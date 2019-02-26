@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using eCommercial.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace eCommercial.Controllers
 {
@@ -22,7 +23,7 @@ namespace eCommercial.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +35,9 @@ namespace eCommercial.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +121,7 @@ namespace eCommercial.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,10 +156,28 @@ namespace eCommercial.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     Customer customer = new Customer();
                     customer.Customer_Id = user.Id;
                     db.Customers.Add(customer);
+
+                    AspNetUserRole userRole = new AspNetUserRole();
+                    userRole.UserId = user.Id;
+                    var count = db.AspNetRoles.Count(t => t.Name.Equals("Customer"));
+                    if (count == 0)
+                    {
+                        ApplicationDbContext context = new ApplicationDbContext();
+                        IdentityRole role = new IdentityRole();
+                        role.Name = "Customer";
+                        context.Roles.Add(role);
+                        context.SaveChanges();
+                        userRole.RoleId = role.Id;
+                    }
+                    else
+                    {
+                        userRole.RoleId = db.AspNetRoles.Single(t => t.Name.Equals("Customer")).Id;
+                    }
+                    db.AspNetUserRoles.Add(userRole);
                     db.SaveChanges();
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

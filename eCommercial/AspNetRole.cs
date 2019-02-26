@@ -17,13 +17,13 @@ namespace eCommercial
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetRole()
         {
-            this.AspNetUsers = new HashSet<AspNetUser>();
+            this.AspNetUserRoles = new HashSet<AspNetUserRole>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
     }
 }

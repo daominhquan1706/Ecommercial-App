@@ -10,16 +10,10 @@
 namespace eCommercial
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class MatHang
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int IdMatHang { get; set; }
-        public string TenMatHang { get; set; }
-        public Nullable<double> DonGia { get; set; }
-        public Nullable<int> MaLoai { get; set; }
-        public string HinhAnh { get; set; }
-        public Nullable<System.DateTime> CreatetionTime { get; set; }
-        public Nullable<bool> isDeleted { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
