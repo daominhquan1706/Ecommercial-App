@@ -10,107 +10,107 @@ using eCommercial;
 
 namespace eCommercial.Controllers
 {
-    public class MatHangsController : Controller
+    public class CategoriesController : Controller
     {
-        private Entities db = new Entities();
+        private DefaultConnectionEntities db = new DefaultConnectionEntities();
 
-        // GET: MatHangs
+        // GET: Categories
         public ActionResult Index()
         {
-            return View(db.MatHangs.ToList());
+            return View(db.Categories.ToList());
         }
 
-        // GET: MatHangs/Details/5
+        // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatHang matHang = db.MatHangs.Find(id);
-            if (matHang == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(matHang);
+            return View(category);
         }
 
-        // GET: MatHangs/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: MatHangs/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdMatHang,TenMatHang,DonGia,MaLoai,HinhAnh,CreatetionTime,isDeleted")] MatHang matHang)
+        public ActionResult Create([Bind(Include = "Category_Id,Category_Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.MatHangs.Add(matHang);
+                db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(matHang);
+            return View(category);
         }
 
-        // GET: MatHangs/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatHang matHang = db.MatHangs.Find(id);
-            if (matHang == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(matHang);
+            return View(category);
         }
 
-        // POST: MatHangs/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdMatHang,TenMatHang,DonGia,MaLoai,HinhAnh,CreatetionTime,isDeleted")] MatHang matHang)
+        public ActionResult Edit([Bind(Include = "Category_Id,Category_Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(matHang).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(matHang);
+            return View(category);
         }
 
-        // GET: MatHangs/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MatHang matHang = db.MatHangs.Find(id);
-            if (matHang == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(matHang);
+            return View(category);
         }
 
-        // POST: MatHangs/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MatHang matHang = db.MatHangs.Find(id);
-            db.MatHangs.Remove(matHang);
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -13,10 +13,10 @@ namespace eCommercial
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class DefaultConnectionEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public DefaultConnectionEntities()
+            : base("name=DefaultConnectionEntities")
         {
         }
     
@@ -30,7 +30,16 @@ namespace eCommercial
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<MatHang> MatHangs { get; set; }
+        public virtual DbSet<C__MigrationHistory1> C__MigrationHistory1 { get; set; }
+        public virtual DbSet<Comment_Image> Comment_Image { get; set; }
+        public virtual DbSet<Comment_Product> Comment_Product { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<MatHang> MatHangs { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product_image> Product_image { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

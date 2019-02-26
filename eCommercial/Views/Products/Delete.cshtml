@@ -1,4 +1,4 @@
-﻿@model eCommercial.MatHang
+﻿@model eCommercial.Product
 
 @{
     ViewBag.Title = "Delete";
@@ -9,55 +9,55 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>MatHang</h4>
+    <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TenMatHang)
+            @Html.DisplayNameFor(model => model.Product_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TenMatHang)
+            @Html.DisplayFor(model => model.Product_Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DonGia)
+            @Html.DisplayNameFor(model => model.Product_Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DonGia)
+            @Html.DisplayFor(model => model.Product_Price)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaLoai)
+            @Html.DisplayNameFor(model => model.CreationTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaLoai)
+            @Html.DisplayFor(model => model.CreationTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HinhAnh)
+            @Html.DisplayNameFor(model => model.IsDeleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HinhAnh)
+            @Html.DisplayFor(model => model.IsDeleted)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatetionTime)
+            @Html.DisplayNameFor(model => model.Picture)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatetionTime)
+            @Html.DisplayFor(model => model.Picture)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isDeleted)
+            @Html.DisplayNameFor(model => model.Category.Category_Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.isDeleted)
+            @Html.DisplayFor(model => model.Category.Category_Name)
         </dd>
 
     </dl>

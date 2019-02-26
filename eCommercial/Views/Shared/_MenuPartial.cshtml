@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@using eCommercial;
+@{
+    DefaultConnectionEntities db = new DefaultConnectionEntities();
+    var id = User.Identity.GetUserId();
+    int count = db.Customers.Count(r => r.Customer_Id.Equals(id));
+}
+
+@if (count == 0)
+{
+    <li>@Html.ActionLink("Customer", "Index", "Customers")</li>
+    <li>@Html.ActionLink("MatHang", "Index", "MatHangs")</li>
+    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+
+}
+else
+{
+    foreach (var item in db.Categories)
+    {
+        <li><a>@item.Category_Name</a></li>
+    }
+}

@@ -4,17 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="710ebd2dfb1546fb9d01ccc5235b8551" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
-        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
-        <EntityTypeShape EntityType="Model.MatHang" Width="1.5" PointX="2.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.database_firewall_rules" Width="1.5" PointX="6.75" PointY="6.75" />
-        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="Model.AspNetUserRoles" />
+      <Diagram DiagramId="86dda066634d4826947c8535a1beb927" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DefaultConnectionModel.C__MigrationHistory" Width="1.5" PointX="8.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetRole" Width="1.5" PointX="1.5" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUser" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.C__MigrationHistory1" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Comment_Image" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Comment_Product" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Customer" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.database_firewall_rules" Width="1.5" PointX="10.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.MatHang" Width="1.5" PointX="7.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Order" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Order_Details" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Product" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Product_image" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Customers_AspnetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Comment_Image_Comment_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK__Comment_P__ID_Cu__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Comment_Product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK__Order__ID_Custom__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Order_Details_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Order_Details_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Product_image_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Category" Width="1.5" PointX="0.75" PointY="6.25" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Product_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
