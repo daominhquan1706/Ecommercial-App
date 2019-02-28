@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+@using eCommercial;
+@using eCommercial.Models;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@{
+    DefaultConnectionEntities db = new DefaultConnectionEntities();
+    var id = User.Identity.GetUserId();
+    int count = db.Customers.Count(r => r.Customer_Id.Equals(id));
+}
+@if (User.Identity.IsAuthenticated)
+{
+    ApplicationDbContext context = new ApplicationDbContext();
+    var user = User.Identity;
+    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+    var s = UserManager.GetRoles(user.GetUserId());
+    if (s[0].ToString() == "Admin")
+    {
+        <li>@Html.ActionLink("Customer", "Index", "Customers")</li>
+        <li>@Html.ActionLink("Product", "Index", "Products")</li>
+        <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+        <li>@Html.ActionLink("User", "Index", "Users")</li>
+    }
+    else if (s[0].ToString() == "Customer")
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại laptop <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @foreach (var item in db.Categories)
+                {
+                    <li><a>@item.Category_Name</a></li>
+                }
+            </ul>
+        </li>
+    }
+}
+else
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại laptop <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            @foreach (var item in db.Categories)
+            {
+                <li><a>@item.Category_Name</a></li>
+            }
+        </ul>
+    </li>
+
+}

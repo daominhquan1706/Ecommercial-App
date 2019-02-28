@@ -16,7 +16,7 @@
     if (s[0].ToString() == "Admin")
     {
         <li>@Html.ActionLink("Customer", "Index", "Customers")</li>
-        <li>@Html.ActionLink("MatHang", "Index", "MatHangs")</li>
+        <li>@Html.ActionLink("Product", "Index", "Products")</li>
         <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
         <li>@Html.ActionLink("User", "Index", "Users")</li>
     }
@@ -40,7 +40,7 @@ else
         <ul class="dropdown-menu">
             @foreach (var item in db.Categories)
             {
-                <li><a>@item.Category_Name</a></li>
+                <li><a href="@Url.Action("CategoryPick", "Home", new { id = item.Category_Id })">@item.Category_Name</a></li>
             }
         </ul>
     </li>

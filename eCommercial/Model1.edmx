@@ -163,6 +163,8 @@
           <Property Name="CreationTime" Type="datetime" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="Picture" Type="image" />
+          <Property Name="Product_Description" Type="nvarchar(max)" />
+          <Property Name="Product_Detail" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Product_image">
           <Key>
@@ -172,6 +174,13 @@
           <Property Name="Product_Id" Type="int" />
           <Property Name="Image" Type="image" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SlideShow">
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="image" Type="nvarchar(max)" />
+        </EntityType>-->
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -747,6 +756,8 @@
           <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
           <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Product" FromRole="Product" ToRole="Order_Details" />
           <NavigationProperty Name="Product_image" Relationship="DefaultConnectionModel.FK_Product_image_Product" FromRole="Product" ToRole="Product_image" />
+          <Property Name="Product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Product_image">
           <Key>
@@ -1116,6 +1127,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DefaultConnectionModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Product_Detail" ColumnName="Product_Detail" />
+                <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />

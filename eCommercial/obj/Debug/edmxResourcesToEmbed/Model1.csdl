@@ -295,6 +295,8 @@
     <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
     <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Product" FromRole="Product" ToRole="Order_Details" />
     <NavigationProperty Name="Product_image" Relationship="DefaultConnectionModel.FK_Product_image_Product" FromRole="Product" ToRole="Product_image" />
+    <Property Name="Product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Product_image">
     <Key>

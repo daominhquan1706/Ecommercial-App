@@ -29,6 +29,8 @@ namespace eCommercial
         public Nullable<System.DateTime> CreationTime { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public byte[] Picture { get; set; }
+        public string Product_Description { get; set; }
+        public string Product_Detail { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
