@@ -16,7 +16,18 @@
 
             <p class="text-primary">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") VND</p>
             <p style="white-space: normal; overflow: hidden;text-overflow: ellipsis">
-                @item.Product_Description
+                @for (int i = 0; i <= 70; i++)
+                {
+                    if (i < item.Product_Description.Count())
+                    {
+                        @item.Product_Description[i]
+                    }
+                    if (item.Product_Description.Count() > 70 && i == 70)
+                    {
+                        <o>...</o>
+                        break;
+                    }
+                }
             </p>
         </a>
     </div>

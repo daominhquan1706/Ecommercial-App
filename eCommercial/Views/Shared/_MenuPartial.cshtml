@@ -15,43 +15,36 @@
     var s = UserManager.GetRoles(user.GetUserId());
     if (s[0].ToString() == "Admin")
     {
-        <li>@Html.ActionLink("Customer", "Index", "Customers")</li>
-        <li>@Html.ActionLink("Product", "Index", "Products")</li>
-        <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-        <li>@Html.ActionLink("User", "Index", "Users")</li>
-    }
-    else if (s[0].ToString() == "Customer")
-    {
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại laptop <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Manage
+            <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                @foreach (var item in db.Categories)
-                {
-                    <li><a>@item.Category_Name</a></li>
-                }
+                <li>@Html.ActionLink("Customer", "Index", "Customers")</li>
+                <li>@Html.ActionLink("Product", "Index", "Products")</li>
+                <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                <li>@Html.ActionLink("User", "Index", "Users")</li>
             </ul>
         </li>
     }
 }
-else
-{
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại laptop <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            @foreach (var item in db.Categories)
-            {
-                <li><a href="@Url.Action("CategoryPick", "Home", new { id = item.Category_Id })">@item.Category_Name</a></li>
-            }
-        </ul>
-    </li>
 
-    <form class="navbar-form navbar-right">
-        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        Categories
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        @foreach (var item in db.Categories)
         {
-            @Html.TextBox("keyword",null,new { @class = "form-control" })
-            <input type="submit" class="btn btn-primary">
+            <li><a href="@Url.Action("CategoryPick", "Home", new { id = item.Category_Id })">@item.Category_Name</a></li>
         }
-    </form>
+    </ul>
+</li>
 
-
-}
+<div class="navbar-form navbar-right">
+    @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { id = "searchForm" }))
+    {
+        @Html.TextBox("keyword", null, new { @class = "form-control" })
+        <a href="javascript:document.getElementById('searchForm').submit()" class="btn btn-primary">Submit</a>
+    }
+</div>
