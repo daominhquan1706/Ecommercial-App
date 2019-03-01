@@ -1,0 +1,33 @@
+﻿@model IEnumerable<eCommercial.Product>
+@{
+    ViewBag.Title = "CategoryPick";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>tìm kiếm "@ViewBag.keyword" có <span class="badge">@Model.Count()</span> kết quả </p>
+
+@foreach (var item in Model.Take(12))
+{
+    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6" style="max-height:400px;min-height:400px">
+        <a href="@Url.Action("DetailsProduct", "Home", new { id = item.Product_ID })" style="text-decoration:none;text-decoration-color:none">
+
+            <img data-src="holder.js/250x250/auto/#777:#555/text:First slide" alt="@item.Product_Name">
+            <h2>@item.Product_Name</h2>
+
+            <p class="text-primary">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") VND</p>
+            <p style="white-space: normal; overflow: hidden;text-overflow: ellipsis">
+                @item.Product_Description
+            </p>
+        </a>
+    </div>
+}
+<div class="w3-right">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @for (int i = 1; i <= Math.Ceiling((double)Model.Count() / 12); i++)
+            {
+                <li class="page-item"><a class="page-link" href="#">@i</a></li>
+            }
+        </ul>
+    </nav>
+</div>

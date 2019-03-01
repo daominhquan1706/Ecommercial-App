@@ -1,81 +1,70 @@
 ﻿@model eCommercial.Product
-
+@using eCommercial;
 @{
     ViewBag.Title = "DetailsProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<h2>DetailsProduct</h2>
+<!-- The Grid -->
+<div class="w3-row-padding">
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Name)
-        </dt>
+    <!-- Left Column -->
+    <div class="w3-third">
 
-        <dd>
-            @Html.DisplayFor(model => model.Product_Name)
-        </dd>
+        <div class="w3-white w3-text-grey w3-card-4">
+            <div class="w3-display-container">
+                <img data-src="holder.js/358x358/auto/#777:#555/text:First slide" alt="">
+                @*<div class="w3-display-bottomleft w3-container w3-text-black">
+                        <h2>Jane Doe</h2>
+                    </div>*@
+            </div>
+            <div class="w3-container w3-margin-top">
+                
+            </div>
+        </div>  
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Price)
-        </dt>
+        <!-- End Left Column -->
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product_Price)
-        </dd>
+    <!-- Right Column -->
+    <div class="w3-twothird">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </dt>
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>@Model.Product_Name</h2>
+            <div class="w3-container">
+                <p><i class="fa fa-money fa-fw w3-margin-right w3-large w3-text-teal"></i>@Convert.ToDecimal(@Model.Product_Price).ToString("#,##0") VND</p>
+                <p><i class="fa fa-asterisk fa-fw w3-margin-right w3-large w3-text-teal"></i>@Model.Category.Category_Name</p>                
+                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
+                <p>@Model.Product_Detail</p>
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreationTime)
-        </dd>
+        <div class="w3-container w3-card w3-white">
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-comment fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Comment</h2>
+            <div class="w3-container">
+                <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
+                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
+                <p>Web Development! All I need to know in one place</p>
+                <hr>
+            </div>
+            <div class="w3-container">
+                <h5 class="w3-opacity"><b>London Business School</b></h5>
+                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
+                <p>Master Degree</p>
+                <hr>
+            </div>
+            <div class="w3-container">
+                <h5 class="w3-opacity"><b>School of Coding</b></h5>
+                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
+                <p>Bachelor Degree</p><br>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
+        <!-- End Right Column -->
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product_Detail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product_Detail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Category_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.Category_Name)
-        </dd>
-
-    </dl>
+    <!-- End Grid -->
 </div>
 <p>
     @Html.ActionLink("Back", "Index")

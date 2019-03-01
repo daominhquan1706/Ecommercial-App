@@ -51,6 +51,22 @@ namespace eCommercial.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var listproduct = db.Products.Where(q=>q.ID_Category==id).Include(p => p.Category);
+            ViewBag.idCategory = id;
+            if (listproduct == null)
+            {
+                return HttpNotFound();
+            }
+            return View(listproduct.ToList());
+        }
+        [HttpPost]
+        public ActionResult Search(string keyword)
+        {
+            if (keyword == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var listproduct = db.Products.Where(q=>q.Product_Name.Contains(keyword)).Include(p => p.Category);
+            ViewBag.keyword = keyword;
             if (listproduct == null)
             {
                 return HttpNotFound();

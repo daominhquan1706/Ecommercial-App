@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<eCommercial.Product>
-
+@using eCommercial;
 @{
     ViewBag.Title = "CategoryPick";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DefaultConnectionEntities db = new DefaultConnectionEntities();
+    string categoryName = db.Categories.Find(ViewBag.idCategory).Category_Name;
 }
 
-<h2>tìm kiếm <span class="badge">@Model.Count()</span> kết quả</h2>
+<p>tìm kiếm <span class="badge">@Model.Count()</span> kết quả @categoryName</p>
 
 @foreach (var item in Model.Take(12))
 {
@@ -14,11 +16,11 @@
 
             <img data-src="holder.js/250x250/auto/#777:#555/text:First slide" alt="@item.Product_Name">
             <h2>@item.Product_Name</h2>
-            <h3>@item.Category.Category_Name</h3>
+            
             <p class="text-primary">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") VND</p>
-            @*<p style="white-space: normal; overflow: hidden;text-overflow: ellipsis">
-                    @item.Product_Description
-                </p>*@
+            <p style="white-space: normal; overflow: hidden;text-overflow: ellipsis">
+                @item.Product_Description
+            </p>
         </a>
     </div>
 }
@@ -29,11 +31,6 @@
             {
                 <li class="page-item"><a class="page-link" href="#">@i</a></li>
             }
-            @*<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>*@
         </ul>
     </nav>
 

@@ -1,0 +1,309 @@
+<manifest alg="2" build="2018.1.0.386" opt="true" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster,textStyling" exportTarget="other" domain="powerlaptop.com" resolutions="1x" timestamp="1551368710170">
+  <folder name="css">
+    <file name="site_global.css" crc="444006867"/>
+    <file name="trang-xem-s_n-ph_m.css" crc="185151582" ref="trang-xem-sản-phẩm"/>
+    <file name="trang-__ng-nh_p.css" crc="4018000184" ref="trang-đăng-nhập"/>
+    <file name="b_ng-x_p-h_ng.css" crc="161339923" ref="bảng-xếp-hạng"/>
+    <file name="trang-__ng-k_.css" crc="400203094" ref="trang-đăng-ký"/>
+    <file name="nh_p-th_ng-tin-mua-h_ng.css" crc="253965002" ref="nhập-thông-tin-mua-hàng"/>
+    <file name="gi_-h_ng.css" crc="299667310" ref="giỏ-hàng"/>
+    <file name="trang-t_m-ki_m.css" crc="448698323" ref="trang-tìm-kiếm"/>
+    <file name="index.css" crc="4009465694" ref="index"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="209076791" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="museutils.js" crc="340535759" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="whatinput.js" crc="86476730" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="museconfig.js" crc="310584261" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="jquery.watch.js" crc="51536988" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="webpro.js" crc="4059564322" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:index"/>
+    <file name="musewpslideshow.js" crc="3862962738" ref="phone>index:index"/>
+    <file name="jquery.museoverlay.js" crc="4147669564" ref="phone>index:index"/>
+    <file name="touchswipe.js" crc="4075097462" ref="phone>index:index"/>
+    <file name="jquery.musemenu.js" crc="510910590" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng"/>
+    <file name="musewpdisclosure.js" crc="3883500470" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng"/>
+    <file name="html5shiv.js" crc="4241844378" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+    <file name="require.js" crc="7928878" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng:phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:index:trang-đăng-ký:trang-đăng-nhập:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng:nhập-thông-tin-mua-hàng"/>
+  </folder>
+  <folder name="images">
+    <file name="chroma.jpg" crc="296000827" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="blank.gif" crc="4208392903" ref="phone>index:index"/>
+    <file name="black_gunmetal_opt.png" crc="148112518" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="mobile_one_charge_tiny.png" crc="252905821" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="play_hard.jpg" crc="180864472" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="loading.gif" crc="3815509949" ref="phone>index:index"/>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u5158.png" crc="4253583695" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="636378051750027718_hp-pavilion-14-bf014tu-1-crop-u5266.jpg" crc="3852955989" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="51vg6tofxql_sx425_-crop-u5279.jpg" crc="4245670237" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="home-crop-u5323.png" crc="4095433872" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b166-crop-u5294.png" crc="3809795982" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="search.png" crc="3795587705" seo="true" ref="phone>index:phone>trang-xem-sản-phẩm:phone>bảng-xếp-hạng:phone>trang-tìm-kiếm:phone>giỏ-hàng">
+      <caption webpage="index" alt=""/>
+      <caption webpage="giỏ-hàng" alt=""/>
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="bell-512-crop-u5292.png" crc="451207088" seo="true" ref="phone>index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u6225.png" crc="4253583695" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="preferences-system-search-icon.png" crc="118899932" seo="true" ref="phone>trang-xem-sản-phẩm:phone>trang-tìm-kiếm:bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="636778880881969758_macbook-air-13-2018-crop-u6384.jpg" crc="454653478" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883213369758_macbook-air-13-2018-gold-139x39.jpg" crc="44328016" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883213389758_macbook-air-13-2018-gold-239x39.jpg" crc="3902753675" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883212829758_macbook-air-13-2018-340x40.jpg" crc="4056896645" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="home-crop-u6792.png" crc="4095433872" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b166-crop-u6796.png" crc="3809795982" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="bell-512-crop-u6804.png" crc="451207088" seo="true" ref="phone>trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u5462.png" crc="4253583695" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="636716712475449777_macbook-pro-13-touch-bar-256gb-2018-xam-3-crop-u5388.jpg" crc="3880269269" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="21611140x130.png" crc="3808031046" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="21613111x103.png" crc="213595665" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="home-crop-u5475.png" crc="4095433872" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b166-crop-u5479.png" crc="3809795982" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="bell-512-crop-u5486.png" crc="451207088" seo="true" ref="phone>bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u6012.png" crc="4253583695" seo="true" ref="phone>trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="636716712475449777_macbook-pro-13-touch-bar-256gb-2018-xam-3-crop-u5994.jpg" crc="3880269269" seo="true" ref="phone>trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="home-crop-u6016.png" crc="4095433872" seo="true" ref="phone>trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b166-crop-u6021.png" crc="3809795982" seo="true" ref="phone>trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="bell-512-crop-u6029.png" crc="451207088" seo="true" ref="phone>trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u6468.png" crc="4253583695" seo="true" ref="phone>giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="636716712475449777_macbook-pro-13-touch-bar-256gb-2018-xam-3-crop-u6450.jpg" crc="3880269269" seo="true" ref="phone>giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="home-crop-u6485.png" crc="4095433872" seo="true" ref="phone>giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b166-crop-u6478.png" crc="3809795982" seo="true" ref="phone>giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="bell-512-crop-u6481.png" crc="451207088" seo="true" ref="phone>giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="chroma-crop-u6716.jpg" crc="156360975" seo="true" ref="phone>nhập-thông-tin-mua-hàng">
+      <caption webpage="nhập-thông-tin-mua-hàng" alt=""/>
+    </file>
+    <file name="pasted-svg-1243308x207.svg" crc="4283429461" seo="true" ref="phone>nhập-thông-tin-mua-hàng:phone>trang-đăng-ký:phone>trang-đăng-nhập:trang-đăng-ký:trang-đăng-nhập:nhập-thông-tin-mua-hàng">
+      <caption webpage="trang-đăng-nhập" alt=""/>
+      <caption webpage="trang-đăng-nhập" alt=""/>
+      <caption webpage="nhập-thông-tin-mua-hàng" alt=""/>
+      <caption webpage="nhập-thông-tin-mua-hàng" alt=""/>
+      <caption webpage="trang-đăng-ký" alt=""/>
+      <caption webpage="trang-đăng-ký" alt=""/>
+    </file>
+    <file name="pasted svg 1243308x207_poster_.png" crc="17148305" ref="phone>nhập-thông-tin-mua-hàng"/>
+    <file name="processor-crop-u4901.jpg" crc="495598369" seo="true" ref="phone>trang-đăng-ký">
+      <caption webpage="trang-đăng-ký" alt=""/>
+    </file>
+    <file name="black_gunmetal_opt286x211.png" crc="275251698" seo="true" ref="phone>trang-đăng-nhập">
+      <caption webpage="trang-đăng-nhập" alt=""/>
+    </file>
+    <file name="2581e3113420b407980d28e7b978b16642x43.png" crc="86038342" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="pasted-svg-644867x181.svg" crc="4180577373" seo="true" ref="index:trang-tìm-kiếm:bảng-xếp-hạng:trang-xem-sản-phẩm:giỏ-hàng">
+      <caption webpage="index" alt=""/>
+      <caption webpage="giỏ-hàng" alt=""/>
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="pasted svg 644867x181_poster_.png" crc="3935972295" ref="index"/>
+    <file name="bell-512-crop-u2507.png" crc="4025480508" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u2491.png" crc="4253583695" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="chroma-crop-u1463.jpg" crc="4073394377" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="black_gunmetal_opt-crop-u1483.png" crc="3766649744" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="mobile_one_charge_tiny2.png" crc="252905821" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="play_hard-crop-u1503.jpg" crc="4034148823" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="preferences-system-search-icon-crop-u1523.png" crc="3854696891" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="636378051750027718_hp-pavilion-14-bf014tu-1-crop-u2251.jpg" crc="3897877743" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="51vg6tofxql_sx425_-crop-u2565.jpg" crc="378780646" seo="true" ref="index">
+      <caption webpage="index" alt=""/>
+    </file>
+    <file name="processor-crop-u2986.jpg" crc="320595946" seo="true" ref="trang-đăng-ký">
+      <caption webpage="trang-đăng-ký" alt=""/>
+    </file>
+    <file name="black_gunmetal_opt529x391.png" crc="281291506" seo="true" ref="trang-đăng-nhập">
+      <caption webpage="trang-đăng-nhập" alt=""/>
+    </file>
+    <file name="bell-512-crop-u4453.png" crc="4025480508" seo="true" ref="trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u4451.png" crc="4253583695" seo="true" ref="trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="preferences-system-search-icon-crop-u2770.png" crc="212608840" seo="true" ref="trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="25531.png" crc="4146632797" seo="true" ref="trang-tìm-kiếm:giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="21611.png" crc="245382095" seo="true" ref="trang-tìm-kiếm:bảng-xếp-hạng:giỏ-hàng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+      <caption webpage="giỏ-hàng" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="21613.png" crc="241814545" seo="true" ref="trang-tìm-kiếm:bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="25066.jpg" crc="3940887386" seo="true" ref="trang-tìm-kiếm">
+      <caption webpage="trang-tìm-kiếm" alt=""/>
+    </file>
+    <file name="bell-512-crop-u4369.png" crc="4025480508" seo="true" ref="bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u4367.png" crc="4253583695" seo="true" ref="bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="636716712475449777_macbook-pro-13-touch-bar-256gb-2018-xam-3-crop-u3754.jpg" crc="124404594" seo="true" ref="bảng-xếp-hạng">
+      <caption webpage="bảng-xếp-hạng" alt=""/>
+    </file>
+    <file name="bell-512-crop-u4405.png" crc="4025480508" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u4403.png" crc="4253583695" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778880881969758_macbook-air-13-2018-crop-u3143.jpg" crc="533475715" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883213369758_macbook-air-13-2018-gold-1.jpg" crc="4133820062" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883213389758_macbook-air-13-2018-gold-2.jpg" crc="27287200" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778883212829758_macbook-air-13-2018-3.jpg" crc="201132657" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636688207026520043_mabookair-1o-crop-u3216.jpg" crc="4285701076" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636778053053351674_apple-macbook-12-2018-crop-u3219.jpg" crc="3824687670" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="636700374319479202_macpro13-crop-u3222.jpg" crc="195933928" seo="true" ref="trang-xem-sản-phẩm">
+      <caption webpage="trang-xem-sản-phẩm" alt=""/>
+    </file>
+    <file name="bell-512-crop-u4680.png" crc="4025480508" seo="true" ref="giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="aa15125da0d2d06f356247099061f134-crop-u4678.png" crc="4253583695" seo="true" ref="giỏ-hàng">
+      <caption webpage="giỏ-hàng" alt=""/>
+    </file>
+    <file name="chroma-crop-u4610.jpg" crc="415098575" seo="true" ref="nhập-thông-tin-mua-hàng">
+      <caption webpage="nhập-thông-tin-mua-hàng" alt=""/>
+    </file>
+  </folder>
+  <folder name="phone">
+    <folder name="css">
+      <file name="trang-t_m-ki_m.css" crc="4145908448" ref="phone>trang-tìm-kiếm"/>
+      <file name="trang-__ng-k_.css" crc="3915038136" ref="phone>trang-đăng-ký"/>
+      <file name="trang-xem-s_n-ph_m.css" crc="114172808" ref="phone>trang-xem-sản-phẩm"/>
+      <file name="b_ng-x_p-h_ng.css" crc="163410224" ref="phone>bảng-xếp-hạng"/>
+      <file name="index.css" crc="97836511" ref="phone>index"/>
+      <file name="trang-__ng-nh_p.css" crc="4216235702" ref="phone>trang-đăng-nhập"/>
+      <file name="nh_p-th_ng-tin-mua-h_ng.css" crc="4270806777" ref="phone>nhập-thông-tin-mua-hàng"/>
+      <file name="gi_-h_ng.css" crc="4061660867" ref="phone>giỏ-hàng"/>
+    </folder>
+    <file name="index.html" crc="4128701460" seo="true" mt="1544852525221" redirect="true"/>
+    <file name="trang-xem-sản-phẩm.html" crc="3968802219" seo="true" mt="1544845901134" redirect="true"/>
+    <file name="bảng-xếp-hạng.html" crc="365504168" seo="true" mt="1544845864944" redirect="true"/>
+    <file name="trang-tìm-kiếm.html" crc="3861993351" seo="true" mt="1544845874352" redirect="true"/>
+    <file name="giỏ-hàng.html" crc="286399505" seo="true" mt="1544845888102" redirect="true"/>
+    <file name="nhập-thông-tin-mua-hàng.html" crc="4190415191" seo="true" mt="1544804381774" redirect="true"/>
+    <file name="trang-đăng-ký.html" crc="455594931" seo="true" mt="1544846056052" redirect="true"/>
+    <file name="trang-đăng-nhập.html" crc="3982354757" seo="true" mt="1544842599376" redirect="true"/>
+  </folder>
+  <file name="index.html" crc="4132634426" seo="true" mt="1544852372019" redirect="true"/>
+  <file name="trang-đăng-ký.html" crc="3982493366" seo="true" mt="1544852766164" redirect="true"/>
+  <file name="trang-đăng-nhập.html" crc="4062052087" seo="true" mt="1544801000362" redirect="true"/>
+  <file name="trang-tìm-kiếm.html" crc="3761021448" seo="true" mt="1544842482221" redirect="true"/>
+  <file name="bảng-xếp-hạng.html" crc="360806336" seo="true" mt="1544842463374" redirect="true"/>
+  <file name="trang-xem-sản-phẩm.html" crc="3988963151" seo="true" mt="1544842495913" redirect="true"/>
+  <file name="giỏ-hàng.html" crc="3847244600" seo="true" mt="1544842489183" redirect="true"/>
+  <file name="nhập-thông-tin-mua-hàng.html" crc="3846588252" seo="true" mt="1544804275818" redirect="true"/>
+</manifest>

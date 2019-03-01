@@ -45,4 +45,13 @@ else
         </ul>
     </li>
 
+    <form class="navbar-form navbar-right">
+        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+        {
+            @Html.TextBox("keyword",null,new { @class = "form-control" })
+            <input type="submit" class="btn btn-primary">
+        }
+    </form>
+
+
 }
