@@ -334,3 +334,9 @@ C:\Users\Quan\source\repos\eCommercial\eCommercial-15dh110176\eCommercial\obj\De
 C:\Users\Quan\source\repos\eCommercial\eCommercial-15dh110176\eCommercial\obj\Debug\eCommercial.csproj.CopyComplete
 C:\Users\Quan\source\repos\eCommercial\eCommercial-15dh110176\eCommercial\obj\Debug\eCommercial.dll
 C:\Users\Quan\source\repos\eCommercial\eCommercial-15dh110176\eCommercial\obj\Debug\eCommercial.pdb
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\gitkraken project\eCommercial-15dh110176\eCommercial\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

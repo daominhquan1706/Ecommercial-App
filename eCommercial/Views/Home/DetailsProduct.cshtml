@@ -1,10 +1,13 @@
 ﻿@model eCommercial.Product
+@using Microsoft.AspNet.Identity;
 @using eCommercial;
 @{
     ViewBag.Title = "DetailsProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DefaultConnectionEntities db = new DefaultConnectionEntities();
 }
 <link rel="stylesheet" href="~/Content/w3.css">
+
 <p>
     @Html.ActionLink("Home", "Index", "Home")<i class="fa fa-arrow-right fa-fw"></i><a href="@Url.Action("CategoryPick", "Home", new { id = Model.Category.Category_Id })">@Model.Category.Category_Name</a><i class="fa fa-arrow-right fa-fw"></i><a href="@Url.Action("DetailsProduct", "Home", new { id = Model.Product_ID })">@Model.Product_Name</a>
 </p>
@@ -14,7 +17,7 @@
     <div class="w3-half">
         <div class="w3-white w3-text-grey w3-card-4">
             <div class="w3-display-container">
-                <img style="width:100%;height:400px;object-fit: cover;" src="@Model.Image" alt="">
+                <img style="width:100%;object-fit: cover;" src="@Model.Image" alt="">
             </div>
         </div>
         <!-- End Left Column -->
@@ -32,32 +35,113 @@
             <h6 class="w3-dark-deep-purple"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@Model.CreationTime</h6>
             <p>@Model.Product_Detail</p>
         </div>
-            
-        
+
+
         <!-- End Right Column -->
     </div>
 </div>
 
 
-<div class="w3-container w3-card w3-white w3-margin">
-    <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-comment fa-fw w3-margin-right w3-xxlarge w3-dark-deep-purple"></i>Comment <span class="badge">@Model.Comment_Product.Count()</span></h2>
+<div class="w3-container  w3-white w3-margin">
+    <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-comment fa-fw w3-margin-right w3-xxlarge w3-dark-deep-purple"></i>Comment <span class="badge w3-red">@Model.Comment_Product.Count()</span></h2>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+
+
+        <!--AddComment-->
+        <div class="w3-container w3-card w3-margin-bottom">
+            <div class="w3-margin-top w3-margin-bottom">
+                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                    <img class="w3-circle" style="width:100%;height:auto;max-height:70px;max-width:70px;object-fit: cover;" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar" alt="avatar">
+                </div>
+                <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                    <label class="w3-margin-top" for="comment">Comment:</label>
+                    <input id="idproduct" class="w3-hide" value="@Model.Product_ID"/>
+                    <input id="idcustomer" class="w3-hide" value="@User.Identity.GetUserId()" />
+                    <textarea style="min-width:100%" class="form-control" rows="5" id="comment" placeholder="How do you think about this product"></textarea>
+                    <button class="btn btn-primary w3-right w3-margin-bottom" id="btncomment">Comment</button>
+                </div>
+            </div>
+
+        </div>
+        <!--End AddComment-->
+    }
+    else
+    {
+        <p>we need you @Html.ActionLink("Log In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "badge w3-deep-purple" }) to use this function, if you dont have account , please @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "badge w3-blue" })</p>
+    }
     <!--Comment-->
+    <div id="divcomment">
+
+    </div>
     @foreach (var item in Model.Comment_Product.OrderByDescending(r => r.CreationTime))
     {
-        <div class="w3-container">
-            @if (item.Customer.Last_Name == null || item.Customer.First_Name == null)
-            {
-                <h5 class="w3-text-deep-purple w3-opacity"><b>User ẩn danh</b></h5>
+        <div class="w3-container w3-card  w3-margin-bottom">
+            <div class="w3-margin-top row">
+                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                    <img class="w3-circle" style="width:100%;height:auto;max-height:70px;max-width:70px;object-fit: cover;" src="@item.Customer.Avatar" alt="@item.Customer.Last_Name + @item.Customer.First_Name">
+                </div>
+                <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                    @if (item.Customer.Last_Name == null || item.Customer.First_Name == null)
+                    {
+                        <h5 class="w3-text-deep-purple w3-opacity"><b>User ẩn danh</b></h5>
+                    }
+                    else
+                    {
+                        <h5 class=" text-success w3-opacity"><b>@item.Customer.Last_Name @item.Customer.First_Name</b></h5>
+                    }
+                    <h6 class="text-primary"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@item.CreationTime</h6>
 
-            }
-            else
-            {
-                <h5 class="w3-text-deep-purple w3-opacity"><b>@item.Customer.Last_Name @item.Customer.First_Name</b></h5>
-            }
-            <h6 class="w3-dark-deep-purple"><i class="fa fa-calendar fa-fw w3-margin-right"></i>@item.CreationTime</h6>
+                </div>
+            </div>
             <p>@item.Comment_Content</p>
         </div>
     }
     <!-- End Grid -->
 </div>
+
+
+
+@section scripts {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+
+
+    <!--SignalR script to update the chat page and send messages.-->
+    <script>
+        $(function () {
+            // Reference the auto-generated proxy for the hub.
+            var comment = $.connection.commentProductHub;
+            // Create a function that the hub can call back to display messages.
+            comment.client.addNewMessageToPage = function (content, avatar, lastname, firstname, date) {
+                // Add the message to the page.
+                $('#divcomment').append('<div class="w3-container w3-card  w3-margin-bottom">    <div class="w3-margin-top row">        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">            <img class="w3-circle" style="width:100%;height:auto;max-height:70px;max-width:70px;object-fit: cover;" src="' + avatar + '">        </div>        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">           <h5 class=" text-success w3-opacity"><b>' + lastname + ' ' + firstname + '</b ></h5 >            <h6 class="text-primary"><i class="fa fa-calendar fa-fw w3-margin-right"></i>' + date + '</h6>        </div>    </div>    <p>' + content + '</p></div>                ');
+            };
+            // Set initial focus to message input box.
+            $('#comment').focus();
+
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                $('#btncomment').click(function () {
+                    // Call the Send method on the hub.
+                    comment.server.comment($('#comment').val(), $('#idproduct').val(), $('#idcustomer').val());
+                    // Clear text box and reset focus for next comment.
+                    $('#comment').val('').focus();
+                });
+            });
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}
+
 

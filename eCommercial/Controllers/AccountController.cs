@@ -142,7 +142,13 @@ namespace eCommercial.Controllers
         {
             return View();
         }
-
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -159,6 +165,7 @@ namespace eCommercial.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     Customer customer = new Customer();
                     customer.Customer_Id = user.Id;
+                    customer.Avatar = "https://api.adorable.io/avatars/"+RandomString(10)+"@adorable.png";
                     db.Customers.Add(customer);
 
                     AspNetUserRole userRole = new AspNetUserRole();

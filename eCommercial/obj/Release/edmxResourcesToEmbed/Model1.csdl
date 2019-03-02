@@ -76,7 +76,7 @@
       <End Role="Comment_Product" EntitySet="Comment_Product" />
       <End Role="Comment_Image" EntitySet="Comment_Image" />
     </AssociationSet>
-    <AssociationSet Name="FK__Comment_P__ID_Cu__797309D9" Association="DefaultConnectionModel.FK__Comment_P__ID_Cu__797309D9">
+    <AssociationSet Name="FK__Comment_P__ID_Cu__6C190EBB" Association="DefaultConnectionModel.FK__Comment_P__ID_Cu__6C190EBB">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="Comment_Product" EntitySet="Comment_Product" />
     </AssociationSet>
@@ -84,7 +84,7 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="Comment_Product" EntitySet="Comment_Product" />
     </AssociationSet>
-    <AssociationSet Name="FK__Order__ID_Custom__7C4F7684" Association="DefaultConnectionModel.FK__Order__ID_Custom__7C4F7684">
+    <AssociationSet Name="FK__Order__ID_Custom__6EF57B66" Association="DefaultConnectionModel.FK__Order__ID_Custom__6EF57B66">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
@@ -206,7 +206,7 @@
     </Key>
     <Property Name="Image_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ID_Comment" Type="Int32" />
-    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Image_Comment_Product" FromRole="Comment_Image" ToRole="Comment_Product" />
   </EntityType>
   <EntityType Name="Comment_Product">
@@ -221,7 +221,7 @@
     <Property Name="ID_Customer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Rate_point" Type="Int32" />
     <NavigationProperty Name="Comment_Image" Relationship="DefaultConnectionModel.FK_Comment_Image_Comment_Product" FromRole="Comment_Product" ToRole="Comment_Image" />
-    <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__797309D9" FromRole="Comment_Product" ToRole="Customer" />
+    <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__6C190EBB" FromRole="Comment_Product" ToRole="Customer" />
     <NavigationProperty Name="Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Comment_Product" ToRole="Product" />
   </EntityType>
   <EntityType Name="Customer">
@@ -233,10 +233,10 @@
     <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Customer_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="DefaultConnectionModel.FK_Customers_AspnetUser" FromRole="Customer" ToRole="AspNetUser" />
-    <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__797309D9" FromRole="Customer" ToRole="Comment_Product" />
-    <NavigationProperty Name="Orders" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__7C4F7684" FromRole="Customer" ToRole="Order" />
+    <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__6C190EBB" FromRole="Customer" ToRole="Comment_Product" />
+    <NavigationProperty Name="Orders" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__6EF57B66" FromRole="Customer" ToRole="Order" />
   </EntityType>
   <EntityType Name="database_firewall_rules">
     <Key>
@@ -264,7 +264,7 @@
     <Property Name="Order_date" Type="DateTime" Precision="3" />
     <Property Name="Total_Price" Type="Double" />
     <Property Name="Shipped_date" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__7C4F7684" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__6EF57B66" FromRole="Order" ToRole="Customer" />
     <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Order" FromRole="Order" ToRole="Order_Details" />
   </EntityType>
   <EntityType Name="Order_Details">
@@ -290,7 +290,9 @@
     <Property Name="ID_Category" Type="Int32" />
     <Property Name="CreationTime" Type="DateTime" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Product_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Product_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Category" Relationship="DefaultConnectionModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
     <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Product" FromRole="Product" ToRole="Order_Details" />
@@ -407,7 +409,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Comment_P__ID_Cu__797309D9">
+  <Association Name="FK__Comment_P__ID_Cu__6C190EBB">
     <End Type="DefaultConnectionModel.Customer" Role="Customer" Multiplicity="0..1" />
     <End Type="DefaultConnectionModel.Comment_Product" Role="Comment_Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -431,7 +433,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Order__ID_Custom__7C4F7684">
+  <Association Name="FK__Order__ID_Custom__6EF57B66">
     <End Type="DefaultConnectionModel.Customer" Role="Customer" Multiplicity="0..1" />
     <End Type="DefaultConnectionModel.Order" Role="Order" Multiplicity="*" />
     <ReferentialConstraint>

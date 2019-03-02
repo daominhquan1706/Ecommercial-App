@@ -88,7 +88,7 @@ namespace eCommercial.Controllers
             {
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Manage");
             }
             ViewBag.Customer_Id = new SelectList(db.AspNetUsers, "Id", "Email", customer.Customer_Id);
             return View(customer);

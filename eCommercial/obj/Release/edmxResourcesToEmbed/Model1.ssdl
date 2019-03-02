@@ -84,7 +84,7 @@
     </Key>
     <Property Name="Image_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_Comment" Type="int" />
-    <Property Name="Image" Type="image" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Comment_Product">
     <Key>
@@ -107,7 +107,7 @@
     <Property Name="Phone" Type="char" MaxLength="20" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="Customer_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Avatar" Type="image" />
+    <Property Name="Avatar" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="database_firewall_rules">
     <Key>
@@ -157,7 +157,9 @@
     <Property Name="ID_Category" Type="int" />
     <Property Name="CreationTime" Type="datetime" />
     <Property Name="IsDeleted" Type="bit" />
-    <Property Name="Picture" Type="image" />
+    <Property Name="Product_Description" Type="nvarchar(max)" />
+    <Property Name="Product_Detail" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Product_image">
     <Key>
@@ -167,6 +169,13 @@
     <Property Name="Product_Id" Type="int" />
     <Property Name="Image" Type="image" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SlideShow">
+          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>-->
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -177,7 +186,7 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <Association Name="FK__Comment_P__ID_Cu__797309D9">
+  <Association Name="FK__Comment_P__ID_Cu__6C190EBB">
     <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
     <End Role="Comment_Product" Type="Self.Comment_Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -189,7 +198,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Order__ID_Custom__7C4F7684">
+  <Association Name="FK__Order__ID_Custom__6EF57B66">
     <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -390,11 +399,11 @@
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_image" EntityType="Self.Product_image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Comment_P__ID_Cu__797309D9" Association="Self.FK__Comment_P__ID_Cu__797309D9">
+    <AssociationSet Name="FK__Comment_P__ID_Cu__6C190EBB" Association="Self.FK__Comment_P__ID_Cu__6C190EBB">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Comment_Product" EntitySet="Comment_Product" />
     </AssociationSet>
-    <AssociationSet Name="FK__Order__ID_Custom__7C4F7684" Association="Self.FK__Order__ID_Custom__7C4F7684">
+    <AssociationSet Name="FK__Order__ID_Custom__6EF57B66" Association="Self.FK__Order__ID_Custom__6EF57B66">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>

@@ -35,3 +35,9 @@ textarea {
     padding: 12px 16px;
     z-index: 1;
 }
+
+.seemore {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
