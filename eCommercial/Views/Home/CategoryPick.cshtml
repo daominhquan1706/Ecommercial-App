@@ -1,28 +1,32 @@
 ﻿@model IEnumerable<eCommercial.Product>
 @using eCommercial;
 @{
+    /**/
+
     ViewBag.Title = "CategoryPick";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DefaultConnectionEntities db = new DefaultConnectionEntities();
     string categoryName = db.Categories.Find(ViewBag.idCategory).Category_Name;
 }
-
+<p>
+    @Html.ActionLink("Home", "Index", "Home")<i class="fa fa-arrow-right fa-fw"></i><a href="@Url.Action("CategoryPick", "Home", new { id = ViewBag.idCategory })">@categoryName</a>
+</p>
 <p>tìm kiếm <span class="badge">@Model.Count()</span> kết quả @categoryName</p>
 
 @foreach (var item in Model.Take(12))
 {
-<div class="col-md-3 col-lg-3 col-sm-6 col-xs-6" style="max-height:400px;min-height:400px">
-    <a href="@Url.Action("DetailsProduct", "Home", new { id = item.Product_ID })" style="text-decoration:none;">
+    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6" style="max-height:400px;min-height:400px">
+        <a href="@Url.Action("DetailsProduct", "Home", new { id = item.Product_ID })" style="text-decoration:none;">
 
-        <img style="width:100%;height:200px;object-fit: cover;" src="https://dummyimage.com/600x600/303842/5704bd.png&text=product_image" alt="@item.Product_Name">
-        <h2>@item.Product_Name</h2>
-        <p class="text-primary">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") VND</p>
-        <div class="">
-            <span class=" w3-text-gray">@item.Comment_Product.Count() comments</span>
-            <span class=" w3-text-gray">@item.Comment_Product.Count() comments</span>
-        </div>
-    </a>
-</div>
+            <img style="width:100%;height:200px;object-fit: cover;" src="@item.Image" alt="@item.Product_Name">
+            <h2>@item.Product_Name</h2>
+            <p class="text-primary">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") VND</p>
+            <div class="">
+                <span class=" w3-text-gray">@item.Comment_Product.Count() comments</span>
+                <span class=" w3-text-gray">@item.Comment_Product.Count() comments</span>
+            </div>
+        </a>
+    </div>
 }
 <div class="w3-right">
     <nav aria-label="Page navigation example">

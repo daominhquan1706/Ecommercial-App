@@ -16,7 +16,7 @@ namespace eCommercial
     {
         public int Image_Id { get; set; }
         public Nullable<int> ID_Comment { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     
         public virtual Comment_Product Comment_Product { get; set; }
     }

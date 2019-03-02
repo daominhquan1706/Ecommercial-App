@@ -26,7 +26,7 @@ namespace eCommercial
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Customer_Id { get; set; }
-        public byte[] Avatar { get; set; }
+        public string Avatar { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

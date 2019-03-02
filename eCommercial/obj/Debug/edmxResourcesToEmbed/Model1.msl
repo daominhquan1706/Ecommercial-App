@@ -180,9 +180,9 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="DefaultConnectionModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Product_Detail" ColumnName="Product_Detail" />
           <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
-          <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
           <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
