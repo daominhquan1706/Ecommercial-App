@@ -41,10 +41,14 @@
     </ul>
 </li>
 
-<div class="navbar-form navbar-right">
-    @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { id = "searchForm" }))
-    {
-        @Html.TextBox("keyword", null, new { @class = "form-control" })
-        <a href="javascript:document.getElementById('searchForm').submit()" class="btn btn-primary"><i class="fa fa-search"></i></a>
-    }
-</div>
+<ul class="navbar-form navbar-right">
+    <li>
+        <div class="form-group">
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { id = "searchForm" }))
+            {
+                @Html.TextBox("keyword", null, new { @class = "form-control" })
+                <a href="javascript:document.getElementById('searchForm').submit()" class="btn btn-primary"><i class="fa fa-search"></i></a>
+            }
+        </div>
+    </li>
+</ul>
