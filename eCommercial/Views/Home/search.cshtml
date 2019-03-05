@@ -1,129 +1,151 @@
 ﻿@model IEnumerable<eCommercial.Product>
+@using Microsoft.AspNet.Identity;
+@using eCommercial;
 @{
     ViewBag.Title = "CategoryPick";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DefaultConnectionEntities db = new DefaultConnectionEntities();
+
 }
 
 <p>tìm kiếm "@ViewBag.keyword" có <span class="badge">@Model.Count()</span> kết quả </p>
 <div class="w3-container">
-    @foreach (var item in Model.Take(12))
-    {
-        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6 w3-margin-bottom" style="">
-            <div class="w3-display-container w3-opacity-min w3-hover-opacity-off" style="transition:0.5s;width:100%">
-                <a href="@Url.Action("DetailsProduct", "Home", new { id = item.Product_ID })" style="text-decoration:none;">
-                    <img style="width:100%;height:200px;object-fit: cover;" src="@item.Image" alt="@item.Product_Name">
-                </a>
-                @if (User.Identity.IsAuthenticated)
+    @{
+        for (int indexpage = 1; indexpage <= Math.Ceiling((double)Model.Count() / 12); indexpage++)
+        {
+            <div id="@("page"+indexpage)" class="pageclass" style="@(indexpage==1?"":"display:none")">
+                @foreach (var item in Model.Skip((indexpage - 1)*12).Take(12))
                 {
-                    string userid = User.Identity.GetUserId();
-                    List<Product_Like> dblike = db.Product_Like.Where(q => q.ID_Customer == userid && q.ID_Product == item.Product_ID).ToList();
-                    if (dblike.Count() == 0)
-                    {
-                        <div class="w3-display-topleft w3-display-hover w3-large">
-                            <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-white w3-text-gray w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="fa fa-heart w3-text-gray"></i></button>
+                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-6 w3-margin-bottom">
+                        <div class="w3-display-container w3-opacity-min w3-hover-opacity-off" style="transition:0.5s;width:100%">
+                            <a href="@Url.Action("DetailsProduct", "Home", new { id = item.Product_ID })" style="text-decoration:none;">
+                                <img style="width:100%;height:200px;object-fit: cover;" src="@item.Image" alt="@item.Product_Name">
+                            </a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                string userid = User.Identity.GetUserId();
+                                List<Product_Like> dblike = db.Product_Like.Where(q => q.ID_Customer == userid && q.ID_Product == item.Product_ID).ToList();
+                                if (dblike.Count() == 0)
+                                {
+                                    <div class="w3-display-topleft w3-display-hover w3-large">
+                                        <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-white w3-text-gray w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="fa fa-heart w3-text-gray"></i></button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="w3-display-topleft w3-display-hover w3-large">
+                                        <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-green w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="w3-text-white fa fa-check"></i></button>
+                                    </div>
+                                }
+                            }
+                            <div class="w3-display-topright w3-display-hover w3-large">
+                                <button type="button" class="w3-white w3-animate-opacity w3-btn w3-margin w3-round" title="Shopping Cart"><i class="fa fa-shopping-cart w3-text-grey"></i></button>
+                            </div>
+                            <div class="w3-display-bottomleft w3-large w3-text-white">
+                                <div class="w3-padding w3-animate-opacity"><span>@item.Comment_Product.Count() <i class="fa fa-comment"></i></span></div>
+                            </div>
+                            <div class="w3-display-middle w3-display-hover w3-large">
+                                <button type="button" class="w3-green w3-animate-opacity w3-btn w3-round">Shop Now</button>
+                            </div>
                         </div>
-                    }
-                    else
-                    {
-                        <div class="w3-display-topleft w3-display-hover w3-large">
-                            <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-green w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="w3-text-white fa fa-check"></i></button>
+                        <div class="w3-center">
+                            <p>@item.Product_Name</p>
+                            <b class="text-danger">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") <text style="text-decoration:underline">đ</text></b>
+                            <div class="w3-row">
+                            </div>
                         </div>
-                    }
+                    </div>
                 }
-                <div class="w3-display-topright w3-display-hover w3-large">
-                    <button type="button" class="w3-white w3-animate-opacity w3-btn w3-margin w3-round" title="Shopping Cart"><i class="fa fa-shopping-cart w3-text-grey"></i></button>
-                </div>
-                <div class="w3-display-bottomleft w3-large w3-text-white">
-                    <div class="w3-padding w3-animate-opacity"><span>@item.Comment_Product.Count() <i class="fa fa-comment"></i></span></div>
-                </div>
-                <div class="w3-display-middle w3-display-hover w3-large">
-                    <button type="button" class="w3-green w3-animate-opacity w3-btn w3-round">Shop Now</button>
-                </div>
             </div>
-            <div class="w3-center">
-                <p>@item.Product_Name</p>
-                <b class="text-danger">@Convert.ToDecimal(item.Product_Price).ToString("#,##0") <text style="text-decoration:underline">đ</text></b>
-                <div class="w3-row">
-                </div>
-            </div>
-        </div>
+        }
     }
-    <div class="w3-right">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                @for (int i = 1; i <= Math.Ceiling((double)Model.Count() / 12); i++)
-                {
-                    <li class="page-item"><a class="page-link" href="#">@i</a></li>
-                }
-            </ul>
-        </nav>
+    <div class="w3-center">
+        <button class="w3-btn w3-round">&laquo;</button>
+        <button class="pageButton w3-btn w3-green w3-round" value="1">1</button>
+        @for (int i = 2; i <= Math.Ceiling((double)Model.Count() / 12); i++)
+        {
+            <button value="@i" class="pageButton w3-btn w3-round">@i</button>
+        }
+        <button class=" w3-btn w3-round">&raquo;</button>
+
+
+
     </div>
 </div>
 
 
 @section scripts {
-    <!--Script references. -->
-    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
-    <!--Reference the SignalR library. -->
-    <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
-    <!--Reference the autogenerated SignalR hub script. -->
-    <script src="~/signalr/hubs"></script>
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/Scripts/toastr.js"></script>
-    <link rel="stylesheet" href="~/Content/toastr.css">
-    <link rel="stylesheet" href="~/Content/toastr.min.css">
+<!--Script references. -->
+<!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+<!--Reference the SignalR library. -->
+<script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+<script src="~/Scripts/toastr.js"></script>
+<link rel="stylesheet" href="~/Content/toastr.css">
+<link rel="stylesheet" href="~/Content/toastr.min.css">
 
 
-    <!--SignalR script to update the chat page and send messages.-->
-    <script>
-        $(function () {
-            // Reference the auto-generated proxy for the hub.
-            var like = $.connection.eCommercialHubs;
-            // Create a function that the hub can call back to display messages.
-            like.client.ChangeLikeButton = function () {
-                // Add the message to the page.
-                // Set initial focus to message input box.
+<!--SignalR script to update the chat page and send messages.-->
+<script>
+    $(function () {
+        // Reference the auto-generated proxy for the hub.
+        var like = $.connection.eCommercialHubs;
+        // Create a function that the hub can call back to display messages.
+        like.client.ChangeLikeButton = function () {
+            // Add the message to the page.
+            // Set initial focus to message input box.
 
 
-            };
+        };
 
 
 
-            // Start the connection.
-            $.connection.hub.start().done(function () {
-                $(".buttonsaveproduct").on('click', function (event) {
-                    //alert("Hello! I am an alert box!!");
-                    // Call the Send method on the hub.
-                    like.server.like($(this).val(), '@User.Identity.GetUserId()');
-                    // Clear text box and reset focus for next comment.
-                    //$('#comment').val('').focus();
-                    if ($(this).hasClass('w3-white')) {
-                        //if this product dont have in saved list
-                        $(this).addClass('w3-green').removeClass('w3-white');
-                        $(this).html('<i class="fa fa-check w3-text-white"></i>');
-                        toastr.options = { "positionClass": "toast-bottom-right" }
-                        toastr.success('successfully saved', 'Congratulation');
-                    }
-                    else {
-                        $(this).addClass('w3-white').removeClass('w3-green');
-                        $(this).html('<i class="fa fa-heart w3-text-gray"></i>');
-                        toastr.options = { "positionClass": "toast-bottom-right" }
-                        toastr.success('successfully unsaved', 'Congratulation');
-                    }
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            $(".buttonsaveproduct").on('click', function (event) {
+                //alert("Hello! I am an alert box!!");
+                // Call the Send method on the hub.
+                like.server.like($(this).val(), '@User.Identity.GetUserId()');
+                // Clear text box and reset focus for next comment.
+                //$('#comment').val('').focus();
+                if ($(this).hasClass('w3-white')) {
+                    //if this product dont have in saved list
+                    $(this).addClass('w3-green').removeClass('w3-white');
+                    $(this).html('<i class="fa fa-check w3-text-white"></i>');
+                    toastr.options = { "positionClass": "toast-bottom-right" }
+                    toastr.success('successfully saved', 'Congratulation');
 
-                });
+                }
+                else {
+                    $(this).addClass('w3-white').removeClass('w3-green');
+                    $(this).html('<i class="fa fa-heart w3-text-gray"></i>');
+                    toastr.options = { "positionClass": "toast-bottom-right" }
+                    toastr.success('successfully unsaved', 'Congratulation');
+                }
+
             });
         });
-        // This optional function html-encodes messages for display in the page.
-        function htmlEncode(value) {
-            var encodedValue = $('<div />').text(value).html();
-            return encodedValue;
-        }
-
-        $('#comment').keyup(function (e) {
-            if (e.keyCode == 13) {
-                $('#btncomment').click();
-            }
+        $(".pageButton").on('click', function (event) {
+            $(".pageButton").removeClass('w3-green');
+            $(this).addClass('w3-green');
+            $(".pageclass").css("display", "none");
+            $("#page" + this.value).css("display", "block");
+            
         });
-    </script>
+
+    });
+    // This optional function html-encodes messages for display in the page.
+    function htmlEncode(value) {
+        var encodedValue = $('<div />').text(value).html();
+        return encodedValue;
+    }
+
+    $('#comment').keyup(function (e) {
+        if (e.keyCode == 13) {
+            $('#btncomment').click();
+        }
+    });
+</script>
 }

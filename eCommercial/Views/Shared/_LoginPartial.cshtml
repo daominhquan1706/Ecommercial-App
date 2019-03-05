@@ -2,6 +2,7 @@
 @using eCommercial;
 @{
     DefaultConnectionEntities db = new DefaultConnectionEntities();
+    string userid = User.Identity.GetUserId();
 }
 @if (Request.IsAuthenticated)
 {
@@ -17,12 +18,18 @@
                         <span class="badge w3-red ">0</span>
                     </div>
                 </a>
-                
+
             </li>
-            <li>
+            <li class="w3-dropdown-hover">
                 <a style="margin:0px;padding-top:6px;padding-bottom:0px" href="@Url.Action("Index", "Manage")">
                     <img class="w3-round" style="height:40px" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar" />
                 </a>
+                <ul class="w3-dropdown-content w3-bar-block w3-border w3-round" style="right:0">
+
+                    <li style="list-style-type: none;"><a href="@Url.Action("Edit", "Customers", new { id = User.Identity.GetUserId() })" style="white-space:nowrap;text-decoration:none" class="w3-bar-item w3-button">Change profile</a></li>
+
+                    <li style="list-style-type: none;"><a style="white-space:nowrap;text-decoration:none" class="w3-bar-item w3-button">Saved product <span class="badge" id="countsavedproduct">@db.Product_Like.Where(r => r.ID_Customer == userid).Count()</span></a></li>
+                </ul>
                 @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

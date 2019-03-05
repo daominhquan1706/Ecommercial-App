@@ -42,7 +42,9 @@ namespace eCommercial.signalr.hubs
                 db.Product_Like.Remove(db.Product_Like.Find(dblike[0].Id));
             }
             db.SaveChanges();
-            Clients.All.ChangeLikeButton();
+
+            string countSavedProduct = db.Product_Like.Where(r => r.ID_Customer == idcustomer).Count().ToString();
+            Clients.All.ChangeLikeButton(countSavedProduct);
 
         }
     }

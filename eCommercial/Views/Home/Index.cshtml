@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
     DefaultConnectionEntities db = new DefaultConnectionEntities();
-    
+    string useridd = Request.IsAuthenticated ? User.Identity.GetUserId() : null;
 }
 <div class="container">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -44,7 +44,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         string userid = User.Identity.GetUserId();
-                        List<Product_Like> dblike = db.Product_Like.Where(q => q.ID_Customer == userid && q.ID_Product == item.Product_ID).ToList();
+                        List<Product_Like> dblike = db.Product_Like.Where(q => q.ID_Customer == useridd && q.ID_Product == item.Product_ID).ToList();
                         if (dblike.Count() == 0)
                         {
                             <div class="w3-display-topleft w3-display-hover w3-large">
@@ -54,7 +54,7 @@
                         else
                         {
                             <div class="w3-display-topleft w3-display-hover w3-large">
-                                <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-green w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="w3-text-white fa fa-check"></i></button>
+                                <button value="@item.Product_ID" type="button" class="buttonsaveproduct w3-green w3-animate-opacity w3-btn w3-margin w3-round" title="Save"><i class="w3-text-white fa fa-heart"></i></button>
                             </div>
                         }
                     }
@@ -99,18 +99,17 @@
             // Reference the auto-generated proxy for the hub.
             var like = $.connection.eCommercialHubs;
             // Create a function that the hub can call back to display messages.
-            like.client.ChangeLikeButton = function () {
+            like.client.ChangeLikeButton = function (countSavedProduct) {
                 // Add the message to the page.
                 // Set initial focus to message input box.
-                
-                
+                $('#countsavedproduct').html(countSavedProduct);
             };
             
 
 
             // Start the connection.
             $.connection.hub.start().done(function () {
-                $(".buttonsaveproduct").on('click', function (event) {
+                $(".buttonsaveproduct").on('click', function (event) {  
                     //alert("Hello! I am an alert box!!");
                     // Call the Send method on the hub.
                     like.server.like($(this).val(), '@User.Identity.GetUserId()');
@@ -119,13 +118,14 @@
                     if ($(this).hasClass('w3-white')) {
                         //if this product dont have in saved list
                         $(this).addClass('w3-green').removeClass('w3-white');
-                        $(this).html('<i class="fa fa-check w3-text-white"></i>');
+                        $(this).html('<i class="fa fa-heart w3-text-white"></i>');
                         toastr.options = { "positionClass": "toast-bottom-right" }
                         toastr.success('successfully saved', 'Congratulation');
                     }
                     else {
                         $(this).addClass('w3-white').removeClass('w3-green');
                         $(this).html('<i class="fa fa-heart w3-text-gray"></i>');
+                        $('#countsavedproduct').html('@db.Product_Like.Where(r => r.ID_Customer == useridd).Count()');
                         toastr.options = { "positionClass": "toast-bottom-right" }
                         toastr.success('successfully unsaved', 'Congratulation');
                     }
