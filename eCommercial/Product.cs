@@ -20,6 +20,7 @@ namespace eCommercial
             this.Comment_Product = new HashSet<Comment_Product>();
             this.Order_Details = new HashSet<Order_Details>();
             this.Product_image = new HashSet<Product_image>();
+            this.Product_Like = new HashSet<Product_Like>();
         }
     
         public int Product_ID { get; set; }
@@ -39,5 +40,7 @@ namespace eCommercial
         public virtual ICollection<Order_Details> Order_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_image> Product_image { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Like> Product_Like { get; set; }
     }
 }

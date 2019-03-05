@@ -43,7 +43,7 @@
 
 
 <div class="w3-container  w3-white w3-margin">
-    <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-comment fa-fw w3-margin-right w3-xxlarge w3-dark-deep-purple"></i>Comment <span class="badge w3-red">@Model.Comment_Product.Count()</span></h2>
+    <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-comment fa-fw w3-margin-right w3-xxlarge w3-dark-deep-purple"></i>Comment <span class="badge w3-red" id="countcomment">@Model.Comment_Product.Count()</span></h2>
 
     @if (User.Identity.IsAuthenticated)
     {
@@ -59,7 +59,7 @@
                     <label class="w3-margin-top" for="comment">Comment:</label>
                     <input id="idproduct" class="w3-hide" value="@Model.Product_ID" />
                     <input id="idcustomer" class="w3-hide" value="@User.Identity.GetUserId()" />
-                    <textarea style="min-width:100%" class="form-control" rows="5" id="comment" placeholder="How do you think about this product"></textarea>
+                    <textarea style="min-width:100%" class="form-control" rows="5" id="comment" placeholder="How do you think about this product ?"></textarea>
                     <button class="btn btn-primary w3-right w3-margin-bottom" id="btncomment">Comment</button>
                 </div>
             </div>
@@ -95,7 +95,7 @@
 
                 </div>
             </div>
-            <p>@item.Comment_Content</p>
+            <p style="word-wrap: break-word">@item.Comment_Content</p>
         </div>
     }
     <!-- End Grid -->
@@ -120,12 +120,12 @@
     <script>
         $(function () {
             // Reference the auto-generated proxy for the hub.
-            var comment = $.connection.commentProductHub;
+            var comment = $.connection.eCommercialHubs;
             // Create a function that the hub can call back to display messages.
-            comment.client.addNewMessageToPage = function (content, avatar, lastname, firstname, date) {
+            comment.client.addNewMessageToPage = function (content, avatar, lastname, firstname, date,count) {
                 // Add the message to the page.
-                $('#divcomment').append('<div class="w3-animate-top w3-container w3-card  w3-margin-bottom">    <div class="w3-margin-top row">        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">            <img class="w3-circle" style="width:100%;height:auto;max-height:70px;max-width:70px;object-fit: cover;" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar">        </div>        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">           <h5 class=" text-success w3-opacity"><b>' + lastname + ' ' + firstname + '</b ></h5 >            <h6 class="text-primary"><i class="fa fa-calendar fa-fw w3-margin-right"></i>' + date + '</h6>        </div>    </div>    <p>' + content + '</p></div>                ');
-
+                $('#divcomment').prepend('<div class="w3-animate-top w3-container w3-card  w3-margin-bottom">    <div class="w3-margin-top row">        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">            <img class="w3-circle" style="width:100%;height:auto;max-height:70px;max-width:70px;object-fit: cover;" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar">        </div>        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">           <h5 class=" text-success w3-opacity"><b>' + lastname + ' ' + firstname + '</b ></h5 >            <h6 class="text-primary"><i class="fa fa-calendar fa-fw w3-margin-right"></i>' + date + '</h6>        </div>    </div>    <p style="word-wrap: break-word">' + content + '</p></div>                ');
+                $('#countcomment').html(count);
             };
             // Set initial focus to message input box.
             $('#comment').focus();

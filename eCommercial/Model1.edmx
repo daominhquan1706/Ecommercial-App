@@ -174,6 +174,15 @@
           <Property Name="Product_Id" Type="int" />
           <Property Name="Image" Type="image" />
         </EntityType>
+        <EntityType Name="Product_Like">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Customer" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ID_Product" Type="int" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="SlideShow">
@@ -355,6 +364,30 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_Like_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Product_Like" Type="Self.Product_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Product_Like">
+              <PropertyRef Name="ID_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Like_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product_Like" Type="Self.Product_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Like">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -403,6 +436,7 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
           <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_image" EntityType="Self.Product_image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Like" EntityType="Self.Product_Like" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Comment_P__ID_Cu__6C190EBB" Association="Self.FK__Comment_P__ID_Cu__6C190EBB">
             <End Role="Customers" EntitySet="Customers" />
@@ -455,6 +489,14 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
           <AssociationSet Name="FK_Product_image_Product" Association="Self.FK_Product_image_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Product_image" EntitySet="Product_image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Like_Customers" Association="Self.FK_Product_Like_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Product_Like" EntitySet="Product_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Like_Product" Association="Self.FK_Product_Like_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_Like" EntitySet="Product_Like" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -560,6 +602,15 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
           <AssociationSet Name="FK_Product_image_Product" Association="DefaultConnectionModel.FK_Product_image_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_image" EntitySet="Product_image" />
+          </AssociationSet>
+          <EntitySet Name="Product_Like" EntityType="DefaultConnectionModel.Product_Like" />
+          <AssociationSet Name="FK_Product_Like_Customers" Association="DefaultConnectionModel.FK_Product_Like_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Product_Like" EntitySet="Product_Like" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Like_Product" Association="DefaultConnectionModel.FK_Product_Like_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Like" EntitySet="Product_Like" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -698,6 +749,7 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
           <NavigationProperty Name="AspNetUser" Relationship="DefaultConnectionModel.FK_Customers_AspnetUser" FromRole="Customer" ToRole="AspNetUser" />
           <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__6C190EBB" FromRole="Customer" ToRole="Comment_Product" />
           <NavigationProperty Name="Orders" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__6EF57B66" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Product_Like" Relationship="DefaultConnectionModel.FK_Product_Like_Customers" FromRole="Customer" ToRole="Product_Like" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -758,6 +810,7 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
           <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
           <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Product" FromRole="Product" ToRole="Order_Details" />
           <NavigationProperty Name="Product_image" Relationship="DefaultConnectionModel.FK_Product_image_Product" FromRole="Product" ToRole="Product_image" />
+          <NavigationProperty Name="Product_Like" Relationship="DefaultConnectionModel.FK_Product_Like_Product" FromRole="Product" ToRole="Product_Like" />
         </EntityType>
         <EntityType Name="Product_image">
           <Key>
@@ -939,6 +992,41 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
             </Principal>
             <Dependent Role="Product_image">
               <PropertyRef Name="Product_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Product_Like">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK_Product_Like_Customers" FromRole="Product_Like" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="DefaultConnectionModel.FK_Product_Like_Product" FromRole="Product_Like" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Product_Like_Customers">
+          <End Type="DefaultConnectionModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DefaultConnectionModel.Product_Like" Role="Product_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Customer_Id" />
+            </Principal>
+            <Dependent Role="Product_Like">
+              <PropertyRef Name="ID_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Like_Product">
+          <End Type="DefaultConnectionModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DefaultConnectionModel.Product_Like" Role="Product_Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Like">
+              <PropertyRef Name="ID_Product" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1156,6 +1244,16 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Like">
+            <EntityTypeMapping TypeName="DefaultConnectionModel.Product_Like">
+              <MappingFragment StoreEntitySet="Product_Like">
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

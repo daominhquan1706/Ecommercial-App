@@ -35,6 +35,9 @@
         <AssociationConnector Association="DefaultConnectionModel.FK_Order_Details_Order" />
         <AssociationConnector Association="DefaultConnectionModel.FK_Order_Details_Product" />
         <AssociationConnector Association="DefaultConnectionModel.FK_Product_image_Product" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Product_Like" Width="1.5" PointX="0.5" PointY="0.75" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Product_Like_Customers" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Product_Like_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

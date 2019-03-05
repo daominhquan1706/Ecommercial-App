@@ -100,6 +100,15 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="Product_image" EntitySet="Product_image" />
     </AssociationSet>
+    <EntitySet Name="Product_Like" EntityType="DefaultConnectionModel.Product_Like" />
+    <AssociationSet Name="FK_Product_Like_Customers" Association="DefaultConnectionModel.FK_Product_Like_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Product_Like" EntitySet="Product_Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Like_Product" Association="DefaultConnectionModel.FK_Product_Like_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Product_Like" EntitySet="Product_Like" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -237,6 +246,7 @@
     <NavigationProperty Name="AspNetUser" Relationship="DefaultConnectionModel.FK_Customers_AspnetUser" FromRole="Customer" ToRole="AspNetUser" />
     <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK__Comment_P__ID_Cu__6C190EBB" FromRole="Customer" ToRole="Comment_Product" />
     <NavigationProperty Name="Orders" Relationship="DefaultConnectionModel.FK__Order__ID_Custom__6EF57B66" FromRole="Customer" ToRole="Order" />
+    <NavigationProperty Name="Product_Like" Relationship="DefaultConnectionModel.FK_Product_Like_Customers" FromRole="Customer" ToRole="Product_Like" />
   </EntityType>
   <EntityType Name="database_firewall_rules">
     <Key>
@@ -297,6 +307,7 @@
     <NavigationProperty Name="Comment_Product" Relationship="DefaultConnectionModel.FK_Comment_Product_Product" FromRole="Product" ToRole="Comment_Product" />
     <NavigationProperty Name="Order_Details" Relationship="DefaultConnectionModel.FK_Order_Details_Product" FromRole="Product" ToRole="Order_Details" />
     <NavigationProperty Name="Product_image" Relationship="DefaultConnectionModel.FK_Product_image_Product" FromRole="Product" ToRole="Product_image" />
+    <NavigationProperty Name="Product_Like" Relationship="DefaultConnectionModel.FK_Product_Like_Product" FromRole="Product" ToRole="Product_Like" />
   </EntityType>
   <EntityType Name="Product_image">
     <Key>
@@ -478,6 +489,41 @@
       </Principal>
       <Dependent Role="Product_image">
         <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product_Like">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Customer" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Product" Type="Int32" Nullable="false" />
+    <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="DefaultConnectionModel.FK_Product_Like_Customers" FromRole="Product_Like" ToRole="Customer" />
+    <NavigationProperty Name="Product" Relationship="DefaultConnectionModel.FK_Product_Like_Product" FromRole="Product_Like" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Product_Like_Customers">
+    <End Type="DefaultConnectionModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="DefaultConnectionModel.Product_Like" Role="Product_Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Customer_Id" />
+      </Principal>
+      <Dependent Role="Product_Like">
+        <PropertyRef Name="ID_Customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Like_Product">
+    <End Type="DefaultConnectionModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="DefaultConnectionModel.Product_Like" Role="Product_Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Product_ID" />
+      </Principal>
+      <Dependent Role="Product_Like">
+        <PropertyRef Name="ID_Product" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

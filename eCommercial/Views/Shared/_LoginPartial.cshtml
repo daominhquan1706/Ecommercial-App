@@ -19,9 +19,9 @@
                 </a>
                 
             </li>
-            <li class="">
-                <a style="margin:2px;padding:2px" href="@Url.Action("Index", "Manage")">
-                    <img class="w3-round" style="height:38px" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar" />
+            <li>
+                <a style="margin:0px;padding-top:6px;padding-bottom:0px" href="@Url.Action("Index", "Manage")">
+                    <img class="w3-round" style="height:40px" src="@db.Customers.Find(User.Identity.GetUserId()).Avatar" />
                 </a>
                 @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
             </li>

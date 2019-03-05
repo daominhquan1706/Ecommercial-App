@@ -169,6 +169,15 @@
     <Property Name="Product_Id" Type="int" />
     <Property Name="Image" Type="image" />
   </EntityType>
+  <EntityType Name="Product_Like">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Customer" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ID_Product" Type="int" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="SlideShow">
@@ -350,6 +359,30 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Product_Like_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Product_Like" Type="Self.Product_Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="Customer_Id" />
+      </Principal>
+      <Dependent Role="Product_Like">
+        <PropertyRef Name="ID_Customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Like_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product_Like" Type="Self.Product_Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Product_ID" />
+      </Principal>
+      <Dependent Role="Product_Like">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -398,6 +431,7 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
     <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_image" EntityType="Self.Product_image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Like" EntityType="Self.Product_Like" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Comment_P__ID_Cu__6C190EBB" Association="Self.FK__Comment_P__ID_Cu__6C190EBB">
       <End Role="Customers" EntitySet="Customers" />
@@ -450,6 +484,14 @@ warning 6013: The table/view 'DefaultConnection.dbo.SlideShow' does not have a p
     <AssociationSet Name="FK_Product_image_Product" Association="Self.FK_Product_image_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Product_image" EntitySet="Product_image" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Like_Customers" Association="Self.FK_Product_Like_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Product_Like" EntitySet="Product_Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Like_Product" Association="Self.FK_Product_Like_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Product_Like" EntitySet="Product_Like" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

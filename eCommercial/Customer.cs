@@ -19,6 +19,7 @@ namespace eCommercial
         {
             this.Comment_Product = new HashSet<Comment_Product>();
             this.Orders = new HashSet<Order>();
+            this.Product_Like = new HashSet<Product_Like>();
         }
     
         public string First_Name { get; set; }
@@ -33,5 +34,7 @@ namespace eCommercial
         public virtual ICollection<Comment_Product> Comment_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Like> Product_Like { get; set; }
     }
 }
