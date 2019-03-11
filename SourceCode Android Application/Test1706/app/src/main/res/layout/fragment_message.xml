@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_google_signin_btn_text_dark_focused">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/v_pager_fragment_message"
+        android:layout_width="match_parent"
+        android:layout_height="218dp"
+        android:background="@color/common_google_signin_btn_text_light_pressed" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/hawk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/v_pager_fragment_message"
+        android:layout_alignTop="@+id/v_pager_fragment_message"
+        android:layout_alignBottom="@+id/v_pager_fragment_message"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="159dp"
+        android:text="HAWK" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/minimum_we"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/v_pager_fragment_message"
+        android:layout_alignTop="@+id/v_pager_fragment_message"
+        android:layout_alignBottom="@+id/v_pager_fragment_message"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginBottom="140dp"
+        android:text="MINIMUM WEIGHT , MAXIMUM ADVANTAGE" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/lorem_ipsu"
+        android:layout_width="252dp"
+        android:layout_height="103dp"
+        android:layout_alignStart="@+id/v_pager_fragment_message"
+        android:layout_alignTop="@+id/v_pager_fragment_message"
+        android:layout_alignBottom="@+id/v_pager_fragment_message"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="82dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="33dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/background_product">
+
+            <TextView
+                android:id="@+id/txt_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Name of product"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/txt_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_product_name"
+                android:layout_marginLeft="10dp"
+                android:text="category"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="13dp" />
+
+            <TextView
+
+                android:id="@+id/txt_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_category"
+                android:layout_marginLeft="10dp"
+                android:text="$360"
+                android:textColor="#ffff14"
+                android:textSize="13dp" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="373dp"
+                android:layout_marginTop="136dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/path_10" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-30dp"
+                android:layout_marginBottom="-30dp"
+                android:paddingLeft="140dp"
+                android:paddingRight="35dp"
+                android:src="@drawable/v2_hawk_300t_listing_front_day" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
