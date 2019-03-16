@@ -2,26 +2,10 @@
 <resources>
 
     <style name="AppTheme.NoActionBar" >
-        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">#131212</item>
+        <item name="colorPrimaryDark">#131212</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-    <style name="hawk">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:letterSpacing">1</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="minimum_we">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:letterSpacing">1</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="lorem_ipsu">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:letterSpacing">1</item>
-    </style>
-
 </resources>

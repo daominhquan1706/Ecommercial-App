@@ -1,30 +1,23 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#131212</item>
+        <item name="colorPrimaryDark">#131212</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppTheme.NoActionBar" >
+        <item name="colorPrimary">#131212</item>
+        <item name="colorPrimaryDark">#131212</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
-    <style name="hawk">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="minimum_we">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="lorem_ipsu">
-        <item name="android:textColor">#ffd7d7d7</item>
-        <item name="android:textSize">10sp</item>
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">#005cf2</item>
+        <item name="colorControlHighlight">#005cf2</item>
     </style>
 
 </resources>
