@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,11 +64,13 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private ImageView mImage;
     private FirebaseAuth mAuth;
+    private ProgressDialog progressDialogdialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressDialogdialog = ProgressDialog.show(LoginActivity.this, "","Loading. Please wait...", true);
         // Set up the login form.
         mProgressView = findViewById(R.id.login_progress);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -112,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                 openRegisterActitvy(v);
             }
         });
-
+        progressDialogdialog.dismiss();
     }
 
     protected void hideKeyboard(View view) {
@@ -131,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void DangNhap() {
+        progressDialogdialog.show();
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
         mAuth.signInWithEmailAndPassword(email, password)
@@ -141,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            progressDialogdialog.dismiss();
                             finish();
 
                         } else {
@@ -153,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+        progressDialogdialog.dismiss();
     }
 
     public void openRegisterActitvy(View view) {

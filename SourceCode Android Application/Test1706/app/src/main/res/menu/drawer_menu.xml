@@ -8,10 +8,10 @@
             android:icon="@drawable/ic_message"
             android:title="Homepage" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_bank"
-            android:title="Login" />
+            android:title="Login" />-->
         <item
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_noftication"

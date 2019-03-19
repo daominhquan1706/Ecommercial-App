@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.test1706.model.Product;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
@@ -17,7 +19,7 @@ public class ProductAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public ProductAdapter(Context context,List<Product> list_product) {
+    public ProductAdapter(Context context, List<Product> list_product) {
         this.context = context;
         this.list_product = list_product;
         layoutInflater = LayoutInflater.from(context);
@@ -25,7 +27,7 @@ public class ProductAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list_product.size();
+        return list_product!=null?list_product.size():0;
     }
 
     @Override
@@ -56,9 +58,12 @@ public class ProductAdapter extends BaseAdapter {
 
 
         Product product = this.list_product.get(position);
-        holder.tvName.setText(product.getProduct_Name());
-        holder.tvCategory.setText(product.getCategory());
-        holder.mImage.setImageResource(FindIdOfImage(product.getImage()));
+        if(product!=null){
+            holder.tvName.setText(product.getProduct_Name());
+            holder.tvCategory.setText(product.getCategory());
+            holder.tvPrice.setText("$" + Integer.toString(product.getPrice()));
+            holder.mImage.setImageResource(FindIdOfImage(product.getImage()));
+        }
         return convertView;
     }
     static class ViewHolder{

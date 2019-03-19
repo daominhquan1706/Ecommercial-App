@@ -6,8 +6,7 @@ public class Product {
     private String category;
     private String Image;
 
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String product_Name, int price, String category, String image) {
         Product_Name = product_Name;

@@ -2,13 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_google_signin_btn_text_light_pressed"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/common_google_signin_btn_text_dark_focused"
     android:fillViewport="true">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <android.support.v4.view.ViewPager
             android:id="@+id/v_pager_fragment_message"
             android:layout_width="match_parent"
@@ -16,11 +18,12 @@
             android:background="@color/colorPrimaryDark" />
 
         <ListView
-
-            android:layout_below="@id/v_pager_fragment_message"
+            android:layout_marginTop="20dp"
             android:id="@+id/listView_product"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v_pager_fragment_message"
+            android:dividerHeight="10dp">
 
         </ListView>
     </RelativeLayout>
