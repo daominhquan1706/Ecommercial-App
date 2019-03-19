@@ -65,12 +65,13 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView mImage;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialogdialog;
+    private View relativelayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        progressDialogdialog = ProgressDialog.show(LoginActivity.this, "","Loading. Please wait...", true);
+        progressDialogdialog = ProgressDialog.show(LoginActivity.this, "", "Loading. Please wait...", true);
         // Set up the login form.
         mProgressView = findViewById(R.id.login_progress);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         mImage = (ImageView) findViewById(R.id.img_account);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
+        relativelayout = (View) findViewById(R.id.relativeLayout);
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -151,14 +152,23 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Snackbar snackbar = Snackbar
+                                    .make(relativelayout, "Acoount ID or password is incorrect", Snackbar.LENGTH_LONG);
+                            snackbar.show();/*
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_LONG).show();*/
                         }
 
                         // ...
                     }
                 });
         progressDialogdialog.dismiss();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
     }
 
     public void openRegisterActitvy(View view) {

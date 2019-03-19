@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,10 +28,11 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser mAuthTask = null;
 
     // UI references.
-    private EditText mPasswordView ,mEmailView;
+    private EditText mPasswordView, mEmailView, mRetypePassword;
     private View mProgressView;
     private FirebaseAuth mAuth;
     private ImageView mImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Set up the login form.
         mProgressView = findViewById(R.id.login_progress);
         mPasswordView = (EditText) findViewById(R.id.password);
+        mRetypePassword = (EditText) findViewById(R.id.retype_password);
+
         mEmailView = (EditText) findViewById(R.id.email);
         mImage = (ImageView) findViewById(R.id.img_account);
         // Initialize Firebase Auth
@@ -60,22 +64,42 @@ public class RegisterActivity extends AppCompatActivity {
         mEmailSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressView.setVisibility(View.VISIBLE);
-                mImage.setVisibility(View.GONE);
-                DangKy();
-                mProgressView.setVisibility(View.GONE);
-                mImage.setVisibility(View.VISIBLE);
+                String email = mEmailView.getText().toString().trim();
+                String password = mPasswordView.getText().toString().trim();
+                String retypepassword = mRetypePassword.getText().toString().trim();
+
+                if (email.length() > 6 && password.length() > 6) {
+                    mProgressView.setVisibility(View.VISIBLE);
+                    mImage.setVisibility(View.GONE);
+                    DangKy();
+                    mProgressView.setVisibility(View.GONE);
+                    mImage.setVisibility(View.VISIBLE);
+                } else if (password != retypepassword) {
+                    Toast.makeText(RegisterActivity.this, "please check again.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "invalid format email or password.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        Button btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
-    protected void hideKeyboard(View view)
-    {
+
+    protected void hideKeyboard(View view) {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
+
     public void DangKy() {
         String email = mEmailView.getText().toString().trim();
-        String password= mPasswordView.getText().toString().trim();
+        String password = mPasswordView.getText().toString().trim();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(RegisterActivity.this,MainActivity.class);
+                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                             finish();
                             startActivity(i);
                         } else {
@@ -98,9 +122,19 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

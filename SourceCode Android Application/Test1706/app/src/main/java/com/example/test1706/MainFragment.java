@@ -79,13 +79,6 @@ public class MainFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Product itemproduct = dataSnapshot.getValue(Product.class);
                 productList.add(itemproduct);
-                // Get the Layout Parameters for ListView Current Item View
-                LayoutParams params = listView.getLayoutParams();
-                listheight = listheight + 200;
-                // Set the height of the Item View
-                params.height = params.height + listheight;
-                listView.setLayoutParams(params);
-
                 productadapter.notifyDataSetChanged();
                 mkey.add(dataSnapshot.getKey());
                 Log.d("dữ liệu Firebase", "đã lấy thành công đồng hồ " + itemproduct.getProduct_Name());

@@ -11,15 +11,7 @@
     android:focusableInTouchMode="true"
     tools:context=".LoginActivity">
 
-    <ImageView
 
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:gravity="bottom"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ba_cai_dong_ho" />
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -27,12 +19,12 @@
         android:layout_height="130dp"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:padding="30dp">
 
         <LinearLayout
 
@@ -44,10 +36,11 @@
             <ImageView
                 android:id="@+id/img_account"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:src="@drawable/account" />
+                android:layout_height="120dp"
+                android:src="@drawable/power_brand" />
 
             <android.support.design.widget.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/drw_edt_bg">
@@ -62,11 +55,12 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                    android:textColor="@color/white" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -94,19 +88,19 @@
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/colorbutton_1"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textStyle="bold" />
+
             <Button
 
                 android:id="@+id/btn_register"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/colorbutton_2"
                 android:text="@string/create_an_account"
                 android:textColor="#005dff"
@@ -118,5 +112,13 @@
 
     </LinearLayout>
 
+    <ImageView
 
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:gravity="bottom"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ba_cai_dong_ho" />
 </RelativeLayout>

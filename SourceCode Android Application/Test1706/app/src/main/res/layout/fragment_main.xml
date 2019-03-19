@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/common_google_signin_btn_text_dark_focused"
     android:fillViewport="true">
 
@@ -17,15 +17,15 @@
             android:layout_height="200dp"
             android:background="@color/colorPrimaryDark" />
 
-        <ListView
-            android:layout_marginTop="20dp"
+        <com.example.test1706.MyListView
             android:id="@+id/listView_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/v_pager_fragment_message"
+            android:layout_marginTop="10dp"
             android:dividerHeight="10dp">
 
-        </ListView>
+        </com.example.test1706.MyListView>
     </RelativeLayout>
 
 
