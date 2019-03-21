@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialogdialog;
     private View relativelayout;
-
+private TextInputLayout minputLayout_email,minputLayout_password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,10 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.password);
         mEmailView = (EditText) findViewById(R.id.email);
         mImage = (ImageView) findViewById(R.id.img_account);
+
+        minputLayout_email= (TextInputLayout) findViewById(R.id.inputlayout_email);
+        minputLayout_password= (TextInputLayout) findViewById(R.id.inputlayout_password);
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         relativelayout = (View) findViewById(R.id.relativeLayout);
@@ -87,14 +92,24 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmailView.getText().toString().trim();
                 String password = mPasswordView.getText().toString().trim();
                 if (email.length() > 6 && password.length() > 6) {
-                    mProgressView.setVisibility(View.VISIBLE);
-                    mImage.setVisibility(View.GONE);
                     DangNhap();
-                    mProgressView.setVisibility(View.GONE);
-                    mImage.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(LoginActivity.this, "invalid format email or password.",
                             Toast.LENGTH_LONG).show();
+                }
+                if(email.length() < 6 ){
+
+                    minputLayout_email.setError("email must include @ character");
+                }
+                else{
+                    minputLayout_email.setErrorEnabled(false);
+                }
+
+                if(password.length()<6){
+                    minputLayout_password.setError("password need to have at least 6 character");
+                }
+                else{
+                    minputLayout_password.setErrorEnabled(false);
                 }
             }
         });
@@ -165,11 +180,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialogdialog.dismiss();
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
-    }
 
     public void openRegisterActitvy(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);

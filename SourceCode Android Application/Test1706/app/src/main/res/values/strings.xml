@@ -16,4 +16,8 @@
         completions."
     </string>
     <string name="create_an_account">Create an account</string>
+    <string name="category">Category</string>
+    <string name="productname">ProductName</string>
+    <string name="money">Money</string>
+    <string name="re_type_password">Re-type password</string>
 </resources>

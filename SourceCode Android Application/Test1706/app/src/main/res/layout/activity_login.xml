@@ -24,7 +24,8 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp">
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
 
         <LinearLayout
 
@@ -40,12 +41,14 @@
                 android:src="@drawable/power_brand" />
 
             <android.support.design.widget.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="@drawable/drw_edt_bg"
+                android:id="@+id/inputlayout_email"
+                style="@style/TextLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/drw_edt_bg">
+                android:layout_height="wrap_content">
 
                 <EditText
+                    android:background="@null"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,13 +63,15 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:background="@drawable/drw_edt_bg"
+                android:id="@+id/inputlayout_password"
+                style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/drw_edt_bg">
+                android:layout_marginTop="30dp">
 
                 <EditText
+                    android:background="@null"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +84,7 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/common_google_signin_btn_text_dark_default" />
+                    android:textColor="@color/white" />
 
             </android.support.design.widget.TextInputLayout>
 

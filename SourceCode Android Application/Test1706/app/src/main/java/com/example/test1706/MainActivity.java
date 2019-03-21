@@ -117,16 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MainFragment()).commit();
                 break;
-            /*case R.id.nav_login:
-                if (mAuth.getCurrentUser() == null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MainFragment()).commit();
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(this, mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-                }
-                break;*/
+            case R.id.nav_NiteWatch:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NiteWatchFragment()).commit();
+                break;
+
             case R.id.nav_register:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MainFragment()).commit();

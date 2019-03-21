@@ -22,10 +22,11 @@
         android:src="@drawable/ba_cai_dong_ho" />
 
     <LinearLayout
-        android:padding="30dp"
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
 
         <LinearLayout
 
@@ -47,8 +48,9 @@
                 android:layout_height="130dp"
                 android:layout_marginBottom="8dp"
                 android:visibility="gone" />
+
             <android.support.design.widget.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/drw_edt_bg">
@@ -59,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:background="@null"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -68,7 +71,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -80,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:background="@null"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
@@ -89,8 +93,9 @@
                     android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/TextLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -102,7 +107,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="@string/prompt_password"
+                    android:background="@null"
+                    android:hint="@string/re_type_password"
                     android:imeActionId="6"
                     android:imeActionLabel="Sign up"
                     android:imeOptions="actionUnspecified"
@@ -124,6 +130,7 @@
                 android:text="@string/create_an_account"
                 android:textColor="#ffff"
                 android:textStyle="bold" />
+
             <Button
 
                 android:id="@+id/btn_login"

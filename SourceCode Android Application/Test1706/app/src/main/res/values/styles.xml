@@ -14,14 +14,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">20sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="colorAccent">@color/LightBlue</item>
-        <item name="colorControlNormal">@color/LightBlue</item>
-        <item name="colorControlActivated">@color/LightBlue</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
     </style>
 
 </resources>

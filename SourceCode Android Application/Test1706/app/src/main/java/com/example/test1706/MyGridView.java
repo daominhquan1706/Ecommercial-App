@@ -5,17 +5,17 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 import android.widget.ListView;
 
-public class MyListView extends ListView {
+public class MyGridView extends GridView {
 
-    public MyListView(Context context, AttributeSet attrs) {
+    public MyGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyListView(Context context) {
+    public MyGridView(Context context) {
         super(context);
     }
 
-    public MyListView(Context context, AttributeSet attrs, int defStyle) {
+    public MyGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

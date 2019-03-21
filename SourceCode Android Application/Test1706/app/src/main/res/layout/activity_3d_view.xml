@@ -9,7 +9,6 @@
         android:id="@+id/santafe3dview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="TODO"
         android:scaleType="centerInside"
         android:src="@drawable/image_3d_images" />
 

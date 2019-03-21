@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,11 +39,12 @@ import java.util.Objects;
 import android.view.ViewGroup.LayoutParams;
 
 public class MainFragment extends Fragment {
+    private StorageReference mStorageRef;
     DatabaseReference myRef;
     ProductAdapter productadapter;
     ProgressBar progressBar;
-    ListView listView;
-    int listheight=0;
+    GridView listView;
+    int listheight = 0;
 
     @Nullable
     @Override
@@ -49,6 +54,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         //SLIDE SHOW
@@ -63,12 +69,20 @@ public class MainFragment extends Fragment {
         final List<Product> productList = new ArrayList<Product>();
         final List<String> mkey = new ArrayList<String>();
         productadapter = new ProductAdapter(getActivity(), productList);
-        listView = (ListView) getView().findViewById(R.id.listView_product);
+        listView = (GridView) getView().findViewById(R.id.listView_product_smartwatch);
         listView.setAdapter(productadapter);
         //DATABASE
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
-
+        listView.setNumColumns(2);
+        listView.setHorizontalSpacing(20);
+        listView.setVerticalSpacing(20);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), productadapter.getItem(position).getProduct_Name(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //getProductdata();
 
