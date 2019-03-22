@@ -77,6 +77,7 @@ public class MainFragment extends Fragment {
         listView.setNumColumns(2);
         listView.setHorizontalSpacing(20);
         listView.setVerticalSpacing(20);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

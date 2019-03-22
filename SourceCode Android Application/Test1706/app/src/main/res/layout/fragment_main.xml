@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:fillViewport="true">
 
@@ -18,6 +19,11 @@
             android:background="@drawable/slide1" />
 
         <GridView
+
+            android:numColumns="2"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            tools:listitem="@layout/layout_item_watch_smartwatch"
             android:layout_margin="5sp"
             android:id="@+id/listView_product_smartwatch"
             android:layout_width="match_parent"
@@ -30,4 +36,4 @@
     </RelativeLayout>
 
 
-</ScrollView>
+</RelativeLayout>
