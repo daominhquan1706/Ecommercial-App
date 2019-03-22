@@ -20,4 +20,5 @@
     <string name="productname">ProductName</string>
     <string name="money">Money</string>
     <string name="re_type_password">Re-type password</string>
+    <string name="search">Search</string>
 </resources>
