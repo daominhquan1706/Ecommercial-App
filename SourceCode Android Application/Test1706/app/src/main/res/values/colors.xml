@@ -4,11 +4,13 @@
     <color name="colorPrimaryDark">#09090c</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#fff</color>
-    <color name="black">#F2010107</color>
+    <color name="black">#191919</color>
+    <color name="black_cardview_nitewatch">#F7191919</color>
 
+    <color name="background_mainpage1">#EEF0F3</color>
     <color name="Blue">#1B30C9</color>
     <color name="LightBlue">#03A9D3</color>
     <color name="Deeppurple">#95B911D8</color>
     <color name="MoneyColor">#2196F3</color>
-    <color name="color_text_productname">#fff</color>
+    <color name="color_text_productname">#031325</color>
 </resources>

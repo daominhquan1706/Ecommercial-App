@@ -8,6 +8,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +41,16 @@ import java.util.Objects;
 import android.view.ViewGroup.LayoutParams;
 
 public class MainFragment extends Fragment {
+    List<Product> productList;
+    List<String> mkey;
     private StorageReference mStorageRef;
     DatabaseReference myRef;
     ProductAdapter productadapter;
     ProgressBar progressBar;
-    GridView listView;
+    MyGridView listView;
     int listheight = 0;
-
+    Product_Recycle_Adapter  hori_Adapter;
+    RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,10 +71,11 @@ public class MainFragment extends Fragment {
         ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Loading. Please wait...", true);
 
 
-        final List<Product> productList = new ArrayList<Product>();
-        final List<String> mkey = new ArrayList<String>();
+
+        productList = new ArrayList<Product>();
+        mkey = new ArrayList<String>();
         productadapter = new ProductAdapter(getActivity(), productList);
-        listView = (GridView) getView().findViewById(R.id.listView_product_smartwatch);
+        listView = (MyGridView) getView().findViewById(R.id.listView_product_smartwatch);
         listView.setAdapter(productadapter);
         //DATABASE
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -95,6 +101,7 @@ public class MainFragment extends Fragment {
                 Product itemproduct = dataSnapshot.getValue(Product.class);
                 productList.add(itemproduct);
                 productadapter.notifyDataSetChanged();
+                hori_Adapter.notifyDataSetChanged();
                 mkey.add(dataSnapshot.getKey());
                 Log.d("dữ liệu Firebase", "đã lấy thành công đồng hồ " + itemproduct.getProduct_Name());
             }
@@ -104,6 +111,7 @@ public class MainFragment extends Fragment {
 
                 productList.set(mkey.indexOf(dataSnapshot.getKey()), dataSnapshot.getValue(Product.class));
                 productadapter.notifyDataSetChanged();
+                hori_Adapter.notifyDataSetChanged();
                 Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
             }
 
@@ -123,6 +131,8 @@ public class MainFragment extends Fragment {
             }
         });
         dialog.dismiss();
+
+        initRecycleView();
     }
 
     private void getProductdata() {
@@ -133,5 +143,12 @@ public class MainFragment extends Fragment {
         myRef.push().setValue(dongho1);
         myRef.push().setValue(dongho2);
         myRef.push().setValue(dongho3);
+    }
+    private void initRecycleView(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal);
+        recyclerView.setLayoutManager(layoutManager);
+        hori_Adapter = new Product_Recycle_Adapter(getActivity(),productList);
+        recyclerView.setAdapter(hori_Adapter);
     }
 }

@@ -18,14 +18,14 @@ import com.example.test1706.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter_Product_RecycleView extends BaseAdapter implements Filterable {
+public class Search_Adapter extends BaseAdapter implements Filterable {
     private List<Product> list_product;
     private List<Product> list_product_search;
 
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public Adapter_Product_RecycleView(Context context, List<Product> list_product) {
+    public Search_Adapter(Context context, List<Product> list_product) {
         this.context = context;
         this.list_product = list_product;
         layoutInflater = LayoutInflater.from(context);

@@ -5,9 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    Adapter_Product_RecycleView productadapter;
+    Search_Adapter productadapter;
     ListView listView;
 
     @Nullable
@@ -36,7 +33,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         List<Product> productList = getProductdata();
-        productadapter = new Adapter_Product_RecycleView(getActivity(), productList);
+        productadapter = new Search_Adapter(getActivity(), productList);
         listView = (ListView) getView().findViewById(R.id.recycleview_search);
         listView.setAdapter(productadapter);
         listView.setDividerHeight(10);

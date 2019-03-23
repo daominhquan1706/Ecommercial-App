@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:fillViewport="true">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/v_pager_fragment_message"
@@ -18,19 +17,55 @@
             android:layout_height="100dp"
             android:background="@drawable/slide1" />
 
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/black_cardview_nitewatch"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_cardview_nitewatch"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Smart Watch"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/recycleview_horizontal_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_horizontal_nite_watch">
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
         <com.example.test1706.MyListView
 
-            tools:listitem="@layout/layout_item_watch_nitewatch"
-            android:layout_margin="5sp"
             android:id="@+id/listView_product_nitewatch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/v_pager_fragment_message"
+            android:layout_margin="5sp"
             android:layout_marginTop="10dp"
-            android:dividerHeight="10dp">
+            android:dividerHeight="10dp"
+            tools:listitem="@layout/layout_item_watch_nitewatch">
 
         </com.example.test1706.MyListView>
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
 </ScrollView>

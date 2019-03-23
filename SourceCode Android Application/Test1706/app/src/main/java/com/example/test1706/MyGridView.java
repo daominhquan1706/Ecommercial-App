@@ -1,11 +1,9 @@
 package com.example.test1706;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
-import android.widget.ListView;
 
-public class MyGridView extends GridView {
+public class MyGridView  extends GridView {
 
     public MyGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -20,10 +18,7 @@ public class MyGridView extends GridView {
     }
 
     @Override
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
-                MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, MeasureSpec.UNSPECIFIED);
     }
-
 }
