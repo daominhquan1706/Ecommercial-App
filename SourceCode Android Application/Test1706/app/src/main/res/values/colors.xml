@@ -5,7 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#fff</color>
     <color name="black">#191919</color>
-    <color name="black_cardview_nitewatch">#F7191919</color>
+    <color name="black_cardview_nitewatch">#222222</color>
+    <color name="black_cardview_nitewatch1">#222222</color>
+
     <color name="gray">#D8D8D8</color>
 
     <color name="background_mainpage1">#EEF0F3</color>
@@ -14,4 +16,5 @@
     <color name="Deeppurple">#95B911D8</color>
     <color name="MoneyColor">#2196F3</color>
     <color name="color_text_productname">#031325</color>
+    <color name="colordark">#3D3D3D</color>
 </resources>

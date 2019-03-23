@@ -21,4 +21,13 @@
     <string name="money">Money</string>
     <string name="re_type_password">Re-type password</string>
     <string name="search">Search</string>
+
+    <string-array name="category_nitewatch">
+        <item>Hawk</item>
+        <item>Alpha</item>
+        <item>Icon</item>
+        <item>Marquess</item>
+        <item>Mx10</item>
+
+    </string-array>
 </resources>

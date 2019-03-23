@@ -22,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/black_cardview_nitewatch"
-            card_view:cardCornerRadius="8dp"
-            card_view:cardElevation="2dp">
+            card_view:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,11 +40,13 @@
 
                 <android.support.v7.widget.RecyclerView
 
+                    android:layout_marginBottom="10dp"
                     android:id="@+id/recycleview_horizontal_nitewatch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+
                     tools:listitem="@layout/item_horizontal_nite_watch">
 
                 </android.support.v7.widget.RecyclerView>
