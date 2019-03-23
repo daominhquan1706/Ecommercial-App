@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">POWERr Watch</string>
+    <string name="app_name">POWERr</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
     <string name="navigation_drawer_close">Close Navigation drawer</string>
     <string name="title_activity_login">Sign in</string>
