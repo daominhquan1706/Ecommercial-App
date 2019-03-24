@@ -22,6 +22,8 @@
     <string name="re_type_password">Re-type password</string>
     <string name="search">Search</string>
     <string name="forgot_password">Forgot password ?</string>
+    <string name="up">Up</string>
+    <string name="unknow_account">Unknow Account</string>
 
     <string-array name="category_nitewatch">
         <item>Hawk</item>

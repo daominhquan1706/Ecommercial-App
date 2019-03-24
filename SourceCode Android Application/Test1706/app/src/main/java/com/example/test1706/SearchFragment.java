@@ -1,28 +1,30 @@
 package com.example.test1706;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.test1706.model.Product;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFragment extends Fragment {
     Search_Adapter productadapter;
     ListView listView;
+
+    SearchView searchview_product;
+    private static final String TAG = "SearchFragment";
 
     @Nullable
     @Override
@@ -30,13 +32,51 @@ public class SearchFragment extends Fragment {
         return inflater.inflate(R.layout.search_fragment, container, false);
     }
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ArrayList<Product> productList = getProductdata();
         productadapter = new Search_Adapter(getActivity(), productList);
+
+
         listView = (ListView) getView().findViewById(R.id.recycleview_search);
         listView.setAdapter(productadapter);
         listView.setDividerHeight(10);
+
+        searchview_product = (SearchView) getView().findViewById(R.id.searchview_product);
+        searchview_product.setIconifiedByDefault(false);
+        searchview_product.setSubmitButtonEnabled(true);
+        searchview_product.setQueryHint("Search Here");
+        searchview_product.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchview_product.setFocusable(true);
+
+        searchview_product.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
+                return false;
+            }
+        });
+
+        searchview_product.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextChange: đã gọi được hàm nhập dữ liệu searchview");
+                productadapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
     }
 
 
@@ -56,37 +96,6 @@ public class SearchFragment extends Fragment {
         list_data.add(dongho3);
         return list_data;
     }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.main_menu, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
 
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack();
-                return false;
-            }
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                productadapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-    }
 }

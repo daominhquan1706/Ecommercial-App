@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +26,6 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     private Context mContext;
     private static final String TAG = "Product_Recycle_Adapter";
     int currentlayout;
-
     public Product_Recycle_Adapter_NiteWatch(Context mContext, List<Product> list_data, int currentlayout) {
         this.list_data = list_data;
         this.mContext = mContext;

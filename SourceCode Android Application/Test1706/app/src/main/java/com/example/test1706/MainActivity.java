@@ -1,5 +1,7 @@
 package com.example.test1706;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,30 +9,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test1706.model.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
@@ -40,6 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private TextView tv_email_nav_header;
     Button btn_login, btn_logout;
+    private static final String TAG = "MainActivity";
+    Context mContext;
+
+    Fragment fragmentnitewatch = new NiteWatchFragment();
+    Fragment fragmentsearch = new SearchFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +73,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new NiteWatchFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
+                    fragmentnitewatch).commit();
+
+
             navigationView.setCheckedItem(R.id.nav_NiteWatch);
         }
 
@@ -86,16 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
 
-        final Fragment F1 = new SearchFragment();
+        /*final Fragment F1 = new SearchFragment();
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-
-
-
-        searchView.setIconifiedByDefault(false);
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint("Search Here");
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
@@ -114,11 +112,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().remove(F1).commit();
                 return true; // OR FALSE IF YOU DIDN'T WANT IT TO CLOSE!
             }
-        });
-
+        });*/
 
 
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Fragment F1 = new SearchFragment();
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Log.d(TAG, "onOptionsItemSelected: " + item.getIcon());
+
+                if (item.getTitle().equals("Search")) {
+                    item.setTitle("Up");
+                    item.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_keyboard_arrow_up_black_24dp));
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fragmentsearch).commit();
+                } else {
+                    hideKeyboard(this);
+                    item.setTitle("Search");
+                    item.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_search_black_24dp));
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fragmentnitewatch).commit();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -143,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
-                tv_email_nav_header.setText("Unknow_Account");
+                tv_email_nav_header.setText(getString(R.string.unknow_account));
                 btn_logout.setVisibility(View.INVISIBLE);
                 btn_login.setVisibility(View.VISIBLE);
             }
@@ -215,13 +239,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             btn_logout.setVisibility(View.VISIBLE);
             btn_login.setVisibility(View.GONE);
         } else {
-            tv_email_nav_header.setText("Unknow_Account");
+            tv_email_nav_header.setText(getString(R.string.unknow_account));
             btn_logout.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);
         }
 
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 
 }

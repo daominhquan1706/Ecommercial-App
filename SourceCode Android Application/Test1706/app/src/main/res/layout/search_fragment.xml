@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:background="@color/white"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.SearchView
+            android:layout_weight="1"
+            android:id="@+id/searchview_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.SearchView>
+    </LinearLayout>
+
+
     <ListView
         tools:listitem="@layout/item_search_nitewatch_layout"
         android:id="@+id/recycleview_search"

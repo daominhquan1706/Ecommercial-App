@@ -152,5 +152,58 @@
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
+ <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_doanhthu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            card_view:cardCornerRadius="@dimen/borderMenuitem"
+            card_view:cardElevation="10dp">
+
+            <LinearLayout
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_cardview_nitewatch"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_ic_accountmanager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_account_manger" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ACCOUNT MANAGER"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            card_view:cardCornerRadius="@dimen/borderMenuitem"
+            card_view:cardElevation="10dp">
+
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -13,7 +13,7 @@ public class Admin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_main_activity);
+        setContentView(R.layout.activity_admin_main);
 
         initAdmin ();
         cv_sanpham.setOnClickListener(new View.OnClickListener() {
