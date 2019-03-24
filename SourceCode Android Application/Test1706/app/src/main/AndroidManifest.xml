@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Add_productActivity"></activity>
+        <activity android:name=".ForgotPassword_Activity" android:parentActivityName=".LoginActivity"></activity>
+        <activity android:name=".Add_productActivity" />
         <activity android:name=".AdminSanPham_Activity" />
         <activity
             android:name=".Admin"

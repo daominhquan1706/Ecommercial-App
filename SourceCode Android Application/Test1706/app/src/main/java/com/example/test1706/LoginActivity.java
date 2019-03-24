@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,6 +94,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        TextView btn_forgotpassword = (TextView) findViewById(R.id.btn_open_forgotpassword);
+        btn_forgotpassword.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openforgotpassword = new Intent(LoginActivity.this,ForgotPassword_Activity.class);
+                startActivity(openforgotpassword);
+            }
+        });
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {

@@ -38,7 +38,7 @@
                 android:id="@+id/img_account"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:src="@drawable/power_brand" />
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <android.support.design.widget.TextInputLayout
                 android:background="@drawable/drw_edt_bg"
@@ -87,7 +87,16 @@
                     android:textColor="@color/white" />
 
             </android.support.design.widget.TextInputLayout>
+            <TextView
 
+                android:id="@+id/btn_open_forgotpassword"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:text="@string/forgot_password"
+                android:textColor="@color/Deeppurple"
+                android:textStyle="bold" />
             <Button
 
                 android:id="@+id/email_sign_in_button"
@@ -108,8 +117,9 @@
                 android:layout_height="58dp"
                 android:background="@drawable/colorbutton_2"
                 android:text="@string/create_an_account"
-                android:textColor="#005dff"
+                android:textColor="@color/LightBlue"
                 android:textStyle="bold" />
+
 
             <!-- Login progress -->
 

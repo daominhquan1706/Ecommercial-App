@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 if (mAuth.getCurrentUser() == null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MainFragment()).commit();
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
                 } else {
@@ -142,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                 tv_email_nav_header.setText("Unknow_Account");
                 btn_logout.setVisibility(View.INVISIBLE);
+                btn_login.setVisibility(View.VISIBLE);
             }
         });
         updateUI();

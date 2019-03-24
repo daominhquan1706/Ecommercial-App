@@ -5,9 +5,12 @@
         android:drawable="@color/white"/>
 
     <item
+
+        android:id="@+id/icon0"
         android:drawable="@mipmap/ic_launcher"
 
         android:gravity="center">
     </item>
+
 
 </layer-list>

@@ -39,7 +39,7 @@
                 android:id="@+id/img_account"
                 android:layout_width="match_parent"
                 android:layout_height="138dp"
-                android:src="@drawable/power_brand" />
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <ProgressBar
                 android:id="@+id/login_progress"
