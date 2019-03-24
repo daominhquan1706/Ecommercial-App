@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailsProductActivity">
+    tools:context=".DetailsProductActivity"
+    android:background="@color/black">
 
     <ImageView
-        android:scaleType="centerCrop"
+        android:id="@+id/img_details_nitewatch"
+        android:scaleType="fitCenter"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/hinh1" />
+        android:src="@drawable/dongho_1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,12 +28,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/white"
+                android:id="@+id/tv_productname_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/productname"
                 android:textSize="20dp" />
 
             <TextView
+                android:textColor="@color/white"
+                android:id="@+id/tv_productcategory_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category"
@@ -77,7 +83,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_price"
+                android:textColor="@color/LightBlue"
+                android:id="@+id/tv_productprice_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"

@@ -1,12 +1,16 @@
 package com.example.test1706;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,8 +44,9 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder :đã được gọi");
+        final Product productt = list_data.get(i);
 
         Glide.with(mContext)
                 .load(list_data.get(i).getImage())
@@ -50,6 +55,29 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         viewHolder.mName.setText(list_data.get(i).getProduct_Name());
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
         viewHolder.mPrice.setText("$ " + list_data.get(i).getPrice());
+
+        viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: đã gọi được hàm click View");
+                Intent intent = new Intent(mContext,DetailsProductActivity.class);
+                Bundle b =new Bundle();
+                b.putString("ProductName",productt.getProduct_Name());
+                b.putString("Category",productt.getCategory());
+                b.putInt("Price",productt.getPrice());
+                b.putString("Image",productt.getImage());
+
+
+                intent.putExtras(b);
+
+
+                mContext.startActivity(intent);
+                Log.d(TAG, "onClick: đã mở được trang details");
+            }
+        });
+
+
+
 
     }
 
@@ -61,6 +89,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mName, mPrice, mCategory;
         ImageView mImage;
+        Button mbtnView,mbtnCart;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -68,6 +97,8 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
             mCategory = (TextView) itemView.findViewById(R.id.tv_horizontal_category);
             mImage = (ImageView) itemView.findViewById(R.id.img_horizontal_product);
+            mbtnView = (Button) itemView.findViewById(R.id.btnview_horizontal_nitewatch);
+            mbtnCart= (Button) itemView.findViewById(R.id.btncart_horizontal_nitewatch);
         }
 
     }

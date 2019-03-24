@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Search_Adapter extends BaseAdapter implements Filterable {
-    private List<Product> list_product;
-    private List<Product> list_product_search;
+    private ArrayList<Product> list_product;
+    private ArrayList<Product> list_product_search;
 
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public Search_Adapter(Context context, List<Product> list_product) {
+    public Search_Adapter(Context context, ArrayList<Product> list_product) {
         this.context = context;
         this.list_product = list_product;
         layoutInflater = LayoutInflater.from(context);
@@ -94,43 +94,35 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
         }
         return resID;
     }
-    @Override
     public Filter getFilter() {
-
-        Filter filter = new Filter() {
-
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-                list_product_search = (List<Product>) results.values;
-                notifyDataSetChanged();
-            }
+        return new Filter() {
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-
-                FilterResults results = new FilterResults();
-                ArrayList<String> FilteredArrayNames = new ArrayList<String>();
-
-                // perform your search here using the searchConstraint String.
-
-                constraint = constraint.toString().toLowerCase();
-                for (int i = 0; i < list_product.size(); i++) {
-                    Product dataNames = list_product.get(i);
-                    if (dataNames.getProduct_Name().toLowerCase().startsWith(constraint.toString()))  {
-                        FilteredArrayNames.add(dataNames.getProduct_Name());
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<Product> results = new ArrayList<Product>();
+                if (list_product == null)
+                    list_product = list_product_search;
+                if (constraint != null) {
+                    if (list_product != null && list_product.size() > 0) {
+                        for (final Product g : list_product) {
+                            if (g.getProduct_Name().toLowerCase()
+                                    .contains(constraint.toString()))
+                                results.add(g);
+                        }
                     }
+                    oReturn.values = results;
                 }
+                return oReturn;
+            }
 
-                results.count = FilteredArrayNames.size();
-                results.values = FilteredArrayNames;
-                Log.e("VALUES", results.values.toString());
-
-                return results;
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint,
+                                          FilterResults results) {
+                list_product_search = (ArrayList<Product>) results.values;
+                notifyDataSetChanged();
             }
         };
-
-        return filter;
     }
 }

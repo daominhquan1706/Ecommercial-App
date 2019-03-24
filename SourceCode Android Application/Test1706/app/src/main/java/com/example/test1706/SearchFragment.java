@@ -32,7 +32,7 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        List<Product> productList = getProductdata();
+        ArrayList<Product> productList = getProductdata();
         productadapter = new Search_Adapter(getActivity(), productList);
         listView = (ListView) getView().findViewById(R.id.recycleview_search);
         listView.setAdapter(productadapter);
@@ -40,8 +40,8 @@ public class SearchFragment extends Fragment {
     }
 
 
-    private List<Product> getProductdata() {
-        List<Product> list_data = new ArrayList<Product>();
+    private ArrayList<Product> getProductdata() {
+        ArrayList<Product> list_data = new ArrayList<Product>();
         Product dongho1 = new Product("Đồng hồ sồ 1", 300, "Sport", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_201.png?alt=media&token=9df5d3fd-95e7-4f24-accf-df105ddaa63b");
         Product dongho2 = new Product("Đồng hồ sồ 2", 300, "Fashion", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_300s.png?alt=media&token=284dc132-8fb0-4531-869d-149dcb0e00cc");
         Product dongho3 = new Product("Đồng hồ sồ 3", 300, "Bussiness", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_t100.png?alt=media&token=43f33315-702a-4484-8ba2-f32e5dd1b941");
@@ -58,8 +58,10 @@ public class SearchFragment extends Fragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         inflater.inflate(R.menu.main_menu, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 

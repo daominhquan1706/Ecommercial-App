@@ -1,6 +1,7 @@
 package com.example.test1706;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,13 +11,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,9 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private TextView tv_email_nav_header;
     Button btn_login, btn_logout;
-    private List<Product> exampleList;
-    private Search_Adapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +86,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
 
-
         final Fragment F1 = new SearchFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, F1).commit();
-        getSupportFragmentManager().beginTransaction().hide(F1).commit();
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
+
+
+        searchView.setIconifiedByDefault(false);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 // Do whatever you need
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, F1).commit();
                 getSupportFragmentManager().beginTransaction().show(F1).commit();
                 return true; // KEEP IT TO TRUE OR IT DOESN'T OPEN !!
             }
@@ -110,9 +111,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 // Do whatever you need
                 getSupportFragmentManager().beginTransaction().hide(F1).commit();
+                getSupportFragmentManager().beginTransaction().remove(F1).commit();
                 return true; // OR FALSE IF YOU DIDN'T WANT IT TO CLOSE!
             }
         });
+
+
+
         return true;
     }
 
@@ -216,5 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+
 
 }

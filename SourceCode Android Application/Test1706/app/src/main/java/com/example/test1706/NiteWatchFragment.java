@@ -22,10 +22,10 @@ import java.util.Objects;
 public class NiteWatchFragment extends Fragment {
     NiteWatchAdapter productadapter;
     ListView listView;
-
-
     Product_Recycle_Adapter_NiteWatch product_horizontal_adapter;
     RecyclerView recyclerView_horizontal;
+
+
 
     @Nullable
     @Override
