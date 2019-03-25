@@ -5,6 +5,11 @@ public class Product {
     private  int Price;
     private String category;
     private String Image;
+    private String Image_Night;
+    private  String Description;
+
+    private  int Quantity;
+    private  int discount;
 
     public Product() {}
 
@@ -13,6 +18,49 @@ public class Product {
         Price = price;
         this.category = category;
         Image = image;
+    }
+
+    public Product(String product_Name, int price, String category, String image, String image_Night, String description, int quantity, int discount) {
+        Product_Name = product_Name;
+        Price = price;
+        this.category = category;
+        Image = image;
+        Image_Night = image_Night;
+        Description = description;
+        Quantity = quantity;
+        this.discount = discount;
+    }
+
+    public String getImage_Night() {
+        return Image_Night;
+    }
+
+    public void setImage_Night(String image_Night) {
+        Image_Night = image_Night;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     public String getProduct_Name() {

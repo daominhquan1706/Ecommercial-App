@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     android:padding="10dp"
     tools:context=".Add_productActivity">
@@ -77,42 +77,75 @@
                     android:textSize="13dp" />
 
                 <Spinner
-                    app:popupTheme="@style/PopupMenuStyle"
                     android:id="@+id/spinner_add"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginLeft="10dp"
+                    android:entries="@array/category_nitewatch"
                     android:overlapAnchor="true"
                     android:spinnerMode="dropdown"
-                    tools:listitem="@layout/spinner_item_dark"
-                    android:entries="@array/category_nitewatch"/>
+                    app:popupTheme="@style/PopupMenuStyle"
+                    tools:listitem="@layout/spinner_item_dark" />
             </RelativeLayout>
 
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/img_choose"
-                android:background="@drawable/drw_edt_bg"
-                android:layout_width="150dp"
-                android:layout_height="150dp" />
-            <Button
-                android:id="@+id/btn_choose_img"
-                android:text="Choose image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/colordark"
+                    android:scaleType="fitCenter" />
+
+                <Button
+
+                    android:id="@+id/btn_choose_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Picture DAY" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_choose_night"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/colordark"
+                    android:scaleType="fitCenter" />
+
+                <Button
+
+                    android:id="@+id/btn_choose_img_night"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="picture NIGHT" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
             android:background="@drawable/buttom_menu"
             android:text="Add"
             android:textColor="@color/white" />

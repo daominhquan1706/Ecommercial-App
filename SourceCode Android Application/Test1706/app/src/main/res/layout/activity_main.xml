@@ -26,8 +26,17 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
         </android.support.design.widget.AppBarLayout>
+
+
+        <ListView
+            android:visibility="gone"
+            android:id="@+id/listview_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_search_nitewatch_layout">
+
+        </ListView>
 
         <FrameLayout
             android:id="@+id/fragment_container"

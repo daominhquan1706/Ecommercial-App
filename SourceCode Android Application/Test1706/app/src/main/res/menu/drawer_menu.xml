@@ -30,9 +30,9 @@
                 android:icon="@drawable/ic_shop"
                 android:title="log out" />
             <item
-                android:id="@+id/nav_setting"
+                android:id="@+id/nav_admin"
                 android:icon="@drawable/ic_settings"
-                android:title="Setting" />
+                android:title="Admin" />
             <item
                 android:id="@+id/nav_buoi1"
                 android:icon="@drawable/ic_settings"

@@ -1,6 +1,5 @@
 package com.example.test1706;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,11 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.test1706.model.Product;
 
@@ -21,19 +22,19 @@ import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
     Search_Adapter productadapter;
+    SearchView searchview_product;
+
+
+
     ListView listView;
 
-    SearchView searchview_product;
+
     private static final String TAG = "SearchFragment";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.search_fragment, container, false);
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
 
@@ -76,9 +77,46 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
+        setHasOptionsMenu(false);
+
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem searchItem = (MenuItem) menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+
+        searchView.setQueryHint("Search Here");
+        searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
+
+
+        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextChange: đã gọi được hàm nhập dữ liệu searchview");
+                productadapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     private ArrayList<Product> getProductdata() {
         ArrayList<Product> list_data = new ArrayList<Product>();

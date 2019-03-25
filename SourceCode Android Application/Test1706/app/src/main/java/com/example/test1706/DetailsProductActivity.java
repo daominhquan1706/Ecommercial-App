@@ -31,7 +31,7 @@ public class DetailsProductActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
 
         mName.setText(b.getString("ProductName"));
-        mPrice.setText("$"+ b.getInt("Price"));
+        mPrice.setText("$" + b.getInt("Price"));
         mCategory.setText(b.getString("Category"));
         Glide.with(this)
                 .load(b.getString("Image"))
