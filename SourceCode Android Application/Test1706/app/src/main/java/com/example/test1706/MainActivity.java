@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

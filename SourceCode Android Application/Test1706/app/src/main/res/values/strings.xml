@@ -24,6 +24,8 @@
     <string name="forgot_password">Forgot password ?</string>
     <string name="up">Up</string>
     <string name="unknow_account">Unknow Account</string>
+    <string name="adventure">ADVENTURE</string>
+    <string name="hawk">HAWK</string>
 
     <string-array name="category_nitewatch">
         <item>Hawk</item>

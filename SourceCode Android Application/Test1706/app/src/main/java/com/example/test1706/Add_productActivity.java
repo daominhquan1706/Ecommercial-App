@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -69,20 +71,23 @@ public class Add_productActivity extends AppCompatActivity {
                     Uri selectedImage = data.getData();
                     InputStream imageStream = null;
                     try {
+                        assert selectedImage != null;
                         imageStream = getContentResolver().openInputStream(selectedImage);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                     Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
                     img_choosen.setImageURI(selectedImage);// To display selected image in image view
-                    tv_productname.setText(data.getData().getPath().split("/")[4]);
+                    tv_productname.setText(selectedImage.getPath());
+                    File file =new File(selectedImage.getPath());
+                    DeleteRecursive(file);
 
-                    Toast.makeText(this, "đã chọn đồng hồ ban ngày", Toast.LENGTH_SHORT).show();
                     break;
                 case PICK_IMAGE2:
                     Uri selectedImage2 = data.getData();
                     InputStream imageStream2 = null;
                     try {
+                        assert selectedImage2 != null;
                         imageStream = getContentResolver().openInputStream(selectedImage2);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -97,7 +102,18 @@ public class Add_productActivity extends AppCompatActivity {
             Toast.makeText(this, "nothing change", Toast.LENGTH_SHORT).show();
         }
     }
+    public static void DeleteRecursive(File fileOrDirectory)
+    {
+        if (fileOrDirectory.isDirectory())
+        {
+            for (File child : fileOrDirectory.listFiles())
+            {
+                DeleteRecursive(child);
+            }
+        }
 
+        fileOrDirectory.delete();
+    }
 
     private void init() {
         tv_productname = (TextView) findViewById(R.id.tv_productname_add);

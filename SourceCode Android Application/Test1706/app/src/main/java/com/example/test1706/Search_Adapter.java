@@ -60,6 +60,7 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_productname_search);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_productprice_search);
             holder.searchLinearLayout = (LinearLayout) convertView.findViewById(R.id.seachlinearlayout);
+            holder.tvCategory = (TextView) convertView.findViewById(R.id.tv_category_search);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,6 +70,7 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
         final Product product = this.list_product.get(position);
         if (product != null) {
             holder.tvName.setText(product.getProduct_Name());
+            holder.tvCategory.setText(product.getCategory());
             holder.tvPrice.setText((String) ("$" + product.getPrice()));
 
             Glide.with(context)
@@ -105,7 +107,7 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
 
     static class ViewHolder {
         LinearLayout searchLinearLayout;
-        TextView tvName, tvPrice;
+        TextView tvName, tvPrice,tvCategory;
         ImageView mImage;
     }
 

@@ -11,48 +11,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/v_pager_fragment_message"
+        <include
+            layout="@layout/slideshow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <include
+            layout="@layout/cardview_horizontal_hawk"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/slide1" />
-
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_height="match_parent"
+            android:layout_margin="13dp" />
+        <include
+            layout="@layout/cardview_horizontal_hawk"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/black_cardview_nitewatch"
-            card_view:cardCornerRadius="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Smart Watch"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <android.support.v7.widget.RecyclerView
-
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/recycleview_horizontal_nitewatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-
-                    tools:listitem="@layout/item_horizontal_nite_watch">
-
-                </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+            android:layout_height="match_parent"
+            android:layout_margin="13dp" />
 
         <com.example.test1706.MyListView
 

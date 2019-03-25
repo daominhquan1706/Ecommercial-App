@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black_cardview_nitewatch"
+    card_view:cardCornerRadius="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_cardview_nitewatch"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:padding="10dp"
+            android:text="@string/hawk"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="27sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/adventure"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:scrollbarThumbHorizontal="@color/LightBlue"
+            android:scrollbars="horizontal"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarFadeDuration="300"
+            android:id="@+id/recycleview_horizontal_nitewatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+
+            tools:listitem="@layout/item_horizontal_nite_watch">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -16,17 +16,18 @@
         android:src="@drawable/dongho_1" />
 
     <TextView
+        android:fontFamily="sans-serif-light"
         android:id="@+id/tv_horizontal_name"
-        android:textColor="@color/LightBlue"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin1"
         android:text="@string/productname"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <TextView
+        android:fontFamily="sans-serif-condensed-light"
         android:id="@+id/tv_horizontal_category"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
@@ -38,8 +39,9 @@
         android:textStyle="normal" />
 
     <TextView
+
         android:id="@+id/tv_horizontal_price"
-        android:textColor="@color/white"
+        android:textColor="@color/LightBlue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
