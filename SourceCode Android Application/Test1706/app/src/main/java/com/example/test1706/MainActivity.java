@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +20,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     Fragment fragmentnitewatch;
     ArrayList<Product> list_data;
+
+    LinearLayout btn_enable_night_view;
+
+    int mStartX, mStartY, mEndX, mEndY;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list_data = getProductdata();
         productadapter = new Search_Adapter(this, list_data);
         listView_search.setAdapter(productadapter);
-
+        btn_enable_night_view.bringToFront();
     }
 
 
@@ -120,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentnitewatch = new NiteWatchFragment();
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         listView_search = (ListView) findViewById(R.id.listview_search);
-
+        btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
     }
 
     private ArrayList<Product> getProductdata() {
@@ -149,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
 
 
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -317,5 +324,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
 
+        int action = MotionEventCompat.getActionMasked(event);
+
+        switch(action) {
+            case (MotionEvent.ACTION_DOWN) :
+
+                mStartX = (int)event.getX();
+                mStartY = (int)event.getY();
+                return true;
+
+            case (MotionEvent.ACTION_MOVE) :
+
+                mEndX = (int)event.getX();
+                mEndY = (int)event.getY();
+
+                if((mEndY - mStartY) > 3) {
+                    Log.d(TAG, "onTouchEvent: UP UP UP");
+
+                }
+                if((mEndY - mStartY) < -3) {
+                    Log.d(TAG, "onTouchEvent: DOWN DOWN DOWN");
+
+                }
+                mStartX = (int)event.getX();
+                mStartY = (int)event.getY();
+                return true;
+
+            case (MotionEvent.ACTION_UP) :
+                mEndX = (int)event.getX();
+                mEndY = (int)event.getY();
+
+                return true;
+
+            case (MotionEvent.ACTION_CANCEL) :
+                return true;
+
+            case (MotionEvent.ACTION_OUTSIDE) :
+                return true;
+
+            default :
+                return super.onTouchEvent(event);
+        }
+    }
 }

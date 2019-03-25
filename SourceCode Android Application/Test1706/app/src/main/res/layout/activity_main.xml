@@ -10,6 +10,8 @@
     tools:context=".MainActivity"
     tools:openDrawer="end">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,11 +32,11 @@
 
 
         <ListView
-            android:background="@color/colordark"
-            android:visibility="gone"
             android:id="@+id/listview_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colordark"
+            android:visibility="gone"
             tools:listitem="@layout/item_search_nitewatch_layout">
 
         </ListView>

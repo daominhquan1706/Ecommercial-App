@@ -6,14 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:gravity="center|top">
+
+        <LinearLayout
+
+            android:id="@+id/btn_enable_night_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin1"
+            android:background="@drawable/drw_edt_bg"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="30dp"
+                android:maxHeight="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_power_settings_new_black_24dp" />
+
+            <TextView
+                android:id="@+id/tvSearchCaption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="ENABLE NIGHT VIEW"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:visibility="gone"
         android:id="@+id/fab"
-        app:backgroundTint="@color/LightBlue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/LightBlue"
         app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

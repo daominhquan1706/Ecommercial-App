@@ -1,24 +1,25 @@
 package com.example.test1706;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 
 import com.example.test1706.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class NiteWatchFragment extends Fragment {
     NiteWatchAdapter productadapter;
@@ -26,7 +27,9 @@ public class NiteWatchFragment extends Fragment {
     Product_Recycle_Adapter_NiteWatch product_horizontal_adapter;
     RecyclerView recyclerView_horizontal;
 
-
+    LinearLayout linearLayout;
+    ScrollView scrollView;
+    private static final String TAG = "NiteWatchFragment";
 
     @Nullable
     @Override
@@ -34,6 +37,7 @@ public class NiteWatchFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_nite_watch, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -45,7 +49,6 @@ public class NiteWatchFragment extends Fragment {
         tabLayout.setupWithViewPager(v_page_massage, true);
 
 
-
         List<Product> productList = getProductdata();
         productadapter = new NiteWatchAdapter(getActivity(), productList);
         listView = (ListView) getView().findViewById(R.id.listView_product_nitewatch);
@@ -53,10 +56,30 @@ public class NiteWatchFragment extends Fragment {
         listView.setDividerHeight(10);
 
 
-        product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(),productList,R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.item_horizontal_nite_watch);
         recyclerView_horizontal = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch);
 
         recyclerView_horizontal.setAdapter(product_horizontal_adapter);
+
+
+        linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
+        scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+                if (scrollY - oldScrollY > 1 && linearLayout.getY() > -200) {
+                    linearLayout.setY(linearLayout.getY() - 10);
+                    if (linearLayout.getY() < -30) {
+                        linearLayout.setY(-200);
+                    }
+                }
+                if (scrollY - oldScrollY < -1 && linearLayout.getY() <= 22) {
+                    linearLayout.setY(linearLayout.getY() + 10);
+                }
+
+            }
+        });
     }
 
     private List<Product> getProductdata() {

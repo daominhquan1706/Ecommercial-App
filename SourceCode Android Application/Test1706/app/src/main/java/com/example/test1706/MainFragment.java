@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,11 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,17 +23,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
-
-import android.view.ViewGroup.LayoutParams;
 
 public class MainFragment extends Fragment {
     List<Product> productList;
@@ -49,8 +38,10 @@ public class MainFragment extends Fragment {
     ProgressBar progressBar;
     MyGridView listView;
     int listheight = 0;
-    Product_Recycle_Adapter  hori_Adapter;
+    Product_Recycle_Adapter hori_Adapter;
     RecyclerView recyclerView;
+    ViewPager v_page_massage;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,9 +52,10 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
+        init();
 
         //SLIDE SHOW
-        ViewPager v_page_massage = (ViewPager) getView().findViewById(R.id.v_pager_fragment_message);
+
         ImageAdapter adapter = new ImageAdapter(getActivity());
         v_page_massage.setAdapter(adapter);
         //v_page_massage.setVisibility(View.GONE);
@@ -71,11 +63,10 @@ public class MainFragment extends Fragment {
         ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Loading. Please wait...", true);
 
 
-
         productList = new ArrayList<Product>();
         mkey = new ArrayList<String>();
         productadapter = new ProductAdapter(getActivity(), productList);
-        listView = (MyGridView) getView().findViewById(R.id.listView_product_smartwatch);
+
         listView.setAdapter(productadapter);
         //DATABASE
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -144,11 +135,18 @@ public class MainFragment extends Fragment {
         myRef.push().setValue(dongho2);
         myRef.push().setValue(dongho3);
     }
-    private void initRecycleView(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+
+    private void init() {
+        listView = (MyGridView) getView().findViewById(R.id.listView_product_smartwatch);
+        v_page_massage = (ViewPager) getView().findViewById(R.id.v_pager_fragment_message);
+    }
+
+    private void initRecycleView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal);
         recyclerView.setLayoutManager(layoutManager);
-        hori_Adapter = new Product_Recycle_Adapter(getActivity(),productList);
+        hori_Adapter = new Product_Recycle_Adapter(getActivity(), productList);
         recyclerView.setAdapter(hori_Adapter);
+
     }
 }
