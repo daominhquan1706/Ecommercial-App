@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,48 +26,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NiteWatchFragment extends Fragment {
+    private static final String TAG = "NiteWatchFragment";
     NiteWatchAdapter productadapter;
     ListView listView;
     Product_Recycle_Adapter_NiteWatch product_horizontal_adapter;
     RecyclerView recyclerView_horizontal;
-
     LinearLayout linearLayout;
     ScrollView scrollView;
-    private static final String TAG = "NiteWatchFragment";
+    TabLayout tabLayout;
+    ViewPager v_page_massage;
+    Toolbar toolbar;
+    AppBarLayout appBarLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_nite_watch, container, false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        init();
         //set up slide show on header fragment
-        ViewPager v_page_massage = (ViewPager) getView().findViewById(R.id.v_pager_fragment_message);
         ImageAdapter adapter = new ImageAdapter(getActivity());
         v_page_massage.setAdapter(adapter);
-        TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.tabDots);
         tabLayout.setupWithViewPager(v_page_massage, true);
-
-
         List<Product> productList = getProductdata();
         productadapter = new NiteWatchAdapter(getActivity(), productList);
-        listView = (ListView) getView().findViewById(R.id.listView_product_nitewatch);
         listView.setAdapter(productadapter);
         listView.setDividerHeight(10);
 
 
         product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.item_horizontal_nite_watch);
-        recyclerView_horizontal = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch);
+
 
         recyclerView_horizontal.setAdapter(product_horizontal_adapter);
 
 
-        linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
-        scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
         scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -73,27 +72,44 @@ public class NiteWatchFragment extends Fragment {
                 // slide-up animation
                 Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
                 Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
+                Animation slideDown_toolbar = AnimationUtils.loadAnimation(getActivity(), R.anim.toolbar_slidedown);
+                Animation slideUp_toolbar = AnimationUtils.loadAnimation(getActivity(), R.anim.toolbar_slideup);
 
-                /*if (linearLayout.getVisibility() == View.VISIBLE) {
-                    linearLayout.setVisibility(View.GONE);
-                    linearLayout.startAnimation(slideUp);
-                } else {
-                    linearLayout.setVisibility(View.VISIBLE);
-                    linearLayout.startAnimation(slideDown);
-                }*/
 
                 if (scrollY - oldScrollY > 5 && linearLayout.getVisibility() == View.INVISIBLE) {
-
                     linearLayout.setVisibility(View.VISIBLE);
                     linearLayout.startAnimation(slideUp);
 
-                } else if (scrollY - oldScrollY < -5&& linearLayout.getVisibility() == View.VISIBLE) {
+                } else if (scrollY - oldScrollY < -5 && linearLayout.getVisibility() == View.VISIBLE) {
                     linearLayout.setVisibility(View.INVISIBLE);
                     linearLayout.startAnimation(slideDown);
                 }
 
+                if (scrollY - oldScrollY > 5 && appBarLayout.getVisibility() == View.VISIBLE) {
+                    appBarLayout.setVisibility(View.GONE);
+                    appBarLayout.startAnimation(slideUp_toolbar);
+
+
+                } else if (scrollY - oldScrollY < -5 && appBarLayout.getVisibility() == View.GONE) {
+
+                    appBarLayout.setVisibility(View.VISIBLE);
+                    appBarLayout.startAnimation(slideDown_toolbar);
+                }
+
+
             }
         });
+    }
+
+    private void init() {
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbar_layout);
+        v_page_massage = (ViewPager) getView().findViewById(R.id.v_pager_fragment_message_nitewatch);
+        tabLayout = (TabLayout) getView().findViewById(R.id.tabDots);
+        linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
+        scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
+        listView = (ListView) getView().findViewById(R.id.listView_product_nitewatch);
+        recyclerView_horizontal = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch);
     }
 
     private List<Product> getProductdata() {

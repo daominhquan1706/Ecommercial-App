@@ -125,7 +125,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             return;
         } else if (email.length() > 6 && password.length() > 6) {
-            Toast.makeText(this, "đang kiểm tra thông tin", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar
+                    .make(relativelayout, "Chechking information", Snackbar.LENGTH_LONG);
+            snackbar.show();
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -138,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
 
                             } else {
-                                Toast.makeText(LoginActivity.this, "Thất bạt", Toast.LENGTH_LONG).show();
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Snackbar snackbar = Snackbar

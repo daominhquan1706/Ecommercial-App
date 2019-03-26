@@ -18,7 +18,7 @@
         <activity
             android:name=".Profile_Account_Activity"
             android:label="@string/title_activity_profile__account_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ForgotPassword_Activity"
             android:parentActivityName=".LoginActivity" />
@@ -39,7 +39,6 @@
         <activity android:name=".SplashActivity" />
         <activity android:name=".DetailsProductActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Launcher3DViewActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"

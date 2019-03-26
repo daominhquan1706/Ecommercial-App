@@ -5,38 +5,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_mainpage"
-            android:icon="@drawable/ic_message"
-            android:title="SmartWatch" />
-        <item
             android:id="@+id/nav_NiteWatch"
             android:icon="@drawable/ic_message"
             android:title="NiteWatch" />
-
-        <!--<item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_bank"
-            android:title="Login" />-->
         <item
-            android:id="@+id/nav_register"
-            android:icon="@drawable/ic_noftication"
-            android:title="360 test" />
+            android:id="@+id/nav_mainpage"
+            android:icon="@drawable/ic_message"
+            android:title="SmartWatch" />
+
 
     </group>
-    <item android:title="Communicate">
+    <item android:title="Demo function">
         <menu>
-            <item
-                android:id="@+id/nav_shop"
-                android:icon="@drawable/ic_shop"
-                android:title="log out" />
             <item
                 android:id="@+id/nav_admin"
                 android:icon="@drawable/ic_settings"
                 android:title="Admin" />
-            <item
-                android:id="@+id/nav_buoi1"
-                android:icon="@drawable/ic_settings"
-                android:title="Buổi 1" />
 
         </menu>
     </item>

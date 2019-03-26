@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </android.support.design.widget.AppBarLayout>
     <RelativeLayout
 
         android:layout_width="match_parent"
@@ -13,6 +25,7 @@
         android:gravity="center|bottom">
 
         <LinearLayout
+            android:visibility="visible"
             android:animateLayoutChanges="true"
             android:id="@+id/btn_enable_night_view"
             android:layout_width="wrap_content"

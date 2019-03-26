@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout btn_enable_night_view;
 
     int mStartX, mStartY, mEndX, mEndY;
-
+    AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,28 +74,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         init();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     fragmentnitewatch).commit();
@@ -120,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+        appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -165,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onMenuItemActionExpand(MenuItem item) {
                 frame_container.setVisibility(View.GONE);
                 listView_search.setVisibility(View.VISIBLE);
+                appBarLayout.setVisibility(View.VISIBLE);
+                btn_enable_night_view.setVisibility(View.INVISIBLE);
+
                 return true; // KEEP IT TO TRUE OR IT DOESN'T OPEN !!
             }
 
@@ -172,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 frame_container.setVisibility(View.VISIBLE);
                 listView_search.setVisibility(View.GONE);
+                appBarLayout.setVisibility(View.VISIBLE);
+                btn_enable_night_view.setVisibility(View.VISIBLE);
                 return true; // OR FALSE IF YOU DIDN'T WANT IT TO CLOSE!
             }
         });
@@ -235,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 btn_profile.setVisibility(View.INVISIBLE);
                 btn_login.setVisibility(View.VISIBLE);*/
 
-                Intent intent_profile = new Intent(MainActivity.this,Profile_Account_Activity.class);
+                Intent intent_profile = new Intent(MainActivity.this, Profile_Account_Activity.class);
                 startActivity(intent_profile);
 
             }
@@ -255,23 +247,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NiteWatchFragment()).commit();
                 break;
-
-            case R.id.nav_register:
-                Intent intent = new Intent(getApplicationContext(), Launcher3DViewActivity.class);
-                startActivity(intent);
-                break;
             case R.id.nav_admin:
                 Intent intention = new Intent(getApplicationContext(), Admin.class);
                 startActivity(intention);
-                break;
-            case R.id.nav_buoi1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new Buoi1Fragment()).commit();
-                break;
-
-            case R.id.nav_shop:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -301,7 +279,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void updateUI() {
-
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             Log.d("UPDATE UI ACCOUNT", "UpdateUI:  " + currentUser.getEmail());
@@ -314,7 +291,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             btn_profile.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);
         }
-
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -328,48 +304,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event){
 
-        int action = MotionEventCompat.getActionMasked(event);
-
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-
-                mStartX = (int)event.getX();
-                mStartY = (int)event.getY();
-                return true;
-
-            case (MotionEvent.ACTION_MOVE) :
-
-                mEndX = (int)event.getX();
-                mEndY = (int)event.getY();
-
-
-
-            case (MotionEvent.ACTION_UP) :
-                mEndX = (int)event.getX();
-                mEndY = (int)event.getY();
-                if((mEndY - mStartY) > 3) {
-                    Log.d(TAG, "onTouchEvent: UP UP UP");
-
-                }
-                if((mEndY - mStartY) < -3) {
-                    Log.d(TAG, "onTouchEvent: DOWN DOWN DOWN");
-
-                }
-                mStartX = (int)event.getX();
-                mStartY = (int)event.getY();
-                return true;
-
-            case (MotionEvent.ACTION_CANCEL) :
-                return true;
-
-            case (MotionEvent.ACTION_OUTSIDE) :
-                return true;
-
-            default :
-                return super.onTouchEvent(event);
-        }
-    }
 }
