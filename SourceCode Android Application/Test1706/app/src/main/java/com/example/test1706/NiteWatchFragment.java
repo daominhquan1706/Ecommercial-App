@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -68,14 +70,26 @@ public class NiteWatchFragment extends Fragment {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
-                if (scrollY - oldScrollY > 1 && linearLayout.getY() > -200) {
-                    linearLayout.setY(linearLayout.getY() - 10);
-                    if (linearLayout.getY() < -30) {
-                        linearLayout.setY(-200);
-                    }
-                }
-                if (scrollY - oldScrollY < -1 && linearLayout.getY() <= 22) {
-                    linearLayout.setY(linearLayout.getY() + 10);
+                // slide-up animation
+                Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
+                Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
+
+                /*if (linearLayout.getVisibility() == View.VISIBLE) {
+                    linearLayout.setVisibility(View.GONE);
+                    linearLayout.startAnimation(slideUp);
+                } else {
+                    linearLayout.setVisibility(View.VISIBLE);
+                    linearLayout.startAnimation(slideDown);
+                }*/
+
+                if (scrollY - oldScrollY > 5 && linearLayout.getVisibility() == View.INVISIBLE) {
+
+                    linearLayout.setVisibility(View.VISIBLE);
+                    linearLayout.startAnimation(slideUp);
+
+                } else if (scrollY - oldScrollY < -5&& linearLayout.getVisibility() == View.VISIBLE) {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    linearLayout.startAnimation(slideDown);
                 }
 
             }

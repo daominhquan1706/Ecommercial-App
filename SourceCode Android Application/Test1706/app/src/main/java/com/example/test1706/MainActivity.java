@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser;
     private NavigationView navigationView;
     private TextView tv_email_nav_header;
-    Button btn_login, btn_logout;
+    Button btn_login, btn_profile;
     private static final String TAG = "MainActivity";
     Context mContext;
 
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
         btn_login = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
-        btn_logout = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
+        btn_profile = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_profile);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,14 +226,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-        btn_logout.setOnClickListener(new View.OnClickListener() {
+        btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                /*FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                 tv_email_nav_header.setText(getString(R.string.unknow_account));
-                btn_logout.setVisibility(View.INVISIBLE);
-                btn_login.setVisibility(View.VISIBLE);
+                btn_profile.setVisibility(View.INVISIBLE);
+                btn_login.setVisibility(View.VISIBLE);*/
+
+                Intent intent_profile = new Intent(MainActivity.this,Profile_Account_Activity.class);
+                startActivity(intent_profile);
+
             }
         });
         updateUI();
@@ -303,11 +307,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("UPDATE UI ACCOUNT", "UpdateUI:  " + currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
             Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
-            btn_logout.setVisibility(View.VISIBLE);
+            btn_profile.setVisibility(View.VISIBLE);
             btn_login.setVisibility(View.GONE);
         } else {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
-            btn_logout.setVisibility(View.GONE);
+            btn_profile.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);
         }
 
@@ -341,6 +345,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mEndX = (int)event.getX();
                 mEndY = (int)event.getY();
 
+
+
+            case (MotionEvent.ACTION_UP) :
+                mEndX = (int)event.getX();
+                mEndY = (int)event.getY();
                 if((mEndY - mStartY) > 3) {
                     Log.d(TAG, "onTouchEvent: UP UP UP");
 
@@ -351,12 +360,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 mStartX = (int)event.getX();
                 mStartY = (int)event.getY();
-                return true;
-
-            case (MotionEvent.ACTION_UP) :
-                mEndX = (int)event.getX();
-                mEndY = (int)event.getY();
-
                 return true;
 
             case (MotionEvent.ACTION_CANCEL) :

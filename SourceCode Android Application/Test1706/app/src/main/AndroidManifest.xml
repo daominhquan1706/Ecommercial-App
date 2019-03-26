@@ -16,8 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Profile_Account_Activity"
+            android:label="@string/title_activity_profile__account_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ForgotPassword_Activity"
-            android:parentActivityName=".LoginActivity"></activity>
+            android:parentActivityName=".LoginActivity" />
         <activity android:name=".Add_productActivity" />
         <activity android:name=".AdminSanPham_Activity" />
         <activity

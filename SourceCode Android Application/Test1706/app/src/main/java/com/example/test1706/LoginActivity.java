@@ -67,38 +67,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hideKeyboard(view);
-                String email = mEmailView.getText().toString().trim();
-                String password = mPasswordView.getText().toString().trim();
-                if (email.equals("admin") && password.equals("admin")) {
-                    Intent intent = new Intent(LoginActivity.this, Admin.class);
-                    startActivity(intent);
-                    return;
-                }
-                else if (email.length() > 6 && password.length() > 6) {
-                    DangNhap();
-                } else {
-                    Toast.makeText(LoginActivity.this, "invalid format email or password.",
-                            Toast.LENGTH_LONG).show();
-                }
-                if (email.length() < 6) {
+                DangNhap();
 
-                    minputLayout_email.setError("email must include @ character");
-                } else {
-                    minputLayout_email.setErrorEnabled(false);
-                }
-
-                if (password.length() < 6) {
-                    minputLayout_password.setError("password need to have at least 6 character");
-                } else {
-                    minputLayout_password.setErrorEnabled(false);
-                }
             }
         });
         TextView btn_forgotpassword = (TextView) findViewById(R.id.btn_open_forgotpassword);
         btn_forgotpassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openforgotpassword = new Intent(LoginActivity.this,ForgotPassword_Activity.class);
+                Intent openforgotpassword = new Intent(LoginActivity.this, ForgotPassword_Activity.class);
                 startActivity(openforgotpassword);
             }
         });
@@ -109,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(v);
+
                 return true;
             }
         });
@@ -140,36 +118,55 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void DangNhap() {
-        progressDialogdialog.show();
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
+        if (email.equals("admin") && password.equals("admin")) {
+            Intent intent = new Intent(LoginActivity.this, Admin.class);
+            startActivity(intent);
+            return;
+        } else if (email.length() > 6 && password.length() > 6) {
+            Toast.makeText(this, "đang kiểm tra thông tin", Toast.LENGTH_SHORT).show();
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                finish();
 
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            progressDialogdialog.dismiss();
-                            finish();
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Snackbar snackbar = Snackbar
-                                    .make(relativelayout, "Acoount ID or password is incorrect", Snackbar.LENGTH_LONG);
-                            snackbar.show();/*
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Thất bạt", Toast.LENGTH_LONG).show();
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Snackbar snackbar = Snackbar
+                                        .make(relativelayout, "Acoount ID or password is incorrect", Snackbar.LENGTH_LONG);
+                                snackbar.show();/*
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();*/
-                        }
+                            }
 
-                        // ...
-                    }
-                });
-        progressDialogdialog.dismiss();
+                            // ...
+                        }
+                    });
+        } else {
+            Toast.makeText(LoginActivity.this, "invalid format email or password.",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (email.length() < 6) {
+
+            minputLayout_email.setError("email must include @ character");
+        } else {
+            minputLayout_email.setErrorEnabled(false);
+        }
+
+        if (password.length() < 6) {
+            minputLayout_password.setError("password need to have at least 6 character");
+        } else {
+            minputLayout_password.setErrorEnabled(false);
+        }
     }
 
 
