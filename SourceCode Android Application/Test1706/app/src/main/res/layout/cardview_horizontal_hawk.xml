@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black_cardview_nitewatch"
-    card_view:cardCornerRadius="10dp">
+    android:id="@+id/cardview_horizonal_nitewatch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardBackgroundColor="@color/black_cardview_nitewatch">
+
     <LinearLayout
+        android:id="@+id/layout_horizontal_nitewatch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_cardview_nitewatch"
         android:orientation="vertical">
 
         <TextView
@@ -32,15 +34,15 @@
             android:textSize="13sp" />
 
         <android.support.v7.widget.RecyclerView
-            android:scrollbarThumbHorizontal="@color/LightBlue"
-            android:scrollbars="horizontal"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarFadeDuration="300"
             android:id="@+id/recycleview_horizontal_nitewatch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
+            android:scrollbarFadeDuration="300"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbHorizontal="@color/LightBlue"
+            android:scrollbars="horizontal"
             card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
 
             tools:listitem="@layout/item_horizontal_nite_watch">

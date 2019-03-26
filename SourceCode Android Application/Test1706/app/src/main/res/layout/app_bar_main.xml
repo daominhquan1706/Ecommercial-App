@@ -36,6 +36,7 @@
             android:padding="16dp">
 
             <ImageView
+                android:id="@+id/icon_buttonNightView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -45,18 +46,19 @@
                 android:maxWidth="30dp"
                 android:maxHeight="30dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_power_settings_new_black_24dp" />
+                android:src="@drawable/ic_power_settings_new_blue_24dp" />
 
             <TextView
-                android:id="@+id/tvSearchCaption"
+                android:id="@+id/tv_NightView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="ENABLE NIGHT VIEW"
+                android:text="@string/enable_night_view"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

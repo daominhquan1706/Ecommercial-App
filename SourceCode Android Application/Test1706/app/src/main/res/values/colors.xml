@@ -17,6 +17,8 @@
     <color name="MoneyColor">#2196F3</color>
     <color name="color_text_productname">#031325</color>
     <color name="colordark">#3D3D3D</color>
+    <color name="clearblack">#000000</color>
+
     <color name="gradient">
         <gradient xmlns:android="http://schemas.android.com/apk/res/android"
             android:startColor="#FFFFFF"

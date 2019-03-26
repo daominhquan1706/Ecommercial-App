@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollview_nitewatch"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview_nitewatch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:fillViewport="true">
 
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,12 +19,15 @@
         <include
             layout="@layout/slideshow"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize" />
+
         <include
             layout="@layout/cardview_horizontal_hawk"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="13dp" />
+
         <include
             layout="@layout/cardview_horizontal_hawk"
             android:layout_width="match_parent"
@@ -40,6 +47,8 @@
         </com.example.test1706.MyListView>
 
     </LinearLayout>
+
+</RelativeLayout>
 
 
 </ScrollView>

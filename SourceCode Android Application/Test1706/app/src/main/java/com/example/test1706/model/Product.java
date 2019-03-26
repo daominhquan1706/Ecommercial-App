@@ -20,15 +20,12 @@ public class Product {
         Image = image;
     }
 
-    public Product(String product_Name, int price, String category, String image, String image_Night, String description, int quantity, int discount) {
+    public Product(String product_Name, int price, String category, String image, String image_Night) {
         Product_Name = product_Name;
         Price = price;
         this.category = category;
         Image = image;
         Image_Night = image_Night;
-        Description = description;
-        Quantity = quantity;
-        this.discount = discount;
     }
 
     public String getImage_Night() {
