@@ -19,7 +19,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -30,8 +29,9 @@ import java.util.List;
 
 public class NiteWatchFragment extends Fragment {
     private static final String TAG = "NiteWatchFragment";
-    NiteWatchAdapter productadapter;
-    ListView listView;
+
+    RecyclerView listView;
+    Product_Recycle_Adapter_NiteWatch productadapter;
     Product_Recycle_Adapter_NiteWatch product_horizontal_adapter;
     RecyclerView recyclerView_horizontal;
     LinearLayout linearLayout, linearLayoutDisable;
@@ -62,18 +62,16 @@ public class NiteWatchFragment extends Fragment {
         final ImageAdapter adapter = new ImageAdapter(getActivity());
         v_page_massage.setAdapter(adapter);
         tabLayout.setupWithViewPager(v_page_massage, true);
-
-
         productList = getProductdata();
-        productadapter = new NiteWatchAdapter(getActivity(), productList);
-        listView.setAdapter(productadapter);
-        listView.setDividerHeight(10);
-        //linearLayout.setVisibility(View.INVISIBLE);
 
+
+        //horizontal recycle view
         product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.item_horizontal_nite_watch);
-
-
         recyclerView_horizontal.setAdapter(product_horizontal_adapter);
+        //vertical recycle view
+        productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.layout_item_watch_nitewatch);
+        listView.setAdapter(productadapter);
+
 
         final Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
         final Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
@@ -83,49 +81,45 @@ public class NiteWatchFragment extends Fragment {
         scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (!product_horizontal_adapter.isNight()) {
-                    if (scrollY - oldScrollY > 10 && linearLayout.getVisibility() == View.INVISIBLE) {
-                        linearLayout.setVisibility(View.VISIBLE);
-                        linearLayout.startAnimation(slideUp);
+                if (scrollY - oldScrollY > 10 && linearLayout.getVisibility() == View.INVISIBLE) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                    linearLayout.startAnimation(slideUp);
 
-                    } else if (scrollY - oldScrollY < -10 && linearLayout.getVisibility() == View.VISIBLE) {
-                        linearLayout.setVisibility(View.INVISIBLE);
-                        linearLayout.startAnimation(slideDown);
-                    }
-
-                    if (scrollY - oldScrollY > 10 && appBarLayout.getVisibility() == View.VISIBLE) {
-                        appBarLayout.setVisibility(View.GONE);
-                        appBarLayout.startAnimation(slideUp_toolbar);
-
-
-                    } else if (scrollY - oldScrollY < -10 && appBarLayout.getVisibility() == View.GONE) {
-
-                        appBarLayout.setVisibility(View.VISIBLE);
-                        appBarLayout.startAnimation(slideDown_toolbar);
-                    }
+                } else if (scrollY - oldScrollY < -10 && linearLayout.getVisibility() == View.VISIBLE) {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    linearLayout.startAnimation(slideDown);
                 }
 
+                if (scrollY - oldScrollY > 10 && appBarLayout.getVisibility() == View.VISIBLE) {
+                    appBarLayout.setVisibility(View.INVISIBLE);
+                    appBarLayout.startAnimation(slideUp_toolbar);
+
+
+                } else if (scrollY - oldScrollY < -10 && appBarLayout.getVisibility() == View.INVISIBLE) {
+
+                    appBarLayout.setVisibility(View.VISIBLE);
+                    appBarLayout.startAnimation(slideDown_toolbar);
+                }
             }
+
+
         });
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 product_horizontal_adapter.setNight(!product_horizontal_adapter.isNight());
                 product_horizontal_adapter.notifyDataSetChanged();
-
-
-                linearLayout.setVisibility(View.VISIBLE);
+                productadapter.setNight(!productadapter.isNight());
+                productadapter.notifyDataSetChanged();
                 boolean isNight = product_horizontal_adapter.isNight();
                 if (isNight) {
-                    icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_red_24dp);
                     tv_NightView.setText(getString(R.string.disable_night_view));
-
+                    icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_red_24dp);
                     scrollView.setBackgroundColor(getResources().getColor(R.color.clearblack));
                     cardview_horizonal_nitewatch.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
                 } else {
-                    icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_blue_24dp);
                     tv_NightView.setText(getString(R.string.enable_night_view));
-
+                    icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_blue_24dp);
                     scrollView.setBackgroundColor(getResources().getColor(R.color.black));
                     cardview_horizonal_nitewatch.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
                 }
@@ -145,7 +139,7 @@ public class NiteWatchFragment extends Fragment {
         tabLayout = (TabLayout) getView().findViewById(R.id.tabDots);
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
         scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
-        listView = (ListView) getView().findViewById(R.id.listView_product_nitewatch);
+        listView = (RecyclerView) getView().findViewById(R.id.listView_product_nitewatch);
         recyclerView_horizontal = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch);
         icon_buttonNightView = (ImageView) getActivity().findViewById(R.id.icon_buttonNightView);
         tv_NightView = (TextView) getActivity().findViewById(R.id.tv_NightView);

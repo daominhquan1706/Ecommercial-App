@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listView_product_nitewatch"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:dividerHeight="@dimen/margintop_cardview"
+    android:nestedScrollingEnabled="false"
+    android:orientation="vertical"
+    android:scrollbarFadeDuration="300"
+    android:scrollbarStyle="outsideOverlay"
+    android:scrollbarThumbHorizontal="@color/LightBlue"
+    android:scrollbars="horizontal"
+    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+    tools:listitem="@layout/layout_item_watch_nitewatch">
+
+</android.support.v7.widget.RecyclerView>

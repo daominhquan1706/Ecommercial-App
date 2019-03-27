@@ -73,6 +73,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:fontFamily="sans-serif-light"
             android:id="@+id/btnview_horizontal_nitewatch"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -82,6 +83,7 @@
             android:textColor="@color/white" />
 
         <Button
+            android:fontFamily="sans-serif-light"
             android:id="@+id/btncart_horizontal_nitewatch"
             android:layout_width="match_parent"
             android:layout_height="30dp"

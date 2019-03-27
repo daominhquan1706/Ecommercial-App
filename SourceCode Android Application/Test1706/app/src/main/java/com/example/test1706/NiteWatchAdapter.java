@@ -68,7 +68,6 @@ public class NiteWatchAdapter extends BaseAdapter implements Filterable {
 
             Glide.with(context)
                     .load(product.getImage())
-                    .apply(new RequestOptions().centerCrop())
                     .into(holder.mImage);
 
         }
