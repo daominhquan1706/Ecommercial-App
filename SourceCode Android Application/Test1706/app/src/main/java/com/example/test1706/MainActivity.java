@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser;
     private NavigationView navigationView;
     private TextView tv_email_nav_header;
-    Button btn_login, btn_profile;
+    Button btn_login, btn_profile, btn_logout;
     private static final String TAG = "MainActivity";
     Context mContext;
 
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setVisibility(View.VISIBLE);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -207,6 +209,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
         btn_login = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
         btn_profile = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_profile);
+        btn_logout = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
+
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,6 +235,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent_profile = new Intent(MainActivity.this, Profile_Account_Activity.class);
                 startActivity(intent_profile);
 
+            }
+        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
+                tv_email_nav_header.setText(getString(R.string.unknow_account));
+                btn_profile.setVisibility(View.INVISIBLE);
+                btn_logout.setVisibility(View.INVISIBLE);
+                btn_login.setVisibility(View.VISIBLE);
             }
         });
         updateUI();
@@ -285,10 +301,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv_email_nav_header.setText(currentUser.getEmail());
             Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
             btn_profile.setVisibility(View.VISIBLE);
+            btn_logout.setVisibility(View.VISIBLE);
             btn_login.setVisibility(View.GONE);
         } else {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             btn_profile.setVisibility(View.GONE);
+            btn_logout.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);
         }
     }

@@ -1,209 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".Admin"
     android:background="@color/black">
 
-    <LinearLayout
-
+    <LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".Admin">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_sanpham"
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:padding="15dp"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_sanpham"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
 
-                <ImageView
-                    android:id="@+id/img_ic_chinhsuasanpham"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chinhssuasanpham" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SẢN PHẢM"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/img_ic_chinhsuasanpham"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chinhssuasanpham" />
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SẢN PHẢM"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_tinnhan"
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_tinnhan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:id="@+id/img_nhantinvoikhach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/nhantinkhachhang" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TIN NHẮN"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:padding="15dp"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_doanhthu"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
 
-                <ImageView
-                    android:id="@+id/img_nhantinvoikhach"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/nhantinkhachhang" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TIN NHẮN"
-                    android:textColor="@color/white" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/img_ic_BaoCaoDoanhThu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/baocaodoanhthu" />
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DOANH THU"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_donhang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:id="@+id/img_thongTinGiaoHang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/thongtingiaohang" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ĐƠN HÀNG"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_doanhthu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:id="@+id/img_ic_accountmanager"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_account_manger" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ACCOUNT MANAGER"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                card_view:cardCornerRadius="@dimen/borderMenuitem"
+                card_view:cardElevation="10dp">
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_doanhthu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
-
-            <LinearLayout
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_ic_BaoCaoDoanhThu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/baocaodoanhthu" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DOANH THU"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_donhang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
-
-            <LinearLayout
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_thongTinGiaoHang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/thongtingiaohang" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ĐƠN HÀNG"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
- <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_doanhthu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
-
-            <LinearLayout
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_cardview_nitewatch"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_ic_accountmanager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_account_manger" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ACCOUNT MANAGER"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cv_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            card_view:cardCornerRadius="@dimen/borderMenuitem"
-            card_view:cardElevation="10dp">
-
-
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

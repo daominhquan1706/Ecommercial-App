@@ -127,7 +127,8 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public int getItemCount() {
-        return list_data.size();
+
+        return (list_data == null) ? 0 : list_data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -138,7 +139,6 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            if (currentlayout == R.layout.item_horizontal_nite_watch) {
                 mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
                 mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
                 mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
@@ -147,17 +147,6 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 mbtnView = (Button) itemView.findViewById(R.id.btnview_horizontal_nitewatch);
                 mbtnCart = (Button) itemView.findViewById(R.id.btncart_horizontal_nitewatch);
                 mImageNight = (ImageView) itemView.findViewById(R.id.img_horizontal_product_night);
-            } else if (currentlayout == R.layout.layout_item_watch_nitewatch) {
-                mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_vertical_nitewatch_item);
-                mName = (TextView) itemView.findViewById(R.id.tv_vertical_name);
-                mPrice = (TextView) itemView.findViewById(R.id.tv_vertical_price);
-                mCategory = (TextView) itemView.findViewById(R.id.tv_vertical_category);
-                mImage = (ImageView) itemView.findViewById(R.id.img_vertical_product);
-                mbtnView = (Button) itemView.findViewById(R.id.btnview_vertical_nitewatch);
-                mbtnCart = (Button) itemView.findViewById(R.id.btncart_vertical_nitewatch);
-                mImageNight = (ImageView) itemView.findViewById(R.id.img_vertical_product_night);
-            }
-
         }
 
     }

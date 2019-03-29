@@ -4,118 +4,16 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="horizontal"
     app:cardBackgroundColor="@color/clearblack"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="@dimen/margintop_cardview">
 
     <LinearLayout
-        android:id="@+id/layout_vertical_nitewatch_item"
+        android:id="@+id/layout_horizontal_nitewatch_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black_cardview_nitewatch">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/tv_vertical_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/productname"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_vertical_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-light"
-                android:text="@string/category"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textSize="13sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_product_name"
-                android:orientation="horizontal">
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_vertical_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/money"
-                android:textColor="@color/gray"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin1"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnview_vertical_nitewatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_nitewatch_1"
-                    android:fontFamily="sans-serif-light"
-                    android:text="View"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btncart_vertical_nitewatch"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_nitewatch_2"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Cart"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </LinearLayout>
-
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -128,7 +26,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/img_vertical_product"
+                    android:id="@+id/img_horizontal_product"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@drawable/radial_background"
@@ -136,7 +34,7 @@
                     android:src="@drawable/dongho_1" />
 
                 <ImageView
-                    android:id="@+id/img_vertical_product_night"
+                    android:id="@+id/img_horizontal_product_night"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@drawable/radial_background"
@@ -147,6 +45,117 @@
             </RelativeLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:gravity="center|left"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_horizontal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/productname"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_horizontal_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="@string/category"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_product_name"
+                    android:orientation="horizontal">
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_black_24dp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_black_24dp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_black_24dp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_black_24dp" />
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_star_black_24dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_horizontal_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/money"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin1"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnview_horizontal_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_nitewatch_1"
+                    android:fontFamily="sans-serif-light"
+                    android:text="View"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btncart_horizontal_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_nitewatch_2"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Cart"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

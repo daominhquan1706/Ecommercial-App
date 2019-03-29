@@ -42,6 +42,8 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerView;
     ViewPager v_page_massage;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

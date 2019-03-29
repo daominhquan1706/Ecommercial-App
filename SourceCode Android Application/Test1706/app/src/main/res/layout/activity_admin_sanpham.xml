@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".AdminSanPham_Activity"
-    android:orientation="vertical">
+    tools:context=".AdminSanPham_Activity">
 
     <LinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <Button
             android:id="@+id/btn_add_product"
@@ -21,10 +21,22 @@
             android:background="@drawable/buttom_menu"
             android:text="add" />
     </LinearLayout>
-    <ListView
 
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/listView_admin_product_nitewatch"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:dividerHeight="@dimen/margintop_cardview"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:scrollbarFadeDuration="300"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbHorizontal="@color/LightBlue"
+        android:scrollbars="horizontal"
+        card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_admin_sanpham_list">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

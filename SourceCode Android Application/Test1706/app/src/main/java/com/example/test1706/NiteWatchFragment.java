@@ -21,8 +21,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.test1706.model.Product;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +46,14 @@ public class NiteWatchFragment extends Fragment {
     ViewPager v_page_massage;
     Toolbar toolbar;
     AppBarLayout appBarLayout;
-    List<String> mkey;
-    List<Product> productList;
     CardView cardview_horizonal_nitewatch;
     LinearLayout layout_horizontal_nitewatch;
     ImageView icon_buttonNightView;
     TextView tv_NightView;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    List<Product> productList;
+    List<String> mkey;
 
     @Nullable
     @Override
@@ -62,8 +70,13 @@ public class NiteWatchFragment extends Fragment {
         final ImageAdapter adapter = new ImageAdapter(getActivity());
         v_page_massage.setAdapter(adapter);
         tabLayout.setupWithViewPager(v_page_massage, true);
-        productList = getProductdata();
 
+
+        //productList = getProductdata();
+        mkey = new ArrayList<String>();
+        productList = new ArrayList<Product>();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
 
         //horizontal recycle view
         product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.item_horizontal_nite_watch);
@@ -71,6 +84,27 @@ public class NiteWatchFragment extends Fragment {
         //vertical recycle view
         productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.layout_item_watch_nitewatch);
         listView.setAdapter(productadapter);
+
+        myRef.child("NiteWatch").child("HAWK").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Product itemproduct = item.getValue(Product.class);
+                    productList.add(itemproduct);
+                    mkey.add(item.getKey());
+                    Toast.makeText(getActivity(), itemproduct.getProduct_Name(), Toast.LENGTH_LONG).show();
+                    productadapter.notifyDataSetChanged();
+                    product_horizontal_adapter.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         final Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
