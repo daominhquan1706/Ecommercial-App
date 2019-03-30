@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -21,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DataSnapshot;
@@ -38,22 +38,59 @@ public class NiteWatchFragment extends Fragment {
 
     RecyclerView listView;
     Product_Recycle_Adapter_NiteWatch productadapter;
-    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter;
-    RecyclerView recyclerView_horizontal;
+
+
     LinearLayout linearLayout, linearLayoutDisable;
     ScrollView scrollView;
     TabLayout tabLayout;
     ViewPager v_page_massage;
     Toolbar toolbar;
     AppBarLayout appBarLayout;
-    CardView cardview_horizonal_nitewatch;
+
     LinearLayout layout_horizontal_nitewatch;
     ImageView icon_buttonNightView;
     TextView tv_NightView;
     FirebaseDatabase database;
     DatabaseReference myRef;
-    List<Product> productList;
-    List<String> mkey;
+
+    CardView cardview_horizonal_nitewatch_Alpha;
+    CardView cardview_horizonal_nitewatch_Hawk;
+    CardView cardview_horizonal_nitewatch_Icon;
+    CardView cardview_horizonal_nitewatch_Icon_auto;
+    CardView cardview_horizonal_nitewatch_Marquess;
+    CardView cardview_horizonal_nitewatch_Mx10;
+
+
+    RecyclerView recyclerView_horizontal_Alpha;
+    RecyclerView recyclerView_horizontal_Hawk;
+    RecyclerView recyclerView_horizontal_Icon;
+    RecyclerView recyclerView_horizontal_Icon_auto;
+    RecyclerView recyclerView_horizontal_Marquess;
+    RecyclerView recyclerView_horizontal_Mx10;
+
+
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Alpha;
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Hawk;
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Icon;
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Icon_auto;
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Marquess;
+    Product_Recycle_Adapter_NiteWatch product_horizontal_adapter_Mx10;
+
+
+    List<Product> productList_Alpha;
+    List<Product> productList_Hawk;
+    List<Product> productList_Icon;
+    List<Product> productList_Icon_auto;
+    List<Product> productList_Marquess;
+    List<Product> productList_Mx10;
+
+    List<String> mkey_Alpha;
+    List<String> mkey_Hawk;
+    List<String> mkey_Icon;
+    List<String> mkey_Icon_auto;
+    List<String> mkey_Marquess;
+    List<String> mkey_Mx10;
+
 
     @Nullable
     @Override
@@ -72,38 +109,54 @@ public class NiteWatchFragment extends Fragment {
         tabLayout.setupWithViewPager(v_page_massage, true);
 
 
-        //productList = getProductdata();
-        mkey = new ArrayList<String>();
-        productList = new ArrayList<Product>();
+        //productList_Hawk = getProductdata();
+        mkey_Alpha = new ArrayList<String>();
+        mkey_Hawk = new ArrayList<String>();
+        mkey_Icon = new ArrayList<String>();
+        mkey_Icon_auto = new ArrayList<String>();
+        mkey_Marquess = new ArrayList<String>();
+        mkey_Mx10 = new ArrayList<String>();
+
+
+        productList_Alpha = new ArrayList<Product>();
+        productList_Hawk = new ArrayList<Product>();
+        productList_Icon = new ArrayList<Product>();
+        productList_Icon_auto = new ArrayList<Product>();
+        productList_Marquess = new ArrayList<Product>();
+        productList_Mx10 = new ArrayList<Product>();
+
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
 
         //horizontal recycle view
-        product_horizontal_adapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.item_horizontal_nite_watch);
-        recyclerView_horizontal.setAdapter(product_horizontal_adapter);
+        product_horizontal_adapter_Alpha = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Alpha, R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter_Hawk = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Hawk, R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter_Icon = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Icon, R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter_Icon_auto = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Icon_auto, R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter_Marquess = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Marquess, R.layout.item_horizontal_nite_watch);
+        product_horizontal_adapter_Mx10 = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Mx10, R.layout.item_horizontal_nite_watch);
+
+
+        recyclerView_horizontal_Alpha.setAdapter(product_horizontal_adapter_Alpha);
+        recyclerView_horizontal_Hawk.setAdapter(product_horizontal_adapter_Hawk);
+        recyclerView_horizontal_Icon.setAdapter(product_horizontal_adapter_Icon);
+        recyclerView_horizontal_Icon_auto.setAdapter(product_horizontal_adapter_Icon_auto);
+        recyclerView_horizontal_Marquess.setAdapter(product_horizontal_adapter_Marquess);
+        recyclerView_horizontal_Mx10.setAdapter(product_horizontal_adapter_Mx10);
+
+
+
         //vertical recycle view
-        productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList, R.layout.layout_item_watch_nitewatch);
+        productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Hawk, R.layout.layout_item_watch_nitewatch);
         listView.setAdapter(productadapter);
 
-        myRef.child("NiteWatch").child("HAWK").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Product itemproduct = item.getValue(Product.class);
-                    productList.add(itemproduct);
-                    mkey.add(item.getKey());
-                    productadapter.notifyDataSetChanged();
-                    product_horizontal_adapter.notifyDataSetChanged();
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        getlist_watch("ALPHA", productList_Alpha, mkey_Alpha, product_horizontal_adapter_Alpha);
+        getlist_watch("HAWK", productList_Hawk, mkey_Hawk, product_horizontal_adapter_Hawk);
+        getlist_watch("ICON-QUARTZ", productList_Icon, mkey_Icon, product_horizontal_adapter_Icon);
+        getlist_watch("ICON-AUTO", productList_Icon_auto, mkey_Icon_auto, product_horizontal_adapter_Icon_auto);
+        getlist_watch("MARQUESS", productList_Marquess, mkey_Marquess, product_horizontal_adapter_Marquess);
+        getlist_watch("MX10", productList_Mx10, mkey_Mx10, product_horizontal_adapter_Mx10);
 
 
         final Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
@@ -140,21 +193,45 @@ public class NiteWatchFragment extends Fragment {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                product_horizontal_adapter.setNight(!product_horizontal_adapter.isNight());
-                product_horizontal_adapter.notifyDataSetChanged();
+                product_horizontal_adapter_Alpha.setNight(!product_horizontal_adapter_Alpha.isNight());
+                product_horizontal_adapter_Hawk.setNight(!product_horizontal_adapter_Hawk.isNight());
+                product_horizontal_adapter_Icon.setNight(!product_horizontal_adapter_Icon.isNight());
+                product_horizontal_adapter_Icon_auto.setNight(!product_horizontal_adapter_Icon_auto.isNight());
+                product_horizontal_adapter_Marquess.setNight(!product_horizontal_adapter_Marquess.isNight());
+                product_horizontal_adapter_Mx10.setNight(!product_horizontal_adapter_Mx10.isNight());
+
+                product_horizontal_adapter_Alpha.notifyDataSetChanged();
+                product_horizontal_adapter_Hawk.notifyDataSetChanged();
+                product_horizontal_adapter_Icon.notifyDataSetChanged();
+                product_horizontal_adapter_Icon_auto.notifyDataSetChanged();
+                product_horizontal_adapter_Marquess.notifyDataSetChanged();
+                product_horizontal_adapter_Mx10.notifyDataSetChanged();
+
                 productadapter.setNight(!productadapter.isNight());
                 productadapter.notifyDataSetChanged();
-                boolean isNight = product_horizontal_adapter.isNight();
+                boolean isNight = product_horizontal_adapter_Hawk.isNight();
                 if (isNight) {
                     tv_NightView.setText(getString(R.string.disable_night_view));
                     icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_red_24dp);
                     scrollView.setBackgroundColor(getResources().getColor(R.color.clearblack));
-                    cardview_horizonal_nitewatch.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Alpha.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Hawk.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Icon.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Icon_auto.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Marquess.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+                    cardview_horizonal_nitewatch_Mx10.setCardBackgroundColor(getResources().getColor(R.color.clearblack));
+
                 } else {
                     tv_NightView.setText(getString(R.string.enable_night_view));
                     icon_buttonNightView.setImageResource(R.drawable.ic_power_settings_new_blue_24dp);
                     scrollView.setBackgroundColor(getResources().getColor(R.color.black));
-                    cardview_horizonal_nitewatch.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Alpha.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Hawk.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Icon.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Icon_auto.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Marquess.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+                    cardview_horizonal_nitewatch_Mx10.setCardBackgroundColor(getResources().getColor(R.color.black_cardview_nitewatch));
+
                 }
 
             }
@@ -162,10 +239,37 @@ public class NiteWatchFragment extends Fragment {
 
     }
 
+    private void getlist_watch(String category, final List<Product> listproduct, final List<String> mkey, final Product_Recycle_Adapter_NiteWatch adapter) {
+        myRef.child("NiteWatch").child(category).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Product itemproduct = item.getValue(Product.class);
+                    listproduct.add(itemproduct);
+                    mkey.add(item.getKey());
+                    adapter.notifyDataSetChanged();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void init() {
 
         layout_horizontal_nitewatch = (LinearLayout) getView().findViewById(R.id.layout_horizontal_nitewatch);
-        cardview_horizonal_nitewatch = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch);
+        cardview_horizonal_nitewatch_Alpha = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Alpha);
+        cardview_horizonal_nitewatch_Hawk = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Hawk);
+        cardview_horizonal_nitewatch_Icon = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Icon);
+        cardview_horizonal_nitewatch_Icon_auto = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Icon_auto);
+        cardview_horizonal_nitewatch_Marquess = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Marquess);
+        cardview_horizonal_nitewatch_Mx10 = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Mx10);
+
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         appBarLayout = (AppBarLayout) getActivity().findViewById(R.id.appbar_layout);
         v_page_massage = (ViewPager) getView().findViewById(R.id.v_pager_fragment_message_nitewatch);
@@ -173,7 +277,13 @@ public class NiteWatchFragment extends Fragment {
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
         scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
         listView = (RecyclerView) getView().findViewById(R.id.listView_product_nitewatch);
-        recyclerView_horizontal = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch);
+        recyclerView_horizontal_Alpha = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Alpha);
+        recyclerView_horizontal_Hawk = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Hawk);
+        recyclerView_horizontal_Icon = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Icon);
+        recyclerView_horizontal_Icon_auto = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Icon_auto);
+        recyclerView_horizontal_Marquess = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Marquess);
+        recyclerView_horizontal_Mx10 = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Mx10);
+
         icon_buttonNightView = (ImageView) getActivity().findViewById(R.id.icon_buttonNightView);
         tv_NightView = (TextView) getActivity().findViewById(R.id.tv_NightView);
     }
@@ -213,7 +323,6 @@ public class NiteWatchFragment extends Fragment {
         list_data.add(dongho1);
         list_data.add(dongho2);
         list_data.add(dongho3);
-
         return list_data;
     }
 }

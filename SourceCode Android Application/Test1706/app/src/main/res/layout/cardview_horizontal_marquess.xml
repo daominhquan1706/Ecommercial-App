@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardview_horizonal_nitewatch_Hawk"
+    android:id="@+id/cardview_horizonal_nitewatch_Marquess"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="10dp"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="10dp"
-            android:text="@string/hawk"
+            android:text="MARQUESS"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="27sp" />
@@ -28,13 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="@string/adventure"
+            android:text="ULTRA-SLIM STYLE"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="13sp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleview_horizontal_nitewatch_Hawk"
+            android:id="@+id/recycleview_horizontal_nitewatch_Marquess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

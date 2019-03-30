@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,10 +33,14 @@ import android.widget.Toast;
 import com.example.test1706.model.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,16 +56,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button btn_login, btn_profile, btn_logout;
     private static final String TAG = "MainActivity";
     Context mContext;
-
+    FirebaseDatabase database;
+    DatabaseReference myRef;
     ListView listView_search;
     Search_Adapter productadapter;
-
-
+    ArrayList<Product> list_data;
+    List<String> mkey;
     ActionBarDrawerToggle toggle;
     FloatingActionButton fab;
     Toolbar toolbar;
     Fragment fragmentnitewatch;
-    ArrayList<Product> list_data;
+
 
     LinearLayout btn_enable_night_view;
 
@@ -89,7 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_NiteWatch);
         }
 
-
+        mkey = new ArrayList<String>();
+        list_data = new ArrayList<Product>();
+        getProductdata();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -97,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView_search.setAdapter(productadapter);
         listView_search.setDividerHeight(10);
 
-        list_data = getProductdata();
+
+
         productadapter = new Search_Adapter(this, list_data);
         listView_search.setAdapter(productadapter);
         btn_enable_night_view.bringToFront();
@@ -120,21 +129,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
     }
 
-    private ArrayList<Product> getProductdata() {
-        ArrayList<Product> list_data = new ArrayList<Product>();
-        Product dongho1 = new Product("Đồng hồ sồ 1", 300, "Sport", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_201.png?alt=media&token=9df5d3fd-95e7-4f24-accf-df105ddaa63b");
-        Product dongho2 = new Product("Đồng hồ sồ 2", 300, "Fashion", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_300s.png?alt=media&token=284dc132-8fb0-4531-869d-149dcb0e00cc");
-        Product dongho3 = new Product("Đồng hồ sồ 3", 300, "Bussiness", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_t100.png?alt=media&token=43f33315-702a-4484-8ba2-f32e5dd1b941");
-        list_data.add(dongho1);
-        list_data.add(dongho2);
-        list_data.add(dongho3);
-        list_data.add(dongho1);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho3);
-        return list_data;
+    private void getProductdata() {
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        myRef.child("NiteWatch").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Product itemProduct = item.getValue(Product.class);
+                    list_data.add(itemProduct);
+                    mkey.add(item.getKey());
+                    productadapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    list_data.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
+                    productadapter.notifyDataSetChanged();
+                    Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

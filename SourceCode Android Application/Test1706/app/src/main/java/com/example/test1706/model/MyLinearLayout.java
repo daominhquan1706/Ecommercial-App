@@ -7,6 +7,22 @@ import android.widget.LinearLayout;
 
 public class MyLinearLayout extends LinearLayout {
     private int mStartX,mStartY,mEndX,mEndY,mImageIndex,mImageCount;
+    private  LinearLayout linearLayout;
+
+    public void setmActivity(LinearLayout linearLayout) {
+        this.linearLayout = linearLayout;
+    }
+
+
+    public LinearLayout getLinearLayout() {
+        return linearLayout;
+    }
+
+
+    public void setLinearLayout(LinearLayout linearLayout) {
+        this.linearLayout = linearLayout;
+    }
+
     public MyLinearLayout(Context context) {
         super(context);
     }
@@ -32,8 +48,6 @@ public class MyLinearLayout extends LinearLayout {
                 mEndX = (int)event.getX();
                 //move to left
                 if((mEndX - mStartX) > 3) {
-
-
 
 
                 }

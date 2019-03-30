@@ -54,8 +54,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
             }
         });
         // Write a message to the database
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
+
 
         productList = new ArrayList<Product>();
         mkey = new ArrayList<String>();
@@ -63,27 +62,27 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         productadapter = new Admin_Product_Recycle_Adapter_NiteWatch(this, productList, 0);
         listView_admin_product_nitewatch.setAdapter(productadapter);
 
-
-        Log.d(TAG, "onCreate: " + RandomString.alphanum);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         myRef.child("NiteWatch").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Product itemProduct = item.getValue(Product.class);
                     productList.add(itemProduct);
+                    mkey.add(item.getKey());
                     productadapter.notifyDataSetChanged();
-                    mkey.add(dataSnapshot.getKey());
+
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    productList.set(mkey.indexOf(dataSnapshot.getKey()), item.getValue(Product.class));
+                    productList.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
                     productadapter.notifyDataSetChanged();
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
                 }
-
             }
 
             @Override
@@ -111,6 +110,10 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
     }
 
     private List<String> getImageHAWK() {

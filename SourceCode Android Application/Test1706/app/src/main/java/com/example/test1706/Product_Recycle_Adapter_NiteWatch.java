@@ -72,7 +72,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImageNight);
 
-        long time = 400;
+        long time = 1000;
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
         fadeIn.setDuration(time);
@@ -82,21 +82,18 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         fadeOut.setStartOffset(50);
         fadeOut.setDuration(time);
 
-        if (isNight) {
+        if (isNight && viewHolder.mImage.getVisibility()==View.VISIBLE) {
             viewHolder.mImage.setAnimation(fadeOut);
             viewHolder.mImage.setVisibility(View.INVISIBLE);
             viewHolder.mImageNight.setVisibility(View.VISIBLE);
             viewHolder.mImageNight.setAnimation(fadeIn);
-
-
             viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.clearblack));
-        } else {
+
+        } else if (!isNight && viewHolder.mImageNight.getVisibility()==View.VISIBLE){
             viewHolder.mImageNight.setAnimation(fadeOut);
             viewHolder.mImageNight.setVisibility(View.INVISIBLE);
             viewHolder.mImage.setVisibility(View.VISIBLE);
             viewHolder.mImage.setAnimation(fadeIn);
-
-
             viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.black_cardview_nitewatch));
         }
 

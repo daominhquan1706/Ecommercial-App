@@ -30,6 +30,43 @@
                 android:layout_marginTop="0dp" />
 
             <include
+                layout="@layout/cardview_horizontal_alpha"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginTop="0dp" />
+
+            <include
+                layout="@layout/cardview_horizontal_iconauto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginTop="0dp" />
+
+            <include
+                layout="@layout/cardview_horizontal_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginTop="0dp" />
+
+
+
+            <include
+                layout="@layout/cardview_horizontal_marquess"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginTop="0dp" />
+
+            <include
+                layout="@layout/cardview_horizontal_mx10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginTop="0dp" />
+
+            <include
                 layout="@layout/cardview_vertical_nitewatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

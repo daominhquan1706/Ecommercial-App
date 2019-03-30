@@ -1,18 +1,12 @@
 package com.example.test1706;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,7 +67,9 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
 
         viewHolder.mName.setText(list_data.get(i).getProduct_Name());
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
-        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
+        viewHolder.mPrice.setText(((String) ("Price:"+"$" + list_data.get(i).getPrice())));
+        viewHolder.mDiscount.setText(((String) ("Discount:"+ list_data.get(i).getDiscount() + "%")));
+        viewHolder.mQuantity.setText(((String) ("Quantity:"+ list_data.get(i).getQuantity())));
         viewHolder.mbtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,13 +91,15 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mName, mPrice, mCategory;
+        TextView mName, mPrice, mCategory, mQuantity, mDiscount;
         ImageView mImage, mImageNight;
         Button mbtnEdit, mbtnDelete;
         LinearLayout mlayout_horizontal_nitewatch_item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mQuantity = (TextView) itemView.findViewById(R.id.tv_tv_Quantity);
+            mDiscount = (TextView) itemView.findViewById(R.id.tv_discount);
             mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
             mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
             mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
