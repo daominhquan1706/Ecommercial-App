@@ -92,7 +92,6 @@ public class NiteWatchFragment extends Fragment {
                     Product itemproduct = item.getValue(Product.class);
                     productList.add(itemproduct);
                     mkey.add(item.getKey());
-                    Toast.makeText(getActivity(), itemproduct.getProduct_Name(), Toast.LENGTH_LONG).show();
                     productadapter.notifyDataSetChanged();
                     product_horizontal_adapter.notifyDataSetChanged();
                 }
