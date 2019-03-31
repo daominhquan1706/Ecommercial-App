@@ -21,6 +21,7 @@ public class Admin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Admin.this,AdminSanPham_Activity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 

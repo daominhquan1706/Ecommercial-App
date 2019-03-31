@@ -92,10 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    protected void hideKeyboard(View view) {
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 
     public void DangKy() {
         String email = mEmailView.getText().toString().trim();
@@ -110,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                             finish();
-                            startActivity(i);
+                            startActivity(i);                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -122,12 +118,18 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,11 +20,11 @@ import com.example.test1706.model.Product;
 import java.util.List;
 
 public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Admin_Product_Recycle_Adapter_NiteWatch.ViewHolder> {
+    private final int currentlayout;
     private List<Product> list_data;
     private Context mContext;
     private static final String TAG = "Product_Recycle_Adapter";
     private boolean isNight;
-    private int currentlayout;
 
     public boolean isNight() {
         return isNight;
@@ -67,9 +68,9 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
 
         viewHolder.mName.setText(list_data.get(i).getProduct_Name());
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
-        viewHolder.mPrice.setText(((String) ("Price:"+"$" + list_data.get(i).getPrice())));
-        viewHolder.mDiscount.setText(((String) ("Discount:"+ list_data.get(i).getDiscount() + "%")));
-        viewHolder.mQuantity.setText(((String) ("Quantity:"+ list_data.get(i).getQuantity())));
+        viewHolder.mPrice.setText(((String) ("Price:" + "$" + list_data.get(i).getPrice())));
+        viewHolder.mDiscount.setText(((String) ("Discount:" + list_data.get(i).getDiscount() + "%")));
+        viewHolder.mQuantity.setText(((String) ("Quantity:" + list_data.get(i).getQuantity())));
         viewHolder.mbtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +84,21 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
             }
         });
 
+        viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, viewHolder.mName.getText(), Toast.LENGTH_SHORT).show();
+                ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
+                    layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
+                } else {
+                    layoutParams_info.setMargins(0, 0, 0, 0);
+                }
+                v.requestLayout();
+            }
+        });
+
+
     }
 
     @Override
@@ -94,13 +110,14 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
         TextView mName, mPrice, mCategory, mQuantity, mDiscount;
         ImageView mImage, mImageNight;
         Button mbtnEdit, mbtnDelete;
-        LinearLayout mlayout_horizontal_nitewatch_item;
+        LinearLayout layout_info, menu_product;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mQuantity = (TextView) itemView.findViewById(R.id.tv_tv_Quantity);
             mDiscount = (TextView) itemView.findViewById(R.id.tv_discount);
-            mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
+            menu_product = (LinearLayout) itemView.findViewById(R.id.menu_product);
+            layout_info = (LinearLayout) itemView.findViewById(R.id.layout_product);
             mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
             mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
             mCategory = (TextView) itemView.findViewById(R.id.tv_horizontal_category);
@@ -109,6 +126,7 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
             mbtnDelete = (Button) itemView.findViewById(R.id.btn_delete);
             mImageNight = (ImageView) itemView.findViewById(R.id.img_horizontal_product_night);
         }
+
 
     }
 }

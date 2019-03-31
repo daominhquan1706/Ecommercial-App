@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                openRegisterActitvy(v);
+                openActivityAnimation(v);
             }
         });
         progressDialogdialog.dismiss();
@@ -171,10 +171,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void openRegisterActitvy(View view) {
+    public void openActivityAnimation(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 }

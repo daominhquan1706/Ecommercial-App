@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.test1706.model.Product;
-import com.example.test1706.model.RandomString;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -51,6 +52,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(AdminSanPham_Activity.this, Add_productActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         // Write a message to the database
@@ -68,21 +70,21 @@ public class AdminSanPham_Activity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Log.d(TAG, "onChildAdded: "+item.getKey());
                     Product itemProduct = item.getValue(Product.class);
                     productList.add(itemProduct);
                     mkey.add(item.getKey());
-                    productadapter.notifyDataSetChanged();
-
                 }
+                productadapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     productList.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
-                    productadapter.notifyDataSetChanged();
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
                 }
+                productadapter.notifyDataSetChanged();
             }
 
             @Override
@@ -110,8 +112,6 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
     }
@@ -277,7 +277,15 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
-
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 
     private void init() {
         btn_firebase = (Button) findViewById(R.id.btn_firebase);

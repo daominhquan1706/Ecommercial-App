@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 if (mAuth.getCurrentUser() == null) {
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
+                    startActivity(i);                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
                     Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                 }
@@ -300,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_admin:
                 Intent intention = new Intent(getApplicationContext(), Admin.class);
                 startActivity(intention);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
         }
