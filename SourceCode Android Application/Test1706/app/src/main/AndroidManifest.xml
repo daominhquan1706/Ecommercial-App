@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Register_Menu_PhoneNumber"></activity>
+        <activity android:name=".Register_Menu" />
+        <activity android:name=".AdminSanPham_edit_product" />
         <activity
             android:name=".Profile_Account_Activity"
             android:label="@string/title_activity_profile__account_"
@@ -24,7 +26,7 @@
         <activity
             android:name=".ForgotPassword_Activity"
             android:parentActivityName=".LoginActivity" />
-        <activity android:name=".Add_productActivity" />
+        <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
         <activity
             android:name=".Admin"

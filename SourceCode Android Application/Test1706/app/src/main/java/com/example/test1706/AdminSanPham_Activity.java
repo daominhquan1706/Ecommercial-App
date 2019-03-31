@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     DatabaseReference myRef;
     List<Product> productList;
     List<String> mkey;
-    Admin_Product_Recycle_Adapter_NiteWatch productadapter;
+    AdminSanPham_Recycle_Adapter_NiteWatch productadapter;
     RecyclerView listView_admin_product_nitewatch;
     private static final String TAG = "AdminSanPham_Activity";
     private StorageReference mStorageRef;
@@ -50,7 +51,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         btn_addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AdminSanPham_Activity.this, Add_productActivity.class);
+                Intent i = new Intent(AdminSanPham_Activity.this, AdminSanPham_add_product.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -61,7 +62,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         productList = new ArrayList<Product>();
         mkey = new ArrayList<String>();
 
-        productadapter = new Admin_Product_Recycle_Adapter_NiteWatch(this, productList, 0);
+        productadapter = new AdminSanPham_Recycle_Adapter_NiteWatch(this, productList, 0);
         listView_admin_product_nitewatch.setAdapter(productadapter);
 
         database = FirebaseDatabase.getInstance();
@@ -280,6 +281,14 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     protected void hideKeyboard(View view) {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+    protected void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
     @Override
     public void finish() {

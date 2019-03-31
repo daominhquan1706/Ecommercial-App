@@ -25,13 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.File;
 import java.util.Random;
 
-public class Add_productActivity extends AppCompatActivity {
+public class AdminSanPham_add_product extends AppCompatActivity {
 
     EditText tv_productname, tv_price, tv_url_image, tv_category, tv_url_image_night, tv_quantity, tv_discount;
     Spinner spinner_category;
     Button btn_chooseImg, btn_chooseImg_Night, btn_add_product;
     ImageView img_choosen, img_chossen_night;
-    private static final String TAG = "Add_productActivity";
+    private static final String TAG = "AdminSanPham_add_product";
     DatabaseReference myRef;
     FirebaseDatabase database;
     Product product;
@@ -94,7 +94,7 @@ public class Add_productActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 // Write failed
-                                Toast.makeText(Add_productActivity.this, "That bai , vui long thu lai", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminSanPham_add_product.this, "That bai , vui long thu lai", Toast.LENGTH_SHORT).show();
                                 // ...
                             }
                         });;
@@ -103,14 +103,7 @@ public class Add_productActivity extends AppCompatActivity {
         });
     }
 
-    protected void hideKeyboard() {
-        // Check if no view has focus:
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
+
 
     //example url :
 //https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_t100_listing_front_day.png?alt=media&token=ff8dc94e-bcb7-4ae4-835a-aff87785e473
@@ -121,12 +114,12 @@ public class Add_productActivity extends AppCompatActivity {
             }
 
             Random rand = new Random();
-            Glide.with(Add_productActivity.this)
+            Glide.with(AdminSanPham_add_product.this)
                     .load(url_image)
                     .into(img_choosen);
             String nite = url_image.replace("day", "night");
             tv_url_image_night.setText(nite);
-            Glide.with(Add_productActivity.this)
+            Glide.with(AdminSanPham_add_product.this)
                     .load(nite)
                     .into(img_chossen_night);
             tv_category.setText(url_image.split("%2F")[1]);   //HAWK
@@ -175,7 +168,14 @@ public class Add_productActivity extends AppCompatActivity {
         tv_quantity = (EditText) findViewById(R.id.tv_quantity);
         tv_discount = (EditText) findViewById(R.id.tv_discount);
     }
-
+    protected void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
     @Override
     public void finish() {
         super.finish();

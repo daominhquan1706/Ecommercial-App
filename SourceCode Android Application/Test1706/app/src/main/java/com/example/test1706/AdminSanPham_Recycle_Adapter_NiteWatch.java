@@ -19,7 +19,7 @@ import com.example.test1706.model.Product;
 
 import java.util.List;
 
-public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Admin_Product_Recycle_Adapter_NiteWatch.ViewHolder> {
+public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<AdminSanPham_Recycle_Adapter_NiteWatch.ViewHolder> {
     private final int currentlayout;
     private List<Product> list_data;
     private Context mContext;
@@ -34,7 +34,7 @@ public class Admin_Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapte
         isNight = night;
     }
 
-    public Admin_Product_Recycle_Adapter_NiteWatch(Context mContext, List<Product> list_data, int currentlayout) {
+    public AdminSanPham_Recycle_Adapter_NiteWatch(Context mContext, List<Product> list_data, int currentlayout) {
         this.list_data = list_data;
         this.mContext = mContext;
         this.currentlayout = currentlayout;
