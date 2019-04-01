@@ -87,14 +87,17 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
         viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, viewHolder.mName.getText(), Toast.LENGTH_SHORT).show();
-                ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
                 if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
+
                     layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
+                    Log.d(TAG, "onClick: "+viewHolder.mName.getText());
+
                 } else {
+
                     layoutParams_info.setMargins(0, 0, 0, 0);
                 }
-                v.requestLayout();
+                viewHolder.layout_info.requestLayout();
             }
         });
 

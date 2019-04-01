@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 public class Register_Menu extends AppCompatActivity {
-    Button btn_normal, btn_facebook, btn_phonenumber;
+    Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,14 @@ public class Register_Menu extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-
+        btn_normal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Register_Menu.this, RegisterActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
 
     }
 
@@ -32,6 +39,7 @@ public class Register_Menu extends AppCompatActivity {
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
+
     @Override
     public void finish() {
         super.finish();
@@ -39,6 +47,7 @@ public class Register_Menu extends AppCompatActivity {
     }
 
     public void init() {
+        btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
         btn_normal = (Button) findViewById(R.id.btn_normal_account);
         btn_phonenumber = (Button) findViewById(R.id.btn_phone_number);

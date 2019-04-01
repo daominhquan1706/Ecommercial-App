@@ -9,7 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +36,7 @@ import static android.support.constraint.Constraints.TAG;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int MENU_ITEM_ITEM1 = 1;
     private FirebaseUser mAuthTask = null;
 
     // UI references.
@@ -93,16 +96,25 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Button mEmailSignUpButton = (Button) findViewById(R.id.btn_register);
+        mEmailSignUpButton.setVisibility(View.GONE);
         mEmailSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivityAnimation(v);
+                openActivityAnimation();
             }
         });
         progressDialogdialog.dismiss();
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem create_new_account = menu.add(0, MENU_ITEM_ITEM1, 0, "Create New Account");
+        create_new_account.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        create_new_account.setTitle(Html.fromHtml("<font color='#ff3824'>New Account</font>"));
+
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,6 +122,10 @@ public class LoginActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case MENU_ITEM_ITEM1:
+                openActivityAnimation();
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,6 +133,29 @@ public class LoginActivity extends AppCompatActivity {
     public void DangNhap() {
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
+        if (email.isEmpty()) {
+            mEmailView.setError("Email is required");
+            mEmailView.requestFocus();
+            return;
+        }
+        if (!email.contains("@")) {
+            mEmailView.setError("This is not valid email");
+            mEmailView.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            mPasswordView.setError("Password is required");
+            mPasswordView.requestFocus();
+            return;
+        }
+        if (password.length() <= 6) {
+            mPasswordView.setError("Password more than 5 characters");
+            mPasswordView.requestFocus();
+            return;
+        }
+
+
         if (email.equals("admin") && password.equals("admin")) {
             Intent intent = new Intent(LoginActivity.this, Admin.class);
             startActivity(intent);
@@ -139,11 +178,9 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Snackbar snackbar = Snackbar
-                                        .make(relativelayout, "Acoount ID or password is incorrect", Snackbar.LENGTH_LONG);
-                                snackbar.show();/*
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_LONG).show();*/
+                                mEmailView.setError("Email or Password is incorrect");
+                                mPasswordView.setError("Email or Password is incorrect");
+                                mPasswordView.requestFocus();
                             }
 
                             // ...
@@ -168,19 +205,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void openActivityAnimation(View view) {
+    public void openActivityAnimation() {
         Intent intent = new Intent(this, Register_Menu.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
+
     protected void hideKeyboard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     @Override
     public void finish() {
         super.finish();
