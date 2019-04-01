@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -83,25 +82,33 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                 //Edit
             }
         });
-
+        hideMenu(viewHolder);
         viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
-                if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
 
-                    layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
-                    Log.d(TAG, "onClick: "+viewHolder.mName.getText());
-
-                } else {
-
-                    layoutParams_info.setMargins(0, 0, 0, 0);
-                }
-                viewHolder.layout_info.requestLayout();
+                showMenu(viewHolder);
             }
         });
+    }
 
+    private void showMenu(ViewHolder viewHolder) {
+        ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
+        if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
 
+            layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
+            Log.d(TAG, "onClick: " + viewHolder.mName.getText());
+
+        } else {
+            layoutParams_info.setMargins(0, 0, 0, 0);
+        }
+        viewHolder.layout_info.requestLayout();
+    }
+
+    private void hideMenu(ViewHolder viewHolder) {
+        ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
+        layoutParams_info.setMargins(0, 0, 0, 0);
+        viewHolder.layout_info.requestLayout();
     }
 
     @Override

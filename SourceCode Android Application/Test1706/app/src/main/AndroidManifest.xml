@@ -24,7 +24,7 @@
             android:label="@string/title_activity_profile__account_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ForgotPassword_Activity"
+            android:name=".LoginActivity_ForgotPassword"
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />

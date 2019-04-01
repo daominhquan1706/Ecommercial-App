@@ -78,14 +78,17 @@ public class LoginActivity extends AppCompatActivity {
         btn_forgotpassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openforgotpassword = new Intent(LoginActivity.this, ForgotPassword_Activity.class);
+                Intent openforgotpassword = new Intent(LoginActivity.this, LoginActivity_ForgotPassword.class);
                 startActivity(openforgotpassword);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -173,7 +176,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                finish();
+                                Intent i =new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -186,21 +191,6 @@ public class LoginActivity extends AppCompatActivity {
                             // ...
                         }
                     });
-        } else {
-            Toast.makeText(LoginActivity.this, "invalid format email or password.",
-                    Toast.LENGTH_LONG).show();
-        }
-        if (email.length() < 6) {
-
-            minputLayout_email.setError("email must include @ character");
-        } else {
-            minputLayout_email.setErrorEnabled(false);
-        }
-
-        if (password.length() < 6) {
-            minputLayout_password.setError("password need to have at least 6 character");
-        } else {
-            minputLayout_password.setErrorEnabled(false);
         }
     }
 

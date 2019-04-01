@@ -10,7 +10,7 @@
     <item
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
-        android:title="@string/search"
+        android:title="Cart"
         app:showAsAction="ifRoom|collapseActionView" />
 
 

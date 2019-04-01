@@ -49,8 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -92,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             mEmailView.requestFocus();
             return;
         } if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() < 3)) {
-            mEmailView.setError("This is not valid email");
+            mEmailView.setError("This is not valid email    ");
             mEmailView.requestFocus();
             return;
         }  if (password.isEmpty()) {

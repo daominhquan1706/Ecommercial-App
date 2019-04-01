@@ -38,6 +38,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,10 +111,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView_search.setDividerHeight(10);
 
 
-
         productadapter = new Search_Adapter(this, list_data);
         listView_search.setAdapter(productadapter);
         btn_enable_night_view.bringToFront();
+
+
     }
 
 
@@ -177,6 +183,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.main_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        final MenuItem cartItem = menu.findItem(R.id.action_cart);
+
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -186,11 +194,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
+                Log.d(TAG, "onMenuItemActionExpand: title" + item.getTitle() + "Icon" + item.getIcon());
                 frame_container.setVisibility(View.GONE);
                 listView_search.setVisibility(View.VISIBLE);
                 appBarLayout.setVisibility(View.VISIBLE);
                 btn_enable_night_view.setVisibility(View.INVISIBLE);
-
                 return true; // KEEP IT TO TRUE OR IT DOESN'T OPEN !!
             }
 
@@ -226,11 +234,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.action_search) {
-            frame_container.setVisibility(View.GONE);
-            listView_search.setVisibility(View.VISIBLE);
-        }
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                frame_container.setVisibility(View.GONE);
+                listView_search.setVisibility(View.VISIBLE);
+                return true;
+            case R.id.action_cart:
 
+                return true;
+
+
+        }
 
         return super.onOptionsItemSelected(item);
 
@@ -310,7 +324,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
-
 
 
         return true;
