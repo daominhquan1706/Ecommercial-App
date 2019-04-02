@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Cart_Activity">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cardview_horizonal_nitewatch_Hawk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        card_view:cardBackgroundColor="@color/black_cardview_nitewatch"
+        card_view:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:id="@+id/layout_horizontal_nitewatch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:padding="10dp"
+                android:text="MY CART"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="27sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="12 products"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleview_horizontal_nitewatch_Hawk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:scrollbarFadeDuration="300"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbarThumbHorizontal="@color/LightBlue"
+                android:scrollbars="horizontal"
+                card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+
+                tools:listitem="@layout/item_horizontal_cart">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Total : "
+                    android:textColor="@color/LightBlue"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="@string/money"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_matchparent_blue"
+                android:text="Checkout"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_register"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/button_matchparent_transparent"
+                android:text="continue shopping"
+                android:textColor="@color/LightBlue"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</ScrollView>

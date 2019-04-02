@@ -39,8 +39,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -240,7 +238,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 listView_search.setVisibility(View.VISIBLE);
                 return true;
             case R.id.action_cart:
-
+                Intent intentCart = new Intent(MainActivity.this,Cart_Activity.class);
+                startActivity(intentCart);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
 
 

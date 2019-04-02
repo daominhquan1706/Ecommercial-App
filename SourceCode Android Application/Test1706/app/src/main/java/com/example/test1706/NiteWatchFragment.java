@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -246,15 +247,22 @@ public class NiteWatchFragment extends Fragment {
 
     private void setupVideoPlayer(){
         VideoView videoView = getView().findViewById(R.id.video_view);
-        View videocontroller = getView().findViewById(R.id.video_controller);
+        FrameLayout videocontroller = getView().findViewById(R.id.video_controller);
         String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.nitewatch;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
-        MediaController mediaController = new MediaController(this.getActivity());
-        mediaController.show(10);
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videocontroller);
+        videoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(videoView.isPlaying()){
+                    videoView.pause();
+                }
+                else{
+                    videoView.start();
+                }
+            }
+        });
     }
 
     private void getlist_watch(String category, final List<Product> listproduct, final List<String> mkey, final Product_Recycle_Adapter_NiteWatch adapter) {

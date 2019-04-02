@@ -17,16 +17,16 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/slideshow"
+                layout="@layout/video_player"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="250dp"
                 android:layout_marginTop="?attr/actionBarSize" />
 
             <include
-                layout="@layout/video_player"
+                layout="@layout/slideshow"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:layout_marginTop="?attr/actionBarSize" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
 
 
             <include
