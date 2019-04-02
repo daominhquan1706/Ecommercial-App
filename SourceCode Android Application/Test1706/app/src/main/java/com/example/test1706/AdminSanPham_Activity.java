@@ -63,8 +63,11 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         mkey = new ArrayList<String>();
 
         productadapter = new AdminSanPham_Recycle_Adapter_NiteWatch(this, productList, 0);
-        listView_admin_product_nitewatch.setAdapter(productadapter);
 
+
+
+
+        listView_admin_product_nitewatch.setAdapter(productadapter);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         myRef.child("NiteWatch").addChildEventListener(new ChildEventListener() {

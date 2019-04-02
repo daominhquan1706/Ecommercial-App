@@ -1,5 +1,7 @@
 package com.example.test1706;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +22,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DataSnapshot;
@@ -236,7 +240,21 @@ public class NiteWatchFragment extends Fragment {
 
             }
         });
+        setupVideoPlayer();
 
+    }
+
+    private void setupVideoPlayer(){
+        VideoView videoView = getView().findViewById(R.id.video_view);
+        View videocontroller = getView().findViewById(R.id.video_controller);
+        String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.nitewatch;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        videoView.start();
+        MediaController mediaController = new MediaController(this.getActivity());
+        mediaController.show(10);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videocontroller);
     }
 
     private void getlist_watch(String category, final List<Product> listproduct, final List<String> mkey, final Product_Recycle_Adapter_NiteWatch adapter) {

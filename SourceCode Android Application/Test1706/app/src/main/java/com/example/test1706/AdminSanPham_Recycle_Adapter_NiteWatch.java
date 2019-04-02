@@ -24,6 +24,9 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
     private Context mContext;
     private static final String TAG = "Product_Recycle_Adapter";
     private boolean isNight;
+    private String name_product_opening_menu = "";
+    private String old_name_product_opening_menu = "";
+
 
     public boolean isNight() {
         return isNight;
@@ -82,12 +85,34 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                 //Edit
             }
         });
-        hideMenu(viewHolder);
+
+        if (name_product_opening_menu.equals(list_data.get(i).getProduct_Name())) {
+            //showMenu(viewHolder);
+            viewHolder.layout_info.animate().translationX(-viewHolder.menu_product.getWidth()).setDuration(200).start();
+
+        } else if (old_name_product_opening_menu.equals(list_data.get(i).getProduct_Name())){
+            viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(200).start();
+            //hideMenu(viewHolder);
+        }
+        else{
+            viewHolder.layout_info.animate().translationX(0).setDuration(0).start();
+        }
+
+
         viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(name_product_opening_menu.equals(list_data.get(i).getProduct_Name())){
+                    viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(200).start();
+                    name_product_opening_menu="";
+                }
+                else{
+                    old_name_product_opening_menu=name_product_opening_menu;
+                    name_product_opening_menu = list_data.get(i).getProduct_Name();
+                    notifyDataSetChanged();
+                }
 
-                showMenu(viewHolder);
+
             }
         });
     }
@@ -95,20 +120,19 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
     private void showMenu(ViewHolder viewHolder) {
         ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
         if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
-
             layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
-            Log.d(TAG, "onClick: " + viewHolder.mName.getText());
-
-        } else {
-            layoutParams_info.setMargins(0, 0, 0, 0);
+            viewHolder.layout_info.requestLayout();
         }
-        viewHolder.layout_info.requestLayout();
+
+
     }
 
     private void hideMenu(ViewHolder viewHolder) {
         ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
-        layoutParams_info.setMargins(0, 0, 0, 0);
-        viewHolder.layout_info.requestLayout();
+        if (layoutParams_info.getMarginEnd() == viewHolder.menu_product.getWidth()) {
+            layoutParams_info.setMargins(0, 0, 0, 0);
+            viewHolder.layout_info.requestLayout();
+        }
     }
 
     @Override

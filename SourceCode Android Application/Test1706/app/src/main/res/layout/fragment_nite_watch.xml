@@ -23,6 +23,13 @@
                 android:layout_marginTop="?attr/actionBarSize" />
 
             <include
+                layout="@layout/video_player"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_marginTop="?attr/actionBarSize" />
+
+
+            <include
                 layout="@layout/cardview_horizontal_hawk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -49,7 +56,6 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margintop_cardview"
                 android:layout_marginTop="0dp" />
-
 
 
             <include
