@@ -30,7 +30,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/colorbutton_1"
+                android:background="@drawable/button_matchparent_blue"
                 android:text="All"
                 android:textColor="@color/white" />
 
@@ -39,7 +39,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/colorbutton_1"
+                android:background="@drawable/button_matchparent_blue"
                 android:text="Smart Watch"
                 android:textColor="@color/white" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/colorbutton_1"
+                android:background="@drawable/button_matchparent_blue"
                 android:text="Nite Watch"
                 android:textColor="@color/white" />
 

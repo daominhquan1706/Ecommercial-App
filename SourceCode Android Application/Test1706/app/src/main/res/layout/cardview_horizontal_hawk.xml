@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardview_horizonal_nitewatch"
+    android:id="@+id/cardview_horizonal_nitewatch_Hawk"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="10dp"
@@ -34,7 +34,7 @@
             android:textSize="13sp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleview_horizontal_nitewatch"
+            android:id="@+id/recycleview_horizontal_nitewatch_Hawk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

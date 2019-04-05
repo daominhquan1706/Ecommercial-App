@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,10 +33,17 @@ import android.widget.Toast;
 import com.example.test1706.model.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,19 +56,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser;
     private NavigationView navigationView;
     private TextView tv_email_nav_header;
-    Button btn_login, btn_profile;
+    Button btn_login, btn_profile, btn_logout;
     private static final String TAG = "MainActivity";
     Context mContext;
-
+    FirebaseDatabase database;
+    DatabaseReference myRef;
     ListView listView_search;
     Search_Adapter productadapter;
-
-
+    ArrayList<Product> list_data;
+    List<String> mkey;
     ActionBarDrawerToggle toggle;
     FloatingActionButton fab;
     Toolbar toolbar;
     Fragment fragmentnitewatch;
-    ArrayList<Product> list_data;
+
 
     LinearLayout btn_enable_night_view;
 
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setVisibility(View.VISIBLE);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -88,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_NiteWatch);
         }
 
-
+        mkey = new ArrayList<String>();
+        list_data = new ArrayList<Product>();
+        getProductdata();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -96,14 +108,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView_search.setAdapter(productadapter);
         listView_search.setDividerHeight(10);
 
-        list_data = getProductdata();
+
         productadapter = new Search_Adapter(this, list_data);
         listView_search.setAdapter(productadapter);
         btn_enable_night_view.bringToFront();
+
+
     }
 
 
     private void init() {
+
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -118,21 +133,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
     }
 
-    private ArrayList<Product> getProductdata() {
-        ArrayList<Product> list_data = new ArrayList<Product>();
-        Product dongho1 = new Product("Đồng hồ sồ 1", 300, "Sport", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_201.png?alt=media&token=9df5d3fd-95e7-4f24-accf-df105ddaa63b");
-        Product dongho2 = new Product("Đồng hồ sồ 2", 300, "Fashion", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_300s.png?alt=media&token=284dc132-8fb0-4531-869d-149dcb0e00cc");
-        Product dongho3 = new Product("Đồng hồ sồ 3", 300, "Bussiness", "https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/list_dong_ho_nite_watch%2Fday_dongho_t100.png?alt=media&token=43f33315-702a-4484-8ba2-f32e5dd1b941");
-        list_data.add(dongho1);
-        list_data.add(dongho2);
-        list_data.add(dongho3);
-        list_data.add(dongho1);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho2);
-        list_data.add(dongho3);
-        return list_data;
+    private void getProductdata() {
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+        myRef.child("NiteWatch").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Product itemProduct = item.getValue(Product.class);
+                    list_data.add(itemProduct);
+                    mkey.add(item.getKey());
+                    productadapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    list_data.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
+                    productadapter.notifyDataSetChanged();
+                    Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override
@@ -141,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.main_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        final MenuItem cartItem = menu.findItem(R.id.action_cart);
+
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -150,11 +192,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
+                Log.d(TAG, "onMenuItemActionExpand: title" + item.getTitle() + "Icon" + item.getIcon());
                 frame_container.setVisibility(View.GONE);
                 listView_search.setVisibility(View.VISIBLE);
                 appBarLayout.setVisibility(View.VISIBLE);
                 btn_enable_night_view.setVisibility(View.INVISIBLE);
-
                 return true; // KEEP IT TO TRUE OR IT DOESN'T OPEN !!
             }
 
@@ -190,11 +232,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.action_search) {
-            frame_container.setVisibility(View.GONE);
-            listView_search.setVisibility(View.VISIBLE);
-        }
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                frame_container.setVisibility(View.GONE);
+                listView_search.setVisibility(View.VISIBLE);
+                return true;
+            case R.id.action_cart:
+                Intent intentCart = new Intent(MainActivity.this,Cart_Activity.class);
+                startActivity(intentCart);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
 
+
+        }
 
         return super.onOptionsItemSelected(item);
 
@@ -207,12 +257,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
         btn_login = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
         btn_profile = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_profile);
+        btn_logout = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
+
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mAuth.getCurrentUser() == null) {
                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
                     Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                 }
@@ -232,6 +286,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
+                tv_email_nav_header.setText(getString(R.string.unknow_account));
+                btn_profile.setVisibility(View.INVISIBLE);
+                btn_logout.setVisibility(View.INVISIBLE);
+                btn_login.setVisibility(View.VISIBLE);
+            }
+        });
         updateUI();
     }
 
@@ -242,20 +307,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_mainpage:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MainFragment()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_NiteWatch:
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NiteWatchFragment()).commit();
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_admin:
                 Intent intention = new Intent(getApplicationContext(), Admin.class);
                 startActivity(intention);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
 
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
-        drawer.closeDrawer(GravityCompat.START);
 
 
         return true;
@@ -285,10 +353,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv_email_nav_header.setText(currentUser.getEmail());
             Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
             btn_profile.setVisibility(View.VISIBLE);
+            btn_logout.setVisibility(View.VISIBLE);
             btn_login.setVisibility(View.GONE);
         } else {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             btn_profile.setVisibility(View.GONE);
+            btn_logout.setVisibility(View.GONE);
             btn_login.setVisibility(View.VISIBLE);
         }
     }

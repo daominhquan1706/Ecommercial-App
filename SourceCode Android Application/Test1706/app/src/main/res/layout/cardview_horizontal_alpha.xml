@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview_horizonal_nitewatch_Alpha"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardBackgroundColor="@color/black_cardview_nitewatch">
+
+    <LinearLayout
+        android:id="@+id/layout_horizontal_nitewatch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:padding="10dp"
+            android:text="@string/alpha"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="27sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="NEVER COMPROMISE"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview_horizontal_nitewatch_Alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:scrollbarFadeDuration="300"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbHorizontal="@color/LightBlue"
+            android:scrollbars="horizontal"
+            card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+
+            tools:listitem="@layout/item_horizontal_nite_watch">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

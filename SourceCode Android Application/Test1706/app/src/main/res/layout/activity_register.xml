@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
@@ -25,8 +24,7 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp">
+        android:layout_margin="30dp">
 
         <LinearLayout
 
@@ -35,11 +33,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_account"
-                android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:src="@mipmap/ic_launcher_foreground" />
 
             <ProgressBar
                 android:id="@+id/login_progress"
@@ -52,16 +45,17 @@
             <android.support.design.widget.TextInputLayout
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:background="@drawable/drw_edt_bg">
 
                 <EditText
+                    android:drawablePadding="@dimen/drawable_padding"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
                     android:background="@null"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -73,16 +67,17 @@
             <android.support.design.widget.TextInputLayout
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/drw_edt_bg">
 
                 <EditText
+                    android:drawablePadding="@dimen/drawable_padding"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
+                    android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                     android:background="@null"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
@@ -97,16 +92,17 @@
             <android.support.design.widget.TextInputLayout
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/drw_edt_bg">
 
                 <EditText
+                    android:drawablePadding="@dimen/drawable_padding"
+                    android:layout_marginStart="20dp"
+                    android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                     android:id="@+id/retype_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:background="@null"
                     android:hint="@string/re_type_password"
                     android:imeActionId="6"
@@ -126,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/colorbutton_1"
+                android:background="@drawable/button_matchparent_blue"
                 android:text="@string/create_an_account"
                 android:textColor="#ffff"
                 android:textStyle="bold" />
@@ -137,9 +133,9 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:background="@drawable/colorbutton_2"
+                android:background="@drawable/button_matchparent_transparent"
                 android:text="@string/action_sign_in"
-                android:textColor="#005dff"
+                android:textColor="@color/LightBlue"
                 android:textStyle="bold" />
 
         </LinearLayout>

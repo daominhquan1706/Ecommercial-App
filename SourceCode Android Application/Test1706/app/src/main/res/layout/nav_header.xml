@@ -10,10 +10,10 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <LinearLayout
-        android:gravity="bottom|left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="bottom|left"
         android:orientation="vertical">
 
         <ImageView
@@ -22,39 +22,55 @@
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
-            android:textColor="@color/white"
             android:id="@+id/txt_username_nav_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:text="Unknow_Account"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white" />
 
         <TextView
-            android:textColor="@color/white"
             android:id="@+id/txt_email_nav_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hello guest !" />
+            android:text="hello guest !"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="bottom|right"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="bottom|right"
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/btn_login"
-            android:text="Sign in"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/buttom_menu"
+            android:text="Sign in"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btn_profile"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile" />
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/buttom_menu"
+            android:text="Profile"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/buttom_menu"
+            android:text="Log out"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

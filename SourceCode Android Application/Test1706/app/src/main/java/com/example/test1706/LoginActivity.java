@@ -9,7 +9,9 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,6 +36,7 @@ import static android.support.constraint.Constraints.TAG;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int MENU_ITEM_ITEM1 = 1;
     private FirebaseUser mAuthTask = null;
 
     // UI references.
@@ -66,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard(view);
+                hideKeyboard();
                 DangNhap();
 
             }
@@ -75,36 +78,45 @@ public class LoginActivity extends AppCompatActivity {
         btn_forgotpassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openforgotpassword = new Intent(LoginActivity.this, ForgotPassword_Activity.class);
+                Intent openforgotpassword = new Intent(LoginActivity.this, LoginActivity_ForgotPassword.class);
                 startActivity(openforgotpassword);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(v);
-
+                hideKeyboard();
                 return true;
             }
         });
 
 
         Button mEmailSignUpButton = (Button) findViewById(R.id.btn_register);
+        mEmailSignUpButton.setVisibility(View.GONE);
         mEmailSignUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                openRegisterActitvy(v);
+                openActivityAnimation();
             }
         });
         progressDialogdialog.dismiss();
     }
 
-    protected void hideKeyboard(View view) {
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem create_new_account = menu.add(0, MENU_ITEM_ITEM1, 0, "Create New Account");
+        create_new_account.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        create_new_account.setTitle(Html.fromHtml("<font color='#ff3824'>New Account</font>"));
+
+        return true;
     }
 
     @Override
@@ -113,6 +125,10 @@ public class LoginActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case MENU_ITEM_ITEM1:
+                openActivityAnimation();
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -120,6 +136,29 @@ public class LoginActivity extends AppCompatActivity {
     public void DangNhap() {
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
+        if (email.isEmpty()) {
+            mEmailView.setError("Email is required");
+            mEmailView.requestFocus();
+            return;
+        }
+        if (!email.contains("@")) {
+            mEmailView.setError("This is not valid email");
+            mEmailView.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            mPasswordView.setError("Password is required");
+            mPasswordView.requestFocus();
+            return;
+        }
+        if (password.length() <= 6) {
+            mPasswordView.setError("Password more than 5 characters");
+            mPasswordView.requestFocus();
+            return;
+        }
+
+
         if (email.equals("admin") && password.equals("admin")) {
             Intent intent = new Intent(LoginActivity.this, Admin.class);
             startActivity(intent);
@@ -137,44 +176,44 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                finish();
+                                Intent i =new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Snackbar snackbar = Snackbar
-                                        .make(relativelayout, "Acoount ID or password is incorrect", Snackbar.LENGTH_LONG);
-                                snackbar.show();/*
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_LONG).show();*/
+                                mEmailView.setError("Email or Password is incorrect");
+                                mPasswordView.setError("Email or Password is incorrect");
+                                mPasswordView.requestFocus();
                             }
 
                             // ...
                         }
                     });
-        } else {
-            Toast.makeText(LoginActivity.this, "invalid format email or password.",
-                    Toast.LENGTH_LONG).show();
-        }
-        if (email.length() < 6) {
-
-            minputLayout_email.setError("email must include @ character");
-        } else {
-            minputLayout_email.setErrorEnabled(false);
-        }
-
-        if (password.length() < 6) {
-            minputLayout_password.setError("password need to have at least 6 character");
-        } else {
-            minputLayout_password.setErrorEnabled(false);
         }
     }
 
 
-    public void openRegisterActitvy(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
+    public void openActivityAnimation() {
+        Intent intent = new Intent(this, Register_Menu.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+    protected void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 }

@@ -126,27 +126,32 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
         return new Filter() {
 
             @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
+            protected FilterResults performFiltering(CharSequence text) {
                 final FilterResults oReturn = new FilterResults();
                 final ArrayList<Product> results = new ArrayList<Product>();
                 if (list_product_search == null)
                     list_product_search = list_product;
-                if (constraint != null) {
+                if (text != "") {
                     if (list_product_search != null && list_product_search.size() > 0) {
                         for (final Product g : list_product_search) {
                             if (g.getProduct_Name().toLowerCase()
-                                    .contains(constraint.toString()))
+                                    .contains(text.toString()))
                                 results.add(g);
                         }
                     }
                     oReturn.values = results;
+                }
+                else
+                {
+                    oReturn.values = results;
+                    oReturn.count = results.size();
                 }
                 return oReturn;
             }
 
             @SuppressWarnings("unchecked")
             @Override
-            protected void publishResults(CharSequence constraint,
+            protected void publishResults(CharSequence text,
                                           FilterResults results) {
                 list_product = (ArrayList<Product>) results.values;
                 notifyDataSetChanged();

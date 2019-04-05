@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v4.view.ViewPager
+
         android:id="@+id/v_pager_fragment_message_nitewatch"
         android:layout_width="match_parent"
         android:layout_height="150dp"

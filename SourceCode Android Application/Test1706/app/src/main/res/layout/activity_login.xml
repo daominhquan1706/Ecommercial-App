@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
@@ -20,12 +19,21 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:gravity="bottom"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ba_cai_dong_ho" />
+
     <LinearLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp">
+        android:layout_margin="30dp">
 
         <LinearLayout
 
@@ -34,26 +42,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_account"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:src="@mipmap/ic_launcher_foreground" />
-
             <android.support.design.widget.TextInputLayout
-                android:background="@drawable/drw_edt_bg"
                 android:id="@+id/inputlayout_email"
                 style="@style/TextLabel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp"
+                android:background="@drawable/drw_edt_bg">
 
                 <EditText
-                    android:background="@null"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="@dimen/drawable_padding"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -62,31 +65,36 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:background="@drawable/drw_edt_bg"
-                android:id="@+id/inputlayout_password"
-                style="@style/TextLabel"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:background="@null"
-                    android:id="@+id/password"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/inputlayout_password"
+                    style="@style/TextLabel"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/white" />
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/drw_edt_bg">
 
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+                        android:drawablePadding="@dimen/drawable_padding"
+                        android:hint="@string/prompt_password"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/white"/>
+
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+
             <TextView
 
                 android:id="@+id/btn_open_forgotpassword"
@@ -95,8 +103,9 @@
                 android:layout_height="40dp"
                 android:layout_gravity="end"
                 android:text="@string/forgot_password"
-                android:textColor="@color/Deeppurple"
+                android:textColor="@color/gray"
                 android:textStyle="bold" />
+
             <Button
 
                 android:id="@+id/email_sign_in_button"
@@ -104,18 +113,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/colorbutton_1"
+                android:background="@drawable/button_matchparent_blue"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textStyle="bold" />
 
             <Button
-
                 android:id="@+id/btn_register"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:background="@drawable/colorbutton_2"
+                android:background="@drawable/button_matchparent_transparent"
                 android:text="@string/create_an_account"
                 android:textColor="@color/LightBlue"
                 android:textStyle="bold" />
@@ -127,13 +135,5 @@
 
     </LinearLayout>
 
-    <ImageView
 
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:gravity="bottom"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ba_cai_dong_ho" />
 </RelativeLayout>

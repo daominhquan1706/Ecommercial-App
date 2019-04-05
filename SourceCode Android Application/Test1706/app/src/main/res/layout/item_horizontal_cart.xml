@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_horizontal_nitewatch_item"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:background="@color/black_cardview_nitewatch"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_horizontal_product"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:background="@drawable/radial_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dongho_1" />
+
+        <ImageView
+            android:id="@+id/img_horizontal_product_night"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:background="@drawable/radial_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/dongho_1_night"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_horizontal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin1"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/productname"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_horizontal_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin1"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="x1"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+
+    <TextView
+
+        android:id="@+id/tv_horizontal_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin1"
+        android:text="@string/money"
+        android:textColor="@color/LightBlue"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_minus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_nitewatch_1"
+            android:textColor="@color/white"
+            android:text="-" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:text="0"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btncart_horizontal_nitewatch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_nitewatch_2"
+            android:textColor="@color/white"
+            android:text="+"  />
+    </LinearLayout>
+
+
+</LinearLayout>

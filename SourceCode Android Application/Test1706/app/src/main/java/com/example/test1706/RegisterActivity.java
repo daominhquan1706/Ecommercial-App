@@ -2,10 +2,10 @@ package com.example.test1706;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -49,8 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,17 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String retypepassword = mRetypePassword.getText().toString().trim();
 
                 if (email.length() > 6 && password.length() > 6) {
-                    mProgressView.setVisibility(View.VISIBLE);
-                    mImage.setVisibility(View.GONE);
                     DangKy();
-                    mProgressView.setVisibility(View.GONE);
-                    mImage.setVisibility(View.VISIBLE);
-                } else if (password != retypepassword) {
-                    Toast.makeText(RegisterActivity.this, "please check again.",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this, "invalid format email or password.",
-                            Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -92,14 +84,34 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    protected void hideKeyboard(View view) {
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 
     public void DangKy() {
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
+        String retypepassword = mRetypePassword.getText().toString().trim();
+        if (email.isEmpty()) {
+            mEmailView.setError("Email is required");
+            mEmailView.requestFocus();
+            return;
+        } if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() < 3)) {
+            mEmailView.setError("This is not valid email    ");
+            mEmailView.requestFocus();
+            return;
+        }  if (password.isEmpty()) {
+            mPasswordView.setError("Password is required");
+            mPasswordView.requestFocus();
+            return;
+        } if (password.length() <= 6) {
+            mPasswordView.setError("Password more than 5 characters");
+            mPasswordView.requestFocus();
+            return;
+        } if (password != retypepassword) {
+            mPasswordView.setError("please check password again");
+            mRetypePassword.setError("please check password again");
+            mPasswordView.requestFocus();
+        }
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -111,6 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                             finish();
                             startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -123,11 +136,18 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

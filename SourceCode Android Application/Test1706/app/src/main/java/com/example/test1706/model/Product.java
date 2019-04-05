@@ -1,17 +1,29 @@
 package com.example.test1706.model;
 
+import java.util.Date;
+
 public class Product {
-    private  String Product_Name;
-    private  int Price;
+    private String Product_Name;
+    private int Price;
     private String category;
     private String Image;
     private String Image_Night;
-    private  String Description;
+    private String Description;
 
-    private  int Quantity;
-    private  int discount;
+    private int Quantity;
+    private int discount;
 
-    public Product() {}
+    private Date createDate;
+    public Product() {
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
     public Product(String product_Name, int price, String category, String image) {
         Product_Name = product_Name;
