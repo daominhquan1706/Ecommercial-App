@@ -12,6 +12,7 @@ public class Admin extends AppCompatActivity {
 
     CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,15 @@ public class Admin extends AppCompatActivity {
                 Intent intent = new Intent(Admin.this, AdminSanPham_Activity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            }
+        });
+        cv_tinnhan.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent1=new Intent(Admin.this,ChatBoxMainActivity.class);
+                startActivity(intent1);
             }
         });
 
