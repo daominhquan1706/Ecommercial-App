@@ -24,8 +24,8 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
     private Context mContext;
     private static final String TAG = "Product_Recycle_Adapter";
     private boolean isNight;
-    private String name_product_opening_menu = "";
-    private String old_name_product_opening_menu = "";
+    private int opening_menu = -1;
+    private int old_opening_menu = -1;
 
 
     public boolean isNight() {
@@ -40,13 +40,11 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
         this.list_data = list_data;
         this.mContext = mContext;
         this.currentlayout = currentlayout;
-        Log.d(TAG, "onCreateViewHolder: listdata()  ");
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "onCreateViewHolder: đã được gọi ");
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_admin_sanpham_list, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -54,7 +52,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        Log.d(TAG, "onBindViewHolder :đã được gọi");
+
         final Product productt = list_data.get(i);
         if (productt == null) {
             return;
@@ -86,15 +84,15 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             }
         });
 
-        if (name_product_opening_menu.equals(list_data.get(i).getProduct_Name())) {
-            //showMenu(viewHolder);
-            viewHolder.layout_info.animate().translationX(-viewHolder.menu_product.getWidth()).setDuration(200).start();
 
-        } else if (old_name_product_opening_menu.equals(list_data.get(i).getProduct_Name())){
+        if (opening_menu == viewHolder.getAdapterPosition()) {
+            //di chuyển sang trái
+            viewHolder.layout_info.animate().translationXBy(300).translationX(-viewHolder.menu_product.getWidth()).setDuration(200).start();
+
+        } else if (old_opening_menu == viewHolder.getAdapterPosition()) {
+            //về vị trí cũ
             viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(200).start();
-            //hideMenu(viewHolder);
-        }
-        else{
+        } else {
             viewHolder.layout_info.animate().translationX(0).setDuration(0).start();
         }
 
@@ -102,16 +100,23 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
         viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name_product_opening_menu.equals(list_data.get(i).getProduct_Name())){
-                    viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(200).start();
-                    name_product_opening_menu="";
-                }
-                else{
-                    old_name_product_opening_menu=name_product_opening_menu;
-                    name_product_opening_menu = list_data.get(i).getProduct_Name();
+                if (opening_menu == viewHolder.getAdapterPosition()) {
+                    //về vị trí cũ
+                    viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(100).start();
+                    opening_menu = -1;
+
+                } else {
+                    int temp = opening_menu;
+                    opening_menu = viewHolder.getAdapterPosition();
+                    if (temp != -1) {
+                        old_opening_menu = temp;
+                    }
+                    Log.d(TAG, "onClick: opening_menu:" + opening_menu);
+                    Log.d(TAG, "onClick: old_opening_menu:" + temp);
+
+
                     notifyDataSetChanged();
                 }
-
 
             }
         });

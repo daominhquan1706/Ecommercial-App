@@ -13,10 +13,12 @@
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cart_Activity"></activity>
+        <activity android:name=".Test_mongodb"></activity>
+        <activity android:name=".Cart_Activity" />
         <activity android:name=".Register_Menu_PhoneNumber" />
         <activity android:name=".Register_Menu" />
         <activity android:name=".AdminSanPham_edit_product" />

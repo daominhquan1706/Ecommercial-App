@@ -38,9 +38,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.stitch.android.core.Stitch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +78,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!Stitch.hasAppClient(getResources().getString(R.string.my_app_id))) {
+            Stitch.initializeDefaultAppClient(
+                    getResources().getString(R.string.my_app_id)
+            );
 
-
+        }
         init();
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 listView_search.setVisibility(View.VISIBLE);
                 return true;
             case R.id.action_cart:
-                Intent intentCart = new Intent(MainActivity.this,Cart_Activity.class);
+                Intent intentCart = new Intent(MainActivity.this, Cart_Activity.class);
                 startActivity(intentCart);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
@@ -305,9 +307,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.nav_mainpage:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MainFragment()).commit();
-                drawer.closeDrawer(GravityCompat.START);
+                Intent testAdmin = new Intent(getApplicationContext(), Test_mongodb.class);
+                startActivity(testAdmin);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_NiteWatch:
 
