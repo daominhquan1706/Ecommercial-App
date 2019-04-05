@@ -28,9 +28,6 @@ public class Test_mongodb extends AppCompatActivity {
         btn = (Button) findViewById(R.id.btn_add_mongodb);
         edtname = (EditText) findViewById(R.id.name);
         edtsdt = (EditText) findViewById(R.id.sdt);
-
-        Code_mongodb db = new Code_mongodb("Product");
-        db.layDanhSachDongHo();
     }
 
 

@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +39,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mongodb.stitch.android.core.Stitch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,17 +73,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int mStartX, mStartY, mEndX, mEndY;
     AppBarLayout appBarLayout;
+    CartSqliteHelper cartSqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (!Stitch.hasAppClient(getResources().getString(R.string.my_app_id))) {
-            Stitch.initializeDefaultAppClient(
-                    getResources().getString(R.string.my_app_id)
-            );
 
-        }
         init();
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
-
+        cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -183,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.main_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        final MenuItem cartItem = menu.findItem(R.id.action_cart);
 
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
@@ -242,7 +237,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_cart:
                 Intent intentCart = new Intent(MainActivity.this, Cart_Activity.class);
                 startActivity(intentCart);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 return true;
 
 

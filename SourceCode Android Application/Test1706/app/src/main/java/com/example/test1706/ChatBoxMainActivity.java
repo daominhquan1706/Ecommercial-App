@@ -18,6 +18,7 @@ import android.text.format.DateFormat;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -106,7 +107,13 @@ public class ChatBoxMainActivity extends AppCompatActivity {
     private void displayChatMessage() {
 
         ListView listOfMessage= (ListView) findViewById(R.id.list_of_message);
-        adapter=new FirebaseListAdapter<ChatMessage>(this,ChatMessage.class,R.layout.list_item,FirebaseDatabase.getInstance().getReference())
+
+        FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
+                .build();
+
+
+
+        adapter=new FirebaseListAdapter<ChatMessage>(options)
             {
 
 

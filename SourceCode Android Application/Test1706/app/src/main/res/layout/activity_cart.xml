@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardview_horizonal_nitewatch_Hawk"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         card_view:cardBackgroundColor="@color/black_cardview_nitewatch"
         card_view:cardCornerRadius="10dp">
@@ -31,16 +31,35 @@
                 android:textColor="@color/white"
                 android:textSize="27sp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:text="12 products"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_quantity_product_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text=" product"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
 
             <android.support.v7.widget.RecyclerView
+
                 android:id="@+id/recycleview_horizontal_nitewatch_Hawk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,50 +77,60 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:text="Total : "
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Total : "
+                        android:textColor="@color/LightBlue"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="@string/money"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/email_sign_in_button"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_matchparent_blue"
+                    android:text="Checkout"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_contiueshopping"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:background="@drawable/button_matchparent_transparent"
+                    android:text="continue shopping"
                     android:textColor="@color/LightBlue"
-                    android:textSize="30sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:text="@string/money"
-                    android:textColor="@color/white"
-                    android:textSize="30sp" />
-
-
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_margin="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/button_matchparent_blue"
-                android:text="Checkout"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_register"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:background="@drawable/button_matchparent_transparent"
-                android:text="continue shopping"
-                android:textColor="@color/LightBlue"
-                android:textStyle="bold" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</ScrollView>
+</RelativeLayout>

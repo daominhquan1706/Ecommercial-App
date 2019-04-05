@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Test_mongodb"></activity>
-        <activity android:name=".Cart_Activity" />
+        <activity android:name=".Cart_Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Register_Menu_PhoneNumber" />
         <activity android:name=".Register_Menu" />
         <activity android:name=".AdminSanPham_edit_product" />
@@ -31,6 +32,8 @@
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
+        <activity android:name=".ChatBoxMainActivity" />
+
         <activity
             android:name=".Admin"
             android:label="Admin dashboard" />

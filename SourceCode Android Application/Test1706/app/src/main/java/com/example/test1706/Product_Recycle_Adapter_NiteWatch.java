@@ -17,9 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 
 import java.util.List;
@@ -120,6 +122,17 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 Log.d(TAG, "onClick: đã mở được trang details");
             }
         });
+
+
+        viewHolder.mbtnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartSqliteHelper cartSqliteHelper = new CartSqliteHelper(mContext);
+                cartSqliteHelper.addCart(productt);
+                Toast.makeText(mContext, "Đã thêm "+productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

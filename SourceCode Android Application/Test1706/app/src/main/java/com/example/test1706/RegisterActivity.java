@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             mEmailView.setError("Email is required");
             mEmailView.requestFocus();
             return;
-        } if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() < 3)) {
+        } if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() > 3)) {
             mEmailView.setError("This is not valid email    ");
             mEmailView.requestFocus();
             return;
