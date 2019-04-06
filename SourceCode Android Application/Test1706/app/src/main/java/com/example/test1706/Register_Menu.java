@@ -3,16 +3,23 @@ package com.example.test1706;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Register_Menu extends AppCompatActivity {
     Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
-
+    private static int SIGN_IN_REQUEST_CODE_GOOGLE = 1;
+    RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,34 @@ public class Register_Menu extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
         }
+        btn_google_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE_GOOGLE);
 
+                } else {
+                    Intent i = new Intent(Register_Menu.this,MainActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SIGN_IN_REQUEST_CODE_GOOGLE) {
+            if (resultCode == RESULT_OK) {
+                Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
+                Intent i = new Intent(Register_Menu.this,MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                Snackbar.make(relativeLayout, "TRY AGAIN !!!!", Snackbar.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -64,6 +98,14 @@ public class Register_Menu extends AppCompatActivity {
     }
 
     public void init() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
+            Intent i = new Intent(Register_Menu.this,MainActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+        
+        relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
         btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
         btn_normal = (Button) findViewById(R.id.btn_normal_account);
