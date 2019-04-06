@@ -9,16 +9,17 @@
     android:padding="@dimen/margin1">
 
     <ListView
+        android:stackFromBottom="true"
         android:id="@+id/list_of_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/fab"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="10dp"
         android:divider="@android:color/transparent"
 
-        android:dividerHeight="16dp"
+        android:dividerHeight="5dp"
         tools:listitem="@layout/list_message_item">
 
     </ListView>
@@ -29,31 +30,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:clickable="true"
         android:src="@drawable/ic_action_send"
         android:tint="@color/white"
+        app:backgroundTint="@color/LightBlue"
         app:fabSize="mini" />
 
-    <android.support.design.widget.TextInputLayout
-        style="@style/TextLabel"
+    <EditText
+        android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/list_of_message"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="10dp"
         android:layout_toStartOf="@+id/fab"
         android:background="@drawable/drw_edt_bg"
-        android:textColorHint="@color/gray">
-
-        <EditText
-            android:maxLines="1"
-            android:id="@+id/input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:hint="Message..."
-            android:textColor="@color/white" />
-
-    </android.support.design.widget.TextInputLayout>
+        android:hint="Message..."
+        android:paddingStart="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray" />
 
 
 </RelativeLayout>

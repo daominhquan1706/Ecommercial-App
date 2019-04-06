@@ -1,25 +1,24 @@
 package com.example.test1706;
 
-import android.widget.BaseAdapter;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
-public class CustomListAdapter extends BaseAdapter {
+public class Chat_Adapter extends BaseAdapter {
 
     private List<ChatMessage> listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public CustomListAdapter(Context aContext, List<ChatMessage> listData) {
+    public Chat_Adapter(Context aContext, List<ChatMessage> listData) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
@@ -47,6 +46,8 @@ public class CustomListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.message_text = (TextView) convertView.findViewById(R.id.message_text);
             holder.message_user = (TextView) convertView.findViewById(R.id.message_user);
+
+
             holder.message_time = (TextView) convertView.findViewById(R.id.message_time);
             convertView.setTag(holder);
         } else {
@@ -56,11 +57,34 @@ public class CustomListAdapter extends BaseAdapter {
         ChatMessage ChatMessage = this.listData.get(position);
         holder.message_text.setText(ChatMessage.getMessageText());
         holder.message_user.setText(ChatMessage.getMessageUser());
-        holder.message_time.setText(String.valueOf(ChatMessage.getMessageTime()));
+
+        String chattime = ThoiGianChat(ChatMessage.getMessageTime());
+        holder.message_time.setText(chattime);
 
         return convertView;
     }
 
+    private String ThoiGianChat(long date) {
+        String thoigian = "";
+        Date datetime = new Date();
+        datetime.setTime(date);
+        Date currentday = new Date();
+        long diffInMillies = Math.abs(datetime.getTime() - currentday.getTime());
+        long diff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        if (diff / (60 * 60 * 24 * 30) > 0) {
+            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + " tháng trước";
+        } else if (diff / (60 * 60 * 24) > 0) {
+            thoigian = Math.round(diff / (60 * 60 * 24)) + " ngày trước";
+        } else if (diff / (60 * 60) > 0) {
+            thoigian = Math.round(diff / (60 * 60)) + " giờ trước";
+        } else if (diff / (60) > 0) {
+            thoigian = Math.round(diff / (60)) + " phút trước";
+        } else if (diff > 0) {
+            thoigian = Math.round(diff) + " giây trước";
+        }
+
+        return thoigian;
+    }
 
     static class ViewHolder {
         TextView message_text;

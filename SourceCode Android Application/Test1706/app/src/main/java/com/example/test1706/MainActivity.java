@@ -316,6 +316,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intention);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
+            case R.id.nav_user_chat:
+                Intent intention_chat = new Intent(getApplicationContext(), Admin.class);
+                startActivity(intention_chat);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
 
         }
 

@@ -49,39 +49,20 @@ public class RegisterActivity extends AppCompatActivity {
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
         }
-        findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(v);
-                return true;
-            }
+        findViewById(R.id.relativeLayout).setOnTouchListener((v, event) -> {
+            hideKeyboard(v);
+            return true;
         });
 
 
         Button mEmailSignUpButton = (Button) findViewById(R.id.btn_register);
-        mEmailSignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = mEmailView.getText().toString().trim();
-                String password = mPasswordView.getText().toString().trim();
-                String retypepassword = mRetypePassword.getText().toString().trim();
-
-                if (email.length() > 6 && password.length() > 6) {
-                    DangKy();
-                }
-            }
-        });
+        mEmailSignUpButton.setOnClickListener(v -> DangKy());
         Button btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btn_login.setOnClickListener(v -> finish());
     }
 
 
@@ -93,19 +74,19 @@ public class RegisterActivity extends AppCompatActivity {
             mEmailView.setError("Email is required");
             mEmailView.requestFocus();
             return;
-        } if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() > 3)) {
+        } else if (!email.contains("@") || !email.split("@")[1].contains(".") || !(email.split("@")[1].length() > 3)) {
             mEmailView.setError("This is not valid email    ");
             mEmailView.requestFocus();
             return;
-        }  if (password.isEmpty()) {
+        } else if (password.isEmpty()) {
             mPasswordView.setError("Password is required");
             mPasswordView.requestFocus();
             return;
-        } if (password.length() <= 6) {
+        } else if (password.length() <= 6) {
             mPasswordView.setError("Password more than 5 characters");
             mPasswordView.requestFocus();
             return;
-        } if (password != retypepassword) {
+        } else if (!password.equals(retypepassword)) {
             mPasswordView.setError("please check password again");
             mRetypePassword.setError("please check password again");
             mPasswordView.requestFocus();
@@ -113,26 +94,23 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                            finish();
-                            startActivity(i);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                        finish();
+                        startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
+
+                    // ...
                 });
     }
 

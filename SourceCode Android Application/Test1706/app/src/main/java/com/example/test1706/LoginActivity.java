@@ -146,25 +146,19 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.setError("Email is required");
             mEmailView.requestFocus();
             return;
-        }
-        if (!email.contains("@")) {
+        } else if (!email.contains("@")) {
             mEmailView.setError("This is not valid email");
             mEmailView.requestFocus();
             return;
-        }
-
-        if (password.isEmpty()) {
+        } else if (password.isEmpty()) {
             mPasswordView.setError("Password is required");
             mPasswordView.requestFocus();
             return;
-        }
-        if (password.length() <= 6) {
+        } else if (password.length() <= 6) {
             mPasswordView.setError("Password more than 5 characters");
             mPasswordView.requestFocus();
             return;
         }
-
-
         if (email.equals("admin") && password.equals("admin")) {
             Intent intent = new Intent(LoginActivity.this, Admin.class);
             startActivity(intent);
@@ -185,12 +179,11 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Log.w(TAG, "signInWithEmail:Đăng nhập thất bại", task.getException());
                                 mEmailView.setError("Email or Password is incorrect");
-                                mPasswordView.setError("Email or Password is incorrect");
+                                mPasswordView.setText("");
                                 mPasswordView.requestFocus();
                             }
 

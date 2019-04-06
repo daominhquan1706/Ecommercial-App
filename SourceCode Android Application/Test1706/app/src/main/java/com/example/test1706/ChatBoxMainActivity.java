@@ -1,27 +1,24 @@
 package com.example.test1706;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.test1706.model.Product;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,16 +27,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ChatBoxMainActivity extends AppCompatActivity {
     List<ChatMessage> chatMessageList;
+    List<String> mkey;
     private static int SIGN_IN_REQUEST_CODE = 1;
     RelativeLayout activity_chatboxmain;
     FloatingActionButton btn_send_message;
@@ -48,7 +46,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
     EditText input;
     ListView listOfMessage;
     private static final String TAG = "ChatBoxMainActivity";
-    CustomListAdapter customListAdapter;
+    Chat_Adapter customListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,23 +115,52 @@ public class ChatBoxMainActivity extends AppCompatActivity {
 
 
     private void displayChatMessage() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("chat with admin");
+        }
         listOfMessage = (ListView) findViewById(R.id.list_of_message);
         chatMessageList = new ArrayList<ChatMessage>();
-        customListAdapter = new CustomListAdapter(this, chatMessageList);
+        customListAdapter = new Chat_Adapter(this, chatMessageList);
+        mkey = new ArrayList<String>();
         listOfMessage.setAdapter(customListAdapter);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+
+        myRef.child("chat_message").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                    ChatMessage itemProduct = dataSnapshot1.getValue(ChatMessage.class);
+                    if (Objects.requireNonNull(itemProduct).getMessageUser_NguoiNhan().equals("admin") && itemProduct.getMessageUser().equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
+                        chatMessageList.add(itemProduct);
+                        Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
+                        customListAdapter.notifyDataSetChanged();
+                        scrollMyListViewToBottom();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         myRef.child("chat_message").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
-                if (itemProduct.getMessageUser_NguoiNhan() == "admin" && itemProduct.getMessageUser() == FirebaseAuth.getInstance().getCurrentUser().getEmail()) {
+                /*ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
+                if (Objects.requireNonNull(itemProduct).getMessageUser_NguoiNhan().equals("admin") && itemProduct.getMessageUser().equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
                     chatMessageList.add(itemProduct);
                     Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
                     customListAdapter.notifyDataSetChanged();
                     scrollMyListViewToBottom();
-                }
+                }*/
             }
 
             @Override
@@ -158,6 +185,15 @@ public class ChatBoxMainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    protected void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void scrollMyListViewToBottom() {

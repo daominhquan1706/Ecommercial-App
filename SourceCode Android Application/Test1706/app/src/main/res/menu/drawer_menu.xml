@@ -21,8 +21,13 @@
                 android:id="@+id/nav_admin"
                 android:icon="@drawable/ic_settings"
                 android:title="Admin" />
+<item
+                android:id="@+id/nav_user_chat"
+                android:icon="@drawable/ic_settings"
+                android:title="Admin" />
 
         </menu>
+
     </item>
 
 </menu>
