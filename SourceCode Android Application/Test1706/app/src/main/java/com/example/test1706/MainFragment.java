@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.test1706.model.Product;
+import com.example.test1706.mongodb.Code_mongodb;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -138,16 +139,20 @@ public class MainFragment extends Fragment {
 
         initRecycleView();
 
-        cauhinhMongo();
+
+
     }
 
     private void cauhinhMongo() {
-        final StitchAppClient client = Stitch.initializeDefaultAppClient("powerr-ntmjm");
+        final StitchAppClient client =
+                Stitch.initializeDefaultAppClient("powerr-ntmjm");
 
-        final RemoteMongoClient mongoClient = client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
+        final RemoteMongoClient mongoClient =
+                client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
 
         final RemoteMongoCollection<Document> coll =
                 mongoClient.getDatabase("PowerR_database").getCollection("PowerR_collection");
+
         client.getAuth().loginWithCredential(new AnonymousCredential()).continueWithTask(
                 new Continuation<StitchUser, Task<RemoteUpdateResult>>() {
 

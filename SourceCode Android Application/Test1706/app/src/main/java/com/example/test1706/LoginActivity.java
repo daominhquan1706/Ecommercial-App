@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -52,6 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ImageView image_ba = (ImageView) findViewById(R.id.image_ba_cai_dong_ho);
+        Glide
+                .with(this)
+                .load(getResources().getDrawable(R.drawable.ba_cai_dong_ho))
+                .into(image_ba);
         progressDialogdialog = ProgressDialog.show(LoginActivity.this, "", "Loading. Please wait...", true);
         // Set up the login form.
         mProgressView = findViewById(R.id.login_progress);
@@ -85,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
         }
@@ -176,9 +182,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent i =new Intent(LoginActivity.this,MainActivity.class);
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
-                                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
                             } else {
                                 // If sign in fails, display a message to the user.

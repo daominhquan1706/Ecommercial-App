@@ -275,8 +275,6 @@ public class NiteWatchFragment extends Fragment {
                     mkey.add(item.getKey());
                     adapter.notifyDataSetChanged();
                 }
-
-
             }
 
             @Override
@@ -284,6 +282,8 @@ public class NiteWatchFragment extends Fragment {
 
             }
         });
+
+
     }
 
     private void init() {

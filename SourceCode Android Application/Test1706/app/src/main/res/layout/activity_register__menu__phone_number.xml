@@ -19,14 +19,13 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
     <ImageView
-
+        android:id="@+id/image_ba_cai_dong_ho"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:adjustViewBounds="true"
         android:gravity="bottom"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ba_cai_dong_ho" />
+        android:scaleType="centerCrop" />
     <LinearLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -35,17 +34,12 @@
         android:paddingEnd="30dp">
 
         <LinearLayout
-
+android:layout_marginTop="@dimen/margintop_cardview"
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_account"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:src="@mipmap/ic_launcher_foreground" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.test1706.model.Product;
+import com.example.test1706.mongodb.Code_mongodb;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -41,6 +41,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     private static final String TAG = "AdminSanPham_Activity";
     private StorageReference mStorageRef;
     LinearLayout layout_product;
+    List<Product> Hawk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,6 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         productadapter = new AdminSanPham_Recycle_Adapter_NiteWatch(this, productList, 0);
 
 
-
-
         listView_admin_product_nitewatch.setAdapter(productadapter);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -74,7 +73,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "onChildAdded: "+item.getKey());
+                    Log.d(TAG, "onChildAdded: " + item.getKey());
                     Product itemProduct = item.getValue(Product.class);
                     productList.add(itemProduct);
                     mkey.add(item.getKey());
@@ -106,7 +105,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
 
             }
         });
-
+        Hawk = new ArrayList<Product>();
 
         btn_firebase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +113,9 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                 for (String item : getImageHAWK()) {
                     addToFireBase(item);
                 }
+                Code_mongodb mongo = new Code_mongodb("PowerR_collection");
+                mongo.ThemDulieu(Hawk);
+
             }
         });
 
@@ -269,6 +271,12 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                             // ...
                         }
                     });
+
+
+
+            if(product.getCategory()=="HAWK"){
+                Hawk.add(product);
+            }
         }
     }
 
@@ -281,18 +289,16 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
-    protected void hideKeyboard(View view) {
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-    }
+
     protected void hideKeyboard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     @Override
     public void finish() {
         super.finish();

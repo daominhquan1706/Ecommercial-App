@@ -11,14 +11,13 @@
     tools:context=".LoginActivity">
 
     <ImageView
-
+        android:id="@+id/image_ba_cai_dong_ho"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:adjustViewBounds="true"
         android:gravity="bottom"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ba_cai_dong_ho" />
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:id="@+id/login_form"

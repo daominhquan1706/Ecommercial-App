@@ -12,29 +12,21 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_horizontal_product"
+            android:id="@+id/img_product_cart"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:background="@drawable/radial_background"
             android:scaleType="fitCenter"
             android:src="@drawable/dongho_1" />
 
-        <ImageView
-            android:id="@+id/img_horizontal_product_night"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:background="@drawable/radial_background"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dongho_1_night"
-            android:visibility="invisible" />
-
     </RelativeLayout>
 
 
     <TextView
-        android:id="@+id/tv_horizontal_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:id="@+id/tv_name_cart"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin1"
         android:fontFamily="sans-serif-light"
@@ -42,21 +34,10 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tv_horizontal_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin1"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="x1"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="normal" />
 
     <TextView
 
-        android:id="@+id/tv_horizontal_price"
+        android:id="@+id/tv_price_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -73,30 +54,34 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_minus"
+
+            android:id="@+id/minus_one_product_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/button_nitewatch_1"
-            android:textColor="@color/white"
-            android:text="-" />
+            android:text="-"
+            android:textColor="@color/white" />
 
-        <EditText
+        <TextView
+            android:gravity="center"
+            android:id="@+id/edt_quantity_product_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/black_cardview_nitewatch"
             android:text="0"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/btncart_horizontal_nitewatch"
+android:id="@+id/plus_one_product_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/button_nitewatch_2"
-            android:textColor="@color/white"
-            android:text="+"  />
+            android:text="+"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
