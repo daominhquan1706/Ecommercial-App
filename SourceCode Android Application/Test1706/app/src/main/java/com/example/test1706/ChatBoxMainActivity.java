@@ -128,10 +128,12 @@ public class ChatBoxMainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
-                chatMessageList.add(itemProduct);
-                Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
-                customListAdapter.notifyDataSetChanged();
-                scrollMyListViewToBottom();
+                if (itemProduct.getMessageUser_NguoiNhan() == "admin" && itemProduct.getMessageUser() == FirebaseAuth.getInstance().getCurrentUser().getEmail()) {
+                    chatMessageList.add(itemProduct);
+                    Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
+                    customListAdapter.notifyDataSetChanged();
+                    scrollMyListViewToBottom();
+                }
             }
 
             @Override
@@ -157,6 +159,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
 
 
     }
+
     private void scrollMyListViewToBottom() {
         listOfMessage.post(new Runnable() {
             @Override

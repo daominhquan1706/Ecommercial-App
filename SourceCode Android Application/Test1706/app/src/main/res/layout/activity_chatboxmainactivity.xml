@@ -3,53 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_chatboxmainactivity"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/clearblack"
+    android:padding="@dimen/margin1">
+
+    <ListView
+        android:id="@+id/list_of_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fab"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"
+        android:divider="@android:color/transparent"
+
+        android:dividerHeight="16dp"
+        tools:listitem="@layout/list_message_item">
+
+    </ListView>
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:clickable="true"
         android:src="@drawable/ic_action_send"
-        android:id="@+id/fab"
         android:tint="@color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         app:fabSize="mini" />
+
     <android.support.design.widget.TextInputLayout
+        style="@style/TextLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/fab"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_toStartOf="@+id/fab"
+        android:background="@drawable/drw_edt_bg"
+        android:textColorHint="@color/gray">
+
         <EditText
-            android:hint="Message..."
+            android:maxLines="1"
             android:id="@+id/input"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_marginStart="10dp"
+            android:hint="Message..."
+            android:textColor="@color/white" />
 
     </android.support.design.widget.TextInputLayout>
 
-
-
-
-    <ListView
-
-        android:id="@+id/list_of_message"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/fab"
-        android:dividerHeight="16dp"
-        android:divider="@android:color/transparent"
-        android:layout_marginBottom="16dp"
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
 
 </RelativeLayout>
