@@ -70,7 +70,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
     // Nếu trong bảng Cart chưa có dữ liệu,
     // Trèn vào mặc định 2 bản ghi.
     public void createDefaultCartsIfNeed() {
-        int count = this.getCartsCount();
+        int count = this.getCartQuantityCount();
         if (count == 0) {
             Product product = new Product(
                     "name",
@@ -159,20 +159,49 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         return CartList;
     }
 
-    public int getCartsCount() {
+    public int getCartQuantityCount() {
         Log.i(TAG, "CartSqliteHelper.getCartsCount ... ");
 
-        String countQuery = "SELECT  * FROM " + TABLE_CART;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CART;
 
-        int count = cursor.getCount();
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int count = 0;
+        // Duyệt trên con trỏ, và thêm vào danh sách.
+        if (cursor.moveToFirst()) {
+            do {
+                count = count + Integer.parseInt(cursor.getString(2));
+            } while (cursor.moveToNext());
+        }
         cursor.close();
 
         // return count
         return count;
     }
+
+    public double getCartPriceCount() {
+        Log.i(TAG, "CartSqliteHelper.getCartsCount ... ");
+
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CART;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        double count = 0;
+        // Duyệt trên con trỏ, và thêm vào danh sách.
+        if (cursor.moveToFirst()) {
+            do {
+                int quantity = Integer.parseInt(cursor.getString(2));
+                count = count + (Double.parseDouble(cursor.getString(3))*quantity);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        // return count
+        return count;
+    }
+
+
 
     public boolean CheckExists(Product product) {
         String[] columns = {COLUMN_CART_PRODUCTNAME};

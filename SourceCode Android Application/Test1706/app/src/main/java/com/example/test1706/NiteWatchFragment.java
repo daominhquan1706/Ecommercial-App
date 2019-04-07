@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -252,15 +253,11 @@ public class NiteWatchFragment extends Fragment {
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
-        videoView.setOnClickListener(new View.OnClickListener() {
+        videoView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if(videoView.isPlaying()){
-                    videoView.pause();
-                }
-                else{
-                    videoView.start();
-                }
+            public boolean onTouch(View v, MotionEvent event) {
+                videoView.stopPlayback();
+                return false;
             }
         });
     }

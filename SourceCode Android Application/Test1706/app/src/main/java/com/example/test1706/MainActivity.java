@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     private FirebaseUser currentUser;
     private NavigationView navigationView;
-    private TextView tv_email_nav_header;
+    private TextView tv_email_nav_header, textCartItemCount;
     Button btn_login, btn_profile, btn_logout;
     private static final String TAG = "MainActivity";
     Context mContext;
@@ -177,14 +178,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-
         MenuItem searchItem = menu.findItem(R.id.action_search);
-
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-
+        //thiết lập badge cart count
+        cartSqliteHelper = new CartSqliteHelper(this);
+        final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+        setupBadge(cartSqliteHelper.getCartQuantityCount());
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+        //end-thiết lập badge cart count
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
             @Override
@@ -222,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+
         return true;
     }
 
@@ -238,8 +249,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intentCart = new Intent(MainActivity.this, Cart_Activity.class);
                 startActivity(intentCart);
                 return true;
-
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -254,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_login = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
         btn_profile = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_profile);
         btn_logout = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
-
+        setupBadge(cartSqliteHelper.getCartQuantityCount());
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_NiteWatch:
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NiteWatchFragment()).commit();
                 drawer.closeDrawer(GravityCompat.START);
@@ -317,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_user_chat:
-                Intent intention_chat = new Intent(getApplicationContext(), Admin.class);
+                Intent intention_chat = new Intent(getApplicationContext(), ChatBoxMainActivity.class);
                 startActivity(intention_chat);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
@@ -373,6 +381,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
+    private void setupBadge(int mCartItemCount) {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
 

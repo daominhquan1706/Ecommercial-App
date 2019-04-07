@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -52,8 +53,16 @@ public class ChatBoxMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatboxmainactivity);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Message with admin");
+        }
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+
         activity_chatboxmain = (RelativeLayout) findViewById(R.id.activity_chatboxmainactivity);
         btn_send_message = (FloatingActionButton) findViewById(R.id.fab);
         input = (EditText) findViewById(R.id.input);
@@ -76,21 +85,32 @@ public class ChatBoxMainActivity extends AppCompatActivity {
                 scrollMyListViewToBottom();
             }
         });
+        findViewById(R.id.activity_chatboxmainactivity).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_sign_out) {
-            AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Snackbar.make(activity_chatboxmain, "You have been signed out", Snackbar.LENGTH_SHORT).show();
-                    finish();
-
-                }
-            });
+        switch (item.getItemId()) {
+            case R.id.menu_sign_out:
+                AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Snackbar.make(activity_chatboxmain, "You have been signed out", Snackbar.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -115,11 +135,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
 
 
     private void displayChatMessage() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("chat with admin");
-        }
+
         listOfMessage = (ListView) findViewById(R.id.list_of_message);
         chatMessageList = new ArrayList<ChatMessage>();
         customListAdapter = new Chat_Adapter(this, chatMessageList);
@@ -132,7 +148,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
         myRef.child("chat_message").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     ChatMessage itemProduct = dataSnapshot1.getValue(ChatMessage.class);
                     if (Objects.requireNonNull(itemProduct).getMessageUser_NguoiNhan().equals("admin") && itemProduct.getMessageUser().equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
                         chatMessageList.add(itemProduct);

@@ -44,11 +44,8 @@ dependencies {
     implementation 'org.mongodb:stitch-android-sdk:4.2.1'
     implementation 'com.pusher:pusher-java-client:1.5.0'
     implementation 'com.firebaseui:firebase-ui:4.3.2'
-
-
-
-
-
+//paypal
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

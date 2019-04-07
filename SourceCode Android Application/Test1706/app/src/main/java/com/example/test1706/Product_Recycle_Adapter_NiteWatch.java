@@ -24,6 +24,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Product_Recycle_Adapter_NiteWatch.ViewHolder> {
@@ -32,6 +34,11 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     private static final String TAG = "Product_Recycle_Adapter";
     private boolean isNight;
     private int currentlayout;
+private TextView textCartItemCount;
+
+    public void setTextCartItemCount(TextView textCartItemCount) {
+        this.textCartItemCount = textCartItemCount;
+    }
 
     public boolean isNight() {
         return isNight;
