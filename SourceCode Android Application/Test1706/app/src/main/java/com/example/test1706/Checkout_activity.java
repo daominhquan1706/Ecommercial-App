@@ -12,10 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test1706.Config.Config;
+import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalPaymentDetails;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -34,6 +34,8 @@ public class Checkout_activity extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // su dung sandbox de test
             .clientId(Config.PAYPAL_CLIENT_ID);
     String amount = "";
+    ListView_Adapter_checkout_item listView_adapter_checkout_item;
+    MyListView lv_checkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,14 @@ public class Checkout_activity extends AppCompatActivity {
                 ProcessPayment();
             }
         });
+
+
+        listView_adapter_checkout_item = new ListView_Adapter_checkout_item(this, cartSqliteHelper.getAllCarts());
+        lv_checkout.setAdapter(listView_adapter_checkout_item);
     }
 
     public void init() {
+        lv_checkout = (MyListView) findViewById(R.id.lv_checkout);
         cartSqliteHelper = new CartSqliteHelper(this);
         btnPaynow = (ImageView) findViewById(R.id.btnPaynow);
         tv_total_price = (TextView) findViewById(R.id.tv_total_price);
@@ -86,9 +93,13 @@ public class Checkout_activity extends AppCompatActivity {
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if (confirmation != null) {
                     try {
+
+                        for (Cart item : cartSqliteHelper.getAllCarts()) {
+                            cartSqliteHelper.deleteCart(item);
+                        }
                         String paymentDetails = confirmation.toJSONObject().toString(4);
-                        startActivity(new Intent(this, PayPalPaymentDetails.class)
-                                .putExtra("PaymentDetails", paymentDetails)
+                        startActivity(new Intent(this, Checkout_PaymentDetails_activity.class)
+                                .putExtra("Checkout_PaymentDetails_activity", paymentDetails)
                                 .putExtra("PaymentAmount", amount)
                         );
                         finish();

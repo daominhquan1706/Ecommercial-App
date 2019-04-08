@@ -1,6 +1,6 @@
 package com.example.test1706;
 
-import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,12 +10,15 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +27,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -96,13 +99,87 @@ public class NiteWatchFragment extends Fragment {
     List<String> mkey_Icon_auto;
     List<String> mkey_Marquess;
     List<String> mkey_Mx10;
-
+    TextView textCartItemCount;
+    CartSqliteHelper cartSqliteHelper;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_nite_watch, container, false);
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //thiết lập badge cart count
+        cartSqliteHelper = new CartSqliteHelper(getActivity());
+        final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+        setupBadge(cartSqliteHelper.getCartQuantityCount());
+        product_horizontal_adapter_Alpha.setTextCartItemCount(textCartItemCount);
+        product_horizontal_adapter_Hawk.setTextCartItemCount(textCartItemCount);
+        product_horizontal_adapter_Icon.setTextCartItemCount(textCartItemCount);
+        product_horizontal_adapter_Icon_auto.setTextCartItemCount(textCartItemCount);
+        product_horizontal_adapter_Marquess.setTextCartItemCount(textCartItemCount);
+        product_horizontal_adapter_Mx10.setTextCartItemCount(textCartItemCount);
+
+        product_horizontal_adapter_Alpha.setAppBarLayout(appBarLayout);
+        product_horizontal_adapter_Hawk.setAppBarLayout(appBarLayout);
+        product_horizontal_adapter_Icon.setAppBarLayout(appBarLayout);
+        product_horizontal_adapter_Icon_auto.setAppBarLayout(appBarLayout);
+        product_horizontal_adapter_Marquess.setAppBarLayout(appBarLayout);
+        product_horizontal_adapter_Mx10.setAppBarLayout(appBarLayout);
+
+
+
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+            }
+        });
+        //end-thiết lập badge cart count
+
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.action_cart:
+                Intent intentCart = new Intent(getActivity(), Cart_Activity.class);
+                startActivity(intentCart);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
+
+    }
+
+    private void setupBadge(int mCartItemCount) {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -150,7 +227,6 @@ public class NiteWatchFragment extends Fragment {
         recyclerView_horizontal_Icon_auto.setAdapter(product_horizontal_adapter_Icon_auto);
         recyclerView_horizontal_Marquess.setAdapter(product_horizontal_adapter_Marquess);
         recyclerView_horizontal_Mx10.setAdapter(product_horizontal_adapter_Mx10);
-
 
 
         //vertical recycle view
@@ -246,7 +322,7 @@ public class NiteWatchFragment extends Fragment {
 
     }
 
-    private void setupVideoPlayer(){
+    private void setupVideoPlayer() {
         VideoView videoView = getView().findViewById(R.id.video_view);
         FrameLayout videocontroller = getView().findViewById(R.id.video_controller);
         String videoPath = "android.resource://" + getActivity().getPackageName() + "/" + R.raw.nitewatch;

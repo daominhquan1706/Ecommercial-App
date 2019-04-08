@@ -238,7 +238,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         Cart cart = getCart(product);
         ContentValues values = new ContentValues();
         values.put(COLUMN_CART_CART_PRICE, cart.getPrice());
-        if (cart.getQuantity() > 0) {
+        if (cart.getQuantity() > 1) {
             values.put(COLUMN_CART_CART_QUANTITY, cart.getQuantity() - 1);
         } else {
             deleteCart(cart);
@@ -259,4 +259,8 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(cart.getId())});
         db.close();
     }
+
+
+
+
 }

@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -23,13 +23,6 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/thongtingiaohang" />
-
-
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -38,7 +31,6 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -128,6 +120,31 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="@color/clearblack">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/item_checkout_item" />
+
+                        <com.example.test1706.MyListView
+                            android:id="@+id/lv_checkout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:dividerHeight="1dp"
+                            tools:listitem="@layout/item_checkout_item" />
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,32 +171,33 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/black"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/btnPaynow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/drw_edt_bg_yellow"
+                        android:clickable="false"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_paypal" />
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
 
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/black"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/btnPaynow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/drw_edt_bg_yellow"
-            android:clickable="false"
-            android:padding="10dp"
-            android:src="@drawable/ic_paypal" />
-
-    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

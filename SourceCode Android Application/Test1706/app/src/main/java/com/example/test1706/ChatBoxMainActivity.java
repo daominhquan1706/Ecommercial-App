@@ -157,50 +157,12 @@ public class ChatBoxMainActivity extends AppCompatActivity {
                         scrollMyListViewToBottom();
                     }
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-
-        myRef.child("chat_message").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                /*ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
-                if (Objects.requireNonNull(itemProduct).getMessageUser_NguoiNhan().equals("admin") && itemProduct.getMessageUser().equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
-                    chatMessageList.add(itemProduct);
-                    Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
-                    customListAdapter.notifyDataSetChanged();
-                    scrollMyListViewToBottom();
-                }*/
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
     }
 
     protected void hideKeyboard() {

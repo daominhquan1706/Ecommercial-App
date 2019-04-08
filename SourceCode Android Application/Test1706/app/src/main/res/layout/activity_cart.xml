@@ -38,6 +38,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text=" Quantity: "
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <TextView
                     android:id="@+id/tv_quantity_product_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,91 +56,97 @@
                     android:textColor="@color/white"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text=" product"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+
             </LinearLayout>
-
-
-            <android.support.v7.widget.RecyclerView
-
-                android:id="@+id/recycleview_horizontal_nitewatch_Hawk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                android:scrollbarFadeDuration="300"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbarThumbHorizontal="@color/LightBlue"
-                android:scrollbars="horizontal"
-                card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-
-                tools:listitem="@layout/item_horizontal_cart">
-
-            </android.support.v7.widget.RecyclerView>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:gravity="bottom"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="Total : "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-light"
-                        android:text="Total : "
-                        android:textColor="@color/LightBlue"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/tv_total_price_cart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-light"
-                        android:text="@string/money"
-                        android:textColor="@color/white"
-                        android:textSize="30sp" />
-
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btn_checkout_cart"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/button_matchparent_blue"
-                    android:text="Checkout"
-                    android:textColor="@color/common_google_signin_btn_text_dark_default"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_contiueshopping"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:background="@drawable/button_matchparent_transparent"
-                    android:text="continue shopping"
-                    android:textColor="@color/LightBlue"
-                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_total_price_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-light"
+                    android:text="@string/money"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="40dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/empty_cart" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycleview_cart_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/black_cardview_nitewatch"
+                    android:orientation="horizontal"
+                    android:scrollbarFadeDuration="50"
+                    android:scrollbarStyle="insideOverlay"
+                    android:scrollbarThumbHorizontal="@color/LightBlue"
+                    android:scrollbarSize="2dp"
+                    android:scrollbars="horizontal"
+                    android:visibility="visible"
+                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_horizontal_cart">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btn_checkout_cart"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_matchparent_blue"
+                android:text="Checkout"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_contiueshopping"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="@drawable/button_matchparent_transparent"
+                android:text="@string/continue_shopping"
+                android:textColor="@color/LightBlue"
+                android:textStyle="bold" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

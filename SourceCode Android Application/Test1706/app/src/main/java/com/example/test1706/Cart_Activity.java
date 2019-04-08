@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
@@ -33,11 +34,16 @@ public class Cart_Activity extends AppCompatActivity {
 
         cartList = cartSqliteHelper.getAllCarts();
         cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartList, R.layout.item_horizontal_cart);
+        recycleview_horizontal_nitewatch_Hawk.setAdapter(cart_recycle_adapter_niteWatch);
+        if (cartSqliteHelper.getCartQuantityCount() == 0) {
+            recycleview_horizontal_nitewatch_Hawk.setVisibility(View.GONE);
+        } else {
+            recycleview_horizontal_nitewatch_Hawk.setVisibility(View.VISIBLE);
+        }
+
         cart_recycle_adapter_niteWatch.setTv_count_price(tv_total_price_cart);
         cart_recycle_adapter_niteWatch.setTv_count_quantity(tv_quantity_product_count);
-
-        recycleview_horizontal_nitewatch_Hawk.setAdapter(cart_recycle_adapter_niteWatch);
-
+        cart_recycle_adapter_niteWatch.setRecycleview_cart_list(recycleview_horizontal_nitewatch_Hawk);
         if (!cartList.isEmpty()) {
             tv_quantity_product_count.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
             tv_total_price_cart.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
@@ -53,9 +59,13 @@ public class Cart_Activity extends AppCompatActivity {
         btn_checkout_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Cart_Activity.this, Checkout_activity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                if (cartSqliteHelper.getCartQuantityCount() >= 1) {
+                    Intent i = new Intent(Cart_Activity.this, Checkout_activity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                } else {
+                    Toast.makeText(Cart_Activity.this, "your cart is empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -69,17 +79,12 @@ public class Cart_Activity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
 
     public void init() {
         tv_total_price_cart = (TextView) findViewById(R.id.tv_total_price_cart);
         btn_checkout_cart = (Button) findViewById(R.id.btn_checkout_cart);
         tv_quantity_product_count = (TextView) findViewById(R.id.tv_quantity_product_count);
         btn_contiueshopping = (Button) findViewById(R.id.btn_contiueshopping);
-        recycleview_horizontal_nitewatch_Hawk = (RecyclerView) findViewById(R.id.recycleview_horizontal_nitewatch_Hawk);
+        recycleview_horizontal_nitewatch_Hawk = (RecyclerView) findViewById(R.id.recycleview_cart_list);
     }
 }

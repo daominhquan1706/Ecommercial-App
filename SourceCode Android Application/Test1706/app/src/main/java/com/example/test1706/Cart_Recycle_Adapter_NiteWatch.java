@@ -28,6 +28,11 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
     private int currentlayout;
     private CartSqliteHelper cartSqliteHelper;
     private TextView tv_count_quantity, tv_count_price;
+    private RecyclerView recycleview_cart_list;
+
+    public void setRecycleview_cart_list(RecyclerView recycleview_cart_list) {
+        this.recycleview_cart_list = recycleview_cart_list;
+    }
 
     public boolean isNight() {
         return isNight;
@@ -85,8 +90,8 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 product.setProduct_Name(cartt.getProductName());
                 cartSqliteHelper.PlusOneQuantity(product);
                 list_data = cartSqliteHelper.getAllCarts();
-                tv_count_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
-                tv_count_quantity.setText(String.valueOf("$"+cartSqliteHelper.getCartQuantityCount()));
+                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
+                tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
 
                 notifyDataSetChanged();
             }
@@ -98,8 +103,11 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 product.setProduct_Name(cartt.getProductName());
                 cartSqliteHelper.MinusOneQuantity(product);
                 list_data = cartSqliteHelper.getAllCarts();
-                tv_count_price.setText(String.valueOf("$"+cartSqliteHelper.getCartPriceCount()));
+                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
                 tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
+                if(cartSqliteHelper.getCartQuantityCount()==0){
+                    recycleview_cart_list.setVisibility(View.GONE);
+                }
                 notifyDataSetChanged();
             }
         });

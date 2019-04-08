@@ -82,6 +82,9 @@ public class Chat_Adapter extends BaseAdapter {
         } else if (diff > 0) {
             thoigian = Math.round(diff) + " giây trước";
         }
+        else if (diff<0){
+            thoigian="vừa xong";
+        }
 
         return thoigian;
     }
@@ -90,7 +93,6 @@ public class Chat_Adapter extends BaseAdapter {
         TextView message_text;
         TextView message_user;
         TextView message_time;
-
     }
 
 }
