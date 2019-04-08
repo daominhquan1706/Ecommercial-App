@@ -81,9 +81,8 @@ public class Chat_Adapter extends BaseAdapter {
             thoigian = Math.round(diff / (60)) + " phút trước";
         } else if (diff > 0) {
             thoigian = Math.round(diff) + " giây trước";
-        }
-        else if (diff<0){
-            thoigian="vừa xong";
+        } else {
+            thoigian = "vừa xong";
         }
 
         return thoigian;
