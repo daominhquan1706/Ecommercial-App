@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@color/clearblack"
     android:gravity="end"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_message">
 
     <TextView
         android:id="@+id/message_time"
@@ -27,6 +28,7 @@
         app:cardBackgroundColor="@color/clearblack">
 
         <LinearLayout
+            android:id="@+id/layout_item_message_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/drw_edt_bg"
@@ -41,8 +43,6 @@
                 android:textColor="@color/LightBlue"
                 android:textStyle="normal|bold"
                 android:visibility="gone" />
-
-
             <TextView
                 android:id="@+id/message_text"
                 android:layout_width="wrap_content"

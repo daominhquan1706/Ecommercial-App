@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class ChatBoxMainActivity extends AppCompatActivity {
+public class Admin_Message_chat_with_user extends AppCompatActivity {
     List<ChatMessage> chatMessageList;
     List<String> mkey;
     private static int SIGN_IN_REQUEST_CODE = 1;
@@ -47,16 +47,19 @@ public class ChatBoxMainActivity extends AppCompatActivity {
     private static final String TAG = "ChatBoxMainActivity";
     Chat_Adapter customListAdapter;
     ActionBar actionBar;
+    String userUID, userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatboxmainactivity);
-
+        setContentView(R.layout.activity_admin_message_main);
+        Bundle b = getIntent().getExtras();
+        userUID = b.getString("userUID");
+        userEmail = b.getString("userEmail");
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Message with admin");
+            actionBar.setTitle(userEmail);
         }
 
         database = FirebaseDatabase.getInstance();
@@ -65,11 +68,9 @@ public class ChatBoxMainActivity extends AppCompatActivity {
         activity_chatboxmain = (RelativeLayout) findViewById(R.id.activity_chatboxmainactivity);
         btn_send_message = (FloatingActionButton) findViewById(R.id.fab);
         input = (EditText) findViewById(R.id.input);
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE);
-        } else {
-            displayChatMessage();
-        }
+
+        displayChatMessage();
+
         btn_send_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,20 +96,15 @@ public class ChatBoxMainActivity extends AppCompatActivity {
                     .child("message")
                     .push()
                     .setValue(
-                    new ChatMessage(
-                            message,
-                            FirebaseAuth.getInstance().getCurrentUser().getEmail(),
-                            System.currentTimeMillis(),
-                            "admin",
-                            FirebaseAuth.getInstance().getCurrentUser().getUid()));
+                            new ChatMessage(
+                                    message,
+                                    "admin",
+                                    System.currentTimeMillis(),
+                                    userEmail,
+                                    FirebaseAuth.getInstance().getCurrentUser().getUid()));
             input.setText("");
             customListAdapter.notifyDataSetChanged();
             scrollMyListViewToBottom();
-
-            FirebaseDatabase.getInstance().getReference()
-                    .child("chat_message")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child("emailCustomer").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }
 
     }
@@ -157,43 +153,45 @@ public class ChatBoxMainActivity extends AppCompatActivity {
 
         listOfMessage = (ListView) findViewById(R.id.list_of_message);
         chatMessageList = new ArrayList<ChatMessage>();
-        customListAdapter = new Chat_Adapter(this, chatMessageList, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        customListAdapter = new Chat_Adapter(this, chatMessageList, "admin");
         mkey = new ArrayList<String>();
         listOfMessage.setAdapter(customListAdapter);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+        if (userUID != null) {
+            myRef.child("chat_message").child(userUID).child("message").addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
+                    chatMessageList.add(itemProduct);
+                    Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
+                    customListAdapter.notifyDataSetChanged();
+                    scrollMyListViewToBottom();
+                }
 
-        myRef.child("chat_message").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("message").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
-                chatMessageList.add(itemProduct);
-                Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
-                customListAdapter.notifyDataSetChanged();
-                scrollMyListViewToBottom();
-            }
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
 
-            }
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                }
 
-            }
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
 
-            }
-        });
+        }
     }
 
     protected void hideKeyboard() {

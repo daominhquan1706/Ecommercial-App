@@ -1,10 +1,12 @@
 package com.example.test1706;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -17,11 +19,13 @@ public class Chat_Adapter extends BaseAdapter {
     private List<ChatMessage> listData;
     private LayoutInflater layoutInflater;
     private Context context;
+    private String currentUser;
 
-    public Chat_Adapter(Context aContext, List<ChatMessage> listData) {
+    public Chat_Adapter(Context aContext, List<ChatMessage> listData, String currentUser) {
         this.context = aContext;
         this.listData = listData;
         layoutInflater = LayoutInflater.from(aContext);
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -46,8 +50,8 @@ public class Chat_Adapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.message_text = (TextView) convertView.findViewById(R.id.message_text);
             holder.message_user = (TextView) convertView.findViewById(R.id.message_user);
-
-
+            holder.layout_item_message_chat = (LinearLayout) convertView.findViewById(R.id.layout_item_message_chat);
+            holder.layout_message = (LinearLayout) convertView.findViewById(R.id.layout_message);
             holder.message_time = (TextView) convertView.findViewById(R.id.message_time);
             convertView.setTag(holder);
         } else {
@@ -61,6 +65,13 @@ public class Chat_Adapter extends BaseAdapter {
         String chattime = ThoiGianChat(ChatMessage.getMessageTime());
         holder.message_time.setText(chattime);
 
+        if (ChatMessage.getMessageUser().equals(currentUser)) {
+            holder.layout_message.setGravity(Gravity.END);
+            holder.layout_item_message_chat.setBackground(context.getResources().getDrawable(R.drawable.drw_edt_bg_blue));
+        } else {
+            holder.layout_message.setGravity(Gravity.START);
+            holder.layout_item_message_chat.setBackground(context.getResources().getDrawable(R.drawable.drw_edt_bg));
+        }
         return convertView;
     }
 
@@ -89,6 +100,8 @@ public class Chat_Adapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+
+        LinearLayout layout_message, layout_item_message_chat;
         TextView message_text;
         TextView message_user;
         TextView message_time;

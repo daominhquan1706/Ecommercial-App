@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:background="@color/black_cardview_nitewatch"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:id="@+id/layout_account_message_user">
 
     <ImageView
         android:id="@+id/img_user_avatar_chat"

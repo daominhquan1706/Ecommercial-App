@@ -32,7 +32,7 @@ public class Admin extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent(Admin.this,ChatBoxMainActivity.class);
+                Intent intent1=new Intent(Admin.this,Admin_Message_Activity.class);
                 startActivity(intent1);
             }
         });

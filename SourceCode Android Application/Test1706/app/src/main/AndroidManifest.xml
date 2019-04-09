@@ -40,6 +40,10 @@
             android:name=".ChatBoxMainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
+            android:name=".Admin_Message_chat_with_user"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
             android:name=".Admin"
             android:label="Admin dashboard" />
         <activity
