@@ -35,6 +35,8 @@
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
+        <activity android:name=".ChatBoxMainActivity" />
+        <activity android:name=".chart"></activity>
         <activity android:name=".Checkout_PaymentDetails_activity" />
         <activity
             android:name=".ChatBoxMainActivity"

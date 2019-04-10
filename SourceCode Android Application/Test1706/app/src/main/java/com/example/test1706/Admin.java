@@ -36,6 +36,14 @@ public class Admin extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+        cv_doanhthu.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(Admin.this,chart.class);
+                startActivity(intent2);
+            }
+        });
 
     }
 
