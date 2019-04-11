@@ -143,12 +143,12 @@
                         android:id="@+id/img_thongTinGiaoHang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/thongtingiaohang" />
+                        android:background="@drawable/image_location" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ĐƠN HÀNG"
+                        android:text="Test Google Map"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -163,7 +163,7 @@
             android:orientation="horizontal">
 
             <android.support.v7.widget.CardView
-                android:id="@+id/cv_doanhthu"
+                android:id="@+id/cv_orders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -183,12 +183,12 @@
                         android:id="@+id/img_ic_accountmanager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_account_manger" />
+                        android:background="@drawable/thongtingiaohang" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ACCOUNT MANAGER"
+                        android:text="DS HÓA ĐƠN"
                         android:textColor="@color/white" />
                 </LinearLayout>
 

@@ -70,13 +70,6 @@
             android:value="@string/google_maps_key" />
 
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".Test_mongodb" />
-        <activity
-            android:name=".Cart_Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Register_Menu_PhoneNumber" />
         <activity android:name=".Register_Menu" />
         <activity android:name=".AdminSanPham_edit_product" />
@@ -89,8 +82,6 @@
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
-        <activity android:name=".ChatBoxMainActivity" />
-        <activity android:name=".chart"></activity>
         <activity android:name=".Checkout_PaymentDetails_activity" />
         <activity
             android:name=".ChatBoxMainActivity"
@@ -99,7 +90,6 @@
             android:name=".Admin_Message_chat_with_user"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <activity android:name=".ChatBoxMainActivity" />
         <activity android:name=".chart" />
         <activity
             android:name=".Admin"

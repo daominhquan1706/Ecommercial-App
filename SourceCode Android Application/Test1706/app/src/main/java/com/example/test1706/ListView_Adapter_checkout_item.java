@@ -47,7 +47,6 @@ public class ListView_Adapter_checkout_item extends BaseAdapter implements Filte
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.item_checkout_item, null);
             holder = new ViewHolder();
-
             holder.tv_name_checkout = (TextView) convertView.findViewById(R.id.tv_name_checkout);
             holder.tv_product_price_checkout = (TextView) convertView.findViewById(R.id.tv_product_price_checkout);
             holder.tv_total_price_checkout = (TextView) convertView.findViewById(R.id.tv_total_price_checkout);

@@ -18,11 +18,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -92,7 +89,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
         if (!message.equals("")) {
             FirebaseDatabase.getInstance().getReference()
                     .child("chat_message")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(userUID)
                     .child("message")
                     .push()
                     .setValue(
@@ -101,7 +98,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
                                     "admin",
                                     System.currentTimeMillis(),
                                     userEmail,
-                                    FirebaseAuth.getInstance().getCurrentUser().getUid()));
+                                    userUID));
             input.setText("");
             customListAdapter.notifyDataSetChanged();
             scrollMyListViewToBottom();
@@ -113,13 +110,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_sign_out:
-                AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Snackbar.make(activity_chatboxmain, "You have been signed out", Snackbar.LENGTH_SHORT).show();
-                        finish();
-                    }
-                });
+                Toast.makeText(this, "Chưa có chức năng", Toast.LENGTH_SHORT).show();
                 return true;
             case android.R.id.home:
                 onBackPressed();

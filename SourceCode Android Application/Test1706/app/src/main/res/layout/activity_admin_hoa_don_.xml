@@ -22,33 +22,13 @@
             android:layout_margin="4dp"
             android:background="@drawable/buttom_menu"
             android:text="add" />
-
-        <Button
-            android:id="@+id/btn_firebase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:background="@drawable/buttom_menu"
-            android:text="firebase" />
-
-
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/listView_admin_product_nitewatch"
+    <ListView
+        android:id="@+id/lv_order_admin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:dividerHeight="@dimen/margintop_cardview"
-        android:nestedScrollingEnabled="false"
-        android:orientation="vertical"
-        android:scrollbarFadeDuration="300"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarThumbHorizontal="@color/LightBlue"
-        android:scrollbars="horizontal"
-        card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_admin_hoadon">
-
-    </android.support.v7.widget.RecyclerView>
+    </ListView>
 </LinearLayout>

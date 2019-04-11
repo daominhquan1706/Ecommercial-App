@@ -12,6 +12,8 @@ public class Orders {
     public String status;
     public List<Cart> orderDetails;
 
+    public Orders() {
+    }
     public Orders(long creationTime, double total, String userID, String customerName, String customerAddress, String customerPhoneNumber, String status, List<Cart> orderDetails) {
         this.creationTime = creationTime;
         this.total = total;
@@ -23,8 +25,7 @@ public class Orders {
         this.orderDetails = orderDetails;
     }
 
-    public Orders() {
-    }
+
 
     public long getCreationTime() {
         return creationTime;

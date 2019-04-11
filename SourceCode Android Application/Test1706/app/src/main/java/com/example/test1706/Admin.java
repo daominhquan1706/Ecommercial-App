@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 
 public class Admin extends AppCompatActivity {
 
-    CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang;
+    CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang,cv_orders;
 
 
     @Override
@@ -34,6 +34,7 @@ public class Admin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1=new Intent(Admin.this,Admin_Message_Activity.class);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         cv_doanhthu.setOnClickListener(new View.OnClickListener(){
@@ -42,6 +43,7 @@ public class Admin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent2=new Intent(Admin.this,chart.class);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         cv_donhang.setOnClickListener(new View.OnClickListener(){
@@ -50,9 +52,18 @@ public class Admin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent2=new Intent(Admin.this,MapsActivity.class);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
+        cv_orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(Admin.this,AdminHoaDon_Activity.class);
+                startActivity(intent2);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
     }
 
     protected void hideKeyboard() {
@@ -75,5 +86,6 @@ public class Admin extends AppCompatActivity {
         cv_donhang = (CardView) findViewById(R.id.cv_donhang);
         cv_sanpham = (CardView) findViewById(R.id.cv_sanpham);
         cv_tinnhan = (CardView) findViewById(R.id.cv_tinnhan);
+        cv_orders  = (CardView) findViewById(R.id.cv_orders);
     }
 }
