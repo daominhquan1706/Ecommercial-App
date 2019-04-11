@@ -44,6 +44,14 @@ public class Admin extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+        cv_donhang.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(Admin.this,MapsActivity.class);
+                startActivity(intent2);
+            }
+        });
 
     }
 

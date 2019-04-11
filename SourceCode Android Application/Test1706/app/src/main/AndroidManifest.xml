@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test1706">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -20,6 +29,26 @@
         <activity android:name=".Admin_Message_Activity"></activity>
         <activity android:name=".Checkout_activity" />
         <activity android:name=".Test_mongodb" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
         <activity
             android:name=".Cart_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -35,7 +64,6 @@
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
-        <activity android:name=".ChatBoxMainActivity" />
         <activity android:name=".chart"></activity>
         <activity android:name=".Checkout_PaymentDetails_activity" />
         <activity
@@ -67,6 +95,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
 
             <!--
             <intent-filter>
