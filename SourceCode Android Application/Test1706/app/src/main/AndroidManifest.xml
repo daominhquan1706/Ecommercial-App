@@ -26,7 +26,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Admin_Message_Activity"></activity>
+        <activity android:name=".AdminHoaDon_Activity"></activity>
+        <activity android:name=".Admin_Message_Activity" />
         <activity android:name=".Checkout_activity" />
         <activity android:name=".Test_mongodb" />
 
@@ -88,6 +89,7 @@
             android:parentActivityName=".LoginActivity" />
         <activity android:name=".AdminSanPham_add_product" />
         <activity android:name=".AdminSanPham_Activity" />
+        <activity android:name=".ChatBoxMainActivity" />
         <activity android:name=".chart"></activity>
         <activity android:name=".Checkout_PaymentDetails_activity" />
         <activity

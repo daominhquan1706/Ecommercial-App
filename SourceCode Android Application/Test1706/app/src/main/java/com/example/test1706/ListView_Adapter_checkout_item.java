@@ -61,9 +61,9 @@ public class ListView_Adapter_checkout_item extends BaseAdapter implements Filte
         Cart cart_item = this.list_product.get(position);
         if (cart_item != null) {
             holder.tv_name_checkout.setText(cart_item.getProductName());
-            holder.tv_product_price_checkout.setText(String.valueOf((int)cart_item.getPrice()));
+            holder.tv_product_price_checkout.setText(String.valueOf((int) cart_item.getPrice()));
             holder.tv_quantity_checkout.setText(String.valueOf(cart_item.getQuantity()));
-            holder.tv_total_price_checkout.setText(String.valueOf((int)cart_item.getPrice() * cart_item.getQuantity()));
+            holder.tv_total_price_checkout.setText(String.valueOf((int) cart_item.getPrice() * cart_item.getQuantity()));
 
 
         }
