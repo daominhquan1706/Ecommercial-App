@@ -59,7 +59,7 @@ public class Admin extends AppCompatActivity {
         cv_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,AdminHoaDon_Activity.class);
+                Intent intent2=new Intent(Admin.this, Admin_HoaDon_Activity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

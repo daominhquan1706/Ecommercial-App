@@ -88,7 +88,7 @@
         <com.example.test1706.MyGridView
             android:id="@+id/listView_product_smartwatch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_below="@id/v_pager_fragment_message"
             android:layout_margin="5sp"
             android:layout_marginTop="10dp"

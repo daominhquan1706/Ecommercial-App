@@ -132,4 +132,10 @@
     <string name="my_app_id">powerr-ntmjm</string>
     <string name="title_activity_maps">Map</string>
     <string name="continue_shopping">continue shopping</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_tabbed">TestTabbed</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_admin__hoa_don_">Admin_HoaDon_Activity</string>
 </resources>
