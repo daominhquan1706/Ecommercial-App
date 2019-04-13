@@ -1,21 +1,30 @@
 package com.example.test1706;
 
-import java.util.Date;
-
 public class ChatMessage {
     private String messageUser_NguoiNhan;
     private String messageText;
     private String messageUser;
     private long messageTime;
+    private String userUID;
+
     public ChatMessage() {
     }
 
 
-    public ChatMessage(String messageText, String messageUser, long messageTime,String messageUser_NguoiNhan) {
+    public ChatMessage(String messageText, String messageUser, long messageTime, String messageUser_NguoiNhan, String userUID) {
         this.messageUser_NguoiNhan = messageUser_NguoiNhan;
         this.messageText = messageText;
         this.messageUser = messageUser;
         this.messageTime = messageTime;
+        this.userUID = userUID;
+    }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 
     public String getMessageUser_NguoiNhan() {

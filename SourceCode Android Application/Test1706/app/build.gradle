@@ -48,6 +48,9 @@ dependencies {
     implementation 'com.pusher:pusher-java-client:1.5.0'
     implementation 'com.firebaseui:firebase-ui:4.3.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    implementation'com.google.android.gms:play-services-maps:16.1.0'
+    implementation'com.google.android.gms:play-services-location:16.0.0'
     implementation'com.google.android.gms:play-services-maps:16.1.0'
     implementation'com.google.android.gms:play-services-location:16.0.0'
 

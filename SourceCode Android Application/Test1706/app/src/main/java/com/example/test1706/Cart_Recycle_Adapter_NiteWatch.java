@@ -18,8 +18,6 @@ import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Recycle_Adapter_NiteWatch.ViewHolder> {
@@ -29,6 +27,12 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
     private boolean isNight;
     private int currentlayout;
     private CartSqliteHelper cartSqliteHelper;
+    private TextView tv_count_quantity, tv_count_price;
+    private RecyclerView recycleview_cart_list;
+
+    public void setRecycleview_cart_list(RecyclerView recycleview_cart_list) {
+        this.recycleview_cart_list = recycleview_cart_list;
+    }
 
     public boolean isNight() {
         return isNight;
@@ -36,6 +40,14 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
 
     public void setNight(boolean night) {
         isNight = night;
+    }
+
+    public void setTv_count_quantity(TextView tv_count_quantity) {
+        this.tv_count_quantity = tv_count_quantity;
+    }
+
+    public void setTv_count_price(TextView tv_count_price) {
+        this.tv_count_price = tv_count_price;
     }
 
     public Cart_Recycle_Adapter_NiteWatch(Context mContext, List<Cart> list_data, int currentlayout) {
@@ -78,6 +90,9 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 product.setProduct_Name(cartt.getProductName());
                 cartSqliteHelper.PlusOneQuantity(product);
                 list_data = cartSqliteHelper.getAllCarts();
+                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
+                tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
+
                 notifyDataSetChanged();
             }
         });
@@ -88,11 +103,14 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 product.setProduct_Name(cartt.getProductName());
                 cartSqliteHelper.MinusOneQuantity(product);
                 list_data = cartSqliteHelper.getAllCarts();
+                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
+                tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
+                if(cartSqliteHelper.getCartQuantityCount()==0){
+                    recycleview_cart_list.setVisibility(View.GONE);
+                }
                 notifyDataSetChanged();
             }
         });
-
-
     }
 
     @Override
@@ -112,7 +130,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
             super(itemView);
             mImage = (ImageView) itemView.findViewById(R.id.img_product_cart);
             mName = (TextView) itemView.findViewById(R.id.tv_name_cart);
-            mPrice = (TextView) itemView.findViewById(R.id.tv_price_cart);
+            mPrice = (TextView) itemView.findViewById(R.id.tv_total_price_cart);
             mQuantity = (TextView) itemView.findViewById(R.id.edt_quantity_product_cart);
             mbtnMinus = (Button) itemView.findViewById(R.id.minus_one_product_cart);
             mbtnPlus = (Button) itemView.findViewById(R.id.plus_one_product_cart);

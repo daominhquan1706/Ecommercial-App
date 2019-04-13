@@ -29,7 +29,6 @@ public class DetailsProductActivity extends AppCompatActivity {
         Log.d(TAG, "init: đã tạo tham chiếu thành công");
 
         Bundle b = getIntent().getExtras();
-
         mName.setText(b.getString("ProductName"));
         mPrice.setText("$" + b.getInt("Price"));
         mCategory.setText(b.getString("Category"));

@@ -82,10 +82,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:background="@null"
-                        android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
+                        android:drawableStart="@drawable/ic_vpn_key_black_24dp"
                         android:drawablePadding="@dimen/drawable_padding"
                         android:hint="@string/prompt_password"
-                        android:inputType="textEmailAddress"
+                        android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="@color/white" />

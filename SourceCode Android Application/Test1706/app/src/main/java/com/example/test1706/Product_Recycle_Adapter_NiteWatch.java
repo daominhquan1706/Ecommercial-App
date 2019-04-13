@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,16 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     private static final String TAG = "Product_Recycle_Adapter";
     private boolean isNight;
     private int currentlayout;
+    private TextView textCartItemCount;
+    private AppBarLayout appBarLayout;
+
+    public void setAppBarLayout(AppBarLayout appBarLayout) {
+        this.appBarLayout = appBarLayout;
+    }
+
+    public void setTextCartItemCount(TextView textCartItemCount) {
+        this.textCartItemCount = textCartItemCount;
+    }
 
     public boolean isNight() {
         return isNight;
@@ -84,14 +96,14 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         fadeOut.setStartOffset(50);
         fadeOut.setDuration(time);
 
-        if (isNight && viewHolder.mImage.getVisibility()==View.VISIBLE) {
+        if (isNight && viewHolder.mImage.getVisibility() == View.VISIBLE) {
             viewHolder.mImage.setAnimation(fadeOut);
             viewHolder.mImage.setVisibility(View.INVISIBLE);
             viewHolder.mImageNight.setVisibility(View.VISIBLE);
             viewHolder.mImageNight.setAnimation(fadeIn);
             viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.clearblack));
 
-        } else if (!isNight && viewHolder.mImageNight.getVisibility()==View.VISIBLE){
+        } else if (!isNight && viewHolder.mImageNight.getVisibility() == View.VISIBLE) {
             viewHolder.mImageNight.setAnimation(fadeOut);
             viewHolder.mImageNight.setVisibility(View.INVISIBLE);
             viewHolder.mImage.setVisibility(View.VISIBLE);
@@ -128,11 +140,41 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             @Override
             public void onClick(View v) {
                 CartSqliteHelper cartSqliteHelper = new CartSqliteHelper(mContext);
-                cartSqliteHelper.addCart(productt);
-                Toast.makeText(mContext, "Đã thêm "+productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
+
+                if (!cartSqliteHelper.CheckExists(productt)) {
+                    cartSqliteHelper.addCart(productt);
+                } else {
+                    cartSqliteHelper.PlusOneQuantity(productt);
+                }
+                setupBadge(cartSqliteHelper.getCartQuantityCount());
+
+                final Animation slideDown_toolbar = AnimationUtils.loadAnimation(mContext, R.anim.toolbar_slidedown);
+                if(appBarLayout!=null){
+                    if(appBarLayout.getVisibility()==View.INVISIBLE){
+                        appBarLayout.setVisibility(View.VISIBLE);
+                        appBarLayout.startAnimation(slideDown_toolbar);
+                    }
+                }
+                Toast.makeText(mContext, "Đã thêm " + productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void setupBadge(int mCartItemCount) {
+
+        if (textCartItemCount != null) {
+            if (mCartItemCount == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(mCartItemCount, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
     @Override
@@ -149,14 +191,14 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-                mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
-                mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
-                mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
-                mCategory = (TextView) itemView.findViewById(R.id.tv_horizontal_category);
-                mImage = (ImageView) itemView.findViewById(R.id.img_horizontal_product);
-                mbtnView = (Button) itemView.findViewById(R.id.btnview_horizontal_nitewatch);
-                mbtnCart = (Button) itemView.findViewById(R.id.btncart_horizontal_nitewatch);
-                mImageNight = (ImageView) itemView.findViewById(R.id.img_horizontal_product_night);
+            mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
+            mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
+            mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
+            mCategory = (TextView) itemView.findViewById(R.id.tv_horizontal_category);
+            mImage = (ImageView) itemView.findViewById(R.id.img_horizontal_product);
+            mbtnView = (Button) itemView.findViewById(R.id.btnview_horizontal_nitewatch);
+            mbtnCart = (Button) itemView.findViewById(R.id.btncart_horizontal_nitewatch);
+            mImageNight = (ImageView) itemView.findViewById(R.id.img_horizontal_product_night);
         }
 
     }
