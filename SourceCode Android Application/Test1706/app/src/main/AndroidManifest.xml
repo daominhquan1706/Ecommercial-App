@@ -28,7 +28,7 @@
             android:name=".Admin_HoaDon_Activity"
             android:label="@string/title_activity_admin__hoa_don_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".AdminHoaDon_Details_activity" />
+        <activity android:name=".Admin_HoaDon_Details_activity" />
         <activity android:name=".Admin_Message_Activity" />
         <activity android:name=".Checkout_activity" />
         <activity android:name=".Test_mongodb" />

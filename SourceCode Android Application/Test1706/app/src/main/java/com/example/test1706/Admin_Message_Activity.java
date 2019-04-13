@@ -25,7 +25,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
     DatabaseReference myRef;
     List<ChatMessage> chatMessageList;
     Admin_message_account_adapter adapter;
-    List<String> userUID_List;
+    List<String> userUID_List,mkey;
     String username;
 
     @Override
@@ -41,6 +41,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
     }
 
     public void init() {
+        mkey=new ArrayList<String>();
         userUID_List = new ArrayList<String>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -78,6 +79,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                     }
                                     chatMessage1.setMessageUser(username);
                                     chatMessageList.add(chatMessage1);
+                                    mkey.add(dataSnapshot1.getKey());
                                     adapter.notifyDataSetChanged();
                                 }
                             }
@@ -119,9 +121,8 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-
-        adapter.notifyDataSetChanged();
         super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     public boolean isExistsInlist(List<String> userUID_List, String UserUID) {

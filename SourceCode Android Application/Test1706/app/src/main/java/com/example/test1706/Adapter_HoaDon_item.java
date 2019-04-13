@@ -72,7 +72,7 @@ public class Adapter_HoaDon_item extends BaseAdapter implements Filterable {
 
         Orders orders_item = this.list_orders.get(position);
         if (orders_item != null) {
-            holder.tv_position.setText(String.valueOf("#" + position));
+            holder.tv_position.setText(String.valueOf("#" + (position + 1)));
             holder.tv_total_price_orders_item.setText(String.valueOf("$" + orders_item.getTotal()));
             holder.tv_payid.setText(orders_item.getPaymentid());
             holder.tv_status.setText(orders_item.getStatus());
@@ -84,7 +84,7 @@ public class Adapter_HoaDon_item extends BaseAdapter implements Filterable {
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "onClick: đã gọi được hàm click View");
-                    Intent intent = new Intent(context, AdminHoaDon_Details_activity.class);
+                    Intent intent = new Intent(context, Admin_HoaDon_Details_activity.class);
                     Bundle b = new Bundle();
                     b.putString("PaymentId", orders_item.getPaymentid());
                     intent.putExtras(b);

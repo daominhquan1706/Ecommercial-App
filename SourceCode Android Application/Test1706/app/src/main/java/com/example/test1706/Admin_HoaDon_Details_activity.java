@@ -2,23 +2,21 @@ package com.example.test1706;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +28,10 @@ import androidx.annotation.RequiresApi;
 
 import static android.Manifest.permission.CALL_PHONE;
 
-public class AdminHoaDon_Details_activity extends AppCompatActivity {
+public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     TextView tv_total_price;
     CartSqliteHelper cartSqliteHelper;
-    TextView name_order, address_order, sdt_order;
-    ImageView btnPaynow;
+    TextView name_order, address_order, sdt_order, tv_Xac_nhan;
     ListView_Adapter_checkout_item adapter;
     MyListView lv_checkout;
     FirebaseDatabase db;
@@ -45,6 +42,7 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
     Orders orders;
     private static final String TAG = "AdminHoaDon_Details_act";
     CardView admin_details_hoadon_inputlayout_sdt_order;
+    CardView btn_Xac_nhan,btn_TuChoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,7 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
 
         init();
         Bundle b = getIntent().getExtras();
-
+        lv_checkout.setVisibility(View.VISIBLE);
         if (b != null) {
             paymentId = b.getString("PaymentId");
         } else {
@@ -68,7 +66,7 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
                 orders = dataSnapshot.getValue(Orders.class);
 
                 if (orders != null) {
-                    adapter = new ListView_Adapter_checkout_item(AdminHoaDon_Details_activity.this, orders.getOrderDetails());
+                    adapter = new ListView_Adapter_checkout_item(Admin_HoaDon_Details_activity.this, orders.getOrderDetails());
                     lv_checkout.setAdapter(adapter);
 
                     adapter.notifyDataSetChanged();
@@ -82,6 +80,8 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
                         actionBar.setDisplayHomeAsUpEnabled(true);
                         actionBar.setTitle(paymentId);
                     }
+
+                    setupbtn_Xac_nhan(orders.getStatus());
                 }
 
             }
@@ -98,7 +98,7 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_CALL);
-                i.setData(Uri.parse("tel:"+orders.getCustomerPhoneNumber()));
+                i.setData(Uri.parse("tel:" + orders.getCustomerPhoneNumber()));
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     startActivity(i);
                 } else {
@@ -106,15 +106,78 @@ public class AdminHoaDon_Details_activity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
+
+    private void setupbtn_Xac_nhan(String status) {
+        if (status.equals("Chờ xác nhận")) {
+            tv_Xac_nhan.setText("Xác nhận");
+            btn_TuChoi.setVisibility(View.VISIBLE);
+            btn_TuChoi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.child("Orders").child(paymentId).child("status").setValue("Admin hủy").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            finish();
+                        }
+                    });
+                }
+            });
+            btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.child("Orders").child(paymentId).child("status").setValue("Chờ lấy hàng").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            finish();
+                        }
+                    });
+                }
+            });
+        } else if (status.equals("Chờ lấy hàng")) {
+            tv_Xac_nhan.setText("Lấy Hàng");
+            btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.child("Orders").child(paymentId).child("status").setValue("Đang giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            finish();
+                        }
+                    });
+                }
+            });
+        } else if (status.equals("Đang giao")) {
+            tv_Xac_nhan.setText("Đã giao");
+            btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.child("Orders").child(paymentId).child("status").setValue("Đã giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            finish();
+                        }
+                    });
+                }
+            });
+        } else {
+            btn_Xac_nhan.setVisibility(View.GONE);
+        }
+
+    }
+
 
     public void init() {
         orders = new Orders();
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
+        btn_TuChoi= (CardView) findViewById(R.id.btn_TuChoi);
         admin_details_hoadon_inputlayout_sdt_order = (CardView) findViewById(R.id.cv_phone_admin_order);
         lv_checkout = (MyListView) findViewById(R.id.admin_details_hoadon_lv_checkout);
-        btnPaynow = (ImageView) findViewById(R.id.admin_details_hoadon_btnPaynow);
+        btn_Xac_nhan = (CardView) findViewById(R.id.btn_Xac_nhan);
+        tv_Xac_nhan = (TextView) findViewById(R.id.tv_Xac_nhan);
         tv_total_price = (TextView) findViewById(R.id.admin_details_hoadon_tv_total_price);
         name_order = (TextView) findViewById(R.id.admin_details_hoadon_name_order);
         address_order = (TextView) findViewById(R.id.admin_details_hoadon_address_order);

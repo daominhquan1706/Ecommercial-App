@@ -65,8 +65,6 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-
         ChatMessage chat_item = this.list_product.get(position);
         if (chat_item != null) {
             holder.tv_username.setText(chat_item.getMessageUser());
