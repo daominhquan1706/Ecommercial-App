@@ -61,7 +61,10 @@ public class Admin_Message_Activity extends AppCompatActivity {
                         myRef.child("chat_message").child(userUID).child("emailCustomer").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                username = dataSnapshot.getValue().toString();
+                                if(dataSnapshot.getValue()!=null){
+                                    username = dataSnapshot.getValue().toString();
+                                }
+
                             }
 
                             @Override
