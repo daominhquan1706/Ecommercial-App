@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.r0adkll.slidr.Slidr;
+
 public class Profile_Account_Activity extends AppCompatActivity {
 
     @Override

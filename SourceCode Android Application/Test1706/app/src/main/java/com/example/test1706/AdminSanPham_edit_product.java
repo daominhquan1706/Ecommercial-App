@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.r0adkll.slidr.Slidr;
 
 public class AdminSanPham_edit_product extends AppCompatActivity {
     EditText tv_productname, tv_price, tv_url_image, tv_category, tv_url_image_night, tv_quantity, tv_discount;
@@ -28,7 +29,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_product);
-
+        Slidr.attach(this);
 
     }
 

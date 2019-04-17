@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.r0adkll.slidr.Slidr;
 
 import androidx.annotation.RequiresApi;
 
@@ -48,7 +49,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_hoa_don__details_activity);
-
+        Slidr.attach(this);
         init();
         Bundle b = getIntent().getExtras();
         lv_checkout.setVisibility(View.VISIBLE);

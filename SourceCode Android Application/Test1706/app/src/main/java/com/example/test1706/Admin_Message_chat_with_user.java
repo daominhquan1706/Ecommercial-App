@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +51,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_message_main);
+        Slidr.attach(this);
         Bundle b = getIntent().getExtras();
         userUID = b.getString("userUID");
         userEmail = b.getString("userEmail");
@@ -202,6 +204,11 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
                 listOfMessage.setSelection(customListAdapter.getCount() - 1);
             }
         });
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
 

@@ -8,6 +8,8 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.r0adkll.slidr.Slidr;
+
 public class Admin extends AppCompatActivity {
 
     CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang,cv_orders;
@@ -17,6 +19,8 @@ public class Admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
+
+        Slidr.attach(this);
 
         initAdmin();
         cv_sanpham.setOnClickListener(new View.OnClickListener() {

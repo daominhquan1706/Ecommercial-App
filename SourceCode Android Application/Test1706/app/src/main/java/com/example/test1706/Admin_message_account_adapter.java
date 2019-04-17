@@ -80,6 +80,7 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
                     b.putString("userEmail", chat_item.getMessageUser());
                     intent.putExtras(b);
                     context.startActivity(intent);
+
                     Log.d(TAG, "onClick: đã mở được trang details");
                 }
             });

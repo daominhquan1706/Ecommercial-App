@@ -14,5 +14,4 @@
     android:scrollbars="horizontal"
     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
     tools:listitem="@layout/layout_item_watch_nitewatch">
-
 </android.support.v7.widget.RecyclerView>
