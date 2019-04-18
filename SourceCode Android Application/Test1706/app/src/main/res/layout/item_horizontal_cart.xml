@@ -5,10 +5,12 @@
     android:layout_height="wrap_content"
     android:background="@color/black_cardview_nitewatch"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:gravity="center">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView

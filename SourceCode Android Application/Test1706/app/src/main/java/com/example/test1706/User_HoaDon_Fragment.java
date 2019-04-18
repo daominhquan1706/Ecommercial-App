@@ -36,7 +36,7 @@ public class User_HoaDon_Fragment extends Fragment {
     List<String> mkey;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    String UserEmail;
+    String UserUID;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,15 +52,15 @@ public class User_HoaDon_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
         if(currentUser==null){
-            UserEmail = "";
+            UserUID = "";
         }
         else{
-            UserEmail = currentUser.getEmail();
+            UserUID = currentUser.getUid();
         }
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) && Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getUserID().equals(UserEmail)) {
+                if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) && Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getUserID().equals(UserUID)) {
                     list.add(dataSnapshot.getValue(Orders.class));
                     mkey.add(dataSnapshot.getKey());
                     Log.d(TAG, "onDataChange: dataSnapshot1.getKey() : " + dataSnapshot.getKey());

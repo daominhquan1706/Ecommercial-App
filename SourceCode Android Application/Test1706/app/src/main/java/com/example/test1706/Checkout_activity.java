@@ -150,7 +150,7 @@ public class Checkout_activity extends AppCompatActivity {
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
-                orders.setUserID(currentUser.getEmail());
+                orders.setUserID(currentUser.getUid());
             }
             List<Cart> orderDetails = new ArrayList<Cart>();
             for (Cart item : cartSqliteHelper.getAllCarts()) {

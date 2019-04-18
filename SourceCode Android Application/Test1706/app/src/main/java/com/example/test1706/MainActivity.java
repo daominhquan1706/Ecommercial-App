@@ -306,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                 tv_email_nav_header.setText(getString(R.string.unknow_account));
+                Anonymous();
                 updateUI();
                 break;
             case R.id.nav_user_order_history:
@@ -338,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void updateUI() {
         currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser.getEmail() != "") {
             Log.d("UPDATE UI ACCOUNT", "UpdateUI:  " + currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
             Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
@@ -352,6 +353,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav_logout.setVisible(false);
             nav_login.setVisible(true);
         }
+    }
+    public void Anonymous(){
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -388,24 +409,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startService(new Intent(this, NotificationService.class));
     }
 
-    public void Anonymous(){
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
 
-                        // ...
-                    }
-                });
-    }
 }

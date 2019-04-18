@@ -62,7 +62,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:4.6.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.6.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:4.6.0'
-
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:0.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
