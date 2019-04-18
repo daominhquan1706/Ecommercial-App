@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
     <application
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -24,10 +23,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MapBoxActivity"></activity>
         <activity
             android:name=".Admin_HoaDon_Activity"
             android:label="@string/title_activity_admin__hoa_don_"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".User_HoaDon_Activity"
+            android:label="@string/title_activity_admin__hoa_don_"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin_HoaDon_Details_activity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
@@ -56,11 +60,10 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Cart_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".Register_Menu_PhoneNumber"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
@@ -77,25 +80,30 @@
         <activity
             android:name=".LoginActivity_ForgotPassword"
             android:parentActivityName=".LoginActivity" />
-        <activity android:name=".AdminSanPham_add_product"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
-        <activity android:name=".AdminSanPham_Activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
-        <activity android:name=".Checkout_PaymentDetails_activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
+        <activity
+            android:name=".AdminSanPham_add_product"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
+        <activity
+            android:name=".AdminSanPham_Activity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
+        <activity
+            android:name=".Checkout_PaymentDetails_activity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".ChatBoxMainActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".Admin_Message_chat_with_user"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
-        <activity android:name=".chart"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
+            android:theme="@style/AppTheme.SlidrActivityTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".chart"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Admin"
             android:label="Admin dashboard"
-            android:theme="@style/AppTheme.SlidrActivityTheme"/>
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashscreenTheme">
@@ -126,6 +134,7 @@
             </intent-filter>
             -->
         </activity>
+
         <service
             android:name=".NotificationService"
             android:label="@string/app_name">

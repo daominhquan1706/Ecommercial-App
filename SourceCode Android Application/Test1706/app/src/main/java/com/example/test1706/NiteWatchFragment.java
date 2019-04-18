@@ -33,10 +33,13 @@ import android.widget.VideoView;
 
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -47,7 +50,7 @@ public class NiteWatchFragment extends Fragment {
 
     RecyclerView listView;
     Product_Recycle_Adapter_NiteWatch productadapter;
-
+    FirebaseRecyclerAdapter<Product, MenuViewHolder> menuAdapter;
 
     LinearLayout linearLayout, linearLayoutDisable;
     ScrollView scrollView;
@@ -137,7 +140,6 @@ public class NiteWatchFragment extends Fragment {
         product_horizontal_adapter_Mx10.setAppBarLayout(appBarLayout);
 
 
-
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +193,27 @@ public class NiteWatchFragment extends Fragment {
         v_page_massage.setAdapter(adapter);
         tabLayout.setupWithViewPager(v_page_massage, true);
 
+        Query query = FirebaseDatabase.getInstance().getReference("/NiteWatch");
+        FirebaseRecyclerOptions<Product> options =
+                new FirebaseRecyclerOptions.Builder<Product>()
+                        .setQuery(query, Product.class)
+                        .build();
+
+        menuAdapter = new FirebaseRecyclerAdapter<Product, MenuViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull Product model) {
+                    holder.mName.setText(model.getProduct_Name());
+            }
+
+
+            @NonNull
+            @Override
+            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return null;
+            }
+        };
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.list_category_nitewatch);
+        recyclerView.setAdapter(menuAdapter);
 
         //productList_Hawk = getProductdata();
         mkey_Alpha = new ArrayList<String>();
@@ -230,7 +253,7 @@ public class NiteWatchFragment extends Fragment {
 
 
         //vertical recycle view
-        productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Hawk, R.layout.layout_item_watch_nitewatch);
+        productadapter = new Product_Recycle_Adapter_NiteWatch(getActivity(), productList_Hawk, R.layout.item_layout_watch_nitewatch);
         listView.setAdapter(productadapter);
 
         getlist_watch("ALPHA", productList_Alpha, mkey_Alpha, product_horizontal_adapter_Alpha);
@@ -423,5 +446,16 @@ public class NiteWatchFragment extends Fragment {
         list_data.add(dongho2);
         list_data.add(dongho3);
         return list_data;
+    }
+
+    public class MenuViewHolder extends RecyclerView.ViewHolder {
+        TextView mName;
+
+        public MenuViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mName = (TextView) itemView.findViewById(R.id.tv_menu_nitewatch_category);
+
+        }
+
     }
 }

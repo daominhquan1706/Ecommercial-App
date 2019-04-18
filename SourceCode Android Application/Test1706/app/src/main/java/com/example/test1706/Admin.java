@@ -54,7 +54,7 @@ public class Admin extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,MapsActivity.class);
+                Intent intent2=new Intent(Admin.this,MapBoxActivity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

@@ -24,6 +24,8 @@ android {
 }
 repositories {
     maven { url "https://jitpack.io" }
+    mavenCentral()
+
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -49,12 +51,17 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui:4.3.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
-    implementation'com.google.android.gms:play-services-maps:16.1.0'
-    implementation'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     //thư viện vuốt góc màn hình để trở về activity trước
     implementation 'com.r0adkll:slidableactivity:2.0.6'
-
+    //bản đồ Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.3.2'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-core:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:4.6.0'
 
 }
 

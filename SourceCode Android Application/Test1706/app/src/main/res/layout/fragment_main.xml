@@ -96,7 +96,7 @@
             android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:verticalSpacing="10dp"
-            tools:listitem="@layout/layout_item_watch_smartwatch">
+            tools:listitem="@layout/item_layout_watch_smartwatch">
 
         </com.example.test1706.MyGridView>
     </LinearLayout>

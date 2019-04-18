@@ -26,7 +26,8 @@
             android:layout_height="230dp"
             android:background="@drawable/radial_background"
             android:scaleType="fitCenter"
-            android:src="@drawable/dongho_1_night" />
+            android:src="@drawable/dongho_1_night"
+            android:contentDescription="@string/imageproduct" />
 
     </RelativeLayout>
 

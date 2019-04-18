@@ -14,9 +14,9 @@
         <ImageView
             android:id="@+id/img_product_cart"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="300dp"
             android:background="@drawable/radial_background"
-            android:scaleType="fitCenter"
+            android:scaleType="centerInside"
             android:src="@drawable/dongho_1" />
 
     </RelativeLayout>

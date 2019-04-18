@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_NiteWatch"
-            android:icon="@drawable/ic_message"
-            android:title="NiteWatch" />
-        <item
-            android:visible="false"
-            android:id="@+id/nav_mainpage"
-            android:icon="@drawable/ic_message"
-            android:title="SmartWatch" />
-
-
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/ic_settings"
+            android:title="Admin" />
     </group>
-    <item android:title="Demo function">
+    <item android:title="User function">
         <menu>
+
             <item
-                android:id="@+id/nav_admin"
-                android:icon="@drawable/ic_settings"
-                android:title="Admin" />
-            <item
-                app:actionLayout="@layout/spinner_item_dark"
                 android:id="@+id/nav_user_chat"
                 android:icon="@drawable/ic_message_black_24dp"
-                android:title="Chat message" />
+                android:title="Chat message"
+                app:actionLayout="@layout/spinner_item_dark" />
+            <item
+                android:id="@+id/nav_user_order_history"
+                android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+                android:title="My Orders"
+                app:actionLayout="@layout/spinner_item_dark" />
+            <item
+                android:id="@+id/nav_viewed_products"
+                android:icon="@drawable/ic_remove_red_eye_black_24dp"
+                android:title="Viewed products"
+                app:actionLayout="@layout/spinner_item_dark" />
 
         </menu>
 
     </item>
-
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_account_profile"
+                android:title="Profile"
+                app:actionLayout="@layout/spinner_item_dark" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_vpn_key_black_24dp"
+                android:title="Login"
+                app:actionLayout="@layout/spinner_item_dark" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_arrow_back_black_24dp"
+                android:title="Log out"
+                app:actionLayout="@layout/spinner_item_dark" />
+        </menu>
+    </item>
 </menu>

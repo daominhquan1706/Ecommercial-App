@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -33,6 +32,9 @@ import android.widget.Toast;
 
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser;
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
-    Button btn_login, btn_profile, btn_logout;
+    MenuItem nav_login, nav_profile, nav_logout;
     private static final String TAG = "MainActivity";
     Context mContext;
     FirebaseDatabase database;
@@ -94,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     fragmentnitewatch).commit();
-            navigationView.setCheckedItem(R.id.nav_NiteWatch);
         }
 
         mkey = new ArrayList<String>();
@@ -123,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         fragmentnitewatch = new NiteWatchFragment();
@@ -232,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-
         return true;
     }
 
@@ -257,68 +256,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+
+
+        return true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
-        btn_login = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_login);
-        btn_profile = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_profile);
-        btn_logout = (Button) navigationView.getHeaderView(0).findViewById(R.id.btn_logout);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mAuth.getCurrentUser() == null) {
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                } else {
-                    Toast.makeText(MainActivity.this, mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        btn_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*FirebaseAuth.getInstance().signOut();
-                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
-                tv_email_nav_header.setText(getString(R.string.unknow_account));
-                btn_profile.setVisibility(View.INVISIBLE);
-                btn_login.setVisibility(View.VISIBLE);*/
 
-                Intent intent_profile = new Intent(MainActivity.this, Profile_Account_Activity.class);
-                startActivity(intent_profile);
-
-            }
-        });
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
-                tv_email_nav_header.setText(getString(R.string.unknow_account));
-                btn_profile.setVisibility(View.INVISIBLE);
-                btn_logout.setVisibility(View.INVISIBLE);
-                btn_login.setVisibility(View.VISIBLE);
-            }
-        });
+        nav_login = navigationView.getMenu().findItem(R.id.nav_login);
+        nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
+        nav_profile = navigationView.getMenu().findItem(R.id.nav_profile);
         updateUI();
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
-            case R.id.nav_mainpage:
-                Intent testAdmin = new Intent(getApplicationContext(), Test_mongodb.class);
-                startActivity(testAdmin);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                break;
-            case R.id.nav_NiteWatch:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NiteWatchFragment()).commit();
-                drawer.closeDrawer(GravityCompat.START);
-                break;
             case R.id.nav_admin:
                 Intent intention = new Intent(getApplicationContext(), Admin.class);
                 startActivity(intention);
@@ -329,12 +292,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intention_chat);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
-
+            case R.id.nav_login:
+                Intent intention_login = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intention_login);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.nav_profile:
+                Intent intent_profile = new Intent(getApplicationContext(), Profile_Account_Activity.class);
+                startActivity(intent_profile);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
+                tv_email_nav_header.setText(getString(R.string.unknow_account));
+                updateUI();
+                break;
+            case R.id.nav_user_order_history:
+                Intent intent_order_user = new Intent(getApplicationContext(), User_HoaDon_Activity.class);
+                startActivity(intent_order_user);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
-
-
         return true;
     }
 
@@ -351,8 +331,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onRestart() {
         super.onRestart();
         updateUI();
+        /*
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_mainpage);
+        navigationView.setCheckedItem(R.id.nav_mainpage);*/
     }
 
     private void updateUI() {
@@ -361,14 +342,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.d("UPDATE UI ACCOUNT", "UpdateUI:  " + currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
             Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
-            btn_profile.setVisibility(View.VISIBLE);
-            btn_logout.setVisibility(View.VISIBLE);
-            btn_login.setVisibility(View.GONE);
+            nav_profile.setVisible(true);
+            nav_logout.setVisible(true);
+            nav_login.setVisible(false);
         } else {
+            Anonymous();
             tv_email_nav_header.setText(getString(R.string.unknow_account));
-            btn_profile.setVisibility(View.GONE);
-            btn_logout.setVisibility(View.GONE);
-            btn_login.setVisibility(View.VISIBLE);
+            nav_profile.setVisible(false);
+            nav_logout.setVisible(false);
+            nav_login.setVisible(true);
         }
     }
 
@@ -404,5 +386,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         startService(new Intent(this, NotificationService.class));
+    }
+
+    public void Anonymous(){
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 }

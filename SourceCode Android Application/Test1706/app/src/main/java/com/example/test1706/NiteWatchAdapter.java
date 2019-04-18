@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.Product;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class NiteWatchAdapter extends BaseAdapter implements Filterable {
 
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.layout_item_watch_nitewatch, null);
+            convertView = layoutInflater.inflate(R.layout.item_layout_watch_nitewatch, null);
             holder = new ViewHolder();
             holder.mImage = (ImageView) convertView.findViewById(R.id.img_product);
             holder.tvName = (TextView) convertView.findViewById(R.id.txt_product_name);

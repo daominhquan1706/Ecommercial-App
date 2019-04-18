@@ -46,7 +46,7 @@ public class ProductAdapter extends BaseAdapter {
 
 
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.layout_item_watch_smartwatch, null);
+            convertView = layoutInflater.inflate(R.layout.item_layout_watch_smartwatch, null);
             holder = new ViewHolder();
             holder.mImage = (ImageView) convertView.findViewById(R.id.img_product);
             holder.tvName = (TextView) convertView.findViewById(R.id.txt_product_name);
