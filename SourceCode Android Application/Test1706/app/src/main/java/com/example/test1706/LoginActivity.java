@@ -199,7 +199,9 @@ public class LoginActivity extends AppCompatActivity {
     public void openActivityAnimation() {
         Intent intent = new Intent(this, Register_Menu.class);
         startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     protected void hideKeyboard() {

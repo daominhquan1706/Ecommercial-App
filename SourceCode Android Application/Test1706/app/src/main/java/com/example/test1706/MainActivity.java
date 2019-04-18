@@ -46,6 +46,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import timber.log.Timber;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout frame_container;
@@ -101,9 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mkey = new ArrayList<String>();
         list_data = new ArrayList<Product>();
         getProductdata();
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-
 
         listView_search.setAdapter(productadapter);
         listView_search.setDividerHeight(10);
@@ -114,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view.bringToFront();
 
 
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
     }
 
 
@@ -259,7 +260,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onPrepareOptionsMenu(Menu menu) {
 
 
-
         return true;
     }
 
@@ -269,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
-
 
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
@@ -306,8 +305,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
                 tv_email_nav_header.setText(getString(R.string.unknow_account));
-                Anonymous();
-                updateUI();
+                nav_profile.setVisible(false);
+                nav_logout.setVisible(false);
+                nav_login.setVisible(true);
                 break;
             case R.id.nav_user_order_history:
                 Intent intent_order_user = new Intent(getApplicationContext(), User_HoaDon_Activity.class);
@@ -318,6 +318,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(menuItem.getItemId());
         return true;
     }
+
+    private void updateUI() {
+        currentUser=mAuth.getCurrentUser();
+        if (currentUser!=null) {
+            tv_email_nav_header.setText(getString(R.string.unknow_account));
+            Timber.d("UpdateUI:  %s", currentUser.getEmail());
+            tv_email_nav_header.setText(currentUser.getEmail());
+            Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
+            nav_profile.setVisible(true);
+            nav_logout.setVisible(true);
+            nav_login.setVisible(false);
+        } else {
+            tv_email_nav_header.setText(getString(R.string.unknow_account));
+            nav_profile.setVisible(false);
+            nav_logout.setVisible(false);
+            nav_login.setVisible(true);
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -337,43 +357,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setCheckedItem(R.id.nav_mainpage);*/
     }
 
-    private void updateUI() {
-        currentUser = mAuth.getCurrentUser();
-        if (currentUser.getEmail() != "") {
-            Log.d("UPDATE UI ACCOUNT", "UpdateUI:  " + currentUser.getEmail());
-            tv_email_nav_header.setText(currentUser.getEmail());
-            Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
-            nav_profile.setVisible(true);
-            nav_logout.setVisible(true);
-            nav_login.setVisible(false);
-        } else {
-            Anonymous();
-            tv_email_nav_header.setText(getString(R.string.unknow_account));
-            nav_profile.setVisible(false);
-            nav_logout.setVisible(false);
-            nav_login.setVisible(true);
-        }
-    }
-    public void Anonymous(){
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
-                    }
-                });
-    }
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);

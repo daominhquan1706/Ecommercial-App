@@ -24,7 +24,6 @@
             android:id="@+id/img_horizontal_product_night"
             android:layout_width="wrap_content"
             android:layout_height="230dp"
-            android:background="@drawable/radial_background"
             android:scaleType="fitCenter"
             android:src="@drawable/dongho_1_night"
             android:contentDescription="@string/imageproduct" />
