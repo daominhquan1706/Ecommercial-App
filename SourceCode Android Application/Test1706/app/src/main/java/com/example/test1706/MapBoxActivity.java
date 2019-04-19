@@ -10,7 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
  * and adds beautiful UI into your Android project.
  */
 public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+    private static final int MENU_ITEM_ITEM1 = 1;
     private static final String TAG = "MapBoxActivity";
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private MapView mapView;
@@ -96,7 +98,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private MapboxDirections client;
     private DirectionsRoute currentRoute;
-    private TextView tvDistance,tvDurationMapbox;
+    private TextView tvDistance, tvDurationMapbox,tvTinhTienShip;
     public Point currentLocation;
     public Point huflitLocation;
     public Style stylee;
@@ -121,11 +123,33 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
         tvDurationMapbox = (TextView) findViewById(R.id.tvDurationMapbox);
         tvDistance = (TextView) findViewById(R.id.tvDistanceMapbox);
-
+        tvTinhTienShip= (TextView) findViewById(R.id.tvTinhTienShip);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuItem searchLocation_menuItem = menu.add(0, MENU_ITEM_ITEM1, 0, "Search");
+        searchLocation_menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        searchLocation_menuItem.setIcon(R.drawable.ic_search_black_24dp);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case MENU_ITEM_ITEM1:
+                openSearchActivity();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -135,8 +159,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 stylee = style;
-
-                initSearchFab();
 
                 addUserLocations();
 
@@ -252,22 +274,17 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         }
     }
 
-    private void initSearchFab() {
-        findViewById(R.id.select_location_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new PlaceAutocomplete.IntentBuilder()
-                        .accessToken(Mapbox.getAccessToken())
-                        .placeOptions(PlaceOptions.builder()
-                                .backgroundColor(Color.parseColor("#EEEEEE"))
-                                .limit(10)
-                                .addInjectedFeature(home)
-                                .addInjectedFeature(work)
-                                .build(PlaceOptions.MODE_CARDS))
-                        .build(MapBoxActivity.this);
-                startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
-            }
-        });
+    private void openSearchActivity() {
+        Intent intent = new PlaceAutocomplete.IntentBuilder()
+                .accessToken(Mapbox.getAccessToken())
+                .placeOptions(PlaceOptions.builder()
+                        .backgroundColor(Color.parseColor("#EEEEEE"))
+                        .limit(10)
+                        .addInjectedFeature(home)
+                        .addInjectedFeature(work)
+                        .build(PlaceOptions.MODE_CARDS))
+                .build(MapBoxActivity.this);
+        startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
     }
 
     private void addUserLocations() {
@@ -463,10 +480,11 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
                 // Get the directions route
                 currentRoute = response.body().routes().get(0);
-                tvDistance.setText(String.valueOf(round(currentRoute.distance()/1000,1)+" km"));
-                tvDurationMapbox.setText(String.valueOf(round((currentRoute.duration()/60),0)+"giò"));
+                tvDistance.setText(String.valueOf(round(currentRoute.distance() / 1000, 1) + " km"));
+                tvDurationMapbox.setText(String.valueOf(round((currentRoute.duration() / 60), 0) + " phút"));
+                tvTinhTienShip.setText(String.valueOf("$"+TinhTienShip(currentRoute.distance()/1000)));
                 // Make a toast which displays the route's distance
-                Toast.makeText(MapBoxActivity.this, String.format("directions_activity_toast_message",
+                Toast.makeText(MapBoxActivity.this, String.format("find location success !",
                         currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
                 if (style.isFullyLoaded()) {
@@ -491,6 +509,27 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
             }
         });
     }
+
+    public static int TinhTienShip(Double km) {
+        int distance = km.intValue();
+
+        if (1 <= distance && distance <= 4) {
+            return 20;
+        } else if (4 <= distance && distance <= 6) {
+            return 25;
+        } else if (6 <= distance && distance <= 9) {
+            return 30;
+        } else if (8 <= distance && distance <= 10) {
+            return 35;
+        } else if (10 <= distance && distance <= 12) {
+            return 40;
+        } else if (12 <= distance && distance <= 14) {
+            return 45;
+        }else {
+            return 50;
+        }
+    }
+
     public static double round(Double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -499,6 +538,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
     // Add the mapView lifecycle to the activity's lifecycle methods
     @Override
     public void onResume() {
