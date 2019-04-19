@@ -1,7 +1,6 @@
 package com.example.test1706;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,7 +32,7 @@ public class Product_Recycle_Adapter extends RecyclerView.Adapter<Product_Recycl
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Log.d(TAG,"onCreateViewHolder: đã được gọi ");
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_item_watch_smartwatch,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_layout_watch_smartwatch,viewGroup,false);
 
         ViewHolder holder = new ViewHolder(view);
         return holder;

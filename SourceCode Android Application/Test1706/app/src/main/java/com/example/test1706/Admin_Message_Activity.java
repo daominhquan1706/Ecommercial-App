@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,15 @@ public class Admin_Message_Activity extends AppCompatActivity {
     DatabaseReference myRef;
     List<ChatMessage> chatMessageList;
     Admin_message_account_adapter adapter;
-    List<String> userUID_List;
+    List<String> userUID_List,mkey;
     String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin__message_);
+        setContentView(R.layout.activity_admin_message_);
+
+        Slidr.attach(this);
         init();
         chatMessageList = new ArrayList<ChatMessage>();
         displayChatMessage();
@@ -41,11 +44,13 @@ public class Admin_Message_Activity extends AppCompatActivity {
     }
 
     public void init() {
+        mkey=new ArrayList<String>();
         userUID_List = new ArrayList<String>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         cartSqliteHelper = new CartSqliteHelper(this);
         lv_user_chat_pick = (MyListView) findViewById(R.id.lv_user_chat_pick);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     private void displayChatMessage() {
@@ -60,7 +65,10 @@ public class Admin_Message_Activity extends AppCompatActivity {
                         myRef.child("chat_message").child(userUID).child("emailCustomer").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                username = dataSnapshot.getValue().toString();
+                                if(dataSnapshot.getValue()!=null){
+                                    username = dataSnapshot.getValue().toString();
+                                }
+
                             }
 
                             @Override
@@ -78,6 +86,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                     }
                                     chatMessage1.setMessageUser(username);
                                     chatMessageList.add(chatMessage1);
+                                    mkey.add(dataSnapshot1.getKey());
                                     adapter.notifyDataSetChanged();
                                 }
                             }
@@ -119,9 +128,8 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-
-        adapter.notifyDataSetChanged();
         super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     public boolean isExistsInlist(List<String> userUID_List, String UserUID) {
@@ -133,6 +141,10 @@ public class Admin_Message_Activity extends AppCompatActivity {
         }
         return isExistsInlist;
     }
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 
 }

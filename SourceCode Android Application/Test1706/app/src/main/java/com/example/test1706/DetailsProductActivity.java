@@ -9,18 +9,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrInterface;
 
 public class DetailsProductActivity extends AppCompatActivity {
     private static final String TAG = "DetailsProductActivity";
     TextView mName, mPrice, mCategory;
     ImageView mImage;
     Context mContext;
+    private SlidrInterface slidr;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_product);
 
+        slidr = Slidr.attach(this);
 
         mName = (TextView) findViewById(R.id.tv_productname_details);
         mCategory = (TextView) findViewById(R.id.tv_productcategory_details);

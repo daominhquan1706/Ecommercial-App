@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.r0adkll.slidr.Slidr;
 
 public class LoginActivity_ForgotPassword extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class LoginActivity_ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+        Slidr.attach(this);
         mEmailView = (TextView) findViewById(R.id.email);
         btn_forgotpassword = (Button) findViewById(R.id.accept_forgot_password);
         firebaseAuth = FirebaseAuth.getInstance();

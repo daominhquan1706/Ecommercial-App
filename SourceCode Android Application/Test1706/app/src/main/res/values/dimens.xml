@@ -9,4 +9,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="margintop_cardview">13dp</dimen>
     <dimen name="drawable_padding">10dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

@@ -8,6 +8,8 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.r0adkll.slidr.Slidr;
+
 public class Admin extends AppCompatActivity {
 
     CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang,cv_orders;
@@ -17,6 +19,8 @@ public class Admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
+
+        Slidr.attach(this);
 
         initAdmin();
         cv_sanpham.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +54,7 @@ public class Admin extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,MapsActivity.class);
+                Intent intent2=new Intent(Admin.this,MapBoxActivity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -59,7 +63,7 @@ public class Admin extends AppCompatActivity {
         cv_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,AdminHoaDon_Activity.class);
+                Intent intent2=new Intent(Admin.this, Admin_HoaDon_Activity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

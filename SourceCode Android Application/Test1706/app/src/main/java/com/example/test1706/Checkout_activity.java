@@ -144,12 +144,13 @@ public class Checkout_activity extends AppCompatActivity {
             orders.setCustomerAddress(address_order.getText().toString());
             orders.setCustomerName(name_order.getText().toString());
             orders.setCustomerPhoneNumber(sdt_order.getText().toString());
-            orders.setStatus(response.getString("state"));
+            orders.setStatus("Chờ xác nhận");
             orders.setTotal(cartSqliteHelper.getCartPriceCount());
+            orders.setPaymentid(id);
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
-                orders.setUserID(currentUser.getEmail());
+                orders.setUserID(currentUser.getUid());
             }
             List<Cart> orderDetails = new ArrayList<Cart>();
             for (Cart item : cartSqliteHelper.getAllCarts()) {

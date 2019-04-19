@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Register_Menu extends AppCompatActivity {
     Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
@@ -51,7 +52,7 @@ public class Register_Menu extends AppCompatActivity {
         btn_google_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                if (FirebaseAuth.getInstance().getCurrentUser()==null) {
                     startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE_GOOGLE);
 
                 } else {
@@ -67,9 +68,11 @@ public class Register_Menu extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_REQUEST_CODE_GOOGLE) {
             if (resultCode == RESULT_OK) {
+
                 Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
                 Intent i = new Intent(Register_Menu.this,MainActivity.class);
                 startActivity(i);
+                finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
                 Snackbar.make(relativeLayout, "TRY AGAIN !!!!", Snackbar.LENGTH_SHORT).show();
@@ -98,13 +101,14 @@ public class Register_Menu extends AppCompatActivity {
     }
 
     public void init() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-            Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
-            Intent i = new Intent(Register_Menu.this,MainActivity.class);
-            startActivity(i);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser  != null ){
+                Intent i = new Intent(Register_Menu.this,MainActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         }
-        
+
         relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
         btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);

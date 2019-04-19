@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sanpham);
-
+        Slidr.attach(this);
         init();
         btn_addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,11 +111,10 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         btn_firebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (String item : getImageHAWK()) {
+                for(String item : getImageHAWK()){
                     addToFireBase(item);
                 }
-                Code_mongodb mongo = new Code_mongodb("PowerR_collection");
-                mongo.ThemDulieu(Hawk);
+
 
             }
         });
@@ -126,112 +126,112 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         List<String> listImage = new ArrayList<String>();
 
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_202s_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_202s_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_202_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_202_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_zt100s_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_zt100s_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_zt100_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Falpha_zt100_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_201s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_201s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_201_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_201_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_208s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_208s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_208_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_208_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_209s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_209s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_209_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_209_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_212s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_212s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_212_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FALPHA%2Fv8_alpha_212_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_202s_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_202s_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_202_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_202_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_zt100s_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_zt100s_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_zt100_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Falpha_zt100_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_201s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_201s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_201_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_201_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_208s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_208s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_208_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_208_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_209s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_209s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_209_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_209_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_212s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_212s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_212_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FALPHA%2Fv8_alpha_212_listing_front_night.png?alt=media");
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_201s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_201s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_300s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_300s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_300t_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_300t_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_t100s_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_t100s_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_t100_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_t100_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_z400t_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv2_hawk_z400t_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv3_hawk_z400ts_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FHAWK%2Fv3_hawk_z400ts_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_300s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_300s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_300t_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_300t_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_t100s_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_t100s_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_t100_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_t100_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_z400t_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_z400t_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv3_hawk_z400ts_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv3_hawk_z400ts_listing_front_night.png?alt=media");
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100l ob_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100l ob_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100l og_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100l og_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100s ob_listing_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100s ob_listing_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100s og_listing_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 208_t100s og_listing_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100l tan ob_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100l tan ob_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100l tan og_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100l tan og_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100s ob_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100s ob_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100s og_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon 212_t100s og_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon auto_216l_listing_front_day_category.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon auto_216l_listing_front_night_category.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon auto_216s_listing_front_day_category.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-AUTO%2Ficon auto_216s_listing_front_night_category.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100l ob_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100l ob_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100l og_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100l og_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100s ob_listing_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100s ob_listing_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100s og_listing_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 208_t100s og_listing_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100l tan ob_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100l tan ob_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100l tan og_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100l tan og_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100s ob_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100s ob_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100s og_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon 212_t100s og_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon auto_216l_listing_front_day_category.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon auto_216l_listing_front_night_category.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon auto_216s_listing_front_day_category.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-AUTO%2Ficon auto_216s_listing_front_night_category.png?alt=media");
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Ficon_212l tan_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Ficon_212l tan_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Ficon_212s_listing_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Ficon_212s_listing_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201l t100_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201l t100_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201l_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201l_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201s t100_listing_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201s t100_listing_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201s_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_201s_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209l t100_list_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209l t100_list_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209l_list_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209l_list_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209s t100_list_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209s t100_list_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209s_list_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FICON-QUARTZ%2Fv2 icon_209s_list_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Ficon_212l tan_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Ficon_212l tan_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Ficon_212s_listing_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Ficon_212s_listing_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201l t100_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201l t100_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201l_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201l_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201s t100_listing_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201s t100_listing_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201s_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_201s_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209l t100_list_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209l t100_list_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209l_list_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209l_list_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209s t100_list_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209s t100_list_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209s_list_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FICON-QUARTZ%2Fv2 icon_209s_list_night.png?alt=media");
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_201_listing_pvd-small_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_201_listing_pvd-small_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_212rg_listing_listing_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_212rg_list_front_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_215p_listing_ss-small_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_215p_listing_ss-small_night.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_215_listing_ss-small_day_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fmarquess_215_listing_ss-small_night_1.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fnw marquess_212ss_list_front_day.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMARQUESS%2Fnw marquess_212ss_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_201_listing_pvd-small_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_201_listing_pvd-small_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_212rg_listing_listing_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_212rg_list_front_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_215p_listing_ss-small_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_215p_listing_ss-small_night.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_215_listing_ss-small_day_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fmarquess_215_listing_ss-small_night_1.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fnw marquess_212ss_list_front_day.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMARQUESS%2Fnw marquess_212ss_list_front_night.png?alt=media");
 
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_201s_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_201s_listing_front_night_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_201_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_201_listing_front_night_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_209s_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_209s_listing_front_night_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_209_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_209_listing_front_night_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_212s_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_212s_listing_front_night_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_212_listing_front_day_04-18.png?alt=media");
-        listImage.add("https://firebasestorage.googleapis.com/v0/b/test1706-8ed39.appspot.com/o/nitewatch%2FMX10%2Fmx10_212_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_201s_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_201s_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_201_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_201_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_209s_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_209s_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_209_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_209_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_212s_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_212s_listing_front_night_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_212_listing_front_day_04-18.png?alt=media");
+        listImage.add("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FMX10%2Fmx10_212_listing_front_night_04-18.png?alt=media");
 
 
         return listImage;

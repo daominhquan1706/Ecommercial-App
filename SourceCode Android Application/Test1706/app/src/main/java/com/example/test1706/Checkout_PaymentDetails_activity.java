@@ -46,7 +46,7 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
     private void showDetails(JSONObject response, String paymentAmount) {
         try {
             txtId.setText(response.getString("id"));
-            txtStatus.setText(response.getString("state"));
+            txtStatus.setText("Chờ xác nhận");
             tvtsCreationTime.setText(response.getString("create_time"));
             txtAmount.setText(String.valueOf("$" + paymentAmount));
         } catch (JSONException e) {

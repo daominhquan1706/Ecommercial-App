@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.r0adkll.slidr.Slidr;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Slidr.attach(this);
         ImageView image_ba = (ImageView) findViewById(R.id.image_ba_cai_dong_ho);
         Glide
                 .with(this)
@@ -197,7 +199,9 @@ public class LoginActivity extends AppCompatActivity {
     public void openActivityAnimation() {
         Intent intent = new Intent(this, Register_Menu.class);
         startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     protected void hideKeyboard() {

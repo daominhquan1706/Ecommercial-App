@@ -11,10 +11,12 @@ public class Orders {
     public String customerPhoneNumber;
     public String status;
     public List<Cart> orderDetails;
+    public String paymentid;
 
     public Orders() {
     }
-    public Orders(long creationTime, double total, String userID, String customerName, String customerAddress, String customerPhoneNumber, String status, List<Cart> orderDetails) {
+
+    public Orders(long creationTime, double total, String userID, String customerName, String customerAddress, String customerPhoneNumber, String status, List<Cart> orderDetails, String paymentid) {
         this.creationTime = creationTime;
         this.total = total;
         this.userID = userID;
@@ -23,9 +25,8 @@ public class Orders {
         this.customerPhoneNumber = customerPhoneNumber;
         this.status = status;
         this.orderDetails = orderDetails;
+        this.paymentid = paymentid;
     }
-
-
 
     public long getCreationTime() {
         return creationTime;
@@ -89,5 +90,13 @@ public class Orders {
 
     public void setOrderDetails(List<Cart> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public String getPaymentid() {
+        return paymentid;
+    }
+
+    public void setPaymentid(String paymentid) {
+        this.paymentid = paymentid;
     }
 }

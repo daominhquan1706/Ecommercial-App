@@ -13,6 +13,5 @@
     android:scrollbarThumbHorizontal="@color/LightBlue"
     android:scrollbars="horizontal"
     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:listitem="@layout/layout_item_watch_nitewatch">
-
+    tools:listitem="@layout/item_layout_watch_nitewatch">
 </android.support.v7.widget.RecyclerView>

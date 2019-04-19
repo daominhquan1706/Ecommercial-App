@@ -88,7 +88,7 @@
         <com.example.test1706.MyGridView
             android:id="@+id/listView_product_smartwatch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:layout_below="@id/v_pager_fragment_message"
             android:layout_margin="5sp"
             android:layout_marginTop="10dp"
@@ -96,7 +96,7 @@
             android:horizontalSpacing="10dp"
             android:numColumns="2"
             android:verticalSpacing="10dp"
-            tools:listitem="@layout/layout_item_watch_smartwatch">
+            tools:listitem="@layout/item_layout_watch_smartwatch">
 
         </com.example.test1706.MyGridView>
     </LinearLayout>

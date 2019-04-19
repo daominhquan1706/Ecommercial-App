@@ -5,8 +5,8 @@
     android:id="@+id/cardview_horizonal_nitewatch_Hawk"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardBackgroundColor="@color/black_cardview_nitewatch">
+    card_view:cardBackgroundColor="@color/black_cardview_nitewatch"
+    card_view:cardCornerRadius="10dp">
 
     <LinearLayout
         android:id="@+id/layout_horizontal_nitewatch"
@@ -39,8 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
-            android:scrollbarFadeDuration="300"
-            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarFadeDuration="50"
+            android:scrollbarSize="2dp"
+            android:scrollbarStyle="insideOverlay"
             android:scrollbarThumbHorizontal="@color/LightBlue"
             android:scrollbars="horizontal"
             card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"

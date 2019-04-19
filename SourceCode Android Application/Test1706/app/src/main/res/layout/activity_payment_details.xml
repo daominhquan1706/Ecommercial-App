@@ -10,13 +10,13 @@
     tools:context=".Checkout_PaymentDetails_activity">
 
     <TextView
-        android:fontFamily="cursive"
-        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="cursive"
         android:text="Thank you !"
         android:textAlignment="center"
-        android:textColor="@color/LightBlue" />
+        android:textColor="@color/LightBlue"
+        android:textSize="30dp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -90,7 +90,8 @@
                         android:id="@+id/txtId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="398f9ja3jrj"
+                        android:maxLines="1"
+                        android:text="398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
