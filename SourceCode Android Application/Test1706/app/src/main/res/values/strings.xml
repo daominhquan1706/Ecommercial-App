@@ -140,4 +140,5 @@
     <string name="title_activity_admin__hoa_don_">Admin_HoaDon_Activity</string>
     <string name="imageproduct">ImageProduct</string>
     <string name="access_token">pk.eyJ1IjoiZGFvbWluaHF1YW4xNzYiLCJhIjoiY2p1bHp0aDU2MG9weTN6cXM2NjB3dGJvMyJ9.-X1tNne-QQ90Rm6hRglFmQ</string>
+    <string name="user_location_permission_explanation">Chúng tôi cần thông tin vị trí của bạn để định vị</string>
 </resources>
