@@ -177,5 +177,11 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
             // Show 3 total pages.
             return 6;
         }
+
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

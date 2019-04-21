@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -176,5 +177,20 @@ public class User_HoaDon_Activity extends AppCompatActivity {
             // Show 3 total pages.
             return 6;
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(User_HoaDon_Activity.this,MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

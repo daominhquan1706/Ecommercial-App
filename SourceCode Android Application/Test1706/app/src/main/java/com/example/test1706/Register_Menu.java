@@ -106,9 +106,8 @@ public class Register_Menu extends AppCompatActivity {
                 Intent i = new Intent(Register_Menu.this,MainActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
+                finish();
         }
-
         relativeLayout= (RelativeLayout) findViewById(R.id.relativeLayout);
         btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);

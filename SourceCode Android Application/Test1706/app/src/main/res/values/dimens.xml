@@ -10,4 +10,5 @@
     <dimen name="margintop_cardview">13dp</dimen>
     <dimen name="drawable_padding">10dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="commentheight">235dp</dimen>
 </resources>

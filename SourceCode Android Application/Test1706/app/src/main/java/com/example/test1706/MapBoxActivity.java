@@ -581,4 +581,9 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

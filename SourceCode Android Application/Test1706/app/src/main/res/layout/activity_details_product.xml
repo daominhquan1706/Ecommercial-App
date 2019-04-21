@@ -1,105 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:orientation="vertical"
     tools:context=".DetailsProductActivity">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_margin="@dimen/margintop_cardview"
+            android:layout_marginBottom="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:orientation="vertical"
+            tools:context=".DetailsProductActivity">
 
-            <TextView
-                android:id="@+id/tv_productname_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/productname"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/tv_productcategory_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/category"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-                <ImageView
-
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <ImageView
+                    <TextView
+                        android:id="@+id/tv_productname_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/productname"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
 
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_productcategory_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_black_24dp" />
+
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_black_24dp" />
+
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_black_24dp" />
+
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_black_24dp" />
+
+                        <ImageView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_black_24dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
-                <ImageView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-
+                    <TextView
+                        android:id="@+id/tv_productprice_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|right"
+                        android:layout_marginLeft="10dp"
+                        android:text="$360"
+                        android:textColor="@color/LightBlue"
+                        android:textSize="30sp" />
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/img_details_nitewatch"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/background_product_image"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dongho_1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_productprice_details"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
-                android:layout_marginLeft="10dp"
-                android:text="$360"
-                android:textColor="@color/LightBlue"
-                android:textSize="30sp" />
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Description"
+                    android:textColor="@color/LightBlue"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_description_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="5"
+                    android:text="@string/large_text"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/btn_readmore"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Read more"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/LightBlue"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <include
+                layout="@layout/activity_details_product_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
-    <ImageView
-        android:id="@+id/img_details_nitewatch"
+    <include
+        android:visibility="gone"
+        layout="@layout/app_bar_main_product_details"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/background_product_image"
-        android:scaleType="fitCenter"
-        android:src="@drawable/dongho_1" />
-
-
-</LinearLayout>
+        android:layout_height="match_parent" />
+</RelativeLayout>

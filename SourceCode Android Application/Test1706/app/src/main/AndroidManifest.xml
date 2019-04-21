@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test1706">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapBoxActivity"></activity>
+        <activity android:name=".MapBoxActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Admin_HoaDon_Activity"
             android:label="@string/title_activity_admin__hoa_don_"
@@ -117,7 +120,8 @@
         <activity
             android:name=".DetailsProductActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
@@ -142,6 +146,11 @@
                 <action android:name="com.example.test1706.NotificationService" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service android:name=".Service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

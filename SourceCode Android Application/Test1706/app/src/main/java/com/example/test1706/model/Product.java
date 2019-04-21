@@ -8,6 +8,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.EncoderContext;
 
 import java.util.Date;
+import java.util.List;
 
 import static com.mongodb.stitch.core.internal.common.BsonUtils.toBsonDocument;
 
@@ -23,6 +24,17 @@ public class Product {
     private int discount;
 
     private Date createDate;
+
+    private List<CommentProduct> commentProductList;
+
+    public List<CommentProduct> getCommentProductList() {
+        return commentProductList;
+    }
+
+    public void setCommentProductList(List<CommentProduct> commentProductList) {
+        this.commentProductList = commentProductList;
+    }
+
     public Product() {
     }
 

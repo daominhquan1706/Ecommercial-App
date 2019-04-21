@@ -57,13 +57,11 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         this.list_data = list_data;
         this.mContext = mContext;
         this.currentlayout = currentlayout;
-        Log.d(TAG, "onCreateViewHolder: listdata()  ");
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "onCreateViewHolder: đã được gọi ");
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(currentlayout, viewGroup, false);
 
         ViewHolder holder = new ViewHolder(view);
@@ -72,7 +70,6 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        Log.d(TAG, "onBindViewHolder :đã được gọi");
         final Product productt = list_data.get(i);
         if (productt == null) {
             return;
@@ -122,9 +119,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 Intent intent = new Intent(mContext, DetailsProductActivity.class);
                 Bundle b = new Bundle();
                 b.putString("ProductName", productt.getProduct_Name());
-                b.putString("Category", productt.getCategory());
-                b.putInt("Price", productt.getPrice());
-                b.putString("Image", productt.getImage());
+                b.putString("ProductCategory", productt.getCategory());
 
 
                 intent.putExtras(b);
