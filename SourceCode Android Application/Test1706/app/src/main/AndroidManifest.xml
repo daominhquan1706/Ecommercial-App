@@ -119,7 +119,7 @@
         <activity android:name=".SplashActivity" />
         <activity
             android:name=".DetailsProductActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity

@@ -86,9 +86,7 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
                     Intent intent = new Intent(context, DetailsProductActivity.class);
                     Bundle b = new Bundle();
                     b.putString("ProductName", product.getProduct_Name());
-                    b.putString("Category", product.getCategory());
-                    b.putInt("Price", product.getPrice());
-                    b.putString("Image", product.getImage());
+                    b.putString("ProductCategory", product.getCategory());
 
 
                     intent.putExtras(b);
