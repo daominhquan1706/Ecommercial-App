@@ -14,11 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Admin_message_account_adapter extends BaseAdapter implements Filterable {
     private List<ChatMessage> list_product;
@@ -59,7 +63,7 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
             holder.tv_username = (TextView) convertView.findViewById(R.id.tv_username);
             holder.tv_message_user = (TextView) convertView.findViewById(R.id.tv_message_user);
             holder.tv_time_message = (TextView) convertView.findViewById(R.id.tv_time_message);
-            holder.img_user_avatar_chat = (ImageView) convertView.findViewById(R.id.img_user_avatar_chat);
+            holder.img_user_avatar_chat = (CircleImageView) convertView.findViewById(R.id.img_user_avatar_chat);
             holder.layout_account_message_user = (LinearLayout) convertView.findViewById(R.id.layout_account_message_user);
             convertView.setTag(holder);
         } else {
@@ -67,6 +71,10 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
         }
         ChatMessage chat_item = this.list_product.get(position);
         if (chat_item != null) {
+            Glide.with(context)
+                    .load("https://api.adorable.io/avatars/"+chat_item.getUserUID().toString()+"@adorable.png")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(holder.img_user_avatar_chat);
             holder.tv_username.setText(chat_item.getMessageUser());
             holder.tv_message_user.setText(String.valueOf(chat_item.getMessageText()));
             holder.tv_time_message.setText(ThoiGianChat(chat_item.getMessageTime()));
@@ -124,7 +132,7 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
                 tv_username,
                 tv_message_user,
                 tv_time_message;
-        ImageView
+        CircleImageView
                 img_user_avatar_chat;
         LinearLayout layout_account_message_user;
     }

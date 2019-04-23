@@ -27,11 +27,14 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.google.firebase.FirebaseApp;
@@ -46,6 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
 
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int mStartX, mStartY, mEndX, mEndY;
     AppBarLayout appBarLayout;
     CartSqliteHelper cartSqliteHelper;
+    CircleImageView img_user_avatar_chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+
         cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -269,8 +275,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
+        img_user_avatar_chat= (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
-
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
         nav_profile = navigationView.getMenu().findItem(R.id.nav_profile);
@@ -354,12 +360,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav_profile.setVisible(true);
             nav_logout.setVisible(true);
             nav_login.setVisible(false);
+            Glide.with(this)
+                    .load("https://api.adorable.io/avatars/" + currentUser.getUid().toString() + "@adorable.png")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(img_user_avatar_chat);
         } else {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             nav_profile.setVisible(false);
             nav_logout.setVisible(false);
             nav_login.setVisible(true);
+
+            Glide.with(this)
+                    .load("https://www.lausanne.org/wp-content/uploads/2017/04/anonymous-icon.jpg")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(img_user_avatar_chat);
+            img_user_avatar_chat.setImageResource(R.drawable.ic_account_circle_black_24dp);
         }
+
+
     }
 
 

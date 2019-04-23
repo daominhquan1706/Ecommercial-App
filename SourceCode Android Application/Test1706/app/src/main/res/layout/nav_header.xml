@@ -16,10 +16,12 @@
         android:gravity="bottom|left"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_round" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user_avatar_navheader"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_account_circle_black_24dp" />
 
         <TextView
             android:id="@+id/txt_username_nav_header"
