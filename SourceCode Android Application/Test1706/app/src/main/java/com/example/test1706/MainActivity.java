@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database;
     DatabaseReference myRef;
     ListView listView_search;
-    Search_Adapter productadapter;
+    Adapter_Search_Product productadapter;
     ArrayList<Product> list_data;
     List<String> mkey;
     ActionBarDrawerToggle toggle;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView_search.setDividerHeight(10);
 
 
-        productadapter = new Search_Adapter(this, list_data);
+        productadapter = new Adapter_Search_Product(this, list_data);
         listView_search.setAdapter(productadapter);
         btn_enable_night_view.bringToFront();
 

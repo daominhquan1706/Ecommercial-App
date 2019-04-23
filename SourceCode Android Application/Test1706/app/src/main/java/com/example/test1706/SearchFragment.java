@@ -21,7 +21,7 @@ import com.example.test1706.model.Product;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
-    Search_Adapter productadapter;
+    Adapter_Search_Product productadapter;
     SearchView searchview_product;
 
 
@@ -41,7 +41,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ArrayList<Product> productList = getProductdata();
-        productadapter = new Search_Adapter(getActivity(), productList);
+        productadapter = new Adapter_Search_Product(getActivity(), productList);
 
 
         listView = (ListView) getView().findViewById(R.id.recycleview_search);

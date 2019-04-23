@@ -1,16 +1,7 @@
 package com.example.test1706.model;
 
-import org.bson.BsonDocument;
-import org.bson.BsonReader;
-import org.bson.BsonWriter;
-import org.bson.codecs.BsonDocumentCodec;
-import org.bson.codecs.Codec;
-import org.bson.codecs.EncoderContext;
-
 import java.util.Date;
 import java.util.List;
-
-import static com.mongodb.stitch.core.internal.common.BsonUtils.toBsonDocument;
 
 public class Product {
     private String Product_Name;
@@ -18,12 +9,11 @@ public class Product {
     private String category;
     private String Image;
     private String Image_Night;
-private String Description;
-
+    private String Description;
     private int Quantity;
     private int discount;
 
-    private Date createDate;
+    private long createDate;
 
     private List<CommentProduct> commentProductList;
 
@@ -38,11 +28,11 @@ private String Description;
     public Product() {
     }
 
-    public Date getCreateDate() {
+    public long getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(long createDate) {
         this.createDate = createDate;
     }
 
@@ -124,7 +114,6 @@ private String Description;
     public void setImage(String image) {
         Image = image;
     }
-
 
 
 }

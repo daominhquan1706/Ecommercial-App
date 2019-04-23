@@ -53,21 +53,24 @@ public class DetailsProductActivity extends AppCompatActivity {
     Context mContext;
     private SlidrInterface slidr;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference myRef;
+
     Product product;
     ViewPager viewPager_comment;
     CommentAdapter commentAdapter;
     List<CommentProduct> listcomment;
     ImageView img_placeholder_viewPager;
     LinearLayout btn_add_to_cart, btn_enable_night_view, btn_nightview;
+
+    DatabaseReference myRef;
     TextView textCartItemCount;
     CartSqliteHelper cartSqliteHelper;
-    private FrameLayout frame_container;
+    FrameLayout frame_container;
     ListView listView_search;
     AppBarLayout appBarLayout;
-    Search_Adapter productadapter;
-    ArrayList<Product> list_data;
+    Adapter_Search_Product productadapter;
     FirebaseDatabase database;
+
+    ArrayList<Product> list_data;
     List<String> mkey;
     boolean isNight = false;
 ScrollView sv_details_product;
@@ -349,16 +352,13 @@ ScrollView sv_details_product;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setVisibility(View.VISIBLE);
-        listView_search.setAdapter(productadapter);
-        listView_search.setDividerHeight(10);
 
 
         mkey = new ArrayList<String>();
         list_data = new ArrayList<Product>();
         getProductdata();
-        listView_search.setAdapter(productadapter);
         listView_search.setDividerHeight(10);
-        productadapter = new Search_Adapter(this, list_data);
+        productadapter = new Adapter_Search_Product(this, list_data);
         listView_search.setAdapter(productadapter);
 
 

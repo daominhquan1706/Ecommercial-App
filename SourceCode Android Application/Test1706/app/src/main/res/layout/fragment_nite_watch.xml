@@ -84,6 +84,7 @@
                 android:layout_marginTop="0dp" />
 
             <include
+                android:visibility="gone"
                 layout="@layout/cardview_vertical_nitewatch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

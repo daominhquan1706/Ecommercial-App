@@ -17,7 +17,7 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
 
 
     // Phiên bản
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
 
     // Tên cơ sở dữ liệu.
@@ -32,6 +32,7 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PRODUCT_IMAGE_NIGHT = "ImageNight";
     private static final String COLUMN_PRODUCT_DESCRIPTION = "ImageProduct";
     private static final String COLUMN_PRODUCT_CATEGORY = "Category";
+    private static final String COLUMN_PRODUCT_CREATIONTIME = "createDate";
 
 
     public ProductSqliteHelper(Context context) {
@@ -50,7 +51,9 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
                         + COLUMN_PRODUCT_IMAGE + " TEXT,"
                         + COLUMN_PRODUCT_IMAGE_NIGHT + " TEXT,"
                         + COLUMN_PRODUCT_DESCRIPTION + " TEXT,"
-                        + COLUMN_PRODUCT_CATEGORY + " TEXT"
+                        + COLUMN_PRODUCT_CATEGORY + " TEXT,"
+                        + COLUMN_PRODUCT_CREATIONTIME + " LONG"
+
                         + ")";
         // Chạy lệnh tạo bảng.
         db.execSQL(script);
@@ -64,7 +67,6 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
 
         // Hủy (drop) bảng cũ nếu nó đã tồn tại.
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CART);
-
 
         // Và tạo lại.
         onCreate(db);
@@ -82,6 +84,7 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
             values.put(COLUMN_PRODUCT_IMAGE_NIGHT, product.getImage_Night());
             values.put(COLUMN_PRODUCT_DESCRIPTION, product.getDescription());
             values.put(COLUMN_PRODUCT_CATEGORY, product.getCategory());
+            values.put(COLUMN_PRODUCT_CREATIONTIME, System.currentTimeMillis());
 
             // Trèn một dòng dữ liệu vào bảng.
             db.insert(TABLE_CART, null, values);
@@ -119,6 +122,7 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
         Product.setImage_Night(cursor.getString(3));
         Product.setDescription(cursor.getString(4));
         Product.setCategory(cursor.getString(5));
+        Product.setCreateDate(Long.parseLong(cursor.getString(6)));
 
         // return Product
         return Product;
@@ -146,6 +150,8 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
                 Product.setImage_Night(cursor.getString(3));
                 Product.setDescription(cursor.getString(4));
                 Product.setCategory(cursor.getString(5));
+                Product.setCreateDate(Long.parseLong(cursor.getString(6)));
+
 
                 // Thêm vào danh sách.
                 ProductList.add(Product);
