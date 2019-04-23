@@ -18,7 +18,7 @@ public class Product {
     private String category;
     private String Image;
     private String Image_Night;
-    private String Description;
+private String Description;
 
     private int Quantity;
     private int discount;

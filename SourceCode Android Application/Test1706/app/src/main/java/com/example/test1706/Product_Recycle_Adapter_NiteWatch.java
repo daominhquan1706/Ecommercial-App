@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.example.test1706.model.ProductSqliteHelper;
 
 import java.util.List;
 
@@ -83,7 +83,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImageNight);
 
-        long time = 2000;
+        long time = 3000;
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
         fadeIn.setDuration(time);
@@ -115,18 +115,15 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: đã gọi được hàm click View");
+                ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
+                productSqliteHelper.addProduct(productt);
+
                 Intent intent = new Intent(mContext, DetailsProductActivity.class);
                 Bundle b = new Bundle();
                 b.putString("ProductName", productt.getProduct_Name());
                 b.putString("ProductCategory", productt.getCategory());
-
-
                 intent.putExtras(b);
-
-
                 mContext.startActivity(intent);
-                Log.d(TAG, "onClick: đã mở được trang details");
             }
         });
 
@@ -144,8 +141,8 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 setupBadge(cartSqliteHelper.getCartQuantityCount());
 
                 final Animation slideDown_toolbar = AnimationUtils.loadAnimation(mContext, R.anim.toolbar_slidedown);
-                if(appBarLayout!=null){
-                    if(appBarLayout.getVisibility()==View.INVISIBLE){
+                if (appBarLayout != null) {
+                    if (appBarLayout.getVisibility() == View.INVISIBLE) {
                         appBarLayout.setVisibility(View.VISIBLE);
                         appBarLayout.startAnimation(slideDown_toolbar);
                     }

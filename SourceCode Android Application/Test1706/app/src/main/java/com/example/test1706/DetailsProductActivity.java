@@ -133,7 +133,7 @@ ScrollView sv_details_product;
         btn_nightview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long time = 2000;
+                long time = 3000;
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
                 fadeIn.setDuration(time);

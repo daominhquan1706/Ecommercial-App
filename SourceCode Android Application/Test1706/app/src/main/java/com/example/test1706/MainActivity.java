@@ -34,10 +34,7 @@ import android.widget.Toast;
 
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -334,6 +331,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent_order_user = new Intent(getApplicationContext(), User_HoaDon_Activity.class);
                 startActivity(intent_order_user);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.nav_viewed_products:
+                Intent intent_viewed_products = new Intent(getApplicationContext(), User_Viewed_Product.class);
+                startActivity(intent_viewed_products);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
@@ -341,8 +345,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void updateUI() {
-        currentUser=mAuth.getCurrentUser();
-        if (currentUser!=null) {
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
@@ -357,7 +361,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav_login.setVisible(true);
         }
     }
-
 
 
     @Override
@@ -387,7 +390,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //super.onBackPressed();
         }
     }
-    public void showAlertDialog(){
+
+    public void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ThangCoder.Com");
         builder.setMessage("Bạn có muốn đăng xuất không?");
@@ -408,6 +412,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.show();
 
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
