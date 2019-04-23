@@ -5,9 +5,9 @@
     android:id="@+id/listView_product_nitewatch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
+
     android:nestedScrollingEnabled="false"
     android:orientation="vertical"
     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    card_view:stackFromEnd="true"
+    card_view:reverseLayout="true"
     tools:listitem="@layout/item_layout_watch_nitewatch" />

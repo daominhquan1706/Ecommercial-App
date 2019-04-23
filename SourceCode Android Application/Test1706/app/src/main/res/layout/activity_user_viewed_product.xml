@@ -12,11 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/cardview_vertical_nitewatch"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp" />
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/cardview_vertical_nitewatch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:layout_marginBottom="?attr/actionBarSize"
+                />
+        </RelativeLayout>
+
+
     </ScrollView>
 
 

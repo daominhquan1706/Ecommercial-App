@@ -49,7 +49,7 @@ import java.util.Objects;
 public class DetailsProductActivity extends AppCompatActivity {
     private static final String TAG = "DetailsProductActivity";
     TextView mName, mPrice, mCategory, mdescription_product, btn_readmore;
-    ImageView mImage;
+    ImageView img_details_nitewatch, img_details_nitewatch_night;
     Context mContext;
     private SlidrInterface slidr;
     FirebaseDatabase firebaseDatabase;
@@ -73,7 +73,8 @@ public class DetailsProductActivity extends AppCompatActivity {
     ArrayList<Product> list_data;
     List<String> mkey;
     boolean isNight = false;
-ScrollView sv_details_product;
+    ScrollView sv_details_product;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,19 +148,18 @@ ScrollView sv_details_product;
                 fadeOut.setDuration(time);
 
                 if (isNight) {
-                    Glide.with(DetailsProductActivity.this)
-                            .load(product.getImage())
-                            .apply(new RequestOptions().fitCenter())
-                            .into(mImage);
-                    mImage.setAnimation(fadeIn);
+                    img_details_nitewatch.setAnimation(fadeIn);
+                    img_details_nitewatch.setVisibility(View.VISIBLE);
+                    img_details_nitewatch_night.setVisibility(View.GONE);
+                    img_details_nitewatch_night.setAnimation(fadeOut);
                     sv_details_product.setBackgroundColor(getResources().getColor(R.color.black));
 
                 } else {
-                    Glide.with(DetailsProductActivity.this)
-                            .load(product.getImage_Night())
-                            .apply(new RequestOptions().fitCenter())
-                            .into(mImage);
-                    mImage.setAnimation(fadeIn);
+
+                    img_details_nitewatch.setAnimation(fadeOut);
+                    img_details_nitewatch.setVisibility(View.GONE);
+                    img_details_nitewatch_night.setVisibility(View.VISIBLE);
+                    img_details_nitewatch_night.setAnimation(fadeIn);
                     sv_details_product.setBackgroundColor(getResources().getColor(R.color.clearblack));
                 }
                 isNight = !isNight;
@@ -341,7 +341,7 @@ ScrollView sv_details_product;
     }
 
     private void init() {
-        sv_details_product= (ScrollView) findViewById(R.id.sv_details_product);
+        sv_details_product = (ScrollView) findViewById(R.id.sv_details_product);
 
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
         btn_enable_night_view.setVisibility(View.GONE);
@@ -367,7 +367,8 @@ ScrollView sv_details_product;
         mName = (TextView) findViewById(R.id.tv_productname_details);
         mCategory = (TextView) findViewById(R.id.tv_productcategory_details);
         mPrice = (TextView) findViewById(R.id.tv_productprice_details);
-        mImage = (ImageView) findViewById(R.id.img_details_nitewatch);
+        img_details_nitewatch = (ImageView) findViewById(R.id.img_details_nitewatch);
+        img_details_nitewatch_night = (ImageView) findViewById(R.id.img_details_nitewatch_night);
         mdescription_product = (TextView) findViewById(R.id.tv_description_product);
         btn_readmore = (TextView) findViewById(R.id.btn_readmore);
         viewPager_comment = (ViewPager) findViewById(R.id.v_pager_comment_nitewatch);
@@ -386,7 +387,12 @@ ScrollView sv_details_product;
         Glide.with(this)
                 .load(product.getImage())
                 .apply(new RequestOptions().fitCenter())
-                .into(mImage);
+                .into(img_details_nitewatch);
+        Glide.with(this)
+                .load(product.getImage_Night())
+                .apply(new RequestOptions().fitCenter())
+                .into(img_details_nitewatch_night);
+
     }
 
 }
