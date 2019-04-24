@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
+import org.w3c.dom.Comment;
+
+import java.util.List;
+
 public class ImageAdapter extends PagerAdapter {
     private Context mContext;
     private int[]  mImageIds= new int[] {R.drawable.slide1,R.drawable.slide2,R.drawable.slide3};

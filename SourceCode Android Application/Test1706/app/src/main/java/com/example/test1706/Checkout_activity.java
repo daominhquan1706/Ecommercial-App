@@ -167,6 +167,8 @@ public class Checkout_activity extends AppCompatActivity {
                             .putExtra("PaymentAmount", amount)
                     );
                     finish();
+
+
                 }
             });
 

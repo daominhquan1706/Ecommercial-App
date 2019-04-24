@@ -17,17 +17,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.Product;
+import com.example.test1706.model.ProductSqliteHelper;
 
 import java.util.ArrayList;
 
-public class Search_Adapter extends BaseAdapter implements Filterable {
+public class Adapter_Search_Product extends BaseAdapter implements Filterable {
     private ArrayList<Product> list_product;
     private ArrayList<Product> list_product_search;
-    private static final String TAG = "Search_Adapter";
+    private static final String TAG = "Adapter_Search_Product";
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public Search_Adapter(Context context, ArrayList<Product> list_product) {
+    public Adapter_Search_Product(Context context, ArrayList<Product> list_product) {
         this.context = context;
         this.list_product = list_product;
         layoutInflater = LayoutInflater.from(context);
@@ -82,13 +83,16 @@ public class Search_Adapter extends BaseAdapter implements Filterable {
             holder.searchLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(context);
+                    productSqliteHelper.addProduct(product);
+
+
+
                     Log.d(TAG, "onClick: đã gọi được hàm click View");
                     Intent intent = new Intent(context, DetailsProductActivity.class);
                     Bundle b = new Bundle();
                     b.putString("ProductName", product.getProduct_Name());
-                    b.putString("Category", product.getCategory());
-                    b.putInt("Price", product.getPrice());
-                    b.putString("Image", product.getImage());
+                    b.putString("ProductCategory", product.getCategory());
 
 
                     intent.putExtras(b);

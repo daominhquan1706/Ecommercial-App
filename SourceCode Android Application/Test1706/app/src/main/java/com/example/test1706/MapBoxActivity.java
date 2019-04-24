@@ -513,7 +513,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     public static int TinhTienShip(Double km) {
         int distance = km.intValue();
 
-        if (1 <= distance && distance <= 4) {
+        if (0 <= distance && distance <= 4) {
             return 20;
         } else if (4 <= distance && distance <= 6) {
             return 25;
@@ -580,5 +580,10 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

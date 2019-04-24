@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_horizonal_nitewatch_Hawk"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/clearblack">
+
+    <LinearLayout
+        android:id="@+id/layout_horizontal_nitewatch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:background="@color/fui_transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:padding="10dp"
+            android:text="CUSTOMER REVIEWS"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/v_pager_comment_nitewatch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/commentheight"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="horizontal"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/img_placeholder_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_insert_comment_black_24dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

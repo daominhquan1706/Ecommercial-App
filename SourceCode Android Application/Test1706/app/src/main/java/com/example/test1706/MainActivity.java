@@ -2,6 +2,7 @@ package com.example.test1706;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -25,16 +27,17 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -46,6 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
-    private DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+    //private DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     private FirebaseUser currentUser;
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database;
     DatabaseReference myRef;
     ListView listView_search;
-    Search_Adapter productadapter;
+    Adapter_Search_Product productadapter;
     ArrayList<Product> list_data;
     List<String> mkey;
     ActionBarDrawerToggle toggle;
@@ -79,10 +83,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int mStartX, mStartY, mEndX, mEndY;
     AppBarLayout appBarLayout;
     CartSqliteHelper cartSqliteHelper;
+    CircleImageView img_user_avatar_chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
         init();
@@ -108,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listView_search.setDividerHeight(10);
 
 
-        productadapter = new Search_Adapter(this, list_data);
+        productadapter = new Adapter_Search_Product(this, list_data);
         listView_search.setAdapter(productadapter);
         btn_enable_night_view.bringToFront();
 
@@ -119,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+
         cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -268,8 +275,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
+        img_user_avatar_chat= (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
-
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
         nav_profile = navigationView.getMenu().findItem(R.id.nav_profile);
@@ -302,17 +309,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_logout:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
-                tv_email_nav_header.setText(getString(R.string.unknow_account));
-                nav_profile.setVisible(false);
-                nav_logout.setVisible(false);
-                nav_login.setVisible(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Đăng xuất");
+                builder.setMessage("Bạn có muốn đăng xuất không?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
+                        tv_email_nav_header.setText(getString(R.string.unknow_account));
+                        nav_profile.setVisible(false);
+                        nav_logout.setVisible(false);
+                        nav_login.setVisible(true);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 break;
             case R.id.nav_user_order_history:
                 Intent intent_order_user = new Intent(getApplicationContext(), User_HoaDon_Activity.class);
                 startActivity(intent_order_user);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case R.id.nav_viewed_products:
+                Intent intent_viewed_products = new Intent(getApplicationContext(), User_Viewed_Product.class);
+                startActivity(intent_viewed_products);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
@@ -320,8 +351,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void updateUI() {
-        currentUser=mAuth.getCurrentUser();
-        if (currentUser!=null) {
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
@@ -329,14 +360,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav_profile.setVisible(true);
             nav_logout.setVisible(true);
             nav_login.setVisible(false);
+            Glide.with(this)
+                    .load("https://api.adorable.io/avatars/" + currentUser.getUid().toString() + "@adorable.png")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(img_user_avatar_chat);
         } else {
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             nav_profile.setVisible(false);
             nav_logout.setVisible(false);
             nav_login.setVisible(true);
-        }
-    }
 
+            Glide.with(this)
+                    .load("https://www.lausanne.org/wp-content/uploads/2017/04/anonymous-icon.jpg")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(img_user_avatar_chat);
+            img_user_avatar_chat.setImageResource(R.drawable.ic_account_circle_black_24dp);
+        }
+
+
+    }
 
 
     @Override
@@ -344,8 +386,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Thoát");
+            builder.setMessage("Bạn có muốn thoát ứng dụng không?");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    System.exit(0);
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            //super.onBackPressed();
         }
+    }
+
+    public void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ThangCoder.Com");
+        builder.setMessage("Bạn có muốn đăng xuất không?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ứ chịu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(MainActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
     @Override

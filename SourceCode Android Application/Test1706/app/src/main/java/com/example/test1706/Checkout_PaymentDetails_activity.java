@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class Checkout_PaymentDetails_activity extends AppCompatActivity {
 
     TextView txtId, txtAmount, txtStatus, tvtsCreationTime;
-    Button btn_continue_shopping;
+    Button btn_continue_shopping,btn_xemHoaDon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,30 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Checkout_PaymentDetails_activity.this,MainActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             }
         });
+
+
+        btn_xemHoaDon = (Button) findViewById(R.id.btn_xemHoaDon);
+        btn_xemHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Checkout_PaymentDetails_activity.this,User_HoaDon_Activity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Checkout_PaymentDetails_activity.this,MainActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
     }
 
     private void showDetails(JSONObject response, String paymentAmount) {
@@ -52,5 +73,11 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
