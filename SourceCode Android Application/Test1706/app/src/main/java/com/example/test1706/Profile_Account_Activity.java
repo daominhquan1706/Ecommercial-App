@@ -28,7 +28,6 @@ public class Profile_Account_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_profile__account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +42,6 @@ public class Profile_Account_Activity extends AppCompatActivity {
     }
 
     public void init() {
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
         img_user_avatar = (ImageView) findViewById(R.id.img_user_avatar);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();

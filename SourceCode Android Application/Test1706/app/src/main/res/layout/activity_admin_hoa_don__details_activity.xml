@@ -7,6 +7,7 @@
     tools:context=".Admin_HoaDon_Details_activity">
 
     <android.support.v4.widget.NestedScrollView
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
@@ -184,33 +185,6 @@
 
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/margintop_cardview"
-                    android:visibility="visible"
-                    app:cardBackgroundColor="@color/clearblack">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/item_checkout_item" />
-
-                        <com.example.test1706.MyListView
-                            android:id="@+id/admin_details_hoadon_lv_checkout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:dividerHeight="1dp"
-                            android:visibility="gone"
-                            tools:listitem="@layout/item_checkout_item" />
-                    </LinearLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -238,6 +212,29 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Danh sách sản phẩm"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp" />
+
+                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/admin_details_hoadon_lv_checkout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/margin_listview_bottom"
+                    android:nestedScrollingEnabled="true"
+                    android:orientation="vertical"
+                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    card_view:stackFromEnd="true"
+                    tools:listitem="@layout/item_checkout_item" />
+
 
             </LinearLayout>
         </ScrollView>
@@ -248,7 +245,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:gravity="center|bottom">
 
         <LinearLayout
@@ -282,7 +278,6 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:visibility="gone"
                 android:id="@+id/btn_TuChoi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,6 +287,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:padding="10dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/colorAccent"
                 app:cardCornerRadius="20dp">
 

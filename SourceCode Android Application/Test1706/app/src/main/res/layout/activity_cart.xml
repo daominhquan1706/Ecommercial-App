@@ -92,7 +92,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="40dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/empty_cart" />
+                    android:src="@drawable/ic_remove_shopping_cart_black_24dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleview_cart_list"

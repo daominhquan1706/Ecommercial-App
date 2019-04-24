@@ -15,10 +15,10 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:background="@drawable/ba_cai_dong_ho"
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/ba_cai_dong_ho"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -26,19 +26,19 @@
 
             <android.support.v7.widget.Toolbar
 
-                app:title="daominhquan176@gmail.com"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="daominhquan176@gmail.com" />
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/img_user_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_account_circle_black_24dp" />
+                android:src="@drawable/ic_account_circle_black_24dp"
+                android:visibility="gone" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
