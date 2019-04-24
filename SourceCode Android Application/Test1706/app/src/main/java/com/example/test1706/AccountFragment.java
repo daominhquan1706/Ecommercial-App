@@ -26,7 +26,7 @@ public class AccountFragment extends Fragment {
     }
     public void updateUIaccount()
     {
-        TextView txt_username_nav_header = (TextView) getView().findViewById(R.id.txt_email_nav_header);
+        /*TextView txt_username_nav_header = (TextView) getView().findViewById(R.id.txt_username_nav_header);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
@@ -34,6 +34,6 @@ public class AccountFragment extends Fragment {
         } else {
             // No user is signed in
             txt_username_nav_header.setText("UnknowAccount");
-        }
+        }*/
     }
 }
