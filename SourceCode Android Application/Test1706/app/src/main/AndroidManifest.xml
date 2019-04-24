@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test1706">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -25,7 +24,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MapBoxActivity"
+        <activity android:name=".User_Viewed_Product"
+            android:label="Viewed product"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
+            android:name=".MapBoxActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Admin_HoaDon_Activity"
@@ -119,8 +123,9 @@
         <activity android:name=".SplashActivity" />
         <activity
             android:name=".DetailsProductActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
-        <activity android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RegisterActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".LoginActivity"
@@ -141,7 +146,7 @@
 
         <service android:name=".Service.MyFirebaseInstanceService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service android:name=".Service.MyFirebaseMessagingService">

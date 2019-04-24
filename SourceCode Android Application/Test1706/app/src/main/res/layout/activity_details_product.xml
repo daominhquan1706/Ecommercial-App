@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".DetailsProductActivity">
 
     <ScrollView
+        android:id="@+id/sv_details_product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/black">
 
         <LinearLayout
-            android:layout_margin="@dimen/margintop_cardview"
-            android:layout_marginBottom="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:layout_marginBottom="?attr/actionBarSize"
             android:orientation="vertical"
             tools:context=".DetailsProductActivity">
 
@@ -23,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margintop_cardview"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -36,21 +37,25 @@
                         android:id="@+id/tv_productname_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:maxLines="1"
                         android:text="@string/productname"
                         android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/tv_productcategory_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
                         android:text="@string/category"
                         android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margintop_cardview"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -105,13 +110,58 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/img_details_nitewatch"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@drawable/background_product_image"
-                android:scaleType="fitCenter"
-                android:src="@drawable/dongho_1" />
+                android:layout_height="300dp">
+
+                <ImageView
+                    android:id="@+id/img_details_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@drawable/background_product_image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dongho_1" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/img_details_nitewatch_night"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@drawable/background_product_image"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dongho_1" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btn_nightview"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/fui_transparent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_NightView"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_power_settings_new_blue_24dp"
+                        android:gravity="center"
+                        android:text="Night view"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -146,17 +196,51 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/btn_add_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margintop_cardview"
+                android:layout_marginBottom="@dimen/margin1"
+                android:layout_weight="1"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/drw_edt_bg_blue"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_add_to_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:baselineAligned="false"
+                    android:drawableStart="@drawable/ic_shopping_cart_black_24dp"
+                    android:gravity="center"
+                    android:text="Add to cart"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
             <include
                 layout="@layout/activity_details_product_comment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="?attr/actionBarSize" />
 
         </LinearLayout>
     </ScrollView>
 
     <include
-        android:visibility="gone"
-        layout="@layout/app_bar_main_product_details"
+        layout="@layout/layout_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </RelativeLayout>

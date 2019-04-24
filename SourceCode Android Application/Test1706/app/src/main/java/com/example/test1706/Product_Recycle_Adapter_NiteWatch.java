@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +24,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.example.test1706.model.ProductSqliteHelper;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Product_Recycle_Adapter_NiteWatch.ViewHolder> {
     private List<Product> list_data;
@@ -83,7 +85,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImageNight);
 
-        long time = 1000;
+        long time = 3000;
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
         fadeIn.setDuration(time);
@@ -115,18 +117,15 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: đã gọi được hàm click View");
+                ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
+                productSqliteHelper.addProduct(productt);
+
                 Intent intent = new Intent(mContext, DetailsProductActivity.class);
                 Bundle b = new Bundle();
                 b.putString("ProductName", productt.getProduct_Name());
                 b.putString("ProductCategory", productt.getCategory());
-
-
                 intent.putExtras(b);
-
-
                 mContext.startActivity(intent);
-                Log.d(TAG, "onClick: đã mở được trang details");
             }
         });
 
@@ -144,8 +143,8 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 setupBadge(cartSqliteHelper.getCartQuantityCount());
 
                 final Animation slideDown_toolbar = AnimationUtils.loadAnimation(mContext, R.anim.toolbar_slidedown);
-                if(appBarLayout!=null){
-                    if(appBarLayout.getVisibility()==View.INVISIBLE){
+                if (appBarLayout != null) {
+                    if (appBarLayout.getVisibility() == View.INVISIBLE) {
                         appBarLayout.setVisibility(View.VISIBLE);
                         appBarLayout.startAnimation(slideDown_toolbar);
                     }
@@ -154,8 +153,34 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             }
         });
 
-    }
+        if (viewHolder.tv_creation_time_viewedproduct != null) {
+            viewHolder.tv_creation_time_viewedproduct.setText(ThoiGianChat(productt.getCreateDate()));
+        }
 
+    }
+    private String ThoiGianChat(long date) {
+        String thoigian = "";
+        Date datetime = new Date();
+        datetime.setTime(date);
+        Date currentday = new Date();
+        long diffInMillies = Math.abs(datetime.getTime() - currentday.getTime());
+        long diff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        if (diff / (60 * 60 * 24 * 30) > 0) {
+            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + " tháng trước";
+        } else if (diff / (60 * 60 * 24) > 0) {
+            thoigian = Math.round(diff / (60 * 60 * 24)) + " ngày trước";
+        } else if (diff / (60 * 60) > 0) {
+            thoigian = Math.round(diff / (60 * 60)) + " giờ trước";
+        } else if (diff / (60) > 0) {
+            thoigian = Math.round(diff / (60)) + " phút trước";
+        } else if (diff > 0) {
+            thoigian = Math.round(diff) + " giây trước";
+        } else {
+            thoigian = "vừa xong";
+        }
+
+        return thoigian;
+    }
     private void setupBadge(int mCartItemCount) {
 
         if (textCartItemCount != null) {
@@ -179,13 +204,14 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mName, mPrice, mCategory;
+        TextView mName, mPrice, mCategory, tv_creation_time_viewedproduct;
         ImageView mImage, mImageNight;
         Button mbtnView, mbtnCart;
         LinearLayout mlayout_horizontal_nitewatch_item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tv_creation_time_viewedproduct = (TextView) itemView.findViewById(R.id.tv_creation_time_viewedproduct);
             mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
             mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
             mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);

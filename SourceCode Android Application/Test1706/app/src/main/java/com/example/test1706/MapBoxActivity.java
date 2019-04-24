@@ -513,7 +513,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     public static int TinhTienShip(Double km) {
         int distance = km.intValue();
 
-        if (1 <= distance && distance <= 4) {
+        if (0 <= distance && distance <= 4) {
             return 20;
         } else if (4 <= distance && distance <= 6) {
             return 25;

@@ -4,14 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/listView_product_nitewatch"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:dividerHeight="@dimen/margintop_cardview"
+    android:layout_height="match_parent"
+
     android:nestedScrollingEnabled="false"
     android:orientation="vertical"
-    android:scrollbarFadeDuration="300"
-    android:scrollbarStyle="outsideOverlay"
-    android:scrollbarThumbHorizontal="@color/LightBlue"
-    android:scrollbars="horizontal"
     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:listitem="@layout/item_layout_watch_nitewatch">
-</android.support.v7.widget.RecyclerView>
+    card_view:reverseLayout="true"
+    tools:listitem="@layout/item_layout_watch_nitewatch" />
