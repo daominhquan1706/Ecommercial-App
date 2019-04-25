@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:0.8.0'
     //library làm CircleImageView
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:17.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

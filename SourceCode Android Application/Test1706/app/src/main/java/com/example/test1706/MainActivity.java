@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,12 +25,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,8 +81,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     FloatingActionButton fab;
     Toolbar toolbar;
+
     Fragment fragmentnitewatch;
 
+    CardView cv_close_ad;
+    RelativeLayout rlt_ad;
 
     LinearLayout btn_enable_night_view;
 
@@ -122,6 +130,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+
+        long time = 500;
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+        fadeOut.setStartOffset(50);
+        fadeOut.setDuration(time);
+        cv_close_ad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                rlt_ad.setVisibility(View.GONE);
+                rlt_ad.setAnimation(fadeOut);
+            }
+        });
     }
 
 
@@ -139,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         listView_search = (ListView) findViewById(R.id.listview_search);
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
+        cv_close_ad = (CardView) findViewById(R.id.cv_close_ad);
+        rlt_ad = (RelativeLayout) findViewById(R.id.rlt_ad);
     }
 
     private void getProductdata() {
