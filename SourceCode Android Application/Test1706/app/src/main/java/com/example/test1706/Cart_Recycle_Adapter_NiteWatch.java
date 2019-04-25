@@ -81,36 +81,46 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 .into(viewHolder.mImage);
         viewHolder.mName.setText(list_data.get(i).getProductName());
         viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
-        viewHolder.mQuantity.setText(((String) ("" + list_data.get(i).getQuantity())));
+        if (viewHolder.mQuantity != null) {
+            viewHolder.mQuantity.setText(((String) ("" + list_data.get(i).getQuantity())));
+        }
+        if (viewHolder.mbtnPlus != null) {
+            viewHolder.mbtnPlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Product product = new Product();
+                    product.setProduct_Name(cartt.getProductName());
+                    cartSqliteHelper.PlusOneQuantity(product);
+                    list_data = cartSqliteHelper.getAllCarts();
+                    tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
+                    tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
 
-        viewHolder.mbtnPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Product product = new Product();
-                product.setProduct_Name(cartt.getProductName());
-                cartSqliteHelper.PlusOneQuantity(product);
-                list_data = cartSqliteHelper.getAllCarts();
-                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
-                tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
-
-                notifyDataSetChanged();
-            }
-        });
-        viewHolder.mbtnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Product product = new Product();
-                product.setProduct_Name(cartt.getProductName());
-                cartSqliteHelper.MinusOneQuantity(product);
-                list_data = cartSqliteHelper.getAllCarts();
-                tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
-                tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
-                if(cartSqliteHelper.getCartQuantityCount()==0){
-                    recycleview_cart_list.setVisibility(View.GONE);
+                    notifyDataSetChanged();
                 }
-                notifyDataSetChanged();
-            }
-        });
+            });
+        }
+        if (viewHolder.mbtnMinus != null) {
+            viewHolder.mbtnMinus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Product product = new Product();
+                    product.setProduct_Name(cartt.getProductName());
+                    cartSqliteHelper.MinusOneQuantity(product);
+                    list_data = cartSqliteHelper.getAllCarts();
+                    tv_count_price.setText(String.valueOf("$" + cartSqliteHelper.getCartPriceCount()));
+                    tv_count_quantity.setText(String.valueOf(cartSqliteHelper.getCartQuantityCount()));
+                    if (cartSqliteHelper.getCartQuantityCount() == 0) {
+                        recycleview_cart_list.setVisibility(View.GONE);
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+        }
+
+
+        if (viewHolder.tv_total_price_checkout != null) {
+            viewHolder.tv_total_price_checkout.setText(String.valueOf(cartt.getQuantity() * cartt.getPrice()));
+        }
     }
 
     @Override
@@ -120,7 +130,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mName, mPrice;
+        TextView mName, mPrice, tv_total_price_checkout;
         TextView mQuantity;
         ImageView mImage, mImageNight;
         Button mbtnPlus, mbtnMinus;
@@ -134,6 +144,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
             mQuantity = (TextView) itemView.findViewById(R.id.edt_quantity_product_cart);
             mbtnMinus = (Button) itemView.findViewById(R.id.minus_one_product_cart);
             mbtnPlus = (Button) itemView.findViewById(R.id.plus_one_product_cart);
+            tv_total_price_checkout = (TextView) itemView.findViewById(R.id.tv_total_price_checkout);
         }
 
     }

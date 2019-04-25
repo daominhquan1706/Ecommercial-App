@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Checkout_activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Test_mongodb" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -95,7 +95,7 @@
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".Checkout_PaymentDetails_activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ChatBoxMainActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme"

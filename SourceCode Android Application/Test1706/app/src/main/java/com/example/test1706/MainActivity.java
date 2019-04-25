@@ -58,9 +58,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private DrawerLayout drawer;
+
     private FirebaseAuth mAuth;
-    //private DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     private FirebaseUser currentUser;
+
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
     MenuItem nav_login, nav_profile, nav_logout;
@@ -328,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         nav_profile.setVisible(false);
                         nav_logout.setVisible(false);
                         nav_login.setVisible(true);
+                        updateUI();
                     }
                 });
                 AlertDialog alertDialog = builder.create();

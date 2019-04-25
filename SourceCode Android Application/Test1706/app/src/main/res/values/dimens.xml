@@ -11,4 +11,5 @@
     <dimen name="drawable_padding">10dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="commentheight">235dp</dimen>
+    <dimen name="margin_listview_bottom">70dp</dimen>
 </resources>
