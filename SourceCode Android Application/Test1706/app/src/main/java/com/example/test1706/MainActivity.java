@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Fragment fragmentnitewatch;
 
-    CardView cv_close_ad;
+    RelativeLayout cv_close_ad;
     RelativeLayout rlt_ad;
 
     LinearLayout btn_enable_night_view;
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         listView_search = (ListView) findViewById(R.id.listview_search);
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
-        cv_close_ad = (CardView) findViewById(R.id.cv_close_ad);
+        cv_close_ad = (RelativeLayout) findViewById(R.id.rlt_ad_close_btn);
         rlt_ad = (RelativeLayout) findViewById(R.id.rlt_ad);
     }
 
