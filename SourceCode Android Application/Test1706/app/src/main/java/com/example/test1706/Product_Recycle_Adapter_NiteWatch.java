@@ -85,7 +85,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImageNight);
 
-        long time = 3000;
+            long time = 3000;
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
         fadeIn.setDuration(time);

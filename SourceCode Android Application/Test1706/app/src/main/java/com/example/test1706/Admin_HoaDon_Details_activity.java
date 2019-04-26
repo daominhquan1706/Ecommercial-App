@@ -44,7 +44,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     Orders orders;
     private static final String TAG = "AdminHoaDon_Details_act";
     CardView admin_details_hoadon_inputlayout_sdt_order;
-    CardView btn_Xac_nhan,btn_TuChoi;
+    CardView btn_Xac_nhan, btn_TuChoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
                 orders = dataSnapshot.getValue(Orders.class);
 
                 if (orders != null) {
-                    adapter = new Cart_Recycle_Adapter_NiteWatch(Admin_HoaDon_Details_activity.this, orders.getOrderDetails(),R.layout.item_checkout_item);
+                    adapter = new Cart_Recycle_Adapter_NiteWatch(Admin_HoaDon_Details_activity.this, orders.getOrderDetails(), R.layout.item_checkout_item);
                     lv_checkout.setAdapter(adapter);
 
                     adapter.notifyDataSetChanged();
@@ -175,7 +175,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
         orders = new Orders();
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
-        btn_TuChoi= (CardView) findViewById(R.id.btn_TuChoi);
+        btn_TuChoi = (CardView) findViewById(R.id.btn_TuChoi);
         admin_details_hoadon_inputlayout_sdt_order = (CardView) findViewById(R.id.cv_phone_admin_order);
         lv_checkout = (RecyclerView) findViewById(R.id.admin_details_hoadon_lv_checkout);
         btn_Xac_nhan = (CardView) findViewById(R.id.btn_Xac_nhan);
