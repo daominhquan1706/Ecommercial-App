@@ -67,6 +67,7 @@ dependencies {
     //library làm CircleImageView
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.1.1'
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.12.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
