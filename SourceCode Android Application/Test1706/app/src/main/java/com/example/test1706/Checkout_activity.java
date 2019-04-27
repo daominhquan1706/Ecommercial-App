@@ -104,8 +104,8 @@ public class Checkout_activity extends AppCompatActivity {
         });
 
 
-        listView_adapter_checkout_item = new ListView_Adapter_checkout_item(this, cartSqliteHelper.getAllCarts());
-        lv_checkout.setAdapter(listView_adapter_checkout_item);
+        cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(),R.layout.item_checkout_item);
+        lv_checkout.setAdapter(cart_recycle_adapter_niteWatch);
 
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")

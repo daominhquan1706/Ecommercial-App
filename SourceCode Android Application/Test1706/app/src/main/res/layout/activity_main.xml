@@ -37,16 +37,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rlt_ad"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BF000000"
-        android:gravity="center">
+        android:background="#D8000000"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:id="@+id/cv_quangcao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="20dp">
 
@@ -63,48 +69,20 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="310dp"
+        <Button
 
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-10dp"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/btn_close_quangcao"
             android:background="@color/fui_transparent"
-            app:cardBackgroundColor="@color/fui_transparent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end">
-
-                <RelativeLayout
-                    android:id="@+id/rlt_ad_close_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp">
-
-                    <ImageView
-                        android:id="@+id/cv_close_ad"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/drw_edt_bg_blue" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:text="X"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-
-    </RelativeLayout>
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:text="Bỏ qua"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

@@ -30,6 +30,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -84,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Fragment fragmentnitewatch;
 
-    RelativeLayout cv_close_ad;
-    RelativeLayout rlt_ad;
+    Button btn_close_quangcao;
+    LinearLayout rlt_ad;
 
     LinearLayout btn_enable_night_view;
 
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
         fadeOut.setStartOffset(50);
         fadeOut.setDuration(time);
-        cv_close_ad.setOnClickListener(new View.OnClickListener() {
+        btn_close_quangcao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -162,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         listView_search = (ListView) findViewById(R.id.listview_search);
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
-        cv_close_ad = (RelativeLayout) findViewById(R.id.rlt_ad_close_btn);
-        rlt_ad = (RelativeLayout) findViewById(R.id.rlt_ad);
+        btn_close_quangcao = (Button) findViewById(R.id.btn_close_quangcao);
+        rlt_ad = (LinearLayout) findViewById(R.id.rlt_ad);
     }
 
     private void getProductdata() {
