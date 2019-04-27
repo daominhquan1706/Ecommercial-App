@@ -25,6 +25,8 @@ import com.example.test1706.Config.Config;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,8 +104,13 @@ public class Checkout_activity extends AppCompatActivity {
         });
 
 
-        cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(),R.layout.item_checkout_item);
-        lv_checkout.setAdapter(cart_recycle_adapter_niteWatch);
+        listView_adapter_checkout_item = new ListView_Adapter_checkout_item(this, cartSqliteHelper.getAllCarts());
+        lv_checkout.setAdapter(listView_adapter_checkout_item);
+
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
+                        .tintTarget(false)
+                        .outerCircleColor(R.color.MoneyColor));
     }
 
     public void init() {

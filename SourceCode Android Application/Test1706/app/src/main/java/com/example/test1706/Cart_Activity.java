@@ -1,10 +1,13 @@
 package com.example.test1706;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -13,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 
 import java.util.List;
 
@@ -69,7 +75,54 @@ public class Cart_Activity extends AppCompatActivity {
                 }
             }
         });
+        final TapTargetSequence sequence = new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.btn_contiueshopping), "Hướng dẫn sử dụng", "Click để tiếp tục mua hàng")
+                                .tintTarget(false)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .id(1),
+                        TapTarget.forView(findViewById(R.id.btn_checkout_cart), "Hướng dẫn sử dụng", "Click để thanh toán hàng")
+                                .tintTarget(false)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .dimColor(android.R.color.darker_gray)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .cancelable(false)
+                                .id(2))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        // Executes when sequence of instruction get completes.
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        final AlertDialog dialog = new AlertDialog.Builder(Cart_Activity.this)
+                                .setTitle("Uh oh")
+                                .setMessage("You canceled the sequence")
+                                .setPositiveButton("OK", null).show();
+                        TapTargetView.showFor(dialog,
+                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
+                                        .cancelable(false)
+                                        .tintTarget(false), new TapTargetView.Listener() {
+                                    @Override
+                                    public void onTargetClick(TapTargetView view) {
+                                        super.onTargetClick(view);
+                                        dialog.dismiss();
+                                    }
+                                });
+                    }
+                });
+        sequence.start();
+
     }
+
 
     protected void hideKeyboard() {
         // Check if no view has focus:

@@ -2,12 +2,14 @@ package com.example.test1706;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
@@ -24,6 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -115,6 +120,49 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         progressDialogdialog.dismiss();
+
+        final TapTargetSequence sequence = new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.email_sign_in_button), "Hướng dẫn sử dụng", "Click để Đăng nhập")
+                                .tintTarget(false)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .id(1),
+                        TapTarget.forView(findViewById(R.id.btn_open_forgotpassword), "Hướng dẫn sử dụng", "Click để lấy lại mật khẩu đã quên")
+                                .tintTarget(false)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .id(2))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        // Executes when sequence of instruction get completes.
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        final AlertDialog dialog = new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("Uh oh")
+                                .setMessage("You canceled the sequence")
+                                .setPositiveButton("OK", null).show();
+                        TapTargetView.showFor(dialog,
+                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
+                                        .cancelable(false)
+                                        .tintTarget(false), new TapTargetView.Listener() {
+                                    @Override
+                                    public void onTargetClick(TapTargetView view) {
+                                        super.onTargetClick(view);
+                                        dialog.dismiss();
+                                    }
+                                });
+                    }
+                });
+        sequence.start();
     }
 
 
