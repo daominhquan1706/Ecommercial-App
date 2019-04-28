@@ -75,7 +75,7 @@ public class Cart_Activity extends AppCompatActivity {
                 }
             }
         });
-        final TapTargetSequence sequence = new TapTargetSequence(this)
+        final TapTargetSequence sequence = new TapTargetSequence(Cart_Activity.this)
                 .targets(
                         TapTarget.forView(findViewById(R.id.btn_contiueshopping), "Hướng dẫn sử dụng", "Click để tiếp tục mua hàng")
                                 .tintTarget(false)
