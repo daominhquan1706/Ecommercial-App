@@ -17,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,15 +31,14 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.google.firebase.FirebaseApp;
@@ -62,6 +60,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout frame_container;
 
+    private AccountUser accountUser;
 
     private DrawerLayout drawer;
 
@@ -136,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         long time = 500;
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-        fadeOut.setStartOffset(50);
+        fadeOut.setStartOffset(20);
         fadeOut.setDuration(time);
         btn_close_quangcao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +149,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+        /*accountUser = new AccountUser();
+        accountUser.update_firebaseAccount();*/
 
         cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
@@ -302,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
-        img_user_avatar_chat= (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
+        img_user_avatar_chat = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
@@ -331,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_profile:
-                Intent intent_profile = new Intent(getApplicationContext(), Profile_Account_Activity.class);
+                Intent intent_profile = new Intent(getApplicationContext(), User_Profile_Account_Activity.class);
                 startActivity(intent_profile);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;

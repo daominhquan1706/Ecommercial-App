@@ -72,16 +72,16 @@
             android:name=".Cart_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Register_Menu_PhoneNumber"
+            android:name=".Login_Register_Menu_PhoneNumber"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
-            android:name=".Register_Menu"
+            android:name=".Login_Register_Menu"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".AdminSanPham_edit_product"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
-            android:name=".Profile_Account_Activity"
+            android:name=".User_Profile_Account_Activity"
             android:label="@string/title_activity_profile__account_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -125,7 +125,7 @@
             android:name=".DetailsProductActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Login_RegisterActivity"
             android:theme="@style/AppTheme.SlidrActivityTheme" />
         <activity
             android:name=".LoginActivity"
