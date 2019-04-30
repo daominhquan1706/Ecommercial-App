@@ -44,6 +44,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -177,6 +180,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
+
+
+                final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
+                        .targets(
+                                TapTarget.forView(findViewById(R.id.toolbar), "Hướng dẫn sử dụng", "Click để search")
+                                        .tintTarget(false)
+                                        .outerCircleColor(R.color.MoneyColor)
+                                        .id(1),
+                                TapTarget.forView(findViewById(R.id.fab), "Hướng dẫn sử dụng", "Click để xem tính năng mở rộng")
+                                        .tintTarget(false)
+                                        .outerCircleColor(R.color.MoneyColor)
+                                        .dimColor(android.R.color.darker_gray)
+                                        .outerCircleColor(R.color.MoneyColor)
+                                        .cancelable(false)
+                                        .id(2))
+                        .listener(new TapTargetSequence.Listener() {
+                            // This listener will tell us when interesting(tm) events happen in regards
+                            // to the sequence
+                            @Override
+                            public void onSequenceFinish() {
+                                // Executes when sequence of instruction get completes.
+                            }
+
+                            @Override
+                            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                                Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                            }
+
+                            @Override
+                            public void onSequenceCanceled(TapTarget lastTarget) {
+                                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                                        .setTitle("Uh oh")
+                                        .setMessage("You canceled the sequence")
+                                        .setPositiveButton("OK", null).show();
+                                TapTargetView.showFor(dialog,
+                                        TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
+                                                .cancelable(false)
+                                                .tintTarget(false), new TapTargetView.Listener() {
+                                            @Override
+                                            public void onTargetClick(TapTargetView view) {
+                                                super.onTargetClick(view);
+                                                dialog.dismiss();
+                                            }
+                                        });
+                            }
+                        });
+                sequence.start();
             }
         });
 
@@ -308,6 +358,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
+
+
     }
 
 
