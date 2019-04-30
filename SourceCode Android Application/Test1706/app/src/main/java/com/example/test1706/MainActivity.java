@@ -27,12 +27,15 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CartSqliteHelper cartSqliteHelper;
     CircleImageView img_user_avatar_chat;
 
+    RelativeLayout rlt_image_ad;
+    ImageView banner_advertisement_night, banner_advertisement_light;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,19 +138,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentUser = mAuth.getCurrentUser();
 
 
-        long time = 500;
+        long time = 3000;
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(time);
+
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-        fadeOut.setStartOffset(20);
+        fadeOut.setStartOffset(50);
         fadeOut.setDuration(time);
+
+        banner_advertisement_night.setAnimation(fadeOut);
+        banner_advertisement_night.setVisibility(View.GONE);
+        banner_advertisement_light.setVisibility(View.VISIBLE);
+        banner_advertisement_light.setAnimation(fadeIn);
+
+        rlt_image_ad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (banner_advertisement_night.getVisibility() == View.VISIBLE) {
+                    banner_advertisement_night.setAnimation(fadeOut);
+                    banner_advertisement_night.setVisibility(View.GONE);
+                    banner_advertisement_light.setVisibility(View.VISIBLE);
+                    banner_advertisement_light.setAnimation(fadeIn);
+
+                } else {
+                    banner_advertisement_night.setAnimation(fadeIn);
+                    banner_advertisement_night.setVisibility(View.VISIBLE);
+                    banner_advertisement_light.setVisibility(View.GONE);
+                    banner_advertisement_light.setAnimation(fadeOut);
+
+                }
+            }
+        });
+
         btn_close_quangcao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
             }
         });
+
+
     }
 
 
@@ -166,6 +202,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
         btn_close_quangcao = (Button) findViewById(R.id.btn_close_quangcao);
         rlt_ad = (LinearLayout) findViewById(R.id.rlt_ad);
+        banner_advertisement_night = (ImageView) findViewById(R.id.banner_advertisement_night);
+        banner_advertisement_light = (ImageView) findViewById(R.id.banner_advertisement_light);
+        rlt_image_ad = (RelativeLayout) findViewById(R.id.rlt_image_ad);
     }
 
     private void getProductdata() {
