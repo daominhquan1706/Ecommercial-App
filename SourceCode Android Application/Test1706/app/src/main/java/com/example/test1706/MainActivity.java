@@ -44,9 +44,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView img_user_avatar_chat;
 
     RelativeLayout rlt_image_ad;
-    ImageView banner_advertisement_night, banner_advertisement_light;
+    ImageView banner_advertisement_night, banner_advertisement_light, img_tag_sale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +136,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        Glide.with(this)
+                .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media")
+                .apply(new RequestOptions().fitCenter())
+                .into(banner_advertisement_light);
+        Glide.with(this)
+                .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_night.png?alt=media")
+                .apply(new RequestOptions().fitCenter())
+                .into(banner_advertisement_night);
+        Glide.with(this)
+                .load("http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Circle-Label-Tag-PNG-Transparent-Image-500x484.png")
+                .apply(new RequestOptions().fitCenter())
+                .into(img_tag_sale);
 
 
         long time = 3000;
@@ -180,53 +190,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
-
-
-                final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
-                        .targets(
-                                TapTarget.forView(findViewById(R.id.toolbar), "Hướng dẫn sử dụng", "Click để search")
-                                        .tintTarget(false)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .id(1),
-                                TapTarget.forView(findViewById(R.id.fab), "Hướng dẫn sử dụng", "Click để xem tính năng mở rộng")
-                                        .tintTarget(false)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .dimColor(android.R.color.darker_gray)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .cancelable(false)
-                                        .id(2))
-                        .listener(new TapTargetSequence.Listener() {
-                            // This listener will tell us when interesting(tm) events happen in regards
-                            // to the sequence
-                            @Override
-                            public void onSequenceFinish() {
-                                // Executes when sequence of instruction get completes.
-                            }
-
-                            @Override
-                            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                                Log.d("TapTargetView", "Clicked on " + lastTarget.id());
-                            }
-
-                            @Override
-                            public void onSequenceCanceled(TapTarget lastTarget) {
-                                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                                        .setTitle("Uh oh")
-                                        .setMessage("You canceled the sequence")
-                                        .setPositiveButton("OK", null).show();
-                                TapTargetView.showFor(dialog,
-                                        TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
-                                                .cancelable(false)
-                                                .tintTarget(false), new TapTargetView.Listener() {
-                                            @Override
-                                            public void onTargetClick(TapTargetView view) {
-                                                super.onTargetClick(view);
-                                                dialog.dismiss();
-                                            }
-                                        });
-                            }
-                        });
-                sequence.start();
             }
         });
 
@@ -255,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         banner_advertisement_night = (ImageView) findViewById(R.id.banner_advertisement_night);
         banner_advertisement_light = (ImageView) findViewById(R.id.banner_advertisement_light);
         rlt_image_ad = (RelativeLayout) findViewById(R.id.rlt_image_ad);
+        img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
     }
 
     private void getProductdata() {
@@ -358,8 +322,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
-
-
     }
 
 
@@ -587,12 +549,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        startService(new Intent(this, NotificationService.class));
     }
 
 

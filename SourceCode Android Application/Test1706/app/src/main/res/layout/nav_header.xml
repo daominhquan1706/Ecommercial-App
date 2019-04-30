@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
-    android:gravity="bottom"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:paddingTop="25dp"
+    android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_weight="1"
-        android:gravity="bottom|left"
+        android:gravity="center"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user_avatar_navheader"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            app:civ_border_color="@color/LightBlue"
+            app:civ_border_width="1dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_account_circle_black_24dp" />
 
@@ -32,5 +34,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white" />
     </LinearLayout>
+
+    <ImageView
+        android:background="@color/LightBlue"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
 </LinearLayout>
