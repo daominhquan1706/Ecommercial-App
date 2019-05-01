@@ -103,6 +103,9 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:visibility="gone"
+            android:clickable="false"
+            android:id="@+id/btn_save_profile"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_width="match_parent"
