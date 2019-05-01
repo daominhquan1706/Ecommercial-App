@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Profile_Account_Activity">
+    tools:context=".Checkout_activity">
 
     <android.support.design.widget.AppBarLayout
-        android:visibility="visible"
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
@@ -18,37 +17,70 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ba_cai_dong_ho"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
             <android.support.v7.widget.Toolbar
+
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Check your information" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        android:padding="10dp"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/layout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/margintop_cardview">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lv_checkout"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="Total : "
+                        android:textColor="@color/LightBlue"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/tv_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="@string/money"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+
+                </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/inputlayout_name_order"
@@ -121,84 +153,58 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.v7.widget.CardView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="@color/clearblack">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/item_checkout_item" />
-
-                        <com.example.test1706.MyListView
-                            android:id="@+id/lv_checkout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:dividerHeight="1dp"
-                            tools:listitem="@layout/item_checkout_item" />
-                    </LinearLayout>
-
-
-                </android.support.v7.widget.CardView>
-
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-light"
-                        android:text="Total : "
-                        android:textColor="@color/LightBlue"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/tv_total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-light"
-                        android:text="@string/money"
-                        android:textColor="@color/white"
-                        android:textSize="30sp" />
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/black"
-                    android:gravity="bottom"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/btnPaynow"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/drw_edt_bg_yellow"
-                        android:clickable="false"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_paypal" />
-
-                </LinearLayout>
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Danh sách sản phẩm"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="20sp" />
             </LinearLayout>
-        </ScrollView>
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/lv_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_info"
+                android:layout_marginBottom="@dimen/margin_listview_bottom"
+                android:nestedScrollingEnabled="true"
+                android:orientation="vertical"
+
+                card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_checkout_item" />
+
+
+        </RelativeLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_listview_bottom"
+        android:layout_gravity="bottom"
+        android:background="@color/black"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="10dp">
 
+
+        <ImageView
+            android:id="@+id/btnPaynow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/drw_edt_bg_yellow"
+            android:clickable="false"
+            android:padding="10dp"
+            android:src="@drawable/ic_paypal" />
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

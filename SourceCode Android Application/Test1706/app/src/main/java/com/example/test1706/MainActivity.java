@@ -17,8 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,8 +28,10 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,11 +42,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.Config.Session;
+import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,14 +65,16 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout frame_container;
 
+    private AccountUser accountUser;
 
     private DrawerLayout drawer;
+
     private FirebaseAuth mAuth;
-    //private DatabaseReference db = FirebaseDatabase.getInstance().getReference();
     private FirebaseUser currentUser;
+
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
-    MenuItem nav_login, nav_profile, nav_logout;
+    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial;
     private static final String TAG = "MainActivity";
     Context mContext;
     FirebaseDatabase database;
@@ -86,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Fragment fragmentnitewatch;
 
-    CardView cv_close_ad;
-    RelativeLayout rlt_ad;
+    Button btn_close_quangcao;
+    LinearLayout rlt_ad;
 
     LinearLayout btn_enable_night_view;
 
@@ -95,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AppBarLayout appBarLayout;
     CartSqliteHelper cartSqliteHelper;
     CircleImageView img_user_avatar_chat;
+
+    RelativeLayout rlt_image_ad;
+    ImageView banner_advertisement_night, banner_advertisement_light, img_tag_sale;
+
+    SwitchCompat switch_quangcao, switch_huongdan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,65 +141,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+        Glide.with(this)
+                .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media")
+                .apply(new RequestOptions().fitCenter())
+                .into(banner_advertisement_light);
+        Glide.with(this)
+                .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_night.png?alt=media")
+                .apply(new RequestOptions().fitCenter())
+                .into(banner_advertisement_night);
+        Glide.with(this)
+                .load("http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Circle-Label-Tag-PNG-Transparent-Image-500x484.png")
+                .apply(new RequestOptions().fitCenter())
+                .into(img_tag_sale);
 
-        long time = 500;
+
+        long time = 3000;
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+        fadeIn.setDuration(time);
+
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
         fadeOut.setStartOffset(50);
         fadeOut.setDuration(time);
-        cv_close_ad.setOnClickListener(new View.OnClickListener() {
+
+        banner_advertisement_night.setAnimation(fadeOut);
+        banner_advertisement_night.setVisibility(View.GONE);
+        banner_advertisement_light.setVisibility(View.VISIBLE);
+        banner_advertisement_light.setAnimation(fadeIn);
+
+        rlt_image_ad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (banner_advertisement_night.getVisibility() == View.VISIBLE) {
+                    banner_advertisement_night.setAnimation(fadeOut);
+                    banner_advertisement_night.setVisibility(View.GONE);
+                    banner_advertisement_light.setVisibility(View.VISIBLE);
+                    banner_advertisement_light.setAnimation(fadeIn);
 
+                } else {
+                    banner_advertisement_night.setAnimation(fadeIn);
+                    banner_advertisement_night.setVisibility(View.VISIBLE);
+                    banner_advertisement_light.setVisibility(View.GONE);
+                    banner_advertisement_light.setAnimation(fadeOut);
+
+                }
+            }
+        });
+
+        btn_close_quangcao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
-
-
-                final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
-                        .targets(
-                                TapTarget.forView(findViewById(R.id.toolbar), "Hướng dẫn sử dụng", "Click để search")
-                                        .tintTarget(false)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .id(1),
-                                TapTarget.forView(findViewById(R.id.fab), "Hướng dẫn sử dụng", "Click để xem tính năng mở rộng")
-                                        .tintTarget(false)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .dimColor(android.R.color.darker_gray)
-                                        .outerCircleColor(R.color.MoneyColor)
-                                        .cancelable(false)
-                                        .id(2))
-                        .listener(new TapTargetSequence.Listener() {
-                            // This listener will tell us when interesting(tm) events happen in regards
-                            // to the sequence
-                            @Override
-                            public void onSequenceFinish() {
-                                // Executes when sequence of instruction get completes.
-                            }
-
-                            @Override
-                            public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                                Log.d("TapTargetView", "Clicked on " + lastTarget.id());
-                            }
-
-                            @Override
-                            public void onSequenceCanceled(TapTarget lastTarget) {
-                                final AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                                        .setTitle("Uh oh")
-                                        .setMessage("You canceled the sequence")
-                                        .setPositiveButton("OK", null).show();
-                                TapTargetView.showFor(dialog,
-                                        TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
-                                                .cancelable(false)
-                                                .tintTarget(false), new TapTargetView.Listener() {
-                                            @Override
-                                            public void onTargetClick(TapTargetView view) {
-                                                super.onTargetClick(view);
-                                                dialog.dismiss();
-                                            }
-                                        });
-                            }
-                        });
-                sequence.start();
             }
         });
 
@@ -200,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
+        /*accountUser = new AccountUser();
+        accountUser.update_firebaseAccount();*/
 
         cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
@@ -213,8 +217,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         listView_search = (ListView) findViewById(R.id.listview_search);
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);
-        cv_close_ad = (CardView) findViewById(R.id.cv_close_ad);
-        rlt_ad = (RelativeLayout) findViewById(R.id.rlt_ad);
+        btn_close_quangcao = (Button) findViewById(R.id.btn_close_quangcao);
+        rlt_ad = (LinearLayout) findViewById(R.id.rlt_ad);
+        banner_advertisement_night = (ImageView) findViewById(R.id.banner_advertisement_night);
+        banner_advertisement_light = (ImageView) findViewById(R.id.banner_advertisement_light);
+        rlt_image_ad = (RelativeLayout) findViewById(R.id.rlt_image_ad);
+        img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
+
     }
 
     private void getProductdata() {
@@ -318,8 +327,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         return true;
-
-
     }
 
 
@@ -354,13 +361,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
-        img_user_avatar_chat= (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
+        img_user_avatar_chat = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
         nav_profile = navigationView.getMenu().findItem(R.id.nav_profile);
-        updateUI();
+        nav_advertisement = navigationView.getMenu().findItem(R.id.nav_advertisement);
+        nav_tutorial = navigationView.getMenu().findItem(R.id.nav_tutorial);
 
+        updateUI();
+        switch_huongdan = nav_tutorial.getActionView().findViewById(R.id.switch_huongdan);
+        switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
+        setUpTuyChinh();
+    }
+
+    private void setUpTuyChinh() {
+        Session session = new Session(getApplicationContext());
+        switch_huongdan.setChecked(session.getSwitchHuongDan());
+        switch_huongdan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch_huongdan.setChecked(!session.getSwitchHuongDan());
+                session.setSwitchHuongDan(!session.getSwitchHuongDan());
+            }
+        });
+        switch_quangcao.setChecked(session.getSwitchQuangCao());
+        switch_quangcao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch_quangcao.setChecked(!session.getSwitchQuangCao());
+                session.setSwitchQuangCao(!session.getSwitchQuangCao());
+            }
+        });
     }
 
     @Override
@@ -383,7 +415,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.nav_profile:
-                Intent intent_profile = new Intent(getApplicationContext(), Profile_Account_Activity.class);
+                Intent intent_profile = new Intent(getApplicationContext(), User_Profile_Account_Activity.class);
                 startActivity(intent_profile);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
@@ -407,6 +439,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         nav_profile.setVisible(false);
                         nav_logout.setVisible(false);
                         nav_login.setVisible(true);
+                        updateUI();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -422,6 +455,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_viewed_products);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
+            /*case R.id.nav_tutorial:
+                nav_tutorial.setChecked(!session.getSwitchHuongDan());
+                session.setSwitchHuongDan(nav_tutorial.isChecked());
+                break;
+            case R.id.nav_advertisement:
+                nav_advertisement.setChecked(!session.getSwitchQuangCao());
+                session.setSwitchHuongDan(nav_advertisement.isChecked());
+                break;*/
 
         }
 
@@ -546,12 +587,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        startService(new Intent(this, NotificationService.class));
     }
 
 

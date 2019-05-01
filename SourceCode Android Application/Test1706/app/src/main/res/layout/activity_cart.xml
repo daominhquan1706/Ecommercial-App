@@ -89,10 +89,10 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="400dp"
                     android:layout_margin="40dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/empty_cart" />
+                    android:src="@drawable/ic_remove_shopping_cart_black_24dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleview_cart_list"
@@ -133,17 +133,18 @@
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/button_matchparent_blue"
+                android:background="@drawable/drw_edt_bg_blue"
                 android:text="Checkout"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textStyle="bold" />
 
             <Button
+                android:layout_margin="10dp"
                 android:id="@+id/btn_contiueshopping"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:background="@drawable/button_matchparent_transparent"
+                android:background="@color/black_cardview_nitewatch"
                 android:text="@string/continue_shopping"
                 android:textColor="@color/LightBlue"
                 android:textStyle="bold" />

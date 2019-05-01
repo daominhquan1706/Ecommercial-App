@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,8 +34,8 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     TextView tv_total_price;
     CartSqliteHelper cartSqliteHelper;
     TextView name_order, address_order, sdt_order, tv_Xac_nhan;
-    ListView_Adapter_checkout_item adapter;
-    MyListView lv_checkout;
+    Cart_Recycle_Adapter_NiteWatch adapter;
+    RecyclerView lv_checkout;
     FirebaseDatabase db;
     DatabaseReference myRef;
     private FirebaseAuth mAuth;
@@ -43,7 +44,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     Orders orders;
     private static final String TAG = "AdminHoaDon_Details_act";
     CardView admin_details_hoadon_inputlayout_sdt_order;
-    CardView btn_Xac_nhan,btn_TuChoi;
+    CardView btn_Xac_nhan, btn_TuChoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
                 orders = dataSnapshot.getValue(Orders.class);
 
                 if (orders != null) {
-                    adapter = new ListView_Adapter_checkout_item(Admin_HoaDon_Details_activity.this, orders.getOrderDetails());
+                    adapter = new Cart_Recycle_Adapter_NiteWatch(Admin_HoaDon_Details_activity.this, orders.getOrderDetails(), R.layout.item_checkout_item);
                     lv_checkout.setAdapter(adapter);
 
                     adapter.notifyDataSetChanged();
@@ -174,9 +175,9 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
         orders = new Orders();
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
-        btn_TuChoi= (CardView) findViewById(R.id.btn_TuChoi);
+        btn_TuChoi = (CardView) findViewById(R.id.btn_TuChoi);
         admin_details_hoadon_inputlayout_sdt_order = (CardView) findViewById(R.id.cv_phone_admin_order);
-        lv_checkout = (MyListView) findViewById(R.id.admin_details_hoadon_lv_checkout);
+        lv_checkout = (RecyclerView) findViewById(R.id.admin_details_hoadon_lv_checkout);
         btn_Xac_nhan = (CardView) findViewById(R.id.btn_Xac_nhan);
         tv_Xac_nhan = (TextView) findViewById(R.id.tv_Xac_nhan);
         tv_total_price = (TextView) findViewById(R.id.admin_details_hoadon_tv_total_price);

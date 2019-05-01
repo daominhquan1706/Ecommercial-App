@@ -10,29 +10,30 @@
             android:icon="@drawable/ic_settings"
             android:title="Admin" />
     </group>
-    <item android:title="User function">
+    <item android:title="Chức năng">
         <menu>
 
             <item
+
                 android:id="@+id/nav_user_chat"
                 android:icon="@drawable/ic_message_black_24dp"
-                android:title="Chat message"
+                android:title="Nhắn tin với amdin"
                 app:actionLayout="@layout/spinner_item_dark" />
             <item
                 android:id="@+id/nav_user_order_history"
                 android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-                android:title="My Orders"
+                android:title="Đơn hàng"
                 app:actionLayout="@layout/spinner_item_dark" />
             <item
                 android:id="@+id/nav_viewed_products"
                 android:icon="@drawable/ic_remove_red_eye_black_24dp"
-                android:title="Viewed products"
+                android:title="Sản phẩm đã xem"
                 app:actionLayout="@layout/spinner_item_dark" />
 
         </menu>
 
     </item>
-    <item android:title="Account">
+    <item android:title="Tài khoản">
         <menu>
             <item
                 android:id="@+id/nav_profile"
@@ -42,13 +43,27 @@
             <item
                 android:id="@+id/nav_login"
                 android:icon="@drawable/ic_vpn_key_black_24dp"
-                android:title="Login"
+                android:title="Đăng nhập"
                 app:actionLayout="@layout/spinner_item_dark" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_arrow_back_black_24dp"
-                android:title="Log out"
+                android:title="Đăng xuất"
                 app:actionLayout="@layout/spinner_item_dark" />
         </menu>
     </item>
+    <item android:title="Tùy chỉnh">
+        <menu>
+            <item
+                android:id="@+id/nav_advertisement"
+                android:title="hiện quảng cáo"
+                app:actionLayout="@layout/nav_advertisement" />
+            <item
+                android:id="@+id/nav_tutorial"
+                android:title="hiện hướng dẫn"
+                app:actionLayout="@layout/nav_tutorial" />
+
+        </menu>
+    </item>
+
 </menu>

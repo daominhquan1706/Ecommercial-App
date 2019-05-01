@@ -303,7 +303,6 @@ public class User_Viewed_Product extends AppCompatActivity {
 
 
     }
-
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 

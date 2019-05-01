@@ -11,14 +11,16 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/clearblack"
         mapbox:mapbox_cameraTargetLat="10.776663"
         mapbox:mapbox_cameraTargetLng="106.667445"
         mapbox:mapbox_cameraZoom="12" />
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/clearblack"
         android:orientation="vertical">
 
         <LinearLayout
@@ -40,13 +42,13 @@
                     android:src="@drawable/ic_distance" />
 
                 <TextView
-
                     android:id="@+id/tvDistanceMapbox"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:text="0 km" />
+                    android:text="0 km"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -70,7 +72,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:text="0 min" />
+                    android:text="0 min"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -93,7 +96,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:text="$" />
+                    android:text="$"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
