@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.Config.Session;
 import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
-    MenuItem nav_login, nav_profile, nav_logout;
+    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial;
     private static final String TAG = "MainActivity";
     Context mContext;
     FirebaseDatabase database;
@@ -99,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     RelativeLayout rlt_image_ad;
     ImageView banner_advertisement_night, banner_advertisement_light, img_tag_sale;
+
+    SwitchCompat switch_quangcao, switch_huongdan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         banner_advertisement_light = (ImageView) findViewById(R.id.banner_advertisement_light);
         rlt_image_ad = (RelativeLayout) findViewById(R.id.rlt_image_ad);
         img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
+
     }
 
     private void getProductdata() {
@@ -361,8 +366,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_login = navigationView.getMenu().findItem(R.id.nav_login);
         nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
         nav_profile = navigationView.getMenu().findItem(R.id.nav_profile);
-        updateUI();
+        nav_advertisement = navigationView.getMenu().findItem(R.id.nav_advertisement);
+        nav_tutorial = navigationView.getMenu().findItem(R.id.nav_tutorial);
 
+        updateUI();
+        switch_huongdan = nav_tutorial.getActionView().findViewById(R.id.switch_huongdan);
+        switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
+        setUpTuyChinh();
+    }
+
+    private void setUpTuyChinh() {
+        Session session = new Session(getApplicationContext());
+        switch_huongdan.setChecked(session.getSwitchHuongDan());
+        switch_huongdan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch_huongdan.setChecked(!session.getSwitchHuongDan());
+                session.setSwitchHuongDan(!session.getSwitchHuongDan());
+            }
+        });
+        switch_quangcao.setChecked(session.getSwitchQuangCao());
+        switch_quangcao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch_quangcao.setChecked(!session.getSwitchQuangCao());
+                session.setSwitchQuangCao(!session.getSwitchQuangCao());
+            }
+        });
     }
 
     @Override
@@ -425,6 +455,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent_viewed_products);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
+            /*case R.id.nav_tutorial:
+                nav_tutorial.setChecked(!session.getSwitchHuongDan());
+                session.setSwitchHuongDan(nav_tutorial.isChecked());
+                break;
+            case R.id.nav_advertisement:
+                nav_advertisement.setChecked(!session.getSwitchQuangCao());
+                session.setSwitchHuongDan(nav_advertisement.isChecked());
+                break;*/
 
         }
 

@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="HOT DEAL"
+                        android:text="Quảng cáo"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
 
@@ -87,15 +87,17 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:layout_margin="30dp"
                             android:id="@+id/banner_advertisement_night"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                         <ImageView
-                            android:visibility="gone"
+                            android:layout_margin="30dp"
                             android:id="@+id/banner_advertisement_light"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
@@ -110,7 +112,7 @@
                             android:id="@+id/img_tag_sale"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/fui_transparent"/>
+                            android:background="@color/fui_transparent" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -118,8 +120,7 @@
                             android:gravity="center"
                             android:text="-70%"
                             android:textColor="@color/white"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
+                            android:textSize="28sp"/>
                     </RelativeLayout>
 
 
@@ -148,7 +149,6 @@
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
-
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

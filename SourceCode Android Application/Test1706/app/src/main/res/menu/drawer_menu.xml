@@ -52,4 +52,18 @@
                 app:actionLayout="@layout/spinner_item_dark" />
         </menu>
     </item>
+    <item android:title="Tùy chỉnh">
+        <menu>
+            <item
+                android:id="@+id/nav_advertisement"
+                android:title="hiện quảng cáo"
+                app:actionLayout="@layout/nav_advertisement" />
+            <item
+                android:id="@+id/nav_tutorial"
+                android:title="hiện hướng dẫn"
+                app:actionLayout="@layout/nav_tutorial" />
+
+        </menu>
+    </item>
+
 </menu>
