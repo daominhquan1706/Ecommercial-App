@@ -2,16 +2,24 @@ package com.example.test1706;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.test1706.Config.Config;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
@@ -47,8 +55,8 @@ public class Checkout_activity extends AppCompatActivity {
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // su dung sandbox de test
             .clientId(Config.PAYPAL_CLIENT_ID);
     String amount = "";
-    ListView_Adapter_checkout_item listView_adapter_checkout_item;
-    MyListView lv_checkout;
+    Cart_Recycle_Adapter_NiteWatch cart_recycle_adapter_niteWatch;
+    RecyclerView lv_checkout;
     FirebaseDatabase db;
     DatabaseReference myRef;
     private FirebaseAuth mAuth;
@@ -59,12 +67,23 @@ public class Checkout_activity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout_activity);
         init();
         tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
-
         // bat dau severvice paypaly
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        Glide.with(this).load(R.drawable.ba_cai_dong_ho).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    collapsingToolbarLayout.setBackground(resource);
+                }
+            }
+        });
         btnPaynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,9 +103,13 @@ public class Checkout_activity extends AppCompatActivity {
         });
 
 
-        listView_adapter_checkout_item = new ListView_Adapter_checkout_item(this, cartSqliteHelper.getAllCarts());
-        lv_checkout.setAdapter(listView_adapter_checkout_item);
+        cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(), R.layout.item_checkout_item);
+        lv_checkout.setAdapter(cart_recycle_adapter_niteWatch);
 
+        HuongDan();
+    }
+
+    private void HuongDan() {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
                         .tintTarget(false)
@@ -96,7 +119,7 @@ public class Checkout_activity extends AppCompatActivity {
     public void init() {
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
-        lv_checkout = (MyListView) findViewById(R.id.lv_checkout);
+        lv_checkout = (RecyclerView) findViewById(R.id.lv_checkout);
         cartSqliteHelper = new CartSqliteHelper(this);
         btnPaynow = (ImageView) findViewById(R.id.btnPaynow);
         tv_total_price = (TextView) findViewById(R.id.tv_total_price);

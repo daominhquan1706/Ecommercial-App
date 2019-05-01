@@ -17,7 +17,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
 
 
     // Phiên bản
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 
     // Tên cơ sở dữ liệu.
@@ -31,6 +31,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CART_CART_QUANTITY = "Quantity";
     private static final String COLUMN_CART_CART_PRICE = "Price";
     private static final String COLUMN_CART_IMAGEPRODUCT = "ImageProduct";
+    private static final String COLUMN_CART_CATEGORY = "Category";
 
 
     public CartSqliteHelper(Context context) {
@@ -48,7 +49,10 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
                         + COLUMN_CART_PRODUCTNAME + " TEXT,"
                         + COLUMN_CART_CART_QUANTITY + " INT,"
                         + COLUMN_CART_CART_PRICE + " REAL,"
-                        + COLUMN_CART_IMAGEPRODUCT + " TEXT" + ")";
+                        + COLUMN_CART_IMAGEPRODUCT + " TEXT,"
+                        + COLUMN_CART_CATEGORY + " TEXT"
+
+                        + ")";
         // Chạy lệnh tạo bảng.
         db.execSQL(script);
     }
@@ -92,6 +96,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
             values.put(COLUMN_CART_CART_QUANTITY, 1);
             values.put(COLUMN_CART_CART_PRICE, product.getPrice());
             values.put(COLUMN_CART_IMAGEPRODUCT, product.getImage());
+            values.put(COLUMN_CART_CATEGORY, product.getCategory());
 
             // Trèn một dòng dữ liệu vào bảng.
             db.insert(TABLE_CART, null, values);
@@ -113,7 +118,9 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
                         COLUMN_CART_PRODUCTNAME,
                         COLUMN_CART_CART_QUANTITY,
                         COLUMN_CART_CART_PRICE,
-                        COLUMN_CART_IMAGEPRODUCT
+                        COLUMN_CART_IMAGEPRODUCT,
+                        COLUMN_CART_CATEGORY
+
                 }, COLUMN_CART_PRODUCTNAME + "=?",
                 new String[]{product.getProduct_Name()}, null, null, null, null);
         if (cursor != null)
@@ -125,6 +132,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         Cart.setQuantity(Integer.parseInt(cursor.getString(2)));
         Cart.setPrice(Double.parseDouble(cursor.getString(3)));
         Cart.setImageProduct(cursor.getString(4));
+        Cart.setCategory(cursor.getString(5));
         // return Cart
         return Cart;
     }
@@ -150,6 +158,8 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
                 Cart.setQuantity(Integer.parseInt(cursor.getString(2)));
                 Cart.setPrice(Double.parseDouble(cursor.getString(3)));
                 Cart.setImageProduct(cursor.getString(4));
+                Cart.setCategory(cursor.getString(5));
+
                 // Thêm vào danh sách.
                 CartList.add(Cart);
             } while (cursor.moveToNext());
@@ -193,14 +203,13 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int quantity = Integer.parseInt(cursor.getString(2));
-                count = count + (Double.parseDouble(cursor.getString(3))*quantity);
+                count = count + (Double.parseDouble(cursor.getString(3)) * quantity);
             } while (cursor.moveToNext());
         }
         cursor.close();
         // return count
         return count;
     }
-
 
 
     public boolean CheckExists(Product product) {
@@ -227,6 +236,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CART_CART_QUANTITY, cart.getQuantity() + 1);
         values.put(COLUMN_CART_IMAGEPRODUCT, cart.getImageProduct());
         values.put(COLUMN_CART_PRODUCTNAME, cart.getProductName());
+        values.put(COLUMN_CART_CATEGORY, cart.getCategory());
 
         db.update(TABLE_CART, values, COLUMN_CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
     }
@@ -247,6 +257,7 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
 
         values.put(COLUMN_CART_IMAGEPRODUCT, cart.getImageProduct());
         values.put(COLUMN_CART_PRODUCTNAME, cart.getProductName());
+        values.put(COLUMN_CART_CATEGORY, cart.getCategory());
 
         db.update(TABLE_CART, values, COLUMN_CART_ID + " = ?", new String[]{String.valueOf(cart.getId())});
     }
@@ -259,8 +270,6 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(cart.getId())});
         db.close();
     }
-
-
 
 
 }

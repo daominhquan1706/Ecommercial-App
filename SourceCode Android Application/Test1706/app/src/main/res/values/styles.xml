@@ -45,5 +45,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
 
     </style>
-
+    <style name="NavigationView">
+        <item name="android:textColorSecondary">#696969</item>
+    </style>
 </resources>

@@ -155,7 +155,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 stylee = style;
@@ -242,7 +242,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
             initSource(stylee);
             initLayers(stylee);
             IsSetUpInit = true;
-
         }
         if (!IsOldLocation) {
             getRoute(stylee, currentLocationn, huflitLocation);
@@ -281,24 +280,16 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                         .backgroundColor(Color.parseColor("#EEEEEE"))
                         .limit(10)
                         .addInjectedFeature(home)
-                        .addInjectedFeature(work)
                         .build(PlaceOptions.MODE_CARDS))
                 .build(MapBoxActivity.this);
         startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
     }
 
     private void addUserLocations() {
-        home = CarmenFeature.builder().text("Mapbox SF Office")
-                .geometry(Point.fromLngLat(-122.399854, 37.7884400))
-                .placeName("50 Beale st, San Francisco, CA")
+        home = CarmenFeature.builder().text("Đại Học Ngoại Ngữ Tin Học HUFLIT")
+                .geometry(huflitLocation)
+                .placeName("155 Sư Vạn Hạnh (nd), Phường 13, Quận 10, TP.HCM")
                 .id("mapbox-sf")
-                .properties(new JsonObject())
-                .build();
-
-        work = CarmenFeature.builder().text("Mapbox DC Office")
-                .placeName("740 15th Street NW, Washington DC")
-                .geometry(Point.fromLngLat(-77.0338348, 38.899750))
-                .id("mapbox-dc")
                 .properties(new JsonObject())
                 .build();
     }

@@ -341,6 +341,7 @@ public class NiteWatchFragment extends Fragment {
 
             }
         });
+        appBarLayout.setVisibility(View.VISIBLE);
         setupVideoPlayer();
 
     }

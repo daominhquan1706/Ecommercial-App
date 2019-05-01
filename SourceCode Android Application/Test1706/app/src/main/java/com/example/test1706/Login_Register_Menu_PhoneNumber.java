@@ -18,7 +18,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class Register_Menu_PhoneNumber extends AppCompatActivity {
+public class Login_Register_Menu_PhoneNumber extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     String codeSent;

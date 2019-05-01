@@ -6,22 +6,24 @@ public class Cart {
     private int Quantity;
     private double Price;
     private String ImageProduct;
+    private String Category;
 
     public Cart() {
     }
 
     public Cart(
-            int             id,
-            String          productName,
-            int             quantity,
-            double          price,
-            String          imageProduct)
-    {
+            int id,
+            String productName,
+            int quantity,
+            double price,
+            String imageProduct,
+            String category) {
         Id = id;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         ImageProduct = imageProduct;
+        Category = category;
     }
 
     public int getId() {
@@ -63,5 +65,13 @@ public class Cart {
 
     public void setImageProduct(String imageProduct) {
         ImageProduct = imageProduct;
+    }
+
+    public String getCategory() {
+        return Category;
+    }
+
+    public void setCategory(String category) {
+        Category = category;
     }
 }
