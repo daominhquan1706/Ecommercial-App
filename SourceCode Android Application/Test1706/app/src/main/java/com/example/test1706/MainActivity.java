@@ -46,6 +46,8 @@ import com.example.test1706.Config.Session;
 import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -103,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView banner_advertisement_night, banner_advertisement_light, img_tag_sale;
 
     SwitchCompat switch_quangcao, switch_huongdan;
-
+    Session session;
+    MenuItem searchItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
+                HuongDan2();
             }
         });
 
@@ -201,7 +205,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+
     private void init() {
+        session = new Session(getApplicationContext());
         /*accountUser = new AccountUser();
         accountUser.update_firebaseAccount();*/
 
@@ -224,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         rlt_image_ad = (RelativeLayout) findViewById(R.id.rlt_image_ad);
         img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
 
+        setUpQuangCao();
     }
 
     private void getProductdata() {
@@ -267,18 +274,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+    public void HuongDan() {
+        final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.btn_close_quangcao),  "tắt cửa sổ quảng cáo")
+                                .tintTarget(true)
+                                .targetCircleColor(R.color.LightBlue)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .cancelable(true)
+                                .id(1))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        // Executes when sequence of instruction get completes.
+                    }
 
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+
+                    }
+                });
+        sequence.start();
+    }
+    public void HuongDan2(){
+        final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.btn_enable_night_view),  "Night Mode","xem sản phẩm của bằng cách mô phỏng ban đêm")
+                                .tintTarget(false)
+                                .targetCircleColor(R.color.white)
+                                .outerCircleColor(R.color.MoneyColor)
+                                .cancelable(true)
+                                .id(1))
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        // Executes when sequence of instruction get completes.
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
+                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+
+                    }
+                });
+        sequence.start();
+
+    }
+    SearchView searchView;
+    MenuItem menuItem;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+
         //thiết lập badge cart count
         cartSqliteHelper = new CartSqliteHelper(this);
-        final MenuItem menuItem = menu.findItem(R.id.action_cart);
+        menuItem = menu.findItem(R.id.action_cart);
         View actionView = MenuItemCompat.getActionView(menuItem);
         textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
         setupBadge(cartSqliteHelper.getCartQuantityCount());
@@ -325,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
+        HuongDan();
         return true;
     }
 
@@ -376,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setUpTuyChinh() {
-        Session session = new Session(getApplicationContext());
+
         switch_huongdan.setChecked(session.getSwitchHuongDan());
         switch_huongdan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -393,6 +463,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 session.setSwitchQuangCao(!session.getSwitchQuangCao());
             }
         });
+    }
+
+    private void setUpQuangCao() {
+        if (!session.getSwitchQuangCao()) {
+            rlt_ad.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -529,27 +605,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void showAlertDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("ThangCoder.Com");
-        builder.setMessage("Bạn có muốn đăng xuất không?");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ứ chịu", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(MainActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
-            }
-        });
-        builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
 
     @Override
     protected void onRestart() {

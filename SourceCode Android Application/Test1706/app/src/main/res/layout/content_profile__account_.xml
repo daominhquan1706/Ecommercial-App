@@ -16,19 +16,19 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
             android:id="@+id/img_user_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_account_circle_black_24dp" />
-
-
-
+            android:src="@drawable/ic_account_circle_black_24dp"
+            app:civ_border_color="@color/LightBlue"
+            app:civ_border_width="2dp" />
 
 
         <android.support.design.widget.TextInputLayout
+
             android:id="@+id/inputlayout_name_order"
             style="@style/TextLabel"
             android:layout_width="match_parent"
@@ -36,6 +36,7 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
+                android:enabled="false"
                 android:id="@+id/tv_name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
+                android:enabled="false"
                 android:id="@+id/tv_phonenumber_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,6 +86,7 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
+                android:enabled="false"
                 android:id="@+id/tv_address_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,12 +103,14 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:background="@drawable/drw_edt_bg_blue"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="thêm địa chỉ" />
+            android:background="@drawable/drw_edt_bg_blue"
+            android:text="Lưu" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

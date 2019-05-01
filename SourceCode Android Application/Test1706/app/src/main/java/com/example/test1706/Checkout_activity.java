@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,9 +103,13 @@ public class Checkout_activity extends AppCompatActivity {
         });
 
 
-        cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(),R.layout.item_checkout_item);
+        cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(), R.layout.item_checkout_item);
         lv_checkout.setAdapter(cart_recycle_adapter_niteWatch);
 
+        HuongDan();
+    }
+
+    private void HuongDan() {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
                         .tintTarget(false)
