@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.test1706.Config.Session;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.getkeepsafe.taptargetview.TapTarget;
@@ -75,6 +76,18 @@ public class Cart_Activity extends AppCompatActivity {
                 }
             }
         });
+        session = new Session(getApplicationContext());
+
+        if(session.getSwitchHuongDan())
+        {
+            HuongDan();
+        }
+    }
+
+    private Session session;
+
+    private void HuongDan() {
+
         final TapTargetSequence sequence = new TapTargetSequence(Cart_Activity.this)
                 .targets(
                         TapTarget.forView(findViewById(R.id.btn_contiueshopping), "Hướng dẫn sử dụng", "Click để tiếp tục mua hàng")
