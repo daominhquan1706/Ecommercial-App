@@ -68,7 +68,7 @@ public class Checkout_activity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout_activity);
         init();
         tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
-        // bat dau severvice paypaly
+        // bat dau severvice paypal
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         startService(intent);
@@ -119,8 +119,7 @@ public class Checkout_activity extends AppCompatActivity {
     private void HuongDan() {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
-                        .tintTarget(false)
-                        .outerCircleColor(R.color.MoneyColor));
+                        .tintTarget(false));
     }
 
     public void init() {
@@ -143,7 +142,7 @@ public class Checkout_activity extends AppCompatActivity {
 
     private void ProcessPayment() {
         amount = tv_total_price.getText().toString();
-        PayPalPayment PaypalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "USD", "Thanh toan san pham", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment PaypalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "USD", "Thanh toán sản phẩm", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(Checkout_activity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, PaypalPayment);

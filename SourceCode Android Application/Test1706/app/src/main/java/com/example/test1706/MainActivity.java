@@ -283,8 +283,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .targets(
                         TapTarget.forView(findViewById(R.id.btn_close_quangcao),  "tắt cửa sổ quảng cáo")
                                 .tintTarget(true)
-                                .targetCircleColor(R.color.LightBlue)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .cancelable(true)
                                 .id(1))
                 .listener(new TapTargetSequence.Listener() {
@@ -312,10 +310,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .targets(
                         TapTarget.forView(findViewById(R.id.btn_enable_night_view),  "Night Mode","xem sản phẩm của bằng cách mô phỏng ban đêm")
                                 .tintTarget(false)
-                                .targetCircleColor(R.color.white)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .cancelable(true)
-                                .id(1))
+                                .id(1),
+        TapTarget.forToolbarNavigationIcon(toolbar, "Menu chức năng",  "Các chức năng linh tinh"  ).id(2),
+                        TapTarget.forToolbarMenuItem(toolbar, R.id.action_search,
+                                "Tìm kiếm", "Nhập từ khóa để tìm thông tin").id(3),
+                        TapTarget.forToolbarMenuItem(toolbar, R.id.action_cart,
+                                "Giỏ hàng", "Click vào để mua hàng hoặc xem những món hàng bạn đã bỏ vào giỏ").id(4))
+
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence
@@ -449,6 +451,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
         setUpTuyChinh();
     }
+
 
     private void setUpTuyChinh() {
 
