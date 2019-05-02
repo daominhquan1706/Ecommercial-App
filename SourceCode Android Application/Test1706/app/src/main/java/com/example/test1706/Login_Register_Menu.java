@@ -28,7 +28,6 @@ public class Login_Register_Menu extends AppCompatActivity {
     DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    AccountUser accountUser;
 
     private static final String TAG = "Login_Register_Menu";
 
@@ -80,9 +79,9 @@ public class Login_Register_Menu extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_REQUEST_CODE_GOOGLE) {
             if (resultCode == RESULT_OK) {
+                AccountUser accountUser;
+                accountUser = new AccountUser();
                 accountUser.update_firebaseAccount();
-
-
                 Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
                 Intent i = new Intent(Login_Register_Menu.this, MainActivity.class);
                 startActivity(i);
@@ -93,7 +92,6 @@ public class Login_Register_Menu extends AppCompatActivity {
             }
         }
     }
-
 
 
     @Override
@@ -121,10 +119,6 @@ public class Login_Register_Menu extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Account");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        accountUser = new AccountUser();
-
 
 
         if (firebaseUser != null) {

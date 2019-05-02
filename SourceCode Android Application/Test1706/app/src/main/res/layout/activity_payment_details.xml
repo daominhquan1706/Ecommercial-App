@@ -12,8 +12,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
-        android:text="payment successful"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="đặt hàng thành công"
         android:textAlignment="center"
         android:textColor="@color/LightBlue"
         android:textSize="40sp" />
@@ -50,33 +50,55 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ID_payment: "
                         android:textColor="@color/LightBlue"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total: "
+                        android:text="Tổng cộng: "
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Status: "
+                        android:text="Tình trạng: "
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Shipping date: "
+                        android:text="Ngày giao dự kiếm: "
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên người nhân: "
+                        android:textColor="@color/LightBlue"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số điện thoại: "
+                        android:textColor="@color/LightBlue"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Địa chỉ: "
+                        android:textColor="@color/LightBlue"
+                        android:textStyle="bold" />
+
 
                 </LinearLayout>
 
@@ -88,20 +110,18 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/txtId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj398f9ja3jrj"
                         android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/txtAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100 USD"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -109,7 +129,6 @@
                         android:id="@+id/txtsStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="approved"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -117,18 +136,40 @@
                         android:id="@+id/tvtsCreationTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1/1/2000 "
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_nguoinhan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_sodienthoai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_diachi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
-                android:gravity="bottom"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
                 <Button
                     android:id="@+id/btn_xemHoaDon"
                     style="?android:textAppearanceSmall"
@@ -140,6 +181,7 @@
                     android:text="xem đơn đặt hàng"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
                     android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/btn_continue_shopping"
                     style="?android:textAppearanceSmall"
