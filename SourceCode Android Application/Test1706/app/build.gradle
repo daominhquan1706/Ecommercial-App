@@ -24,6 +24,9 @@ android {
 }
 repositories {
     maven { url "https://jitpack.io" }
+    maven {
+        url 'https://dl.bintray.com/spark/maven'
+    }
     mavenCentral()
 
 }
@@ -68,6 +71,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.1.1'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.12.0'
+
+    implementation 'me.spark:submitbutton:1.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.test1706.Config.Session;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -120,16 +121,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         progressDialogdialog.dismiss();
+        session = new Session(getApplicationContext());
+        if(session.getSwitchHuongDan())
+        {
+            Huongdan();
+        }
+    }
+    private Session session;
 
+    private void Huongdan() {
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
                         TapTarget.forView(findViewById(R.id.email_sign_in_button), "Hướng dẫn sử dụng", "Click để Đăng nhập")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
+
                                 .id(1),
                         TapTarget.forView(findViewById(R.id.btn_open_forgotpassword), "Hướng dẫn sử dụng", "Click để lấy lại mật khẩu đã quên")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
+
                                 .id(2))
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards

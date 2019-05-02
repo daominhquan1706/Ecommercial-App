@@ -90,34 +90,24 @@ public class Admin extends AppCompatActivity {
                 .targets(
                         TapTarget.forView(findViewById(R.id.cv_sanpham), "Hướng dẫn sử dụng", "Click để thêm sản phẩm")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .id(1),
                         TapTarget.forView(findViewById(R.id.cv_tinnhan), "Hướng dẫn sử dụng", "Click để chat với khách hàng")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
-                                .dimColor(android.R.color.darker_gray)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .cancelable(false)
                                 .id(2),
                         TapTarget.forView(findViewById(R.id.cv_doanhthu), "Hướng dẫn sử dụng", "Click để xem biểu đồ")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
-                                .dimColor(android.R.color.darker_gray)
-                                .outerCircleColor(R.color.MoneyColor)
+
                                 .cancelable(false)
                                 .id(3),
                         TapTarget.forView(findViewById(R.id.cv_donhang), "Hướng dẫn sử dụng", "Click click để dùng map")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
-                                .dimColor(android.R.color.darker_gray)
-                                .outerCircleColor(R.color.MoneyColor)
+
                                 .cancelable(false)
                                 .id(4),
                         TapTarget.forView(findViewById(R.id.cv_orders), "Hướng dẫn sử dụng", "Click để xem hóa đơn")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
-                                .dimColor(android.R.color.darker_gray)
-                                .outerCircleColor(R.color.MoneyColor)
+
                                 .cancelable(false)
                                 .id(5))
                 .listener(new TapTargetSequence.Listener() {

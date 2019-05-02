@@ -92,13 +92,9 @@ public class Cart_Activity extends AppCompatActivity {
                 .targets(
                         TapTarget.forView(findViewById(R.id.btn_contiueshopping), "Hướng dẫn sử dụng", "Click để tiếp tục mua hàng")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .id(1),
                         TapTarget.forView(findViewById(R.id.btn_checkout_cart), "Hướng dẫn sử dụng", "Click để thanh toán hàng")
                                 .tintTarget(false)
-                                .outerCircleColor(R.color.MoneyColor)
-                                .dimColor(android.R.color.darker_gray)
-                                .outerCircleColor(R.color.MoneyColor)
                                 .cancelable(false)
                                 .id(2))
                 .listener(new TapTargetSequence.Listener() {
