@@ -48,6 +48,7 @@ import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -197,7 +198,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
-                HuongDan2();
+                if(session.getSwitchHuongDan())
+                {
+                    HuongDan2();
+                }
             }
         });
 
@@ -333,6 +337,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sequence.start();
 
     }
+
     SearchView searchView;
     MenuItem menuItem;
     @Override
@@ -394,8 +399,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-
-        HuongDan();
+            if(session.getSwitchHuongDan())
+                {HuongDan();}
         return true;
     }
 

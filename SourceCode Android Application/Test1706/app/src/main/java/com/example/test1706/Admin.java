@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.example.test1706.Config.Session;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -74,6 +75,17 @@ public class Admin extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+        session = new Session(getApplicationContext());
+        if(session.getSwitchHuongDan())
+        {
+            HuongDan();
+        }
+
+    }
+
+    private Session session;
+
+    private void HuongDan() {
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
                         TapTarget.forView(findViewById(R.id.cv_sanpham), "Hướng dẫn sử dụng", "Click để thêm sản phẩm")
@@ -140,7 +152,6 @@ public class Admin extends AppCompatActivity {
                     }
                 });
         sequence.start();
-
     }
 
     protected void hideKeyboard() {

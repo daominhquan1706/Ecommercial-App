@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.test1706.Config.Config;
+import com.example.test1706.Config.Session;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
@@ -106,9 +107,15 @@ public class Checkout_activity extends AppCompatActivity {
         cart_recycle_adapter_niteWatch = new Cart_Recycle_Adapter_NiteWatch(this, cartSqliteHelper.getAllCarts(), R.layout.item_checkout_item);
         lv_checkout.setAdapter(cart_recycle_adapter_niteWatch);
 
-        HuongDan();
+        session = new Session(getApplicationContext());
+
+        if(session.getSwitchHuongDan())
+        {
+            HuongDan();
+        }
     }
 
+    private Session session;
     private void HuongDan() {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
