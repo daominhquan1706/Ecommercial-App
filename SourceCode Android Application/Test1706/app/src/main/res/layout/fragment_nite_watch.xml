@@ -1,106 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollview_nitewatch"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-
-    <RelativeLayout
-
+    <ScrollView
+        android:id="@+id/scrollview_nitewatch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:fillViewport="true">
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-
-            <include
-                layout="@layout/slideshow"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?attr/actionBarSize" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/list_category_nitewatch"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                android:scrollbarFadeDuration="300"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbarThumbHorizontal="@color/LightBlue"
-                android:scrollbars="horizontal"
-                card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_category_menu">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <include
-                layout="@layout/cardview_horizontal_hawk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
-
-            <include
-                layout="@layout/cardview_horizontal_alpha"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
-
-            <include
-                layout="@layout/cardview_horizontal_iconauto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
-
-            <include
-                layout="@layout/cardview_horizontal_icon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:orientation="vertical">
 
 
-            <include
-                layout="@layout/cardview_horizontal_marquess"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
+                <include
+                    layout="@layout/slideshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="?attr/actionBarSize" />
 
-            <include
-                layout="@layout/cardview_horizontal_mx10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list_category_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:scrollbarFadeDuration="300"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbarThumbHorizontal="@color/LightBlue"
+                    android:scrollbars="horizontal"
+                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_category_menu">
 
-            <include
-                layout="@layout/cardview_vertical_nitewatch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margintop_cardview"
-                android:layout_marginTop="0dp"
-                android:visibility="gone" />
+                </android.support.v7.widget.RecyclerView>
 
-            <include
-                layout="@layout/video_player"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:visibility="gone" />
-        </LinearLayout>
+                <include
+                    layout="@layout/cardview_horizontal_hawk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
 
-    </RelativeLayout>
+                <include
+                    layout="@layout/cardview_horizontal_alpha"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
+
+                <include
+                    layout="@layout/cardview_horizontal_iconauto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
+
+                <include
+                    layout="@layout/cardview_horizontal_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
 
 
-</ScrollView>
+                <include
+                    layout="@layout/cardview_horizontal_marquess"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
+
+                <include
+                    layout="@layout/cardview_horizontal_mx10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp" />
+
+                <include
+                    layout="@layout/cardview_vertical_nitewatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margintop_cardview"
+                    android:layout_marginTop="0dp"
+                    android:visibility="gone" />
+
+                <include
+                    layout="@layout/video_player"
+                    android:layout_width="wrap_content"
+                    android:layout_height="250dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:background="#0E1E2F"
+        android:src="@drawable/loadingscreen"
+        android:id="@+id/loadingscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

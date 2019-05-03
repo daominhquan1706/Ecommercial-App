@@ -55,7 +55,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
 
         //loading
         pd = new ProgressDialog(User_Profile_Account_Activity.this);
-        pd.setMessage("đang lấy dữ liệu");
+        pd.setMessage("Đang lấy dữ liệu");
         pd.show();
 
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -140,8 +141,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view.bringToFront();
 
 
-
-
         Glide.with(this)
                 .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media")
                 .apply(new RequestOptions().fitCenter())
@@ -239,7 +238,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }*/
 
     }
+
     AccountUser accountUser;
+
     private void getProductdata() {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -317,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 .tintTarget(false)
                                 .cancelable(true)
                                 .id(1),
-        TapTarget.forToolbarNavigationIcon(toolbar, "Menu chức năng",  "Các chức năng linh tinh"  ).id(2),
+                        TapTarget.forToolbarNavigationIcon(toolbar, "Menu chức năng", "Các chức năng linh tinh").id(2),
                         TapTarget.forToolbarMenuItem(toolbar, R.id.action_search,
                                 "Tìm kiếm", "Nhập từ khóa để tìm thông tin").id(3),
                         TapTarget.forToolbarMenuItem(toolbar, R.id.action_cart,
@@ -406,8 +407,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-        if (session.getSwitchHuongDan()) {
+        if (session.getSwitchHuongDan() && session.getSwitchQuangCao()) {
             HuongDan();
+        }
+
+        if (!session.getSwitchQuangCao() && session.getSwitchHuongDan()) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+                    HuongDan2();
+                }
+            }, 1000);
+
         }
         return true;
     }
@@ -436,6 +449,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onPrepareOptionsMenu(Menu menu) {
 
 
+
         return true;
     }
 
@@ -456,6 +470,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch_huongdan = nav_tutorial.getActionView().findViewById(R.id.switch_huongdan);
         switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
         setUpTuyChinh();
+
+
     }
 
 
@@ -563,6 +579,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void updateUI() {
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
+            /*accountUser= new AccountUser();
+            accountUser.update_firebaseAccount();
+*/
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());

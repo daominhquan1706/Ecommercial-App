@@ -291,6 +291,11 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+
+                                AccountUser accountUser;
+                                accountUser = new AccountUser();
+                                accountUser.update_firebaseAccount();
+
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

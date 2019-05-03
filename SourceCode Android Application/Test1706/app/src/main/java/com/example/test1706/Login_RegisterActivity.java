@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.test1706.UserModel.AccountUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.r0adkll.slidr.Slidr;
@@ -96,6 +97,11 @@ public class Login_RegisterActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+
+                        AccountUser accountUser;
+                        accountUser = new AccountUser();
+                        accountUser.update_firebaseAccount();
+
                         Intent i = new Intent(Login_RegisterActivity.this, MainActivity.class);
                         finish();
                         startActivity(i);

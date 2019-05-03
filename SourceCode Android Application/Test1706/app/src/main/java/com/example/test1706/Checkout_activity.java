@@ -22,10 +22,10 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.test1706.Config.Config;
 import com.example.test1706.Config.Session;
+import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
-import com.example.test1706.model.UserAccount;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,10 +129,10 @@ public class Checkout_activity extends AppCompatActivity {
             myRef.child("Account").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
+                    AccountUser userAccount = dataSnapshot.getValue(AccountUser.class);
                     if (userAccount != null) {
                         name_order.setText(userAccount.getName());
-                        sdt_order.setText(userAccount.getSdt());
+                        sdt_order.setText(userAccount.getSDT());
                         address_order.setText(userAccount.getDiachi());
                     }
                 }
