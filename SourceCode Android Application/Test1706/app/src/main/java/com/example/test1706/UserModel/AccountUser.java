@@ -134,7 +134,6 @@ public class AccountUser {
                     isExist = true;
                 }
             }
-
             if (!isExist) {
                 databaseReference.child(currentUser.getUid()).setValue(accountUser);
             }

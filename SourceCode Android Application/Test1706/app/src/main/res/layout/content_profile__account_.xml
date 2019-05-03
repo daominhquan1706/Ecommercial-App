@@ -15,6 +15,7 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user_avatar"
             android:layout_width="150dp"
@@ -36,7 +37,6 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
-                android:enabled="false"
                 android:id="@+id/tv_name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,6 +44,7 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_account_circle_black_24dp"
                 android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
                 android:hint="Tên người nhận"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -61,7 +62,6 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
-                android:enabled="false"
                 android:id="@+id/tv_phonenumber_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +69,7 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_phone_blue_24dp"
                 android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
                 android:hint="Số điện thoại người nhận"
                 android:inputType="phone"
                 android:maxLines="1"
@@ -86,7 +87,6 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
-                android:enabled="false"
                 android:id="@+id/tv_address_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,6 +94,7 @@
                 android:background="@null"
                 android:drawableStart="@drawable/ic_home_blue_24dp"
                 android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
                 android:hint="Địa chỉ giao hàng"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -103,17 +104,17 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:visibility="gone"
-            android:clickable="false"
             android:id="@+id/btn_save_profile"
-            android:textSize="20sp"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:background="@drawable/drw_edt_bg_blue"
-            android:text="Lưu" />
+            android:clickable="false"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

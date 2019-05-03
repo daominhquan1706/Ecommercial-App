@@ -25,14 +25,18 @@ import com.example.test1706.Config.Session;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
+import com.example.test1706.model.UserAccount;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -58,15 +62,19 @@ public class Checkout_activity extends AppCompatActivity {
     String amount = "";
     Cart_Recycle_Adapter_NiteWatch cart_recycle_adapter_niteWatch;
     RecyclerView lv_checkout;
+
+
     FirebaseDatabase db;
     DatabaseReference myRef;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_activity);
         init();
+        layDataUser();
         tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
         // bat dau severvice paypal
         Intent intent = new Intent(this, PayPalService.class);
@@ -109,13 +117,33 @@ public class Checkout_activity extends AppCompatActivity {
 
         session = new Session(getApplicationContext());
 
-        if(session.getSwitchHuongDan())
-        {
+        if (session.getSwitchHuongDan()) {
             HuongDan();
         }
     }
 
+    private void layDataUser() {
+        if (currentUser != null) {
+            myRef.child("Account").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
+                    name_order.setText(userAccount.getName());
+                    sdt_order.setText(userAccount.getSdt());
+                    address_order.setText(userAccount.getDiachi());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+    }
+
     private Session session;
+
     private void HuongDan() {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
@@ -125,6 +153,8 @@ public class Checkout_activity extends AppCompatActivity {
     public void init() {
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         lv_checkout = (RecyclerView) findViewById(R.id.lv_checkout);
         cartSqliteHelper = new CartSqliteHelper(this);
         btnPaynow = (ImageView) findViewById(R.id.btnPaynow);
@@ -170,6 +200,7 @@ public class Checkout_activity extends AppCompatActivity {
             Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
     }
 
+
     public void AddCart_to_Order(String paymentDetails) {
         try {
             JSONObject jsonObject = new JSONObject(paymentDetails);
@@ -183,8 +214,7 @@ public class Checkout_activity extends AppCompatActivity {
             orders.setStatus("Chờ xác nhận");
             orders.setTotal(cartSqliteHelper.getCartPriceCount());
             orders.setPaymentid(id);
-            mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
+
             if (currentUser != null) {
                 orders.setUserID(currentUser.getUid());
             }
@@ -199,8 +229,12 @@ public class Checkout_activity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     startActivity(new Intent(Checkout_activity.this, Checkout_PaymentDetails_activity.class)
-                            .putExtra("Checkout_PaymentDetails_activity", paymentDetails)
-                            .putExtra("PaymentAmount", amount)
+                                    .putExtra("Checkout_PaymentDetails_activity", paymentDetails)
+                                    .putExtra("PaymentAmount", amount)
+                                    .putExtra("tennguoinhan", name_order.getText().toString())
+                                    .putExtra("sodienthoai",sdt_order.getText().toString() )
+                                    .putExtra("diachi",address_order.getText().toString() )
+
                     );
                     finish();
 

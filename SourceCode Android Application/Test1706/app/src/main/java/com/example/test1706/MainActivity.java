@@ -48,7 +48,6 @@ import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,8 +66,6 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout frame_container;
-
-    private AccountUser accountUser;
 
     private DrawerLayout drawer;
 
@@ -108,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SwitchCompat switch_quangcao, switch_huongdan;
     Session session;
     MenuItem searchItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,8 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_enable_night_view.bringToFront();
 
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+
 
         Glide.with(this)
                 .load("https://firebasestorage.googleapis.com/v0/b/ecommerial-40d25.appspot.com/o/NiteWatch%2FHAWK%2Fv2_hawk_201_listing_front_day.png?alt=media")
@@ -198,8 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 rlt_ad.setVisibility(View.GONE);
                 rlt_ad.setAnimation(fadeOut);
-                if(session.getSwitchHuongDan())
-                {
+                if (session.getSwitchHuongDan()) {
                     HuongDan2();
                 }
             }
@@ -209,11 +205,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     private void init() {
         session = new Session(getApplicationContext());
-        /*accountUser = new AccountUser();
-        accountUser.update_firebaseAccount();*/
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         cartSqliteHelper = new CartSqliteHelper(this);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar_layout);
@@ -235,8 +230,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
 
         setUpQuangCao();
-    }
 
+        /*if (currentUser != null) {
+
+            accountUser = new AccountUser();
+            accountUser.update_firebaseAccount();
+            Toast.makeText(this, "Hello "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        }*/
+
+    }
+    AccountUser accountUser;
     private void getProductdata() {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -278,10 +281,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+
     public void HuongDan() {
         final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.btn_close_quangcao),  "tắt cửa sổ quảng cáo")
+                        TapTarget.forView(findViewById(R.id.btn_close_quangcao), "tắt cửa sổ quảng cáo")
                                 .tintTarget(true)
                                 .cancelable(true)
                                 .id(1))
@@ -305,10 +309,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
         sequence.start();
     }
-    public void HuongDan2(){
+
+    public void HuongDan2() {
         final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.btn_enable_night_view),  "Night Mode","xem sản phẩm của bằng cách mô phỏng ban đêm")
+                        TapTarget.forView(findViewById(R.id.btn_enable_night_view), "Night Mode", "xem sản phẩm của bằng cách mô phỏng ban đêm")
                                 .tintTarget(false)
                                 .cancelable(true)
                                 .id(1),
@@ -342,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SearchView searchView;
     MenuItem menuItem;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -350,7 +356,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search Here");
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
 
 
         //thiết lập badge cart count
@@ -401,8 +406,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-            if(session.getSwitchHuongDan())
-                {HuongDan();}
+        if (session.getSwitchHuongDan()) {
+            HuongDan();
+        }
         return true;
     }
 

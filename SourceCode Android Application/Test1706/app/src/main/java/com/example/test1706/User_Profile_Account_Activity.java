@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class User_Profile_Account_Activity extends AppCompatActivity {
     CircleImageView img_user_avatar;
-    Toolbar toolbar;
+    Toolbar toolbar_profile;
     AccountUser accountUser;
     EditText tv_name_profile, tv_phonenumber_profile, tv_address_profile;
     FirebaseDatabase firebaseDatabase;
@@ -42,6 +43,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     Button btn_save_profile;
     FirebaseUser firebaseUser;
     String userUID;
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,12 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        //loading
+        pd = new ProgressDialog(User_Profile_Account_Activity.this);
+        pd.setMessage("đang lấy dữ liệu");
+        pd.show();
+
 
         isEditing = false;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +137,8 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                             .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
                             .apply(new RequestOptions().centerCrop())
                             .into(img_user_avatar);
+                    pd.cancel();
+                    toolbar_profile.setTitle(accountUser1.getEmail());
                 }
 
                 @Override
@@ -140,6 +150,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     }
 
     public void init() {
+        toolbar_profile = (Toolbar) findViewById(R.id.toolbar_profile);
         tv_name_profile = (EditText) findViewById(R.id.tv_name_profile);
         tv_phonenumber_profile = (EditText) findViewById(R.id.tv_phonenumber_profile);
         tv_address_profile = (EditText) findViewById(R.id.tv_address_profile);
