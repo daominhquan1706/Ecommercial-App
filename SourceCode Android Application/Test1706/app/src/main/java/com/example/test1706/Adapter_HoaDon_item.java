@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,7 +90,7 @@ public class Adapter_HoaDon_item extends BaseAdapter implements Filterable {
                     b.putString("PaymentId", orders_item.getPaymentid());
                     intent.putExtras(b);
                     context.startActivity(intent);
-                    Log.d(TAG, "onClick: đã mở được trang details");
+                    ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             });
 

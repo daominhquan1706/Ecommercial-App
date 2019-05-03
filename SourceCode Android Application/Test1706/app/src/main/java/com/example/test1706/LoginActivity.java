@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +29,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.test1706.Config.Session;
+import com.example.test1706.UserModel.AccountUser;
+import com.firebase.ui.auth.AuthUI;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -55,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialogdialog;
     private View relativelayout;
     private TextInputLayout minputLayout_email, minputLayout_password;
-
+    Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
+    private static int SIGN_IN_REQUEST_CODE_GOOGLE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,11 +103,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
         }
+
+
         findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -112,22 +120,70 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        Button mEmailSignUpButton = (Button) findViewById(R.id.btn_register);
-        mEmailSignUpButton.setVisibility(View.GONE);
-        mEmailSignUpButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityAnimation();
-            }
-        });
         progressDialogdialog.dismiss();
         session = new Session(getApplicationContext());
         if(session.getSwitchHuongDan())
         {
             Huongdan();
         }
+        setupButtonResgister();
+    }
+
+    private void setupButtonResgister(){
+        btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
+        btn_facebook = (Button) findViewById(R.id.btn_facebook);
+        btn_normal = (Button) findViewById(R.id.btn_normal_account);
+        btn_phonenumber = (Button) findViewById(R.id.btn_phone_number);
+
+        btn_phonenumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, Login_Register_Menu_PhoneNumber.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        btn_normal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, Login_RegisterActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        btn_google_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE_GOOGLE);
+
+                } else {
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+        });
     }
     private Session session;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SIGN_IN_REQUEST_CODE_GOOGLE) {
+            if (resultCode == RESULT_OK) {
+                AccountUser accountUser;
+                accountUser = new AccountUser();
+                accountUser.update_firebaseAccount();
+                Snackbar.make(this.getCurrentFocus(), "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            } else {
+                Snackbar.make(this.getCurrentFocus(), "TRY AGAIN !!!!", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private void Huongdan() {
         final TapTargetSequence sequence = new TapTargetSequence(this)

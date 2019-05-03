@@ -150,4 +150,9 @@ public class Cart_Activity extends AppCompatActivity {
         btn_contiueshopping = (Button) findViewById(R.id.btn_contiueshopping);
         recycleview_horizontal_nitewatch_Hawk = (RecyclerView) findViewById(R.id.recycleview_cart_list);
     }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

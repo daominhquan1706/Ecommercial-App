@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.r0adkll.slidr.Slidr;
 
 public class Login_Register_Menu extends AppCompatActivity {
     Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
@@ -35,6 +36,7 @@ public class Login_Register_Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__menu);
+        Slidr.attach(this);
         init();
         btn_phonenumber.setOnClickListener(new View.OnClickListener() {
             @Override
