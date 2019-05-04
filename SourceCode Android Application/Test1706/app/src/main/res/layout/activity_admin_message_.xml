@@ -16,4 +16,5 @@
         tools:listitem="@layout/item_account_user_vertical">
 
     </ListView>
+    <include layout="@layout/loading_screen"/>
 </RelativeLayout>

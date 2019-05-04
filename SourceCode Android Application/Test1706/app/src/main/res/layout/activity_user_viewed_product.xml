@@ -27,7 +27,7 @@
 
 
     </ScrollView>
-
+<include layout="@layout/loading_screen"/>
 
     <include
         layout="@layout/layout_search"

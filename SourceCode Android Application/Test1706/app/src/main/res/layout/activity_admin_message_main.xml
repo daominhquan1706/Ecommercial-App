@@ -7,7 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/clearblack"
     android:padding="@dimen/margin1">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+</RelativeLayout>
     <ListView
         android:transcriptMode="normal"
         android:stackFromBottom="true"
@@ -53,5 +57,5 @@
         android:textColor="@color/white"
         android:textColorHint="@color/gray" />
 
-
+    <include layout="@layout/loading_screen"/>
 </RelativeLayout>

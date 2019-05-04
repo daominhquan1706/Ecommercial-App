@@ -25,6 +25,8 @@ import com.r0adkll.slidr.Slidr;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class Admin_Message_Activity extends AppCompatActivity {
     CartSqliteHelper cartSqliteHelper;
     ListView lv_user_chat_pick;
@@ -35,7 +37,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
     Admin_message_account_adapter adapter;
     List<String> userUID_List,mkey;
     String username;
-
+    GifImageView loadingscreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
 
     public void init() {
+        loadingscreen= (GifImageView) findViewById(R.id.loadingscreen);
         mkey=new ArrayList<String>();
         userUID_List = new ArrayList<String>();
         database = FirebaseDatabase.getInstance();
@@ -117,6 +120,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                     chatMessageList.add(chatMessage1);
                                     mkey.add(dataSnapshot1.getKey());
                                     adapter.notifyDataSetChanged();
+                                    loadingscreen.setVisibility(View.GONE);
                                 }
                             }
 

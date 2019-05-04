@@ -110,8 +110,8 @@
     </ScrollView>
 
     <pl.droidsonroids.gif.GifImageView
-        android:background="#0E1E2F"
-        android:src="@drawable/loadingscreen"
+        android:background="@color/loading_screen_background"
+        android:src="@drawable/loading_screen3"
         android:id="@+id/loadingscreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

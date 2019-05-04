@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    tools:openDrawer="end">
+    tools:openDrawer="start">
 
 
 
@@ -155,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/clearblack"
+        android:background="@color/black_cardview_nitewatch"
         android:theme="@style/NavigationView"
         app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/LightBlue"
