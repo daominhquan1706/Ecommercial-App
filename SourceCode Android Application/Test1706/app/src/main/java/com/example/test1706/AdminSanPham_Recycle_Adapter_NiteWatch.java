@@ -3,6 +3,7 @@ package com.example.test1706;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -110,6 +111,12 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             @Override
             public void onClick(View v) {
                 //Edit
+                Intent intent_edit =new Intent(mContext,AdminSanPham_edit_product.class);
+                Bundle b = new Bundle();
+                b.putString("ProductName", productt.getProduct_Name());
+                b.putString("ProductCategory", productt.getCategory());
+                intent_edit.putExtras(b);
+                mContext.startActivity(intent_edit);
             }
         });
 

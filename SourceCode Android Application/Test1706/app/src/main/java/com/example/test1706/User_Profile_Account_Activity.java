@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -179,5 +180,13 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userUID = firebaseUser.getUid();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(this,MainActivity.class);
+        startActivity(back);
+        finish();
     }
 }

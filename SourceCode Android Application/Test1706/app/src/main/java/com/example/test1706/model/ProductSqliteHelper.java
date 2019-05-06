@@ -110,20 +110,21 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
 
                 }, COLUMN_PRODUCT_PRODUCTNAME + "=?",
                 new String[]{productName}, null, null, null, null);
-        if (cursor != null)
+        Product product = new Product();
+        if (cursor != null) {
             cursor.moveToFirst();
 
-        Product Product = new Product();
-        Product.setProduct_Name((cursor.getString(0)));
-        Product.setPrice(Integer.parseInt(cursor.getString(1)));
-        Product.setImage(cursor.getString(2));
-        Product.setImage_Night(cursor.getString(3));
-        Product.setDescription(cursor.getString(4));
-        Product.setCategory(cursor.getString(5));
-        //Product.setCreateDate(Long.parseLong(cursor.getString(6)));
 
+            product.setProduct_Name((cursor.getString(0)));
+            product.setPrice(Integer.parseInt(cursor.getString(1)));
+            product.setImage(cursor.getString(2));
+            product.setImage_Night(cursor.getString(3));
+            product.setDescription(cursor.getString(4));
+            product.setCategory(cursor.getString(5));
+            //Product.setCreateDate(Long.parseLong(cursor.getString(6)));
+        }
         // return Product
-        return Product;
+        return product;
     }
 
 

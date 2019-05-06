@@ -14,7 +14,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +91,8 @@ public class AdminSanPham_add_product extends AppCompatActivity {
         // Write a message to the database
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+
+
         product = new Product();
 
         btn_add_product.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +153,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             // Write was successful!
-                            Intent i = new Intent(AdminSanPham_add_product.this,AdminSanPham_Activity.class);
+                            Intent i = new Intent(AdminSanPham_add_product.this, AdminSanPham_Activity.class);
                             startActivity(i);
                             finish();
                             // ...
@@ -177,7 +178,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
 
         Random rand = new Random();
         String finalname = spinner_category.getSelectedItem().toString() + " " + getRandomNumberInRange(100, 999);
-        finalname = finalname.substring(0,1).toUpperCase() + finalname.substring(1).toLowerCase();
+        finalname = finalname.substring(0, 1).toUpperCase() + finalname.substring(1).toLowerCase();
 
         tv_productname.setText(finalname);
         tv_price.setText(String.valueOf(getRandomNumberInRange(10, 80) * 10));
@@ -303,15 +304,16 @@ public class AdminSanPham_add_product extends AppCompatActivity {
     private Uri uriImage_Night;
     String TenHinh_DAY;
     String TenHinh_NIGHT;
+    ProgressDialog progressDialog_day;
 
     private void uploadFile_Day() {
         //if there is a file to upload
         if (uriImage_Day != null) {
             //displaying a progress dialog while upload is going on
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Đang tải lên Firebase hình DAY");
-            progressDialog.show();
-
+            progressDialog_day = new ProgressDialog(this);
+            progressDialog_day.setTitle("Đang tải lên Firebase hình DAY");
+            progressDialog_day.show();
+            progressDialog_night = new ProgressDialog(this);
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference();
             TenHinh_DAY = "NiteWatch/" + spinner_category.getSelectedItem().toString() + "/" + System.currentTimeMillis() + "_DAY.png";
@@ -322,13 +324,16 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //if the upload is successfull
                             //hiding the progress dialog
-                            progressDialog.dismiss();
+                            progressDialog_day.dismiss();
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     tv_url_image.setText(uri.toString());
+
+                                    progressDialog_night.setTitle("Đang tải lên Firebase hình NIGHT");
+                                    progressDialog_night.show();
                                     uploadFile_Night();
 
                                     //Do what you want with the url
@@ -341,7 +346,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         public void onFailure(@NonNull Exception exception) {
                             //if the upload is not successfull
                             //hiding the progress dialog
-                            progressDialog.dismiss();
+                            progressDialog_day.dismiss();
 
                             //and displaying error message
                             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
@@ -354,7 +359,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                            progressDialog_day.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
                     });
         }
@@ -365,14 +370,13 @@ public class AdminSanPham_add_product extends AppCompatActivity {
         }
     }
 
+    ProgressDialog progressDialog_night;
 
     private void uploadFile_Night() {
         //if there is a file to upload
         if (uriImage_Night != null) {
             //displaying a progress dialog while upload is going on
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Đang tải lên Firebase hình NIGHT");
-            progressDialog.show();
+
 
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageReference = storage.getReference();
@@ -384,7 +388,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             //if the upload is successfull
                             //hiding the progress dialog
-                            progressDialog.dismiss();
+                            progressDialog_night.dismiss();
 
                             //and displaying a success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
@@ -405,7 +409,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         public void onFailure(@NonNull Exception exception) {
                             //if the upload is not successfull
                             //hiding the progress dialog
-                            progressDialog.dismiss();
+                            progressDialog_night.dismiss();
 
                             //and displaying error message
                             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
@@ -418,7 +422,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                            progressDialog_night.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
                     });
         }
