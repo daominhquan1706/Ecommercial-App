@@ -1,9 +1,11 @@
 package com.example.test1706;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -22,6 +24,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -31,6 +35,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.test1706.Config.Session;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -44,6 +49,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class NiteWatchFragment extends Fragment {
     private static final String TAG = "NiteWatchFragment";
@@ -105,9 +112,13 @@ public class NiteWatchFragment extends Fragment {
     TextView textCartItemCount;
     CartSqliteHelper cartSqliteHelper;
 
+
+    ProgressDialog pd;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
         return inflater.inflate(R.layout.fragment_nite_watch, container, false);
     }
@@ -115,6 +126,8 @@ public class NiteWatchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+
     }
 
     @Override
@@ -184,10 +197,13 @@ public class NiteWatchFragment extends Fragment {
         }
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
+
+
         //set up slide show on header fragment
         final ImageAdapter adapter = new ImageAdapter(getActivity());
         v_page_massage.setAdapter(adapter);
@@ -202,7 +218,7 @@ public class NiteWatchFragment extends Fragment {
         menuAdapter = new FirebaseRecyclerAdapter<Product, MenuViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull Product model) {
-                    holder.mName.setText(model.getProduct_Name());
+                holder.mName.setText(model.getProduct_Name());
             }
 
 
@@ -371,6 +387,17 @@ public class NiteWatchFragment extends Fragment {
                     listproduct.add(itemproduct);
                     mkey.add(item.getKey());
                     adapter.notifyDataSetChanged();
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Do something after 5s = 5000ms
+                            hideLoadingScreen();
+                        }
+                    }, 1000);
+
+
                 }
             }
 
@@ -379,8 +406,17 @@ public class NiteWatchFragment extends Fragment {
 
             }
         });
+    }
 
-
+    private void hideLoadingScreen() {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+        fadeOut.setStartOffset(50);
+        fadeOut.setDuration(1000);
+        GifImageView loadingscreen;
+        loadingscreen = (GifImageView) getView().findViewById(R.id.loadingscreen);
+        loadingscreen.setVisibility(View.GONE);
+        loadingscreen.setAnimation(fadeOut);
     }
 
     private void init() {

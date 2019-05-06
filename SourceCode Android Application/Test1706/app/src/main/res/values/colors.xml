@@ -32,5 +32,6 @@
             android:type="linear"/>
     </color>
     <color name="dark_blue">#FF202F65</color>
+    <color name="loading_screen_background">#000001</color>
 
 </resources>

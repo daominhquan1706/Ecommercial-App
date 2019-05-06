@@ -30,7 +30,7 @@
             />
         <activity
             android:name=".MapBoxActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin_HoaDon_Activity"
             android:label="@string/title_activity_admin__hoa_don_"
@@ -41,10 +41,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin_HoaDon_Details_activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin_Message_Activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Checkout_activity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -67,19 +67,19 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Cart_Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_Register_Menu_PhoneNumber"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_Register_Menu"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdminSanPham_edit_product"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".User_Profile_Account_Activity"
             android:label="@string/title_activity_profile__account_"
@@ -89,28 +89,28 @@
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".AdminSanPham_add_product"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AdminSanPham_Activity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Checkout_PaymentDetails_activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ChatBoxMainActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".Admin_Message_chat_with_user"
-            android:theme="@style/AppTheme.SlidrActivityTheme"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".chart"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Admin"
             android:label="Admin dashboard"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/SplashscreenTheme">
@@ -126,11 +126,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_RegisterActivity"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.SlidrActivityTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

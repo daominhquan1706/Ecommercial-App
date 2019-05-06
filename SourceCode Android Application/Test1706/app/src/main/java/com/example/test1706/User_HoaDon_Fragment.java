@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class User_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
     ListView listView_order_admin;
@@ -37,6 +39,7 @@ public class User_HoaDon_Fragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     String UserUID;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -96,6 +99,8 @@ public class User_HoaDon_Fragment extends Fragment {
                 } else {
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
+                getView().findViewById(R.id.loadingscreen).setVisibility(View.GONE);
+
             }
 
             @Override

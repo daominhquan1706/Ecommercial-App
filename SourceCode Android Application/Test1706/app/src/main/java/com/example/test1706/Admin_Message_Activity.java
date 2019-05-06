@@ -1,10 +1,17 @@
 package com.example.test1706;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ListView;
 
 import com.example.test1706.model.CartSqliteHelper;
 import com.google.firebase.database.ChildEventListener;
@@ -18,9 +25,11 @@ import com.r0adkll.slidr.Slidr;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class Admin_Message_Activity extends AppCompatActivity {
     CartSqliteHelper cartSqliteHelper;
-    MyListView lv_user_chat_pick;
+    ListView lv_user_chat_pick;
     private static final String TAG = "Admin_Message_Activity";
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -28,7 +37,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
     Admin_message_account_adapter adapter;
     List<String> userUID_List,mkey;
     String username;
-
+    GifImageView loadingscreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +50,38 @@ public class Admin_Message_Activity extends AppCompatActivity {
         adapter = new Admin_message_account_adapter(this, chatMessageList);
         displayChatMessage();
         lv_user_chat_pick.setAdapter(adapter);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
+        findViewById(R.id.relativeLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return true;
+            }
+        });
+    }
+    protected void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
+
     public void init() {
+        loadingscreen= (GifImageView) findViewById(R.id.loadingscreen);
         mkey=new ArrayList<String>();
         userUID_List = new ArrayList<String>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
         cartSqliteHelper = new CartSqliteHelper(this);
-        lv_user_chat_pick = (MyListView) findViewById(R.id.lv_user_chat_pick);
+        lv_user_chat_pick = (ListView) findViewById(R.id.lv_user_chat_pick);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
@@ -88,6 +120,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                     chatMessageList.add(chatMessage1);
                                     mkey.add(dataSnapshot1.getKey());
                                     adapter.notifyDataSetChanged();
+                                    loadingscreen.setVisibility(View.GONE);
                                 }
                             }
 
@@ -124,6 +157,15 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

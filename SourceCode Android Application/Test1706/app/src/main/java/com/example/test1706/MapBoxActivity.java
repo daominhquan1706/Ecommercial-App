@@ -8,10 +8,10 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +51,7 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
+import com.r0adkll.slidr.Slidr;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -98,7 +99,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
     private MapboxDirections client;
     private DirectionsRoute currentRoute;
-    private TextView tvDistance, tvDurationMapbox,tvTinhTienShip;
+    private TextView tvDistance, tvDurationMapbox, tvTinhTienShip;
     public Point currentLocation;
     public Point huflitLocation;
     public Style stylee;
@@ -112,7 +113,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Slidr.attach(this);
         huflitLocation = Point.fromLngLat(106.667445, 10.776663);
 // Mapbox access token is configured here. This needs to be called either in your application
 // object or in the same activity which contains the mapview.
@@ -123,14 +124,22 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
         tvDurationMapbox = (TextView) findViewById(R.id.tvDurationMapbox);
         tvDistance = (TextView) findViewById(R.id.tvDistanceMapbox);
-        tvTinhTienShip= (TextView) findViewById(R.id.tvTinhTienShip);
+        tvTinhTienShip = (TextView) findViewById(R.id.tvTinhTienShip);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        FloatingActionButton search_location_button_mapbox = (FloatingActionButton) findViewById(R.id.search_location_button_mapbox);
+        search_location_button_mapbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearchActivity();
+            }
+        });
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuItem searchLocation_menuItem = menu.add(0, MENU_ITEM_ITEM1, 0, "Search");
         searchLocation_menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -151,7 +160,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         }
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
@@ -473,7 +482,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 currentRoute = response.body().routes().get(0);
                 tvDistance.setText(String.valueOf(round(currentRoute.distance() / 1000, 1) + " km"));
                 tvDurationMapbox.setText(String.valueOf(round((currentRoute.duration() / 60), 0) + " phút"));
-                tvTinhTienShip.setText(String.valueOf("$"+TinhTienShip(currentRoute.distance()/1000)));
+                tvTinhTienShip.setText(String.valueOf("$" + TinhTienShip(currentRoute.distance() / 1000)));
                 // Make a toast which displays the route's distance
                 Toast.makeText(MapBoxActivity.this, String.format("find location success !",
                         currentRoute.distance()), Toast.LENGTH_SHORT).show();
@@ -516,7 +525,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
             return 40;
         } else if (12 <= distance && distance <= 14) {
             return 45;
-        }else {
+        } else {
             return 50;
         }
     }
@@ -572,6 +581,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
+
     @Override
     public void finish() {
         super.finish();

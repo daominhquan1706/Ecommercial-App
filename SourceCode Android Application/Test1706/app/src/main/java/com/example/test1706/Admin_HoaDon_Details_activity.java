@@ -70,7 +70,6 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
                 if (orders != null) {
                     adapter = new Cart_Recycle_Adapter_NiteWatch(Admin_HoaDon_Details_activity.this, orders.getOrderDetails(), R.layout.item_checkout_item);
                     lv_checkout.setAdapter(adapter);
-
                     adapter.notifyDataSetChanged();
                     tv_total_price.setText(String.valueOf(orders.getTotal()));
                     name_order.setText(orders.getCustomerName());

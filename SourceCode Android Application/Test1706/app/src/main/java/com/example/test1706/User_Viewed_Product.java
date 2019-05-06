@@ -202,6 +202,8 @@ public class User_Viewed_Product extends AppCompatActivity {
                     list_data.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
                     productadapter.notifyDataSetChanged();
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
+
+                    findViewById(R.id.loadingscreen).setVisibility(View.GONE);
                 }
             }
 

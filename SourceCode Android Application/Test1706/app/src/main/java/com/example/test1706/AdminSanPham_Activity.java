@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.test1706.model.Product;
-import com.example.test1706.mongodb.Code_mongodb;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -30,9 +30,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AdminSanPham_Activity extends AppCompatActivity {
+import pl.droidsonroids.gif.GifImageView;
 
-    Button btn_addproduct, btn_firebase;
+public class AdminSanPham_Activity extends AppCompatActivity {
+    GifImageView loadingscreen;
+    Button  btn_firebase;
     FirebaseDatabase database;
     DatabaseReference myRef;
     List<Product> productList;
@@ -43,14 +45,14 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     private StorageReference mStorageRef;
     LinearLayout layout_product;
     List<Product> Hawk;
-
+    FloatingActionButton btn_add_product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sanpham);
         Slidr.attach(this);
         init();
-        btn_addproduct.setOnClickListener(new View.OnClickListener() {
+        btn_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AdminSanPham_Activity.this, AdminSanPham_add_product.class);
@@ -80,6 +82,8 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                     mkey.add(item.getKey());
                 }
                 productadapter.notifyDataSetChanged();
+                loadingscreen.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -111,7 +115,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         btn_firebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(String item : getImageHAWK()){
+                for (String item : getImageHAWK()) {
                     addToFireBase(item);
                 }
 
@@ -273,8 +277,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                     });
 
 
-
-            if(product.getCategory()=="HAWK"){
+            if (product.getCategory() == "HAWK") {
                 Hawk.add(product);
             }
         }
@@ -306,9 +309,11 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     }
 
     private void init() {
+
+        btn_add_product= (FloatingActionButton) findViewById(R.id.btn_add_product);
+        loadingscreen = (GifImageView) findViewById(R.id.loadingscreen);
         btn_firebase = (Button) findViewById(R.id.btn_firebase);
         layout_product = (LinearLayout) findViewById(R.id.layout_product);
-        btn_addproduct = (Button) findViewById(R.id.btn_add_product);
         listView_admin_product_nitewatch = (RecyclerView) findViewById(R.id.listView_admin_product_nitewatch);
     }
 }

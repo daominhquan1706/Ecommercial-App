@@ -22,10 +22,10 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.test1706.Config.Config;
 import com.example.test1706.Config.Session;
+import com.example.test1706.UserModel.AccountUser;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
-import com.example.test1706.model.UserAccount;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +42,7 @@ import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
+import com.r0adkll.slidr.Slidr;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,6 +74,7 @@ public class Checkout_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_activity);
+        Slidr.attach(this);
         init();
         layDataUser();
         tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
@@ -127,10 +129,12 @@ public class Checkout_activity extends AppCompatActivity {
             myRef.child("Account").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    UserAccount userAccount = dataSnapshot.getValue(UserAccount.class);
-                    name_order.setText(userAccount.getName());
-                    sdt_order.setText(userAccount.getSdt());
-                    address_order.setText(userAccount.getDiachi());
+                    AccountUser userAccount = dataSnapshot.getValue(AccountUser.class);
+                    if (userAccount != null) {
+                        name_order.setText(userAccount.getName());
+                        sdt_order.setText(userAccount.getSDT());
+                        address_order.setText(userAccount.getDiachi());
+                    }
                 }
 
                 @Override
@@ -229,11 +233,11 @@ public class Checkout_activity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     startActivity(new Intent(Checkout_activity.this, Checkout_PaymentDetails_activity.class)
-                                    .putExtra("Checkout_PaymentDetails_activity", paymentDetails)
-                                    .putExtra("PaymentAmount", amount)
-                                    .putExtra("tennguoinhan", name_order.getText().toString())
-                                    .putExtra("sodienthoai",sdt_order.getText().toString() )
-                                    .putExtra("diachi",address_order.getText().toString() )
+                            .putExtra("Checkout_PaymentDetails_activity", paymentDetails)
+                            .putExtra("PaymentAmount", amount)
+                            .putExtra("tennguoinhan", name_order.getText().toString())
+                            .putExtra("sodienthoai", sdt_order.getText().toString())
+                            .putExtra("diachi", address_order.getText().toString())
 
                     );
                     finish();

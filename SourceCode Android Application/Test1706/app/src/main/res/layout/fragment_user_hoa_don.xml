@@ -69,5 +69,5 @@
             tools:listitem="@layout/item_admin_hoadon" />
     </android.support.v4.widget.NestedScrollView>
 
-
+    <include layout="@layout/loading_screen"/>
 </android.support.constraint.ConstraintLayout>

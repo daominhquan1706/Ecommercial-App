@@ -9,6 +9,8 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorPrimary">#131212</item>
         <item name="colorPrimaryDark">#131212</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -27,6 +29,7 @@
     </style>
 
     <style name="SplashscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowBackground">@drawable/bg_splashscreen</item>
     </style>
 
@@ -48,4 +51,13 @@
     <style name="NavigationView">
         <item name="android:textColorSecondary">#696969</item>
     </style>
+
+    <style name="AppTheme.SplashScreen" >
+        <item name="colorPrimary">#131212</item>
+        <item name="colorPrimaryDark">#131212</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

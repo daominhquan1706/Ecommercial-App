@@ -48,14 +48,14 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile__account);
+        setContentView(R.layout.activity_user_profile__account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //loading
         pd = new ProgressDialog(User_Profile_Account_Activity.this);
-        pd.setMessage("đang lấy dữ liệu");
+        pd.setMessage("Đang lấy dữ liệu");
         pd.show();
 
 
@@ -139,6 +139,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                             .into(img_user_avatar);
                     pd.cancel();
                     toolbar_profile.setTitle(accountUser1.getEmail());
+                    findViewById(R.id.loadingscreen).setVisibility(View.GONE);
                 }
 
                 @Override

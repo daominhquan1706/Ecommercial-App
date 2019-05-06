@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.r0adkll.slidr.Slidr;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +28,7 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
-
+        Slidr.attach(this);
 
         tv_nguoinhan = (TextView) findViewById(R.id.tv_nguoinhan);
         tv_sodienthoai = (TextView) findViewById(R.id.tv_sodienthoai);

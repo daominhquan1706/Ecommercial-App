@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class Admin_Message_chat_with_user extends AppCompatActivity {
     List<ChatMessage> chatMessageList;
@@ -46,7 +48,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
     Chat_Adapter customListAdapter;
     ActionBar actionBar;
     String userUID, userEmail;
-
+GifImageView loadingscreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,9 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
 
         activity_chatboxmain = (RelativeLayout) findViewById(R.id.activity_chatboxmainactivity);
         btn_send_message = (FloatingActionButton) findViewById(R.id.fab);
+        loadingscreen = (GifImageView) findViewById(R.id.loadingscreen);
+
+
         input = (EditText) findViewById(R.id.input);
 
         displayChatMessage();
@@ -161,6 +166,8 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
                     Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
                     customListAdapter.notifyDataSetChanged();
                     scrollMyListViewToBottom();
+                    loadingscreen.setVisibility(View.GONE);
+                    btn_send_message.setVisibility(View.VISIBLE);
                 }
 
                 @Override

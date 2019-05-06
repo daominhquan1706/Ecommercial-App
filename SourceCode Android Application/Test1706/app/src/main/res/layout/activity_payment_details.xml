@@ -4,31 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#141C34"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Checkout_PaymentDetails_activity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="đặt hàng thành công"
-        android:textAlignment="center"
-        android:textColor="@color/LightBlue"
-        android:textSize="40sp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/thongtingiaohang" />
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/thank_you" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        app:cardBackgroundColor="@color/black_cardview_nitewatch"
+        app:cardBackgroundColor="#232736"
         app:cardCornerRadius="20dp">
 
         <LinearLayout

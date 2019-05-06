@@ -99,7 +99,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                                 Toast.makeText(AdminSanPham_add_product.this, "That bai , vui long thu lai", Toast.LENGTH_SHORT).show();
                                 // ...
                             }
-                        });;
+                        });
 
             }
         });

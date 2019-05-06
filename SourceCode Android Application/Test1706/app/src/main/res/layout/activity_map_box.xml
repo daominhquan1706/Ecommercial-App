@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -102,5 +103,18 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:id="@+id/search_location_button_mapbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/LightBlue"
+        app:srcCompat="@drawable/ic_search_black_24dp" />
 
 </RelativeLayout>
