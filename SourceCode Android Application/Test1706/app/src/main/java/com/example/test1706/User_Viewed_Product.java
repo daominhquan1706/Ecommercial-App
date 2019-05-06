@@ -202,13 +202,11 @@ public class User_Viewed_Product extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                /*for (DataSnapshot item : dataSnapshot.getChildren()) {
                     list_data.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
                     productadapter.notifyDataSetChanged();
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
-
-
-                }
+                }*/
             }
 
             @Override

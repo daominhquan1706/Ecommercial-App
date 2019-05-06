@@ -35,6 +35,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.CommentProduct;
 import com.example.test1706.model.Product;
+import com.example.test1706.model.ProductSqliteHelper;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,8 +95,16 @@ public class DetailsProductActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             product = dataSnapshot.getValue(Product.class);
-                            LoadDataProduct();
-                            setUpAddToCart();
+                            if(product!=null){
+                                LoadDataProduct();
+                                setUpAddToCart();
+                            }else{
+                                ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(DetailsProductActivity.this);
+                                productSqliteHelper.deleteProduct(productSqliteHelper.getProduct(b.getString("ProductName")));
+                                Toast.makeText(DetailsProductActivity.this, "Sản phẩm không tồn tại", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
                         }
 
                         @Override
@@ -174,6 +183,7 @@ public class DetailsProductActivity extends AppCompatActivity {
             actionBar.setTitle("");
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -388,6 +398,7 @@ public class DetailsProductActivity extends AppCompatActivity {
 
 
     private void LoadDataProduct() {
+
         mName.setText(product.getProduct_Name());
         mPrice.setText("$" + product.getPrice());
         mCategory.setText(product.getCategory());
@@ -400,6 +411,7 @@ public class DetailsProductActivity extends AppCompatActivity {
                 .load(product.getImage_Night())
                 .apply(new RequestOptions().fitCenter())
                 .into(img_details_nitewatch_night);
+
 
     }
 

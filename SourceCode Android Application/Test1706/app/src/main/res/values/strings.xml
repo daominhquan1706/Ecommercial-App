@@ -28,11 +28,13 @@
     <string name="hawk">HAWK</string>
 
     <string-array name="category_nitewatch">
-        <item>Hawk</item>
-        <item>Alpha</item>
-        <item>Icon</item>
-        <item>Marquess</item>
-        <item>Mx10</item>
+        <item>ALPHA</item>
+        <item>HAWK</item>
+        <item>ICON-AUTO</item>
+        <item>ICON-QUARTZ</item>
+        <item>MARQESS</item>
+        <item>MX10</item>
+
 
     </string-array>
     <string name="title_activity_profile__account_">Profile_Account_Activity</string>

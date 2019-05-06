@@ -34,10 +34,8 @@
     </style>
 
     <style name="PopupMenuStyle" parent="Theme.AppCompat.Light">
-
         <item name="android:background">@color/colordark</item>
         <item name="android:textColor">@color/white</item>
-
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

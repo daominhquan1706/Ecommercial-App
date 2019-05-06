@@ -20,6 +20,7 @@ import com.example.test1706.model.CartSqliteHelper;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.r0adkll.slidr.Slidr;
 
 import java.util.List;
 
@@ -36,8 +37,9 @@ public class Cart_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
+        Slidr.attach(this);
         init();
+
         cartSqliteHelper = new CartSqliteHelper(this);
 
         cartList = cartSqliteHelper.getAllCarts();
@@ -78,8 +80,7 @@ public class Cart_Activity extends AppCompatActivity {
         });
         session = new Session(getApplicationContext());
 
-        if(session.getSwitchHuongDan())
-        {
+        if (session.getSwitchHuongDan()) {
             HuongDan();
         }
     }
@@ -150,6 +151,7 @@ public class Cart_Activity extends AppCompatActivity {
         btn_contiueshopping = (Button) findViewById(R.id.btn_contiueshopping);
         recycleview_horizontal_nitewatch_Hawk = (RecyclerView) findViewById(R.id.recycleview_cart_list);
     }
+
     @Override
     public void finish() {
         super.finish();

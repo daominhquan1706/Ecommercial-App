@@ -88,11 +88,11 @@ public class AdminSanPham_Activity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                /*for (DataSnapshot item : dataSnapshot.getChildren()) {
                     productList.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
                 }
-                productadapter.notifyDataSetChanged();
+                productadapter.notifyDataSetChanged();*/
             }
 
             @Override
@@ -315,5 +315,13 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         btn_firebase = (Button) findViewById(R.id.btn_firebase);
         layout_product = (LinearLayout) findViewById(R.id.layout_product);
         listView_admin_product_nitewatch = (RecyclerView) findViewById(R.id.listView_admin_product_nitewatch);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(this,Admin.class);
+        startActivity(back);
+        finish();
     }
 }
