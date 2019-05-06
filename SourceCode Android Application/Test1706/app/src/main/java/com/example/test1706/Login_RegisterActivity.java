@@ -102,10 +102,10 @@ public class Login_RegisterActivity extends AppCompatActivity {
                         accountUser = new AccountUser();
                         accountUser.update_firebaseAccount();
 
-                        Intent i = new Intent(Login_RegisterActivity.this, MainActivity.class);
-                        finish();
+                        Intent i = new Intent(Login_RegisterActivity.this, User_Profile_Account_Activity.class);
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        finish();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -137,5 +137,14 @@ public class Login_RegisterActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(this, MainActivity.class);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        startActivity(i);
+
     }
 }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import pl.droidsonroids.gif.GifImageView;
+import timber.log.Timber;
 
 public class User_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
@@ -54,10 +54,9 @@ public class User_HoaDon_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
-        if(currentUser==null){
+        if (currentUser == null) {
             UserUID = "";
-        }
-        else{
+        } else {
             UserUID = currentUser.getUid();
         }
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
@@ -66,7 +65,7 @@ public class User_HoaDon_Fragment extends Fragment {
                 if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) && Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getUserID().equals(UserUID)) {
                     list.add(dataSnapshot.getValue(Orders.class));
                     mkey.add(dataSnapshot.getKey());
-                    Log.d(TAG, "onDataChange: dataSnapshot1.getKey() : " + dataSnapshot.getKey());
+                    Timber.d("onDataChange: dataSnapshot1.getKey() : %s", dataSnapshot.getKey());
                     adapter.notifyDataSetChanged();
                 }
                 if (list.size() == 0) {
@@ -82,7 +81,7 @@ public class User_HoaDon_Fragment extends Fragment {
                 if (mkey.contains(dataSnapshot.getKey())) {
                     if (!Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getStatus().equals(Status)) {
                         list.remove(mkey.indexOf(dataSnapshot.getKey()));
-                        mkey.remove(mkey.indexOf(dataSnapshot.getKey()));
+                        mkey.remove(dataSnapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }
                 } else {
@@ -99,8 +98,6 @@ public class User_HoaDon_Fragment extends Fragment {
                 } else {
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
-                getView().findViewById(R.id.loadingscreen).setVisibility(View.GONE);
-
             }
 
             @Override

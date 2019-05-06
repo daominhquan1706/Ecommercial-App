@@ -1,6 +1,5 @@
 package com.example.test1706;
 
-import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,8 +42,6 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     Button btn_save_profile;
     FirebaseUser firebaseUser;
     String userUID;
-    ProgressDialog pd;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +51,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //loading
-        pd = new ProgressDialog(User_Profile_Account_Activity.this);
-        pd.setMessage("Đang lấy dữ liệu");
-        pd.show();
+
 
 
         isEditing = false;
@@ -124,21 +119,25 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     AccountUser accountUser1;
 
     public void getCurrentUser() {
-
+        toolbar_profile.setTitle(firebaseUser.getEmail());
         if (firebaseUser != null) {
             databaseReference.child("Account").child(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     accountUser1 = dataSnapshot.getValue(AccountUser.class);
-                    tv_name_profile.setText(accountUser1.getName());
-                    tv_phonenumber_profile.setText(accountUser1.getSDT());
-                    tv_address_profile.setText(accountUser1.getDiachi());
-                    Glide.with(User_Profile_Account_Activity.this)
-                            .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
-                            .apply(new RequestOptions().centerCrop())
-                            .into(img_user_avatar);
-                    pd.cancel();
-                    toolbar_profile.setTitle(accountUser1.getEmail());
+                    if (accountUser != null) {
+                        tv_name_profile.setText(accountUser1.getName());
+                        tv_phonenumber_profile.setText(accountUser1.getSDT());
+                        tv_address_profile.setText(accountUser1.getDiachi());
+                        Glide.with(User_Profile_Account_Activity.this)
+                                .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
+                                .apply(new RequestOptions().centerCrop())
+                                .into(img_user_avatar);
+
+                    } else {
+                        update_firebaseAccount();
+                        getCurrentUser();
+                    }
                     findViewById(R.id.loadingscreen).setVisibility(View.GONE);
                 }
 
@@ -147,6 +146,17 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
 
                 }
             });
+        }
+    }
+
+    public void update_firebaseAccount() {
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            AccountUser accountUser = new AccountUser(currentUser.getUid(), currentUser.getEmail());
+            databaseReference.child("Account").child(currentUser.getUid()).setValue(accountUser);
         }
     }
 

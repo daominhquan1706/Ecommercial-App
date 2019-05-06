@@ -393,11 +393,10 @@ public class NiteWatchFragment extends Fragment {
                         @Override
                         public void run() {
                             // Do something after 5s = 5000ms
-                            hideLoadingScreen();
                         }
                     }, 1000);
 
-
+                    hideLoadingScreen();
                 }
             }
 

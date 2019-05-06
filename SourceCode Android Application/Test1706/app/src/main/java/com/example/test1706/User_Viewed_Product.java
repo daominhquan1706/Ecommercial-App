@@ -26,6 +26,8 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.example.test1706.model.ProductSqliteHelper;
@@ -37,8 +39,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.RequiresApi;
 
 public class User_Viewed_Product extends AppCompatActivity {
     ProductSqliteHelper productSqliteHelper;
@@ -62,6 +62,7 @@ public class User_Viewed_Product extends AppCompatActivity {
                 R.layout.item_layout_watch_nitewatch);
         recyclerView.setAdapter(product_recycle_adapter_niteWatch);
         setUpToolbar();
+
     }
 
     @Override
@@ -192,6 +193,9 @@ public class User_Viewed_Product extends AppCompatActivity {
                     list_data.add(itemProduct);
                     mkey.add(item.getKey());
                     productadapter.notifyDataSetChanged();
+                    if (findViewById(R.id.loadingscreen).getVisibility() == View.VISIBLE) {
+                        findViewById(R.id.loadingscreen).setVisibility(View.GONE);
+                    }
 
                 }
             }
@@ -203,7 +207,7 @@ public class User_Viewed_Product extends AppCompatActivity {
                     productadapter.notifyDataSetChanged();
                     Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
 
-                    findViewById(R.id.loadingscreen).setVisibility(View.GONE);
+
                 }
             }
 
@@ -282,7 +286,8 @@ public class User_Viewed_Product extends AppCompatActivity {
             }
         });
 
-
+        product_recycle_adapter_niteWatch.setAppBarLayout(appBarLayout);
+        product_recycle_adapter_niteWatch.setTextCartItemCount(textCartItemCount);
         return true;
     }
 
@@ -305,6 +310,7 @@ public class User_Viewed_Product extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 

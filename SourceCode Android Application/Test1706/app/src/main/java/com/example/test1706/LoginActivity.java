@@ -253,31 +253,34 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+ProgressDialog pd;
     public void DangNhap() {
+        pd = new ProgressDialog(this);
+        pd.setMessage("Đang kiểm tra...");
+        pd.show();
         String email = mEmailView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
-        if (email.isEmpty()) {
-            mEmailView.setError("Email is required");
-            mEmailView.requestFocus();
-            return;
-        } else if (!email.contains("@")) {
-            mEmailView.setError("This is not valid email");
-            mEmailView.requestFocus();
-            return;
-        } else if (password.isEmpty()) {
-            mPasswordView.setError("Password is required");
-            mPasswordView.requestFocus();
-            return;
-        } else if (password.length() <= 6) {
-            mPasswordView.setError("Password more than 5 characters");
-            mPasswordView.requestFocus();
-            return;
-        }
+
         if (email.equals("admin") && password.equals("admin")) {
             Intent intent = new Intent(LoginActivity.this, Admin.class);
             startActivity(intent);
             return;
+        }
+
+
+
+        if (email.isEmpty()) {
+            mEmailView.setError("Email is required");
+            mEmailView.requestFocus();
+        } else if (!email.contains("@")) {
+            mEmailView.setError("This is not valid email");
+            mEmailView.requestFocus();
+        } else if (password.isEmpty()) {
+            mPasswordView.setError("Password is required");
+            mPasswordView.requestFocus();
+        } else if (password.length() <= 6) {
+            mPasswordView.setError("Password more than 5 characters");
+            mPasswordView.requestFocus();
         } else if (email.length() > 6 && password.length() > 6) {
             Snackbar snackbar = Snackbar
                     .make(relativelayout, "Chechking information", Snackbar.LENGTH_LONG);
@@ -286,6 +289,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            pd.cancel();
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
