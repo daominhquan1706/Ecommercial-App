@@ -77,7 +77,8 @@ dependencies {
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
-
+    //noinspection GradleDependency
+    implementation 'com.ramotion.cardslider:card-slider:0.3.0'
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.2'
 }
 

@@ -21,6 +21,8 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.r0adkll.slidr.Slidr;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 
 import java.util.List;
 
@@ -83,6 +85,11 @@ public class Cart_Activity extends AppCompatActivity {
         if (session.getSwitchHuongDan()) {
             HuongDan();
         }
+
+        /*recycleview_horizontal_nitewatch_Hawk.setLayoutManager(new CardSliderLayoutManager(this));
+
+        new CardSnapHelper().attachToRecyclerView(recycleview_horizontal_nitewatch_Hawk);*/
+
     }
 
     private Session session;
