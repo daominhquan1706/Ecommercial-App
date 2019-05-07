@@ -155,4 +155,9 @@
     <string name="hienquangcao">Hiện quảng cáo</string>
     <string name="hienhuongdan">Hiện hướng dẫn</string>
     <string name="doingonngu">Đổi ngôn ngữ</string>
+    <string name="menu_admin_name_sanpham">SẢN PHẢM</string>
+    <string name="menu_admin_tinnhan">TIN NHẮN</string>
+    <string name="menu_admin_doanthu">DOANH THU</string>
+    <string name="menu_admin_map">Test Google Map</string>
+    <string name="menu_admin_ds_hoadon">DANH SÁCH HÓA ĐƠN</string>
 </resources>

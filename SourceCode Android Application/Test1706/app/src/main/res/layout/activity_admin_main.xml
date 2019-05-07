@@ -39,12 +39,12 @@
                         android:id="@+id/img_ic_chinhsuasanpham"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/chinhssuasanpham" />
+                        android:src="@drawable/chinhssuasanpham" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SẢN PHẢM"
+                        android:text="@string/menu_admin_name_sanpham"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -71,12 +71,12 @@
                         android:id="@+id/img_nhantinvoikhach"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/nhantinkhachhang" />
+                        android:src="@drawable/nhantinkhachhang" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TIN NHẮN"
+                        android:text="@string/menu_admin_tinnhan"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -111,12 +111,12 @@
                         android:id="@+id/img_ic_BaoCaoDoanhThu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/baocaodoanhthu" />
+                        android:src="@drawable/baocaodoanhthu" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DOANH THU"
+                        android:text="@string/menu_admin_doanthu"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -143,12 +143,12 @@
                         android:id="@+id/img_thongTinGiaoHang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/image_location" />
+                        android:src="@drawable/image_location" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Test Google Map"
+                        android:text="@string/menu_admin_map"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -183,12 +183,12 @@
                         android:id="@+id/img_ic_accountmanager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/thongtingiaohang" />
+                        android:src="@drawable/thongtingiaohang" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DS HÓA ĐƠN"
+                        android:text="@string/menu_admin_ds_hoadon"
                         android:textColor="@color/white" />
                 </LinearLayout>
 

@@ -144,7 +144,7 @@
     <string name="user_location_permission_explanation">We need your location to locate</string>
     <string name="admin">Admin</string>
     <string name="function">Function</string>
-    <string name="nhantinvoiadmin">Chat with Admin</string>
+    <string name="nhantinvoiadmin">Message with Admin</string>
     <string name="donhang">Bill</string>
     <string name="sanphamdaxem">Viewed Product</string>
     <string name="taikhoan">Account</string>
@@ -155,4 +155,9 @@
     <string name="hienquangcao">Show Advertising</string>
     <string name="hienhuongdan">Show tutorial</string>
     <string name="doingonngu">Change language</string>
+    <string name="menu_admin_name_sanpham">PRODUCT</string>
+    <string name="menu_admin_tinnhan">MESSAGE</string>
+    <string name="menu_admin_doanthu">REVENUE</string>
+    <string name="menu_admin_map">MAP</string>
+    <string name="menu_admin_ds_hoadon">BILLING LIST</string>
 </resources>

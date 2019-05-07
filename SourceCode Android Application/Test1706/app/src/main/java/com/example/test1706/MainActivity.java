@@ -587,7 +587,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 session.setSwitchHuongDan(nav_advertisement.isChecked());
                 break;*/
             case R.id.nav_changelang:
-
                 showChangeLangDialog();
                 break;
 
@@ -606,15 +605,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(DialogInterface dialog, int i) {
                 if(i==0)
                 {
-                    setLocale("en");
+                    session.setLanguage("vi");
+                    setLocale("vi");
                     recreate();
                 }
                 else if(i==1){
+                    session.setLanguage("fr");
                     setLocale("fr");
                     recreate();
                 }
                 else if(i==2){
-                    setLocale("vn");
+                    session.setLanguage("en");
+                    setLocale("en");
                     recreate();
 
                 }

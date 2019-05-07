@@ -155,4 +155,9 @@
     <string name="hienquangcao">Montrer la publicité</string>
     <string name="hienhuongdan">Montrer le tutoriel</string>
     <string name="doingonngu">Changer de langue</string>
+    <string name="menu_admin_name_sanpham">PRODUIT</string>
+    <string name="menu_admin_tinnhan">MESSAGE</string>
+    <string name="menu_admin_doanthu">REVENU</string>
+    <string name="menu_admin_map">CARTE</string>
+    <string name="menu_admin_ds_hoadon">LISTE DE FACTURATION</string>
 </resources>
