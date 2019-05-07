@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="10dp"
-            android:text="ICON AUTOMATIC"
+            android:text="@string/icon_automatic"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="27sp" />
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="THE POWER TO IMPRESS"
+            android:text="@string/the_power_to_impress"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="13sp" />

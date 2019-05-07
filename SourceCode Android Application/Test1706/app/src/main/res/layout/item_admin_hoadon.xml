@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:folding-cell="http://schemas.android.com/tools"
     android:id="@+id/layout_admin_hoadon_item"
     android:layout_width="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:layout_height="wrap_content"
-    android:background="@color/clearblack"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <RelativeLayout
         android:id="@+id/thongtinthem"
@@ -18,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="1 phút trước"
-            android:textColor="@color/gray" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_position"
@@ -26,7 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="#1"
-            android:textColor="@color/gray" />
+            android:textColor="@color/black" />
     </RelativeLayout>
 
 
@@ -35,22 +38,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/thongtinthem"
-        android:clipChildren="true"
-        android:clipToPadding="true">
+        folding-cell:animationDuration="1500"
+        folding-cell:backSideColor="#ABCDF0">
 
         <FrameLayout
 
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
             android:visibility="gone">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="0dp">
 
                 <include layout="@layout/activity_admin_hoa_don__details_activity" />
 
@@ -68,7 +70,7 @@
                 android:layout_below="@id/tv_creation_time"
                 android:visibility="visible"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -80,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         app:cardBackgroundColor="@color/dark_blue"
-                        app:cardCornerRadius="20dp">
+                        app:cardCornerRadius="0dp">
 
                         <TextView
                             android:id="@+id/tv_payid"

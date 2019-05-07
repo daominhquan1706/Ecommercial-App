@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:padding="10dp"
-            android:text="MARQUESS"
+            android:text="@string/marquess"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="27sp" />
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="ULTRA-SLIM STYLE"
+            android:text="@string/ultra_slim_style"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="13sp" />

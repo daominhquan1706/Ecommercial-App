@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.drm.DrmStore;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -18,7 +17,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
-    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial,nav_changelang;
+    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial, nav_changelang;
     private static final String TAG = "MainActivity";
     Context mContext;
     FirebaseDatabase database;
@@ -247,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "Hello "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
         }*/
 
+
     }
 
     AccountUser accountUser;
@@ -262,7 +261,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     list_data.add(itemProduct);
                     mkey.add(item.getKey());
                     productadapter.notifyDataSetChanged();
-
                 }
             }
 
@@ -432,6 +430,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }, 1000);
 
         }
+
+
+        loadLocale();
         return true;
     }
 
@@ -458,8 +459,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-
-
+        loadLocale();
         return true;
     }
 
@@ -476,11 +476,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_advertisement = navigationView.getMenu().findItem(R.id.nav_advertisement);
         nav_tutorial = navigationView.getMenu().findItem(R.id.nav_tutorial);
 
-        nav_changelang= (MenuItem) findViewById(R.id.nav_changelang);
+        nav_changelang = (MenuItem) findViewById(R.id.nav_changelang);
         loadLocale();
-
-
-
 
 
         updateUI();
@@ -597,54 +594,60 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showChangeLangDialog() {
-        final String[] listItem={"Việt Nam","French","English"};
+        final String[] listItem = {"Việt Nam", "French", "English", "Chinese"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
         mBuilder.setTitle("Choose Language");
         mBuilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
-                if(i==0)
-                {
+                if (i == 0) {
+
                     session.setLanguage("vi");
                     setLocale("vi");
                     recreate();
-                }
-                else if(i==1){
+                } else if (i == 1) {
                     session.setLanguage("fr");
                     setLocale("fr");
                     recreate();
-                }
-                else if(i==2){
+                } else if (i == 2) {
                     session.setLanguage("en");
                     setLocale("en");
                     recreate();
-
+                } else if (i == 3) {
+                    session.setLanguage("zh");
+                    setLocale("zh");
+                    recreate();
                 }
+                updateUI();
+                String lang = session.getLanguage();
+
                 dialog.dismiss();
             }
         });
-        AlertDialog mDialog=mBuilder.create();
+        AlertDialog mDialog = mBuilder.create();
         mDialog.show();
 
     }
 
     private void setLocale(String lang) {
-        Locale locale= new Locale(lang);
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
-        Configuration config =new Configuration();
-        config.locale=locale;
-        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 
-        SharedPreferences.Editor editor= getSharedPreferences("Settings",MODE_PRIVATE).edit();
-        editor.putString("My Lang",lang);
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My Lang", lang);
 
         editor.apply();
 
     }
-    public void loadLocale(){
-        SharedPreferences prefers=getSharedPreferences("Settings",Activity.MODE_PRIVATE);
-        String language=prefers.getString("My_lang","");
-        setLocale(language);
+
+    public void loadLocale() {
+        /*setLocale(session.getLanguage());
+        SharedPreferences prefers = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefers.getString("My_lang", "");*/
+        setLocale(session.getLanguage());
     }
 
     private void updateUI() {
@@ -670,10 +673,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             nav_logout.setVisible(false);
             nav_login.setVisible(true);
 
-            Glide.with(this)
-                    .load("https://www.lausanne.org/wp-content/uploads/2017/04/anonymous-icon.jpg")
-                    .apply(new RequestOptions().centerCrop())
-                    .into(img_user_avatar_chat);
             img_user_avatar_chat.setImageResource(R.drawable.ic_account_circle_black_24dp);
         }
 

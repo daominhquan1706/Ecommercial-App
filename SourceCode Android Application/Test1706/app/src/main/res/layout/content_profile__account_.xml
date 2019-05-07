@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".User_Profile_Account_Activity"
-    tools:showIn="@layout/activity_user_profile__account">
+    tools:context=".User_Profile_Account_Activity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +36,7 @@
             android:background="@drawable/drw_edt_bg">
 
             <EditText
+
                 android:id="@+id/tv_name_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:drawablePadding="@dimen/drawable_padding"
                 android:enabled="false"
                 android:hint="Tên người nhận"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName|textCapWords"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />

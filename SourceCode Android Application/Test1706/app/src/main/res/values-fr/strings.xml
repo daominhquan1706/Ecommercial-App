@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">POWERr</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
     <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
@@ -25,16 +25,14 @@
     <string name="forgot_password">Mot de passe oublié?</string>
     <string name="up">Up</string>
     <string name="unknow_account">compte inconnu</string>
-    <string name="adventure">ADVENTURE</string>
-    <string name="hawk">HAWK</string>
 
-    <string-array name="category_nitewatch">
+
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
         <item>Hawk</item>
         <item>Alpha</item>
         <item>Icon</item>
         <item>Marquess</item>
         <item>Mx10</item>
-
     </string-array>
     <string name="title_activity_profile__account_">Profile_Account_Activity</string>
     <string name="large_text">
@@ -160,4 +158,16 @@
     <string name="menu_admin_doanthu">REVENU</string>
     <string name="menu_admin_map">CARTE</string>
     <string name="menu_admin_ds_hoadon">LISTE DE FACTURATION</string>
+    <string name="icon_automatic"> ICÔNE AUTOMATIQUE </string>
+    <string name="marquess"> MARQUESS </string>
+    <string name="hawk">HAWK</string>
+        
+    <string name="never_compromise"> JAMAIS EST SAI </string>
+    <string name="adventure">AVENTURE</string>
+    <string name="life_ready"> PRET POUR LA VIE </string>        
+    <string name="the_power_to_impress"> LA PUISSANCE DE LIMPRESSION </string>        
+    <string name="ultra_slim_style"> STYLISH STYLE </string>
+
+
+
 </resources>

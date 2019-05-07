@@ -68,7 +68,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         holder.tv_customer_name.setText(orders_item.getCustomerName());
         holder.tv_customer_address.setText(orders_item.getCustomerAddress());
         holder.tv_customer_sdt.setText(orders_item.getCustomerPhoneNumber());
-        holder.layout_admin_hoadon_item.setOnClickListener(new View.OnClickListener() {
+        /*holder.layout_admin_hoadon_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: đã gọi được hàm click View");
@@ -79,7 +79,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 context.startActivity(intent);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
-        });
+        });*/
         holder.folding_cell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

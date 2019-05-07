@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,6 @@ import com.example.test1706.model.CartSqliteHelper;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
-import com.r0adkll.slidr.Slidr;
-import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 
 import java.util.List;
@@ -34,12 +33,13 @@ public class Cart_Activity extends AppCompatActivity {
     Button btn_contiueshopping;
     TextView tv_quantity_product_count, tv_total_price_cart;
     Button btn_checkout_cart;
+    ImageView place_holder_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
 
         cartSqliteHelper = new CartSqliteHelper(this);
@@ -50,6 +50,7 @@ public class Cart_Activity extends AppCompatActivity {
         if (cartSqliteHelper.getCartQuantityCount() == 0) {
             recycleview_horizontal_nitewatch_Hawk.setVisibility(View.GONE);
         } else {
+            place_holder_cart.setVisibility(View.INVISIBLE);
             recycleview_horizontal_nitewatch_Hawk.setVisibility(View.VISIBLE);
         }
 
@@ -152,11 +153,14 @@ public class Cart_Activity extends AppCompatActivity {
 
 
     public void init() {
+        place_holder_cart= (ImageView) findViewById(R.id.place_holder_cart);
         tv_total_price_cart = (TextView) findViewById(R.id.tv_total_price_cart);
         btn_checkout_cart = (Button) findViewById(R.id.btn_checkout_cart);
         tv_quantity_product_count = (TextView) findViewById(R.id.tv_quantity_product_count);
         btn_contiueshopping = (Button) findViewById(R.id.btn_contiueshopping);
         recycleview_horizontal_nitewatch_Hawk = (RecyclerView) findViewById(R.id.recycleview_cart_list);
+
+        new CardSnapHelper().attachToRecyclerView(recycleview_horizontal_nitewatch_Hawk);
     }
 
     @Override
