@@ -59,13 +59,11 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
         this.mContext = mContext;
         this.currentlayout = currentlayout;
         cartSqliteHelper = new CartSqliteHelper(mContext);
-        Log.d(TAG, "onCreateViewHolder: listdata()  ");
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "onCreateViewHolder: đã được gọi ");
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(currentlayout, viewGroup, false);
 
         ViewHolder holder = new ViewHolder(view);
@@ -74,7 +72,6 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        Log.d(TAG, "onBindViewHolder :đã được gọi");
         final Cart cartt = list_data.get(i);
         if (cartt == null) {
             return;

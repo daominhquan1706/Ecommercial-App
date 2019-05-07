@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Admin_HoaDon_Details_activity">
 
     <android.support.v4.widget.NestedScrollView
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+
+        android:focusable="true"
         android:padding="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -24,9 +25,29 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/btn_close_fold"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        android:textSize="30dp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Đóng"
+                        android:textAlignment="center" />
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/dark_blue"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -81,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="@dimen/margintop_cardview"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
+                    app:cardBackgroundColor="@color/dark_blue"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -135,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="@dimen/margintop_cardview"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
+                    app:cardBackgroundColor="@color/dark_blue"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -206,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-light"
                         android:text="@string/money"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="30sp" />
 
 
@@ -222,88 +243,85 @@
                     android:textColor="@color/gray"
                     android:textSize="20sp" />
 
-                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
+                <android.support.v7.widget.RecyclerView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
                     android:id="@+id/admin_details_hoadon_lv_checkout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/margin_listview_bottom"
                     android:nestedScrollingEnabled="true"
                     android:orientation="vertical"
                     card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
                     card_view:stackFromEnd="true"
                     tools:listitem="@layout/item_checkout_item" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|bottom">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btn_Xac_nhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="10dp"
+                            app:cardBackgroundColor="@color/dark_blue"
+                            app:cardCornerRadius="20dp">
+
+                            <TextView
+                                android:id="@+id/tv_Xac_nhan"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:text="xác nhận"
+                                android:textAlignment="center"
+                                android:textColor="@color/LightBlue"
+                                android:textSize="20sp" />
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/btn_TuChoi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="@dimen/margintop_cardview"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            app:cardBackgroundColor="@color/colorAccent"
+                            app:cardCornerRadius="20dp">
+
+                            <TextView
+                                android:id="@+id/tv_TuChoi"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="8dp"
+                                android:text="hủy đơn hàng"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </android.support.v7.widget.CardView>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
             </LinearLayout>
         </ScrollView>
 
 
     </android.support.v4.widget.NestedScrollView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/btn_Xac_nhan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                app:cardBackgroundColor="@color/dark_blue"
-                app:cardCornerRadius="20dp">
-
-                <TextView
-                    android:id="@+id/tv_Xac_nhan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:text="xác nhận"
-                    android:textAlignment="center"
-                    android:textColor="@color/LightBlue"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/btn_TuChoi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="@dimen/margintop_cardview"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/colorAccent"
-                app:cardCornerRadius="20dp">
-
-                <TextView
-                    android:id="@+id/tv_TuChoi"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:text="hủy đơn hàng"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

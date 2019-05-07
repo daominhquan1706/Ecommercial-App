@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/clearblack"
     android:padding="10dp"
     tools:context=".Admin_HoaDon_Activity$PlaceholderFragment">
 
@@ -30,8 +30,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
-
-
                 android:text="Không có đơn hàng "
                 android:textColor="@color/white"
                 android:textSize="18sp" />
@@ -58,13 +56,13 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.example.test1706.MyListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/lv_order_admin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black"
             android:dividerHeight="@dimen/margintop_cardview"
             android:visibility="gone"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_admin_hoadon" />
     </android.support.v4.widget.NestedScrollView>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ import timber.log.Timber;
 
 public class User_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
-    ListView listView_order_admin;
+    RecyclerView listView_order_admin;
     Adapter_HoaDon_item adapter;
     List<Orders> list;
     DatabaseReference myRef;
@@ -47,7 +48,7 @@ public class User_HoaDon_Fragment extends Fragment {
         if (bundle != null) {
             Status = bundle.getString("Status", ("Nothing"));
         }
-        return inflater.inflate(R.layout.fragment_user_hoa_don, container, false);
+        return inflater.inflate(R.layout.fragment_admin__hoa_don, container, false);
     }
 
 
@@ -132,8 +133,8 @@ public class User_HoaDon_Fragment extends Fragment {
         tv_status_empty = (TextView) getView().findViewById(R.id.tv_status_empty);
         myRef = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<Orders>();
-        adapter = new Adapter_HoaDon_item(getActivity(), list);
-        listView_order_admin = (ListView) getView().findViewById(R.id.lv_order_admin);
+        adapter = new Adapter_HoaDon_item(getActivity(), list,getActivity());
+        listView_order_admin = (RecyclerView) getView().findViewById(R.id.lv_order_admin);
         listView_order_admin.setAdapter(adapter);
     }
 
