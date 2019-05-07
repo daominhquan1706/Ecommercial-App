@@ -9,7 +9,7 @@
     tools:context=".Admin_HoaDon_Activity">
 
     <android.support.design.widget.AppBarLayout
-        android:background="#4527A0"
+        android:background="@color/purple1"
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

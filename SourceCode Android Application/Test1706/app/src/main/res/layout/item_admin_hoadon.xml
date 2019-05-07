@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:folding-cell="http://schemas.android.com/tools"
     android:id="@+id/layout_admin_hoadon_item"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -38,11 +37,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/thongtinthem"
-        folding-cell:animationDuration="1500"
-        folding-cell:backSideColor="#ABCDF0">
+        app:animationDuration="1500"
+        app:backSideColor="#BECBEB">
 
         <FrameLayout
-
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        app:cardBackgroundColor="@color/dark_blue"
+                        app:cardBackgroundColor="@color/purple1"
                         app:cardCornerRadius="0dp">
 
                         <TextView
