@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.drm.DrmStore;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -15,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +42,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +65,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
@@ -75,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView navigationView;
     private TextView tv_email_nav_header, textCartItemCount;
-    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial;
+    MenuItem nav_login, nav_profile, nav_logout, nav_advertisement, nav_tutorial,nav_changelang;
     private static final String TAG = "MainActivity";
     Context mContext;
     FirebaseDatabase database;
@@ -106,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SwitchCompat switch_quangcao, switch_huongdan;
     Session session;
     MenuItem searchItem;
+
+    Spinner spinner;
+    Locale myLocale;
+    String currentLanguage = "en", currentLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -466,6 +476,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_advertisement = navigationView.getMenu().findItem(R.id.nav_advertisement);
         nav_tutorial = navigationView.getMenu().findItem(R.id.nav_tutorial);
 
+        nav_changelang= (MenuItem) findViewById(R.id.nav_changelang);
+        loadLocale();
+
+
+
+
+
         updateUI();
         switch_huongdan = nav_tutorial.getActionView().findViewById(R.id.switch_huongdan);
         switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
@@ -569,11 +586,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 nav_advertisement.setChecked(!session.getSwitchQuangCao());
                 session.setSwitchHuongDan(nav_advertisement.isChecked());
                 break;*/
+            case R.id.nav_changelang:
+
+                showChangeLangDialog();
+                break;
 
         }
 
         navigationView.setCheckedItem(menuItem.getItemId());
         return true;
+    }
+
+    private void showChangeLangDialog() {
+        final String[] listItem={"Việt Nam","French","English"};
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        mBuilder.setTitle("Choose Language");
+        mBuilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if(i==0)
+                {
+                    setLocale("en");
+                    recreate();
+                }
+                else if(i==1){
+                    setLocale("fr");
+                    recreate();
+                }
+                else if(i==2){
+                    setLocale("vn");
+                    recreate();
+
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog mDialog=mBuilder.create();
+        mDialog.show();
+
+    }
+
+    private void setLocale(String lang) {
+        Locale locale= new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config =new Configuration();
+        config.locale=locale;
+        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor= getSharedPreferences("Settings",MODE_PRIVATE).edit();
+        editor.putString("My Lang",lang);
+
+        editor.apply();
+
+    }
+    public void loadLocale(){
+        SharedPreferences prefers=getSharedPreferences("Settings",Activity.MODE_PRIVATE);
+        String language=prefers.getString("My_lang","");
+        setLocale(language);
     }
 
     private void updateUI() {
