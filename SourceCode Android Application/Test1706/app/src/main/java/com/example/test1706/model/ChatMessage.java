@@ -1,6 +1,8 @@
-package com.example.test1706;
+package com.example.test1706.model;
 
-public class ChatMessage {
+import java.util.Date;
+
+public class ChatMessage implements Comparable<ChatMessage> {
     private String messageUser_NguoiNhan;
     private String messageText;
     private String messageUser;
@@ -58,5 +60,15 @@ public class ChatMessage {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    @Override
+    public int compareTo(ChatMessage o) {
+        Date datetime1 = new Date();
+        datetime1.setTime(getMessageTime());
+
+        Date datetime2 = new Date();
+        datetime2.setTime(o.getMessageTime());
+        return datetime2.compareTo(datetime1);
     }
 }

@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.test1706.model.ChatMessage;
+
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

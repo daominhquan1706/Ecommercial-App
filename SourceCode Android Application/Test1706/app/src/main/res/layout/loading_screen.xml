@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <pl.droidsonroids.gif.GifImageView
         android:background="@color/loading_screen_background"
-        android:src="@drawable/loading_screen3"
+        android:src="@drawable/loadingscreen"
         android:id="@+id/loadingscreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

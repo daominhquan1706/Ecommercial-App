@@ -97,10 +97,8 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
     }
 
 
-    public Product getProduct(Product product) {
-        Log.i(TAG, "ProductSqliteHelper.getProduct ... " + product.getProduct_Name());
-
-        SQLiteDatabase db = this.getReadableDatabase();
+    public Product getProduct(String productName) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.query(TABLE_CART, new String[]{
                         COLUMN_PRODUCT_PRODUCTNAME,
@@ -111,21 +109,22 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
                         COLUMN_PRODUCT_CATEGORY
 
                 }, COLUMN_PRODUCT_PRODUCTNAME + "=?",
-                new String[]{product.getProduct_Name()}, null, null, null, null);
-        if (cursor != null)
+                new String[]{productName}, null, null, null, null);
+        Product product = new Product();
+        if (cursor != null) {
             cursor.moveToFirst();
 
-        Product Product = new Product();
-        Product.setProduct_Name((cursor.getString(0)));
-        Product.setPrice(Integer.parseInt(cursor.getString(2)));
-        Product.setImage(cursor.getString(2));
-        Product.setImage_Night(cursor.getString(3));
-        Product.setDescription(cursor.getString(4));
-        Product.setCategory(cursor.getString(5));
-        Product.setCreateDate(Long.parseLong(cursor.getString(6)));
 
+            product.setProduct_Name((cursor.getString(0)));
+            product.setPrice(Integer.parseInt(cursor.getString(1)));
+            product.setImage(cursor.getString(2));
+            product.setImage_Night(cursor.getString(3));
+            product.setDescription(cursor.getString(4));
+            product.setCategory(cursor.getString(5));
+            //Product.setCreateDate(Long.parseLong(cursor.getString(6)));
+        }
         // return Product
-        return Product;
+        return product;
     }
 
 

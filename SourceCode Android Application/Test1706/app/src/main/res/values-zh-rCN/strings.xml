@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="PrivateResource"> POWERr </string>
+        
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+        
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+        
+    <string name="title_activity_login">登录</string>
+        
+    <string name="prompt_email">电子邮件</string>
+        
+    <string name="prompt_password">密码</string>
+        
+    <string name="action_sign_in">登录</string>
+        
+    <string name="action_sign_in_short">登录</string>
+        
+    <string name="error_invalid_email">此电子邮件地址无效</string>
+        
+    <string name="error_invalid_password">此密码太短</string>
+        
+    <string name="error_incorrect_password">此密码不正确</string>
+        
+    <string name="error_field_required">此字段是必需的</string>
+        
+    <string name="permission_rationale">配置电子邮件需要联系人权限  完成。</string>
+        
+    <string name="create_an_account">创建帐户</string>
+        
+    <string name="category">类别</string>
+        
+    <string name="productname"> ProductName </string>
+        
+    <string name="money"> $ 100 </string>
+        
+    <string name="re_type_password">重新输入密码</string>
+        
+    <string name="search">搜索</string>
+        
+    <string name="forgot_password">忘记密码？</string>
+        
+    <string name="up"> 向上 </string>
+        
+    <string name="unknow_account">未知帐户</string>
+        
+    <string name="adventure">冒险</string>
+        
+    <string name="hawk"> HAWK </string>
+
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
+        <item>Hawk</item>
+        <item>Alpha</item>
+        <item>Icon</item>
+        <item>Marquess</item>
+        <item>Mx10</item>
+
+    </string-array>
+    <string name="title_activity_profile__account_">资料帐户活动</string>
+    <string name="large_text">
+       "材料就是比喻。\n \n"
+
+        "物质比喻是理性化空间和运动系统的统一理论。"
+        "材料以触觉现实为基础，受到纸张和墨水研究的启发，"
+        "技术先进，对想象力和魔力开放。\n"
+        "材料的表面和边缘提供了在现实中基础的视觉线索。"
+        "使用熟悉的触觉属性可以帮助用户快速了解可用性。然而，"
+        "材料的灵活性创造了新的能力，取代了物理上的人"
+        "世界，没有违反物理规则。\n"
+        "光，表面和运动的基本原理是传达物体运动方式的关键，"
+        "互动，存在于空间和彼此之间。现实的灯光显示"
+        "接缝，划分空间，并指示移动部件。\n \n"
+
+        "大胆，图形，有意。\n \n"
+
+        "基于印刷的设计排版，网格，空间，比例，颜色的基本要素，"
+        "并使用图像引导视觉处理。这些元素远远超过了取悦"
+        "眼睛。他们创造了等级，意义和焦点。有意识的颜色选择，边缘到边缘"
+        "图像，大规模排版和有意识的白色空间创造了一个大胆的图形"
+        "让用户沉浸在体验中的界面。\n"
+        "强调用户行为使核心功能立即显现并提供"
+        "用户的航路点。\n \n"
+
+        "运动提供了意义。\n \n"
+
+        "运动尊重并强化用户作为主要推动者。主要用户行为是"
+        "引起运动的拐点，改变了整个设计。\n"
+        "所有操作都在一个环境中进行。对象在没有"的情况下呈现给用户"
+        "即使在改造和重组时也会破坏经验的连续性。\n"
+        "运动是有意义和适当的，有助于集中注意力并保持连续性。"
+        "反馈是微妙但清晰的。过渡是有效但连贯的。\n \n"
+
+        "3D世界。\n \n"
+
+        "物质环境是一个3D空间，这意味着所有对象都有x，y和z"
+        "尺寸.z轴与显示器平面垂直对齐，"
+        "正z轴向观察者延伸。每张材料占据一个"
+        "沿z轴的位置，标准厚度为1dp。\n"
+        "在网络上，z轴用于分层，而不是用于透视.3D世界是"
+        "通过操纵y轴来模拟。\n \n"
+
+        "光与影。\n \n"
+
+        "在物质环境中，虚拟灯照亮了场景。关键灯创造"
+        "定向阴影，而环境光从所有角度创建柔和阴影。\n"
+        "物质环境中的阴影是由这两个光源投射的。在Android中"
+        "发展时，当光源被材料片阻挡时会出现阴影"
+        "沿z轴的各种位置。在网络上，通过操纵"描绘阴影"
+        "仅限y轴。以下示例显示高度为6dp的卡片。\n \n"
+
+        "休息高度。\n \n"
+
+       "所有物质对象，无论大小，都具有静止高程或默认高程"
+        "这不会改变。如果一个物体改变了高度，它应该回到它的静止状态"
+        "尽快升高。\n \n"
+
+        "组件高程。\n \n"
+
+        "组件类型的静止高程在应用程序中是一致的（例如，FAB高程"
+        "从一个应用程序中的6dp到另一个应用程序中的16dp不等。"\n"
+        "组件可能在平台上有不同的静止高度，具体取决于深度"
+        "环境（例如，电视的深度比移动或桌面更深）。\n \n"
+
+        "响应性高程和动态高程偏移。\n \n"
+
+        "某些组件类型具有响应性提升，这意味着它们会响应"
+        "用户输入（例如，正常，聚焦和按下）或系统事件。这些提升"
+        "使用动态高程偏移始终实现更改。\n"
+        "动态高程偏移是组件向相对移动的目标高度"
+        "对于组件的静止状态。它们确保高程变化是一致的"
+        "跨行动和组件类型。例如，所有按下电梯的组件都有"
+        "相对于它们的静止高度，相同的高度变化。\n"
+        "一旦输入事件完成或取消，组件将返回其静止状态"
+        "标高。\n \n"
+
+        "避免高程干扰。\n \n"
+
+        "具有响应性高程的组件在它们之间移动时可能会遇到其他组件"
+        "他们的静止高度和动态高程偏移。因为材料无法通过"
+        "通过其他材料，组件避免以任何方式相互干扰，"
+        "无论是基于每个组件还是使用整个应用程序布局。\n"
+        "在组件级别，组件可以在它们引起干扰之前移动或移除。"
+        "例如，浮动动作按钮（FAB）可以在"之前消失或移出屏幕"
+        "用户拿起一张卡片，或者如果出现小吃店，它就可以移动。\n"
+        "在布局层面，设计您的应用布局，以尽量减少干扰的机会。"
+        "例如，将FAB放在卡片流的一侧，这样FAB就不会干扰"
+        "当用户试图拿起其中一张卡时。\n \n"
+    </string>
+    <string name="action_settings">设置</string>
+        
+    <string name="enable_night_view">启用夜间视图</string>
+        
+    <string name="disable_night_view"> 禁用夜景 </string>
+        
+    <string name="alpha"> ALPHA </string>
+        
+    <string name="my_app_id"> powerr-ntmjm </string>
+        
+    <string name="title_activity_maps">地图</string>
+        
+    <string name="continue_shopping">继续购物</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment"> Hello空白片段</string>
+        
+    <string name="title_activity_test_tabbed"> 测试标签 </string>
+        
+    <string name="section_format">来自部分的Hello World：％1 $ d </string>
+        
+    <string name="title_activity_admin__hoa_don_">管理开票活动</string>
+        
+    <string name="imageproduct"> ImageProduct </string>
+        
+    <string name="access_token"> pk.eyJ1IjoiZGFvbWluaHF1YW4xNzYiLCJhIjoiY2p1bHp0aDU2MG9weTN6cXM2NjB3dGJvMyJ9.-X1tNne-QQ90Rm6hRglFmQ </string>
+        
+    <string name="user_location_permission_explanation">我们需要您的位置找到</string>
+        
+    <string name="admin"> 管理 </string>
+        
+    <string name="function">函数</string>
+        
+    <string name="nhantinvoiadmin">带管理员的消息</string>
+        
+    <string name="donhang"> 法案 </string>
+        
+    <string name="sanphamdaxem">已查看产品</string>
+        
+    <string name="taikhoan">帐户</string>
+        
+    <string name="profile">个人资料</string>
+        
+    <string name="dangnhap">登录</string>
+        
+    <string name="dangxuat"> 登出 </string>
+        
+    <string name="tuychinh">设置</string>
+        
+    <string name="hienquangcao">展示广告</string>
+        
+    <string name="hienhuongdan">显示教程</string>
+        
+    <string name="doingonngu">更改语言</string>
+        
+    <string name="menu_admin_name_sanpham"> 产品 </string>
+        
+    <string name="menu_admin_tinnhan"> 信息 </string>
+        
+    <string name="menu_admin_doanthu">收入</string>
+        
+    <string name="menu_admin_map"> 地图 </string>
+        
+    <string name="menu_admin_ds_hoadon"> 计费清单 </string>
+        
+    <string name="never_compromise">从不妥协</string>
+        
+    <string name="icon"> ICON </string>
+        
+    <string name="life_ready"> 生活就绪 </string>
+        
+    <string name="icon_automatic"> ICON AUTOMATIC </string>
+        
+    <string name="the_power_to_impress">强大的力量</string>
+        
+    <string name="marquess"> MARQUESS </string>
+        
+    <string name="ultra_slim_style"> 超薄款式 </string>
+</resources>

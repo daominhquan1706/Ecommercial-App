@@ -166,4 +166,12 @@ public class Admin extends AppCompatActivity {
         cv_tinnhan = (CardView) findViewById(R.id.cv_tinnhan);
         cv_orders  = (CardView) findViewById(R.id.cv_orders);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(this,MainActivity.class);
+        startActivity(back);
+        finish();
+    }
 }

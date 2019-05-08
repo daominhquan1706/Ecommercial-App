@@ -35,7 +35,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.example.test1706.Config.Session;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -202,7 +201,6 @@ public class NiteWatchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
-
 
         //set up slide show on header fragment
         final ImageAdapter adapter = new ImageAdapter(getActivity());
@@ -378,7 +376,10 @@ public class NiteWatchFragment extends Fragment {
         });
     }
 
+    boolean isHideLoadingscreen;
+
     private void getlist_watch(String category, final List<Product> listproduct, final List<String> mkey, final Product_Recycle_Adapter_NiteWatch adapter) {
+        isHideLoadingscreen = false;
         myRef.child("NiteWatch").child(category).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -393,7 +394,9 @@ public class NiteWatchFragment extends Fragment {
                         @Override
                         public void run() {
                             // Do something after 5s = 5000ms
-                            hideLoadingScreen();
+                            if (!isHideLoadingscreen) {
+                                hideLoadingScreen();
+                            }
                         }
                     }, 1000);
 
@@ -408,19 +411,22 @@ public class NiteWatchFragment extends Fragment {
         });
     }
 
+    GifImageView loadingscreen;
+
     private void hideLoadingScreen() {
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
         fadeOut.setStartOffset(50);
         fadeOut.setDuration(1000);
-        GifImageView loadingscreen;
-        loadingscreen = (GifImageView) getView().findViewById(R.id.loadingscreen);
+
+
         loadingscreen.setVisibility(View.GONE);
         loadingscreen.setAnimation(fadeOut);
+
     }
 
     private void init() {
-
+        loadingscreen = (GifImageView) getView().findViewById(R.id.loadingscreen);
         layout_horizontal_nitewatch = (LinearLayout) getView().findViewById(R.id.layout_horizontal_nitewatch);
         cardview_horizonal_nitewatch_Alpha = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Alpha);
         cardview_horizonal_nitewatch_Hawk = (CardView) getView().findViewById(R.id.cardview_horizonal_nitewatch_Hawk);

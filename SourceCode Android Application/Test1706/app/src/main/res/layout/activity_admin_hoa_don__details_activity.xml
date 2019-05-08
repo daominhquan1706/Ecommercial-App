@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Admin_HoaDon_Details_activity">
 
     <android.support.v4.widget.NestedScrollView
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
         android:padding="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -23,21 +23,37 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
+                <RelativeLayout
+                    android:id="@+id/btn_close_fold"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/h_nh_n_t_g_p_c_a_s"
+                        android:src="@drawable/ic_arrow_up_close" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
-                    app:cardCornerRadius="20dp">
+                    android:layout_marginTop="10dp"
+
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/drw_edt_bg"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="match_parent"
                             android:layout_margin="5dp"
+                            android:contentDescription="@string/h_nh"
                             android:src="@drawable/ic_account_circle_black_24dp" />
 
                         <LinearLayout
@@ -53,7 +69,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Tên người nhận"
+                                android:text="@string/t_n_ng_i_nh_n"
                                 android:textColor="@color/LightBlue"
                                 android:textSize="13sp" />
 
@@ -65,7 +81,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Đào Minh Quân"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -74,25 +90,25 @@
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </RelativeLayout>
 
-                <android.support.v7.widget.CardView
+                <RelativeLayout
                     android:id="@+id/cv_phone_admin_order"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/margintop_cardview"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
-                    app:cardCornerRadius="20dp">
+                    android:layout_marginTop="@dimen/margintop_cardview">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/drw_edt_bg"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="match_parent"
                             android:layout_margin="5dp"
+                            android:contentDescription="@string/h_nh"
                             android:src="@drawable/ic_phone_blue_24dp" />
 
                         <LinearLayout
@@ -108,7 +124,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Số điện thoại người nhận"
+                                android:text="@string/s_i_n_tho_i_ng_i_nh_n"
                                 android:textColor="@color/LightBlue"
                                 android:textSize="13sp" />
 
@@ -120,7 +136,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="0971103092"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -129,24 +145,24 @@
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </RelativeLayout>
 
-                <android.support.v7.widget.CardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="@dimen/margintop_cardview"
-                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
-                    app:cardCornerRadius="20dp">
+                    android:layout_marginTop="@dimen/margintop_cardview">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/drw_edt_bg"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="match_parent"
                             android:layout_margin="5dp"
+                            android:contentDescription="@string/h_nh"
                             android:src="@drawable/ic_home_blue_24dp" />
 
                         <LinearLayout
@@ -162,7 +178,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Địa chỉ giao hàng"
+                                android:text="@string/a_ch_giao_h_ng"
                                 android:textColor="@color/LightBlue"
                                 android:textSize="13sp" />
 
@@ -174,7 +190,7 @@
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="48/63A phường bình hưng hòa B , quận bình tân , tphcm"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -183,7 +199,7 @@
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -196,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-light"
-                        android:text="Total : "
+                        android:text="@string/t_ng"
                         android:textColor="@color/LightBlue"
                         android:textSize="30sp" />
 
@@ -206,7 +222,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-condensed-light"
                         android:text="@string/money"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="30sp" />
 
 
@@ -217,24 +233,74 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif-light"
-                    android:text="Danh sách sản phẩm"
+                    android:text="@string/danh_s_ch_s_n_ph_m"
                     android:textAlignment="center"
                     android:textColor="@color/gray"
                     android:textSize="20sp" />
 
-                <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/admin_details_hoadon_lv_checkout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/margin_listview_bottom"
-                    android:nestedScrollingEnabled="true"
-                    android:orientation="vertical"
-                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                    card_view:stackFromEnd="true"
-                    tools:listitem="@layout/item_checkout_item" />
+                    android:layout_height="200dp"
+                    card_view:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+                    tools:listitem="@layout/item_checkout_item">
 
+                </android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/btn_Xac_nhan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        app:cardBackgroundColor="#FFB741">
+
+                        <TextView
+                            android:id="@+id/tv_Xac_nhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:text="@string/x_c_nh_n"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/btn_TuChoi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="@dimen/margintop_cardview"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="@color/colorAccent">
+
+                        <TextView
+                            android:id="@+id/tv_TuChoi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:text="@string/h_y_n_h_ng"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                    </android.support.v7.widget.CardView>
+
+
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
@@ -242,68 +308,5 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/btn_Xac_nhan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                app:cardBackgroundColor="@color/dark_blue"
-                app:cardCornerRadius="20dp">
-
-                <TextView
-                    android:id="@+id/tv_Xac_nhan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:text="xác nhận"
-                    android:textAlignment="center"
-                    android:textColor="@color/LightBlue"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/btn_TuChoi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="@dimen/margintop_cardview"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:visibility="gone"
-                app:cardBackgroundColor="@color/colorAccent"
-                app:cardCornerRadius="20dp">
-
-                <TextView
-                    android:id="@+id/tv_TuChoi"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:text="hủy đơn hàng"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

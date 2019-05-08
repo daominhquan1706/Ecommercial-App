@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">POWERr</string>
     <string name="navigation_drawer_open">Open Navigation drawer</string>
     <string name="navigation_drawer_close">Close Navigation drawer</string>
@@ -13,9 +13,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email  completions."</string>
     <string name="create_an_account">Create an account</string>
     <string name="category">Category</string>
     <string name="productname">ProductName</string>
@@ -28,7 +26,7 @@
     <string name="adventure">ADVENTURE</string>
     <string name="hawk">HAWK</string>
 
-    <string-array name="category_nitewatch">
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
         <item>Hawk</item>
         <item>Alpha</item>
         <item>Icon</item>
@@ -144,7 +142,7 @@
     <string name="user_location_permission_explanation">We need your location to locate</string>
     <string name="admin">Admin</string>
     <string name="function">Function</string>
-    <string name="nhantinvoiadmin">Chat with Admin</string>
+    <string name="nhantinvoiadmin">Message with Admin</string>
     <string name="donhang">Bill</string>
     <string name="sanphamdaxem">Viewed Product</string>
     <string name="taikhoan">Account</string>
@@ -155,4 +153,16 @@
     <string name="hienquangcao">Show Advertising</string>
     <string name="hienhuongdan">Show tutorial</string>
     <string name="doingonngu">Change language</string>
+    <string name="menu_admin_name_sanpham">PRODUCT</string>
+    <string name="menu_admin_tinnhan">MESSAGE</string>
+    <string name="menu_admin_doanthu">REVENUE</string>
+    <string name="menu_admin_map">MAP</string>
+    <string name="menu_admin_ds_hoadon">BILLING LIST</string>
+    <string name="never_compromise">NEVER COMPROMISE</string>
+    <string name="icon">ICON</string>
+    <string name="life_ready">LIFE READY</string>
+    <string name="icon_automatic">ICON AUTOMATIC</string>
+    <string name="the_power_to_impress">THE POWER TO IMPRESS</string>
+    <string name="marquess">MARQUESS</string>
+    <string name="ultra_slim_style">ULTRA-SLIM STYLE</string>
 </resources>

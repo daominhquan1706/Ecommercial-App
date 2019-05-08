@@ -68,9 +68,10 @@ public class Login_Register_Menu extends AppCompatActivity {
                     startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE_GOOGLE);
 
                 } else {
-                    Intent i = new Intent(Login_Register_Menu.this, MainActivity.class);
+                    Intent i = new Intent(Login_Register_Menu.this, User_Profile_Account_Activity.class);
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
                 }
             }
         });
@@ -85,7 +86,7 @@ public class Login_Register_Menu extends AppCompatActivity {
                 accountUser = new AccountUser();
                 accountUser.update_firebaseAccount();
                 Snackbar.make(relativeLayout, "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
-                Intent i = new Intent(Login_Register_Menu.this, MainActivity.class);
+                Intent i = new Intent(Login_Register_Menu.this, User_Profile_Account_Activity.class);
                 startActivity(i);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -124,7 +125,7 @@ public class Login_Register_Menu extends AppCompatActivity {
 
 
         if (firebaseUser != null) {
-            Intent i = new Intent(Login_Register_Menu.this, MainActivity.class);
+            Intent i = new Intent(Login_Register_Menu.this, User_Profile_Account_Activity.class);
             startActivity(i);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish();

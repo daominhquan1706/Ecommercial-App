@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.test1706.model.Orders;
@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import pl.droidsonroids.gif.GifImageView;
+import timber.log.Timber;
 
 public class User_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
-    ListView listView_order_admin;
+    RecyclerView listView_order_admin;
     Adapter_HoaDon_item adapter;
     List<Orders> list;
     DatabaseReference myRef;
@@ -47,17 +47,17 @@ public class User_HoaDon_Fragment extends Fragment {
         if (bundle != null) {
             Status = bundle.getString("Status", ("Nothing"));
         }
-        return inflater.inflate(R.layout.fragment_user_hoa_don, container, false);
+        return inflater.inflate(R.layout.fragment_admin__hoa_don, container, false);
     }
 
+    RelativeLayout image_empty_hoadon;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
-        if(currentUser==null){
+        if (currentUser == null) {
             UserUID = "";
-        }
-        else{
+        } else {
             UserUID = currentUser.getUid();
         }
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
@@ -66,12 +66,13 @@ public class User_HoaDon_Fragment extends Fragment {
                 if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) && Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getUserID().equals(UserUID)) {
                     list.add(dataSnapshot.getValue(Orders.class));
                     mkey.add(dataSnapshot.getKey());
-                    Log.d(TAG, "onDataChange: dataSnapshot1.getKey() : " + dataSnapshot.getKey());
+                    Timber.d("onDataChange: dataSnapshot1.getKey() : %s", dataSnapshot.getKey());
                     adapter.notifyDataSetChanged();
                 }
                 if (list.size() == 0) {
                     listView_order_admin.setVisibility(View.INVISIBLE);
                 } else {
+                    image_empty_hoadon.setVisibility(View.GONE);
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
             }
@@ -82,7 +83,7 @@ public class User_HoaDon_Fragment extends Fragment {
                 if (mkey.contains(dataSnapshot.getKey())) {
                     if (!Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getStatus().equals(Status)) {
                         list.remove(mkey.indexOf(dataSnapshot.getKey()));
-                        mkey.remove(mkey.indexOf(dataSnapshot.getKey()));
+                        mkey.remove(dataSnapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }
                 } else {
@@ -99,8 +100,6 @@ public class User_HoaDon_Fragment extends Fragment {
                 } else {
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
-                getView().findViewById(R.id.loadingscreen).setVisibility(View.GONE);
-
             }
 
             @Override
@@ -129,14 +128,15 @@ public class User_HoaDon_Fragment extends Fragment {
     }
 
     public void init() {
+        image_empty_hoadon = (RelativeLayout) Objects.requireNonNull(getView()).findViewById(R.id.image_empty_hoadon);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         mkey = new ArrayList<String>();
         tv_status_empty = (TextView) getView().findViewById(R.id.tv_status_empty);
         myRef = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<Orders>();
-        adapter = new Adapter_HoaDon_item(getActivity(), list);
-        listView_order_admin = (ListView) getView().findViewById(R.id.lv_order_admin);
+        adapter = new Adapter_HoaDon_item(getActivity(), list, getActivity());
+        listView_order_admin = (RecyclerView) getView().findViewById(R.id.lv_order_admin);
         listView_order_admin.setAdapter(adapter);
     }
 

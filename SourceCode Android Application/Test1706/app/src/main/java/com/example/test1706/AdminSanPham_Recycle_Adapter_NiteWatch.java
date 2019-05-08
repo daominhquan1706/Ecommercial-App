@@ -1,7 +1,11 @@
 package com.example.test1706;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +19,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.Product;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -75,12 +81,42 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             @Override
             public void onClick(View v) {
                 //Delete
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("xóa");
+                builder.setMessage("Bạn có muốn xóa " +productt.getProduct_Name()+" không ?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase database;
+                        DatabaseReference myRef;
+                        database = FirebaseDatabase.getInstance();
+                        myRef = database.getReference();
+                        myRef.child("NiteWatch").child(productt.getCategory()).child(productt.getProduct_Name()).removeValue();
+                        Intent refresh = new Intent(mContext,AdminSanPham_Activity.class);
+                        mContext.startActivity(refresh);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
         viewHolder.mbtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Edit
+                Intent intent_edit =new Intent(mContext,AdminSanPham_edit_product.class);
+                Bundle b = new Bundle();
+                b.putString("ProductName", productt.getProduct_Name());
+                b.putString("ProductCategory", productt.getCategory());
+                intent_edit.putExtras(b);
+                mContext.startActivity(intent_edit);
             }
         });
 

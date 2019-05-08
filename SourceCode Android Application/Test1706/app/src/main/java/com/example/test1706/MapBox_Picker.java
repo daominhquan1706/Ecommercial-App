@@ -1,0 +1,371 @@
+package com.example.test1706;
+
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.test1706.UserModel.AccountUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.api.geocoding.v5.GeocodingCriteria;
+import com.mapbox.api.geocoding.v5.MapboxGeocoding;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
+import com.mapbox.core.exceptions.ServicesException;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import timber.log.Timber;
+
+import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
+import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
+
+/**
+ * Drop a marker at a specific location and then perform
+ * reverse geocoding to retrieve and display the location's address
+ */
+public class MapBox_Picker extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback {
+
+    private static final String TAG = "MapBox_Picker";
+    private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
+    private MapView mapView;
+    private MapboxMap mapboxMap;
+    private Button selectLocationButton, btn_save_change_profile_location;
+    private PermissionsManager permissionsManager;
+    private ImageView hoveringMarker;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser firebaseUser;
+    AccountUser accountUser;
+    TextView tv_place_name, tv_lat_location, tv_lng_location;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
+        Mapbox.getInstance(this, getString(R.string.access_token));
+
+        // This contains the MapView in XML and needs to be called after the access token is configured.
+        setContentView(R.layout.activity_map_box__picker);
+
+        // Initialize the mapboxMap view
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
+
+        tv_place_name = (TextView) findViewById(R.id.tv_place_name);
+        tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
+        tv_lng_location = (TextView) findViewById(R.id.tv_lng_location);
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        getCurrentUser();
+    }
+
+    @Override
+    public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        MapBox_Picker.this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull final Style style) {
+                enableLocationPlugin(style);
+
+                // Toast instructing user to tap on the mapboxMap
+                Toast.makeText(
+                        MapBox_Picker.this,
+                        getString(R.string.move_map_instruction), Toast.LENGTH_SHORT).show();
+
+                // When user is still picking a location, we hover a marker above the mapboxMap in the center.
+                // This is done by using an image view with the default marker found in the SDK. You can
+                // swap out for your own marker image, just make sure it matches up with the dropped marker.
+                hoveringMarker = new ImageView(MapBox_Picker.this);
+                hoveringMarker.setImageResource(R.drawable.mapbox_marker_icon_default);
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+                hoveringMarker.setLayoutParams(params);
+                mapView.addView(hoveringMarker);
+
+                // Initialize, but don't show, a SymbolLayer for the marker icon which will represent a selected location.
+                initDroppedMarker(style);
+
+                // Button for user to drop marker or to pick marker back up.
+                selectLocationButton = findViewById(R.id.btn_pick_location);
+                btn_save_change_profile_location = findViewById(R.id.btn_save_change_profile_location);
+                btn_save_change_profile_location.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String userUID = firebaseUser.getUid();
+                        accountUser.setDiachi(tv_place_name.getText().toString());
+                        accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));
+                        accountUser.setLong_Location(Double.parseDouble(tv_lng_location.getText().toString()));
+
+                        databaseReference.child("Account").child(userUID).child("diachi").setValue(accountUser.getDiachi());
+                        databaseReference.child("Account").child(userUID).child("lat_Location").setValue(accountUser.getLat_Location());
+                        databaseReference.child("Account").child(userUID).child("long_Location").setValue(accountUser.getLong_Location());
+
+
+                        finish();
+                    }
+                });
+
+                selectLocationButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (hoveringMarker.getVisibility() == View.VISIBLE) {
+                            btn_save_change_profile_location.setVisibility(View.VISIBLE);
+                            // Use the map target's coordinates to make a reverse geocoding search
+                            final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
+
+                            // Hide the hovering red hovering ImageView marker
+                            hoveringMarker.setVisibility(View.INVISIBLE);
+
+                            // Transform the appearance of the button to become the cancel button
+                            selectLocationButton.setBackgroundColor(
+                                    ContextCompat.getColor(MapBox_Picker.this, R.color.colorAccent));
+                            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
+
+                            // Show the SymbolLayer icon to represent the selected map location
+                            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                                GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
+                                if (source != null) {
+                                    source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
+                                            mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
+                                }
+                                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
+                            }
+
+                            // Use the map camera target's coordinates to make a reverse geocoding search
+                            reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
+
+                        } else {
+                            btn_save_change_profile_location.setVisibility(View.INVISIBLE);
+                            // Switch the button appearance back to select a location.
+                            selectLocationButton.setBackgroundColor(
+                                    ContextCompat.getColor(MapBox_Picker.this, R.color.colorPrimary));
+                            selectLocationButton.setText(getString(R.string.ch_n_m_t_v_tr));
+
+                            // Show the red hovering ImageView marker
+                            hoveringMarker.setVisibility(View.VISIBLE);
+
+                            // Hide the selected location SymbolLayer
+                            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void initDroppedMarker(@NonNull Style loadedMapStyle) {
+        // Add the marker image to map
+        loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
+                getResources(), R.drawable.mapbox_marker_icon_default));
+        loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
+        loadedMapStyle.addLayer(new SymbolLayer(DROPPED_MARKER_LAYER_ID,
+                "dropped-marker-source-id").withProperties(
+                iconImage("dropped-icon-image"),
+                visibility(NONE),
+                iconAllowOverlap(true),
+                iconIgnorePlacement(true)
+        ));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    @SuppressWarnings({"MissingPermission"})
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onExplanationNeeded(List<String> permissionsToExplain) {
+        Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onPermissionResult(boolean granted) {
+        if (granted && mapboxMap != null) {
+            Style style = mapboxMap.getStyle();
+            if (style != null) {
+                enableLocationPlugin(style);
+            }
+        } else {
+            Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+
+    /**
+     * This method is used to reverse geocode where the user has dropped the marker.
+     *
+     * @param style style
+     * @param point The location to use for the search
+     */
+
+    private void reverseGeocode(@NonNull final Style style, final Point point) {
+        try {
+            MapboxGeocoding client = MapboxGeocoding.builder()
+                    .accessToken(getString(R.string.access_token))
+                    .query(Point.fromLngLat(point.longitude(), point.latitude()))
+                    .geocodingTypes(GeocodingCriteria.TYPE_LOCALITY)
+                    .build();
+
+            client.enqueueCall(new Callback<GeocodingResponse>() {
+                @Override
+                public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
+
+                    List<CarmenFeature> results = response.body().features();
+                    if (results.size() > 0) {
+                        CarmenFeature feature = results.get(0);
+
+                        // If the geocoder returns a result, we take the first in the list and show a Toast with the place name.
+                        if (style.isFullyLoaded() && style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                            Toast.makeText(MapBox_Picker.this,
+                                    getString(R.string.location_picker_place_name_result) + ": " +
+                                            feature.placeName(), Toast.LENGTH_SHORT).show();
+                            tv_place_name.setText(String.valueOf(feature.placeName()));
+                            tv_lat_location.setText(String.valueOf(point.latitude()));
+                            tv_lng_location.setText(String.valueOf(point.longitude()));
+                        }
+
+                    } else {
+                        Toast.makeText(MapBox_Picker.this,
+                                getString(R.string.location_picker_dropped_marker_snippet_no_results), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
+                    Timber.e("Geocoding Failure: %s", throwable.getMessage());
+                }
+            });
+        } catch (ServicesException servicesException) {
+            Timber.e("Error geocoding: %s", servicesException.toString());
+            servicesException.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings({"MissingPermission"})
+    private void enableLocationPlugin(@NonNull Style loadedMapStyle) {
+        // Check if permissions are enabled and if not request
+        if (PermissionsManager.areLocationPermissionsGranted(this)) {
+
+            // Get an instance of the component. Adding in LocationComponentOptions is also an optional
+            // parameter
+            LocationComponent locationComponent = mapboxMap.getLocationComponent();
+            locationComponent.activateLocationComponent(this, loadedMapStyle);
+            locationComponent.setLocationComponentEnabled(true);
+
+            // Set the component's camera mode
+            locationComponent.setCameraMode(CameraMode.TRACKING);
+            locationComponent.setRenderMode(RenderMode.NORMAL);
+
+        } else {
+            permissionsManager = new PermissionsManager(this);
+            permissionsManager.requestLocationPermissions(this);
+        }
+    }
+
+    public void getCurrentUser() {
+        if (firebaseUser != null) {
+            databaseReference.child("Account").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    accountUser = dataSnapshot.getValue(AccountUser.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+}

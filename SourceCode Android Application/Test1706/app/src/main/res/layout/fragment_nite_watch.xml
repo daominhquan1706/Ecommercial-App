@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -109,11 +108,5 @@
 
     </ScrollView>
 
-    <pl.droidsonroids.gif.GifImageView
-        android:background="@color/loading_screen_background"
-        android:src="@drawable/loading_screen3"
-        android:id="@+id/loadingscreen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+    <include layout="@layout/loading_screen" />
 </RelativeLayout>

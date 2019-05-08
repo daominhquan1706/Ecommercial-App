@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        card_view:cardBackgroundColor="@color/black_cardview_nitewatch"
+        card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -28,7 +28,7 @@
                 android:padding="10dp"
                 android:text="MY CART"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="27sp" />
 
             <LinearLayout
@@ -43,7 +43,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text=" Quantity: "
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="0"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-light"
                     android:text="Total : "
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-light"
                     android:text="$0"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -88,6 +88,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/place_holder_cart"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:layout_margin="40dp"
@@ -95,20 +96,14 @@
                     android:src="@drawable/ic_remove_shopping_cart_black_24dp" />
 
                 <android.support.v7.widget.RecyclerView
+
                     android:id="@+id/recycleview_cart_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/black_cardview_nitewatch"
-                    android:orientation="horizontal"
-                    android:scrollbarFadeDuration="50"
-                    android:scrollbarSize="2dp"
-                    android:scrollbarStyle="insideOverlay"
-                    android:scrollbarThumbHorizontal="@color/LightBlue"
-                    android:scrollbars="horizontal"
-                    android:visibility="visible"
-                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_horizontal_cart">
+                    android:layout_height="500dp"
+                    card_view:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+
+                    tools:listitem="@layout/item_horizontal_cart"
+                    >
 
                 </android.support.v7.widget.RecyclerView>
 
@@ -139,12 +134,12 @@
                 android:textStyle="bold" />
 
             <Button
-                android:layout_margin="10dp"
                 android:id="@+id/btn_contiueshopping"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="58dp"
-                android:background="@color/black_cardview_nitewatch"
+                android:layout_margin="10dp"
+                android:background="@color/fui_transparent"
                 android:text="@string/continue_shopping"
                 android:textColor="@color/LightBlue"
                 android:textStyle="bold" />

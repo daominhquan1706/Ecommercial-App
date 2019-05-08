@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">POWERr</string>
     <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
     <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
@@ -23,106 +23,107 @@
     <string name="forgot_password">Quên mật khẩu ?</string>
     <string name="up">Up</string>
     <string name="unknow_account">Tài khoản khách</string>
-    <string name="adventure">ADVENTURE</string>
-    <string name="hawk">HAWK</string>
 
-    <string-array name="category_nitewatch">
-        <item>Hawk</item>
-        <item>Alpha</item>
-        <item>Icon</item>
-        <item>Marquess</item>
-        <item>Mx10</item>
+
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
+        <item>ALPHA</item>
+        <item>HAWK</item>
+        <item>ICON-AUTO</item>
+        <item>ICON-QUARTZ</item>
+        <item>MARQESS</item>
+        <item>MX10</item>
+
 
     </string-array>
     <string name="title_activity_profile__account_">Profile_Account_Activity</string>
     <string name="large_text">
-        "Vật chất là phép ẩn dụ. \ N \ n"
+        "Vật chất là phép ẩn dụ. \n \n"
 
         "Một phép ẩn dụ vật chất là lý thuyết thống nhất về một không gian hợp lý và một hệ thống chuyển động."
         "Tài liệu này dựa trên thực tế xúc giác, lấy cảm hứng từ nghiên cứu về giấy và mực,"
-        "công nghệ tiên tiến và mở ra cho trí tưởng tượng và phép thuật. \ n"
+        "công nghệ tiên tiến và mở ra cho trí tưởng tượng và phép thuật. \n"
         "Bề mặt và các cạnh của vật liệu cung cấp tín hiệu thị giác được đặt nền tảng trong thực tế."
         "sử dụng các thuộc tính xúc giác quen thuộc giúp người dùng nhanh chóng hiểu được khả năng chi trả. Tuy nhiên,"
         "tính linh hoạt của vật liệu tạo ra khả năng chi trả mới thay thế cho vật chất"
-        "thế giới, không phá vỡ các quy tắc vật lý. \ n"
+        "thế giới, không phá vỡ các quy tắc vật lý. \n"
         "Các nguyên tắc cơ bản của ánh sáng, bề mặt và chuyển động là chìa khóa để truyền đạt cách các vật thể di chuyển,"
         "tương tác và tồn tại trong không gian và liên quan đến nhau. Chương trình chiếu sáng thực tế"
-        "đường nối, phân chia không gian và biểu thị các bộ phận chuyển động. \ n \ n"
+        "đường nối, phân chia không gian và biểu thị các bộ phận chuyển động. \n \n"
 
-        "Táo bạo, đồ họa, có chủ ý. \ N \ n"
+        "Táo bạo, đồ họa, có chủ ý. \n \n"
 
         "Các yếu tố nền tảng của kiểu chữ thiết kế dựa trên in, lưới, không gian, tỷ lệ, màu sắc,"
         "và sử dụng các hướng dẫn điều trị bằng hình ảnh. Các yếu tố này làm được nhiều hơn là làm hài lòng"
         "mắt. Chúng tạo ra thứ bậc, ý nghĩa và trọng tâm. Cố ý lựa chọn màu sắc, cạnh này sang cạnh khác"
         "hình ảnh, kiểu chữ quy mô lớn và không gian trắng có chủ ý tạo ra một sự táo bạo và đồ họa"
-        "Giao diện khiến người dùng đắm chìm trong trải nghiệm. \ n"
+        "Giao diện khiến người dùng đắm chìm trong trải nghiệm. \n"
         "Sự nhấn mạnh vào hành động của người dùng làm cho chức năng cốt lõi ngay lập tức rõ ràng và cung cấp"
-        "điểm tham chiếu cho người dùng. \ n \ n"
+        "điểm tham chiếu cho người dùng. \n \n"
 
-        "Chuyển động cung cấp ý nghĩa. \ N \ n"
+        "Chuyển động cung cấp ý nghĩa. \n \n"
 
         "Chuyển động tôn trọng và củng cố người dùng là động lực chính. Hành động của người dùng chính là"
-        "các điểm uốn bắt đầu chuyển động, biến đổi toàn bộ thiết kế. \ n"
+        "các điểm uốn bắt đầu chuyển động, biến đổi toàn bộ thiết kế. \n"
         "Tất cả hành động diễn ra trong một môi trường duy nhất. Các đối tượng được trình bày cho người dùng mà không"
-        "phá vỡ tính liên tục của kinh nghiệm ngay cả khi chúng biến đổi và sắp xếp lại. \ n"
+        "phá vỡ tính liên tục của kinh nghiệm ngay cả khi chúng biến đổi và sắp xếp lại. \n"
         "Chuyển động có ý nghĩa và phù hợp, phục vụ để tập trung sự chú ý và duy trì sự liên tục."
-        "Phản hồi là tinh tế nhưng rõ ràng. Chuyển đổi là hiệu quả nhưng vẫn mạch lạc. \ N \ n"
+        "Phản hồi là tinh tế nhưng rõ ràng. Chuyển đổi là hiệu quả nhưng vẫn mạch lạc. \n \n"
 
-        "Thế giới 3D. \ N \ n"
+        "Thế giới 3D. \n \n"
 
         "Môi trường vật chất là không gian 3D, có nghĩa là tất cả các đối tượng có x, y và z"
         "kích thước. Trục z được đặt vuông góc với mặt phẳng của màn hình, với"
         "trục z dương kéo dài về phía người xem. Mỗi tờ vật liệu chiếm một"
-        "vị trí dọc theo trục z và có độ dày 1dp tiêu chuẩn. \ n"
+        "vị trí dọc theo trục z và có độ dày 1dp tiêu chuẩn. \n"
         "Trên web, trục z được sử dụng để tạo lớp chứ không phải cho phối cảnh. Thế giới 3D là"
-        "được mô phỏng bằng cách thao tác trục y. \ n \ n"
+        "được mô phỏng bằng cách thao tác trục y. \n \n"
 
-        "Ánh sáng và bóng tối. \ N \ n"
+        "Ánh sáng và bóng tối. \n \n"
 
         "Trong môi trường vật chất, đèn ảo chiếu sáng cảnh. Đèn chính tạo ra"
-        "bóng định hướng, trong khi ánh sáng xung quanh tạo ra bóng mềm từ mọi góc độ. \ n"
+        "bóng định hướng, trong khi ánh sáng xung quanh tạo ra bóng mềm từ mọi góc độ. \n"
         "Bóng trong môi trường vật chất được tạo bởi hai nguồn sáng này. Trong Android"
         "sự phát triển, bóng tối xảy ra khi các nguồn sáng bị chặn bởi các tấm vật liệu tại"
         "các vị trí khác nhau dọc theo trục z. Trên web, bóng được mô tả bằng cách thao tác"
-        "chỉ trục y. Ví dụ sau đây cho thấy thẻ có chiều cao 6dp. \ n \ n"
+        "chỉ trục y. Ví dụ sau đây cho thấy thẻ có chiều cao 6dp. \n \n"
 
-        "Độ cao nghỉ ngơi. \ N \ n"
+        "Độ cao nghỉ ngơi. \n \n"
 
         "Tất cả các đối tượng vật chất, bất kể kích thước, có độ cao nghỉ, hoặc độ cao mặc định"
         "điều đó không thay đổi. Nếu một vật thể thay đổi độ cao, nó sẽ trở về trạng thái nghỉ"
-        "độ cao càng sớm càng tốt. \ n \ n"
+        "độ cao càng sớm càng tốt. \n \n"
 
-        "Độ cao thành phần. \ N \ n"
+        "Độ cao thành phần. \n \n"
 
         "Độ cao nghỉ ngơi cho loại thành phần phù hợp giữa các ứng dụng (ví dụ: độ cao FAB"
-        "không thay đổi từ 6dp trong một ứng dụng sang 16dp trong một ứng dụng khác). \ n"
+        "không thay đổi từ 6dp trong một ứng dụng sang 16dp trong một ứng dụng khác). \n"
         "Các thành phần có thể có độ cao nghỉ khác nhau trên các nền tảng, tùy thuộc vào độ sâu"
-        "của môi trường (ví dụ: TV có độ sâu lớn hơn thiết bị di động hoặc máy tính để bàn). \ n \ n"
+        "của môi trường (ví dụ: TV có độ sâu lớn hơn thiết bị di động hoặc máy tính để bàn). \n \n"
 
-        "Độ cao đáp ứng và độ lệch độ cao động. \ N \ n"
+        "Độ cao đáp ứng và độ lệch độ cao động. \n \n"
 
         "Một số loại thành phần có độ cao đáp ứng, nghĩa là chúng thay đổi độ cao trong phản ứng"
         "cho đầu vào của người dùng (ví dụ: bình thường, tập trung và nhấn) hoặc các sự kiện hệ thống. Những độ cao này"
-        "các thay đổi được thực hiện một cách nhất quán bằng cách sử dụng các độ lệch độ cao động. \ n"
+        "các thay đổi được thực hiện một cách nhất quán bằng cách sử dụng các độ lệch độ cao động. \n"
         "Độ lệch độ cao động là độ cao mục tiêu mà một thành phần di chuyển tới, tương đối"
         "đến trạng thái nghỉ ngơi thành phần. Họ đảm bảo rằng sự thay đổi độ cao là phù hợp"
         "trên các hành động và loại thành phần. Ví dụ: tất cả các thành phần nâng trên báo chí có"
-        "cùng một thay đổi độ cao so với độ cao nghỉ của chúng. \ n"
+        "cùng một thay đổi độ cao so với độ cao nghỉ của chúng. \n"
         "Khi sự kiện đầu vào được hoàn thành hoặc hủy bỏ, thành phần sẽ trở về trạng thái nghỉ"
-        "độ cao. \ n \ n"
+        "độ cao. \n \n"
 
-        "Tránh nhiễu độ cao. \ N \ n"
+        "Tránh nhiễu độ cao. \n \n"
 
         "Các thành phần có độ cao đáp ứng có thể gặp các thành phần khác khi chúng di chuyển giữa"
         "độ cao nghỉ ngơi của họ và e năng động giảm thuế. Bởi vì vật chất không thể vượt qua "
          "thông qua các tài liệu khác, các thành phần tránh can thiệp lẫn nhau bất kỳ cách nào,"
-         "cho dù trên cơ sở từng thành phần hoặc sử dụng toàn bộ bố cục ứng dụng. \ n"
+         "cho dù trên cơ sở từng thành phần hoặc sử dụng toàn bộ bố cục ứng dụng. \n"
          "Ở cấp độ thành phần, các thành phần có thể di chuyển hoặc bị loại bỏ trước khi chúng gây nhiễu."
          "Ví dụ: nút hành động nổi (FAB) có thể biến mất hoặc di chuyển khỏi màn hình trước khi"
-         "người dùng nhặt một thẻ hoặc nó có thể di chuyển nếu một thanh snack xuất hiện. \ n"
+         "người dùng nhặt một thẻ hoặc nó có thể di chuyển nếu một thanh snack xuất hiện. \n"
          "Ở cấp độ bố cục, hãy thiết kế bố cục ứng dụng của bạn để giảm thiểu cơ hội can thiệp."
          "Ví dụ: đặt FAB sang một bên của luồng thẻ để FAB giành được can thiệp"
-         "khi người dùng cố lấy một trong các thẻ. \ n \ n"
+         "khi người dùng cố lấy một trong các thẻ. \n \n"
     </string>
     <string name="action_settings">Cài đặt</string>
     <string name="enable_night_view">CHẾ ĐỘ SÁNG</string>
@@ -153,4 +154,38 @@
     <string name="hienquangcao">Hiện quảng cáo</string>
     <string name="hienhuongdan">Hiện hướng dẫn</string>
     <string name="doingonngu">Đổi ngôn ngữ</string>
+    <string name="menu_admin_name_sanpham">SẢN PHẢM</string>
+    <string name="menu_admin_tinnhan">TIN NHẮN</string>
+    <string name="menu_admin_doanthu">DOANH THU</string>
+    <string name="menu_admin_map">Test Google Map</string>
+    <string name="menu_admin_ds_hoadon">DANH SÁCH HÓA ĐƠN</string>
+
+    <string name="icon" translatable="false">ICON</string>
+    <string name="icon_automatic">ICON AUTOMATIC</string>
+    <string name="marquess">MARQUESS</string>
+    <string name="hawk">HAWK</string>
+
+    <string name="never_compromise">CHƯA BAO GIỜ LÀ SAI</string>
+    <string name="life_ready">SẴN SÀNG CHO CUỘC SỐNG</string>
+    <string name="the_power_to_impress">SỨC MẠNH CỦA SỰ ẤN TƯỢNG</string>
+    <string name="ultra_slim_style">PHONG CÁCH NHẸ NHÀNG</string>
+    <string name="adventure">CUỘC PHIÊU LƯU</string>
+
+    <string name="t_n_ng_i_nh_n">Tên người nhận</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Số điện thoại người nhận</string>
+    <string name="a_ch_giao_h_ng">Địa chỉ giao hàng</string>
+    <string name="t_ng">Tổng :</string>
+    <string name="danh_s_ch_s_n_ph_m">Danh sách sản phẩm</string>
+    <string name="h_nh_n_t_g_p_c_a_s">hình nút gập cửa sổ</string>
+    <string name="h_nh">hình</string>
+    <string name="h_y_n_h_ng">hủy đơn hàng</string>
+    <string name="x_c_nh_n">xác nhận</string>
+    <string name="move_map_instruction">Di chuyển bản đồ để chọn địa điểm</string>
+    <string name="location_picker_select_location_button_cancel">Hủy chọn</string>
+    <string name="ch_n_m_t_v_tr">Chọn một vị trí</string>
+    <string name="user_location_permission_not_granted">quyền của người dùng không được cấp</string>
+    <string name="location_picker_place_name_result">tên địa điểm</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">Không có kết quả</string>
+    <string name="l_u_thay_i">lưu thay đổi</string>
+
 </resources>

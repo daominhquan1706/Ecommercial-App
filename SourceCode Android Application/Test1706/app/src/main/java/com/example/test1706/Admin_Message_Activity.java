@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
 import com.example.test1706.model.CartSqliteHelper;
+import com.example.test1706.model.ChatMessage;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -35,9 +37,10 @@ public class Admin_Message_Activity extends AppCompatActivity {
     DatabaseReference myRef;
     List<ChatMessage> chatMessageList;
     Admin_message_account_adapter adapter;
-    List<String> userUID_List,mkey;
+    List<String> userUID_List, mkey;
     String username;
     GifImageView loadingscreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
             }
         });
     }
+
     protected void hideKeyboard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
@@ -75,8 +79,8 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
 
     public void init() {
-        loadingscreen= (GifImageView) findViewById(R.id.loadingscreen);
-        mkey=new ArrayList<String>();
+        loadingscreen = (GifImageView) findViewById(R.id.loadingscreen);
+        mkey = new ArrayList<String>();
         userUID_List = new ArrayList<String>();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -97,7 +101,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
                         myRef.child("chat_message").child(userUID).child("emailCustomer").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.getValue()!=null){
+                                if (dataSnapshot.getValue() != null) {
                                     username = dataSnapshot.getValue().toString();
                                 }
 
@@ -119,8 +123,12 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                     chatMessage1.setMessageUser(username);
                                     chatMessageList.add(chatMessage1);
                                     mkey.add(dataSnapshot1.getKey());
+
+                                    Collections.sort(chatMessageList);
                                     adapter.notifyDataSetChanged();
                                     loadingscreen.setVisibility(View.GONE);
+
+
                                 }
                             }
 
@@ -158,6 +166,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -183,6 +192,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
         }
         return isExistsInlist;
     }
+
     @Override
     public void finish() {
         super.finish();

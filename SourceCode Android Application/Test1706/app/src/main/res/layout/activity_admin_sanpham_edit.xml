@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_product"
     android:layout_width="match_parent"
@@ -15,6 +14,42 @@
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/tv_Category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:hint="Category"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_random_info"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/ic_refresh_black_24dp" />
+        </RelativeLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+
             style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,101 +93,6 @@
 
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/drw_edt_bg"
-            android:visibility="gone">
-
-            <RelativeLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/titlecategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Category"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13dp" />
-
-                <Spinner
-                    android:id="@+id/spinner_add"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
-                    android:entries="@array/category_nitewatch"
-                    android:overlapAnchor="true"
-                    android:spinnerMode="dropdown"
-                    app:popupTheme="@style/PopupMenuStyle"
-                    tools:listitem="@layout/spinner_item_dark" />
-            </RelativeLayout>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/drw_edt_bg">
-
-            <EditText
-                android:id="@+id/tv_Category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@null"
-                android:hint="Category "
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/white" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/drw_edt_bg">
-
-            <EditText
-                android:id="@+id/tv_url_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@null"
-                android:hint="Day Image URL"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/white" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            style="@style/TextLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/drw_edt_bg">
-
-            <EditText
-                android:id="@+id/tv_url_image_night"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@null"
-                android:hint="Night Image URL "
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/white" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
             style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -167,6 +107,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@null"
                 android:hint="quantity "
+                android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -187,6 +128,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@null"
                 android:hint="discount"
+                android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -208,17 +150,19 @@
 
                 <ImageView
                     android:id="@+id/img_choose"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:background="@color/colordark"
+                    android:layout_gravity="center"
+                    android:background="@color/black_cardview_nitewatch"
                     android:scaleType="fitCenter" />
 
                 <Button
-
                     android:id="@+id/btn_choose_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Picture DAY" />
+                    android:background="@color/fui_transparent"
+                    android:text="Picture DAY"
+                    android:textColor="@color/LightBlue" />
             </LinearLayout>
 
             <LinearLayout
@@ -231,30 +175,74 @@
 
                 <ImageView
                     android:id="@+id/img_choose_night"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:background="@color/colordark"
+                    android:layout_gravity="center"
+                    android:background="@color/black_cardview_nitewatch"
                     android:scaleType="fitCenter" />
 
                 <Button
-
                     android:id="@+id/btn_choose_img_night"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="picture NIGHT" />
+                    android:background="@color/fui_transparent"
+                    android:text="picture NIGHT"
+                    android:textColor="@color/LightBlue" />
             </LinearLayout>
 
         </LinearLayout>
 
+        <android.support.design.widget.TextInputLayout
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/tv_url_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:hint="Day Image URL"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/tv_url_image_night"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:hint="Night Image URL "
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btn_add_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/buttom_menu"
-            android:text="Add"
+            android:text="Lưu dữ liệu"
             android:textColor="@color/white" />
 
 
     </LinearLayout>
+
 </ScrollView>
