@@ -17,8 +17,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user_avatar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
@@ -78,6 +78,21 @@
 
         </android.support.design.widget.TextInputLayout>
 
+
+        <Button
+            android:id="@+id/btn_save_profile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/drw_edt_bg_blue"
+            android:clickable="false"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/inputlayout_address_order"
             style="@style/TextLabel"
@@ -103,18 +118,34 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_save_profile"
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/mapbox_cardview"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/drw_edt_bg_blue"
-            android:clickable="false"
-            android:text="Lưu"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:visibility="gone" />
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/black_cardview_nitewatch"
+            app:cardCornerRadius="20dp" />
+
+        <TextView
+            android:id="@+id/tv_lat_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_lng_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/testmapfragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg_yellow"
+            android:text="map fragment" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

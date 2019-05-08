@@ -28,7 +28,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Category "
+                android:hint="Category"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -153,7 +153,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:background="@color/colordark"
+                    android:background="@color/black_cardview_nitewatch"
                     android:scaleType="fitCenter" />
 
                 <Button
@@ -178,7 +178,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:background="@color/colordark"
+                    android:background="@color/black_cardview_nitewatch"
                     android:scaleType="fitCenter" />
 
                 <Button
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/drw_edt_bg"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/tv_url_image"
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/drw_edt_bg"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/tv_url_image_night"

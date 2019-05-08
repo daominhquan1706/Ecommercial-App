@@ -1,16 +1,10 @@
 package com.example.test1706.UserModel;
 
-import android.support.annotation.NonNull;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountUser {
@@ -19,6 +13,25 @@ public class AccountUser {
     private String Name;
     private String SDT;
     private String Diachi;
+    private Double Lat_Location;
+    private Double Long_Location;
+
+    public Double getLat_Location() {
+        return Lat_Location;
+    }
+
+    public void setLat_Location(Double lat_Location) {
+        Lat_Location = lat_Location;
+    }
+
+    public Double getLong_Location() {
+        return Long_Location;
+    }
+
+    public void setLong_Location(Double long_Location) {
+        Long_Location = long_Location;
+    }
+
     private static final String TAG = "AccountUser";
 
     FirebaseDatabase firebaseDatabase;

@@ -1,6 +1,7 @@
 package com.example.test1706;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,12 +9,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -27,6 +30,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.maps.SupportMapFragment;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,16 +59,21 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     Button btn_save_profile;
     FirebaseUser firebaseUser;
     String userUID;
+    LatLng location;
+    Bundle savedInstance_bundle;
+    TextView tv_lng_location, tv_lat_location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        savedInstance_bundle = savedInstanceState;
         setContentView(R.layout.activity_user_profile__account);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //loading
-
 
 
         isEditing = false;
@@ -70,7 +91,6 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                     btn_save_profile.setVisibility(View.GONE);
                 }
                 isEditing = !isEditing;
-                tv_address_profile.setEnabled(isEditing);
                 tv_name_profile.setEnabled(isEditing);
                 tv_phonenumber_profile.setEnabled(isEditing);
                 btn_save_profile.setClickable(isEditing);
@@ -107,11 +127,69 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                     getCurrentUser();
                 }
                 isEditing = !isEditing;
-                tv_address_profile.setEnabled(isEditing);
                 tv_name_profile.setEnabled(isEditing);
                 tv_phonenumber_profile.setEnabled(isEditing);
                 btn_save_profile.setClickable(isEditing);
                 btn_save_profile.setVisibility(View.GONE);
+            }
+        });
+        LatLng huflit = new LatLng(10.776663, 106.667445);
+        loadMap(huflit);
+    }
+
+    private void changeLocation(LatLng latLng) {
+        MapboxMapOptions options = new MapboxMapOptions();
+        options.camera(new CameraPosition.Builder()
+                .target(latLng)
+                .zoom(15)
+                .build());
+        mapFragment = SupportMapFragment.newInstance(options);
+    }
+
+    SupportMapFragment mapFragment;
+
+    private void loadMap(LatLng latLng) {
+        Mapbox.getInstance(this, getString(R.string.access_token));
+
+        if (savedInstance_bundle == null) {
+            final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            MapboxMapOptions options = new MapboxMapOptions();
+            options.camera(new CameraPosition.Builder()
+                    .target(latLng)
+                    .zoom(15)
+                    .build());
+            mapFragment = SupportMapFragment.newInstance(options);
+            transaction.add(R.id.mapbox_cardview, mapFragment, "com.mapbox.map");
+            transaction.commit();
+        } else {
+            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
+        }
+
+        assert mapFragment != null;
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
+
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+                        // Add the marker image to map
+                        style.addImage("marker-icon-id",
+                                BitmapFactory.decodeResource(
+                                        User_Profile_Account_Activity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
+                                Point.fromLngLat(106.667445, 10.776663)));
+                        style.addSource(geoJsonSource);
+
+                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+                        symbolLayer.withProperties(
+                                PropertyFactory.iconImage("marker-icon-id")
+                        );
+                        style.addLayer(symbolLayer);
+                    }
+                });
             }
         });
 
@@ -134,7 +212,14 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                                 .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
                                 .apply(new RequestOptions().centerCrop())
                                 .into(img_user_avatar);
+                        if (accountUser1.getLat_Location() != null && accountUser.getLong_Location() != null) {
+                            tv_lng_location.setText(String.valueOf(accountUser1.getLong_Location()));
+                            tv_lat_location.setText(String.valueOf(accountUser1.getLat_Location()));
 
+
+                            location = new LatLng(accountUser1.getLat_Location(), accountUser1.getLong_Location());
+                            changeLocation(location);
+                        }
                     } else {
                         update_firebaseAccount();
                         getCurrentUser();
@@ -161,7 +246,17 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         }
     }
 
+    Button testmapfragment;
+
     public void init() {
+        testmapfragment = (Button) findViewById(R.id.testmapfragment);
+        testmapfragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(User_Profile_Account_Activity.this, MapBox_Picker.class);
+                startActivity(i);
+            }
+        });
         toolbar_profile = (Toolbar) findViewById(R.id.toolbar_profile);
         tv_name_profile = (EditText) findViewById(R.id.tv_name_profile);
         tv_phonenumber_profile = (EditText) findViewById(R.id.tv_phonenumber_profile);
@@ -180,13 +275,18 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userUID = firebaseUser.getUid();
 
+
+        tv_lng_location = (TextView) findViewById(R.id.tv_lng_location);
+        tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(this,MainActivity.class);
+        Intent back = new Intent(this, MainActivity.class);
         startActivity(back);
         finish();
     }
+
+
 }

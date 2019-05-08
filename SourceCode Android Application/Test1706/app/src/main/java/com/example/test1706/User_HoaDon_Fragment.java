@@ -5,11 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.test1706.model.Orders;
@@ -51,6 +50,7 @@ public class User_HoaDon_Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_admin__hoa_don, container, false);
     }
 
+    RelativeLayout image_empty_hoadon;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ public class User_HoaDon_Fragment extends Fragment {
                 if (list.size() == 0) {
                     listView_order_admin.setVisibility(View.INVISIBLE);
                 } else {
+                    image_empty_hoadon.setVisibility(View.GONE);
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
             }
@@ -127,13 +128,14 @@ public class User_HoaDon_Fragment extends Fragment {
     }
 
     public void init() {
+        image_empty_hoadon = (RelativeLayout) Objects.requireNonNull(getView()).findViewById(R.id.image_empty_hoadon);
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         mkey = new ArrayList<String>();
         tv_status_empty = (TextView) getView().findViewById(R.id.tv_status_empty);
         myRef = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<Orders>();
-        adapter = new Adapter_HoaDon_item(getActivity(), list,getActivity());
+        adapter = new Adapter_HoaDon_item(getActivity(), list, getActivity());
         listView_order_admin = (RecyclerView) getView().findViewById(R.id.lv_order_admin);
         listView_order_admin.setAdapter(adapter);
     }

@@ -6,14 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +41,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     private static final String TAG = "Adapter_HoaDon_item";
     Activity activity;
 
-    public Adapter_HoaDon_item(Context context, List<Orders> list_orders,Activity activity) {
+    public Adapter_HoaDon_item(Context context, List<Orders> list_orders, Activity activity) {
         this.context = context;
         this.list_orders = list_orders;
         this.activity = activity;
@@ -93,7 +91,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
 
         Cart_Recycle_Adapter_NiteWatch adapter;
-        adapter = new Cart_Recycle_Adapter_NiteWatch(context, orders_item.getOrderDetails(), R.layout.item_checkout_item);
+        adapter = new Cart_Recycle_Adapter_NiteWatch(context, orders_item.getOrderDetails(), R.layout.item_checkout_item_slider_card);
         holder.lv_checkout.setAdapter(adapter);
         if (orders_item.getStatus().equals("Chờ xác nhận")) {
             holder.tv_Xac_nhan.setText("Xác nhận");
@@ -234,13 +232,13 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         String paymentId;
         Orders orders;
         private static final String TAG = "AdminHoaDon_Details_act";
-        CardView admin_details_hoadon_inputlayout_sdt_order;
-        CardView btn_Xac_nhan, btn_TuChoi, btn_close_fold;
+        CardView btn_Xac_nhan, btn_TuChoi;
+        RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold;
 
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
-            btn_close_fold = (CardView) convertView.findViewById(R.id.btn_close_fold);
+            btn_close_fold = (RelativeLayout) convertView.findViewById(R.id.btn_close_fold);
             tv_position = (TextView) convertView.findViewById(R.id.tv_position);
             tv_customer_sdt = (TextView) convertView.findViewById(R.id.tv_customer_sdt);
             tv_creation_time = (TextView) convertView.findViewById(R.id.tv_creation_time);
@@ -256,7 +254,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
             db = FirebaseDatabase.getInstance();
             myRef = db.getReference();
             btn_TuChoi = (CardView) convertView.findViewById(R.id.btn_TuChoi);
-            admin_details_hoadon_inputlayout_sdt_order = (CardView) convertView.findViewById(R.id.cv_phone_admin_order);
+            admin_details_hoadon_inputlayout_sdt_order = (RelativeLayout) convertView.findViewById(R.id.cv_phone_admin_order);
             lv_checkout = (RecyclerView) convertView.findViewById(R.id.admin_details_hoadon_lv_checkout);
             btn_Xac_nhan = (CardView) convertView.findViewById(R.id.btn_Xac_nhan);
             tv_Xac_nhan = (TextView) convertView.findViewById(R.id.tv_Xac_nhan);

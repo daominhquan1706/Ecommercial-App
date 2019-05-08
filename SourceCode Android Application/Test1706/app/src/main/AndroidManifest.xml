@@ -20,7 +20,6 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,6 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MapBox_Picker"></activity>
+        <activity android:name=".SupportMapFragmentActivity" />
         <activity
             android:name=".User_Viewed_Product"
             android:label="Viewed product"

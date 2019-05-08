@@ -5,8 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
-    android:padding="10dp"
+    android:background="@drawable/background_gradient_item_hoadon"
     tools:context=".Admin_HoaDon_Activity$PlaceholderFragment">
 
     <RelativeLayout

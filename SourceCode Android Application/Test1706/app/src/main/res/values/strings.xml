@@ -171,4 +171,21 @@
     <string name="ultra_slim_style">PHONG CÁCH NHẸ NHÀNG</string>
     <string name="adventure">CUỘC PHIÊU LƯU</string>
 
+    <string name="t_n_ng_i_nh_n">Tên người nhận</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Số điện thoại người nhận</string>
+    <string name="a_ch_giao_h_ng">Địa chỉ giao hàng</string>
+    <string name="t_ng">Tổng :</string>
+    <string name="danh_s_ch_s_n_ph_m">Danh sách sản phẩm</string>
+    <string name="h_nh_n_t_g_p_c_a_s">hình nút gập cửa sổ</string>
+    <string name="h_nh">hình</string>
+    <string name="h_y_n_h_ng">hủy đơn hàng</string>
+    <string name="x_c_nh_n">xác nhận</string>
+    <string name="move_map_instruction">Di chuyển bản đồ để chọn địa điểm</string>
+    <string name="location_picker_select_location_button_cancel">Hủy chọn</string>
+    <string name="ch_n_m_t_v_tr">Chọn một vị trí</string>
+    <string name="user_location_permission_not_granted">quyền của người dùng không được cấp</string>
+    <string name="location_picker_place_name_result">tên địa điểm</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">Không có kết quả</string>
+    <string name="l_u_thay_i">lưu thay đổi</string>
+
 </resources>

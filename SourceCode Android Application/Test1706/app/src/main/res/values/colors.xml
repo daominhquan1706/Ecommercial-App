@@ -33,6 +33,6 @@
     </color>
     <color name="dark_blue">@color/black_cardview_nitewatch</color>
     <color name="loading_screen_background">#0E1E2F</color>
-    <color name="purple1">#4527A0</color>
+    <color name="purple1">@color/black_cardview_nitewatch</color>
 
 </resources>
