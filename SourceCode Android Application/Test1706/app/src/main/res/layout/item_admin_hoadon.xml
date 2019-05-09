@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/thongtinthem"
         app:animationDuration="1500"
-        app:backSideColor="#BECBEB">
+        app:backSideColor="#6E6E70">
 
         <FrameLayout
             android:id="@+id/cell_content_view"

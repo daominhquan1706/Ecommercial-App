@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
+        loadLangguage();
+
         init();
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -213,7 +215,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void init() {
-        session = new Session(getApplicationContext());
+
+
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -432,7 +435,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-        loadLocale();
         return true;
     }
 
@@ -458,8 +460,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
-        loadLocale();
         return true;
     }
 
@@ -477,9 +477,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_tutorial = navigationView.getMenu().findItem(R.id.nav_tutorial);
 
         nav_changelang = (MenuItem) findViewById(R.id.nav_changelang);
-        loadLocale();
-
-
         updateUI();
         switch_huongdan = nav_tutorial.getActionView().findViewById(R.id.switch_huongdan);
         switch_quangcao = nav_advertisement.getActionView().findViewById(R.id.switch_quangcao);
@@ -643,11 +640,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void loadLocale() {
-        /*setLocale(session.getLanguage());
-        SharedPreferences prefers = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language = prefers.getString("My_lang", "");*/
-        setLocale(session.getLanguage());
+    public void loadLangguage() {
+        session = new Session(getApplicationContext());
+        if (session.getIsChangeLanguage()) {
+            session.setIsChangeLanguage(!session.getIsChangeLanguage());
+            setLocale(session.getLanguage());
+            recreate();
+        }
+        else{
+            session.setIsChangeLanguage(!session.getIsChangeLanguage());
+        }
     }
 
     private void updateUI() {
@@ -675,7 +677,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             img_user_avatar_chat.setImageResource(R.drawable.ic_account_circle_black_24dp);
         }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
 
+
+            }
+        }, 5000);
 
     }
 

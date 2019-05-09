@@ -13,15 +13,15 @@
     <item android:state_focused="true" >
         <shape android:shape="rectangle">
             <corners android:radius="50dp" />
-            <solid android:color="@color/black_cardview_nitewatch" />
-            <stroke android:color="@color/black_cardview_nitewatch" android:width="3px"/>
+            <solid android:color="@color/black_cardview_nitewatch1" />
+            <stroke android:color="@color/black_cardview_nitewatch1" android:width="3px"/>
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="50dp" />
-            <solid android:color="@color/black_cardview_nitewatch" />
-            <stroke android:color="@color/black_cardview_nitewatch" android:width="3px"/>
+            <solid android:color="@color/black_cardview_nitewatch1" />
+            <stroke android:color="@color/black_cardview_nitewatch1" android:width="3px"/>
         </shape>
     </item>
 

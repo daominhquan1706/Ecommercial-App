@@ -41,19 +41,12 @@ public class Session {
         return prefs.getString("appLanguage", "vi");
     }
 
-    private void setLocale(Context context) {
-        String lang = getLanguage();
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    public void setIsChangeLanguage(boolean bool) {
+        prefs.edit().putBoolean("setIsChangeLanguage", bool).apply();
+    }
 
-        SharedPreferences.Editor editor = context.getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My Lang", lang);
-
-        editor.apply();
-
+    public boolean getIsChangeLanguage() {
+        return prefs.getBoolean("setIsChangeLanguage", true);
     }
 
 }

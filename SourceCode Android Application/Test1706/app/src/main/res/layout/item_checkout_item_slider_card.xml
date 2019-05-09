@@ -8,7 +8,7 @@
     android:background="@color/black"
     android:gravity="center"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/black_cardview_nitewatch"
+    app:cardBackgroundColor="@color/black_cardview_nitewatch1"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="x"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/gray" />
+                    android:textColor="@color/LightBlue" />
 
                 <TextView
                     android:id="@+id/edt_quantity_product_cart"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="Quantity"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/gray" />
+                    android:textColor="@color/LightBlue" />
             </LinearLayout>
         </RelativeLayout>
 

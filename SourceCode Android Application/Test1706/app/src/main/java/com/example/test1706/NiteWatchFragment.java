@@ -2,6 +2,8 @@ package com.example.test1706;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.test1706.Config.Session;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -48,8 +51,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import pl.droidsonroids.gif.GifImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class NiteWatchFragment extends Fragment {
     private static final String TAG = "NiteWatchFragment";
@@ -396,6 +402,19 @@ public class NiteWatchFragment extends Fragment {
                             // Do something after 5s = 5000ms
                             if (!isHideLoadingscreen) {
                                 hideLoadingScreen();
+
+                                /*Session session = new Session(getContext());
+                                Locale locale = new Locale(session.getLanguage());
+                                Locale.setDefault(locale);
+                                Configuration config = new Configuration();
+                                config.locale = locale;
+                                getContext().getResources().updateConfiguration(config, getContext().getResources().getDisplayMetrics());
+
+                                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Settings", MODE_PRIVATE).edit();
+                                editor.putString("My Lang", session.getLanguage());
+
+                                editor.apply();
+                                getActivity().recreate();*/
                             }
                         }
                     }, 1000);
