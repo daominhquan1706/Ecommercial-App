@@ -292,8 +292,7 @@ ProgressDialog pd;
                             pd.cancel();
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(LoginActivity.this, "LOGIN SUCESS", Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "signInWithEmail:success");
+                                Toast.makeText(LoginActivity.this, getString(R.string.dangnhapthanhcong), Toast.LENGTH_LONG).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 AccountUser accountUser;
@@ -304,9 +303,7 @@ ProgressDialog pd;
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:Đăng nhập thất bại", task.getException());
-                                mEmailView.setError("Email or Password is incorrect");
+                                mEmailView.setError(getString(R.string.khonghople));
                                 mPasswordView.setText("");
                                 mPasswordView.requestFocus();
                             }

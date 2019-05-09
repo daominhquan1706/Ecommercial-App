@@ -161,7 +161,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     public void onClick(View v) {
                         String userUID = firebaseUser.getUid();
                         if (tv_lat_location.getText().toString().isEmpty()) {
-                            Toast.makeText(MapBox_Picker.this, "Chưa lấy được thông tin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapBox_Picker.this, getString(R.string.chualayduocthongtin), Toast.LENGTH_SHORT).show();
                         } else {
                             accountUser.setDiachi(tv_place_name.getText().toString());
                             accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));

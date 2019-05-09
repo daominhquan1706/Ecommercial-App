@@ -483,7 +483,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 tvDurationMapbox.setText(String.valueOf(round((currentRoute.duration() / 60), 0) + " phút"));
                 tvTinhTienShip.setText(String.valueOf("$" + TinhTienShip(currentRoute.distance() / 1000)));
                 // Make a toast which displays the route's distance
-                Toast.makeText(MapBoxActivity.this, String.format("find location success !",
+                Toast.makeText(MapBoxActivity.this, String.format(getString(R.string.timdiadiemthanhcong),
                         currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
                 if (style.isFullyLoaded()) {
@@ -502,8 +502,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
             @Override
             public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-                Timber.e("Error: " + throwable.getMessage());
-                Toast.makeText(MapBoxActivity.this, "Error: " + throwable.getMessage(),
+                Toast.makeText(MapBoxActivity.this, getString(R.string.loi) + throwable.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }
         });

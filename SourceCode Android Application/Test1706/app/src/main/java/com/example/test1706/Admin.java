@@ -88,24 +88,24 @@ public class Admin extends AppCompatActivity {
     private void HuongDan() {
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.cv_sanpham), "Hướng dẫn sử dụng", "Click để thêm sản phẩm")
+                        TapTarget.forView(findViewById(R.id.img_ic_chinhsuasanpham), getString(R.string.quanlysanpham), getString(R.string.admin_motahuongdan1))
                                 .tintTarget(false)
                                 .id(1),
-                        TapTarget.forView(findViewById(R.id.cv_tinnhan), "Hướng dẫn sử dụng", "Click để chat với khách hàng")
+                        TapTarget.forView(findViewById(R.id.img_nhantinvoikhach), getString(R.string.nhantinkhachhang), getString(R.string.admin_motahuongdan2))
                                 .tintTarget(false)
                                 .cancelable(false)
                                 .id(2),
-                        TapTarget.forView(findViewById(R.id.cv_doanhthu), "Hướng dẫn sử dụng", "Click để xem biểu đồ")
+                        TapTarget.forView(findViewById(R.id.img_ic_BaoCaoDoanhThu), getString(R.string.baocao), getString(R.string.admin_motahuongdan3))
                                 .tintTarget(false)
 
                                 .cancelable(false)
                                 .id(3),
-                        TapTarget.forView(findViewById(R.id.cv_donhang), "Hướng dẫn sử dụng", "Click click để dùng map")
+                        TapTarget.forView(findViewById(R.id.img_thongTinGiaoHang), getString(R.string.bando), getString(R.string.admin_motahuongdan4))
                                 .tintTarget(false)
 
                                 .cancelable(false)
                                 .id(4),
-                        TapTarget.forView(findViewById(R.id.cv_orders), "Hướng dẫn sử dụng", "Click để xem hóa đơn")
+                        TapTarget.forView(findViewById(R.id.img_ic_accountmanager), getString(R.string.danhmuchoadon), getString(R.string.admin_motahuongdan5))
                                 .tintTarget(false)
 
                                 .cancelable(false)
@@ -120,7 +120,7 @@ public class Admin extends AppCompatActivity {
 
                     @Override
                     public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+
                     }
 
                     @Override

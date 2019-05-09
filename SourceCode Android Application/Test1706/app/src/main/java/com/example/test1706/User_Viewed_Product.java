@@ -234,7 +234,7 @@ public class User_Viewed_Product extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint(getString(R.string.search_here_hint));
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         //thiết lập badge cart count
         cartSqliteHelper = new CartSqliteHelper(this);

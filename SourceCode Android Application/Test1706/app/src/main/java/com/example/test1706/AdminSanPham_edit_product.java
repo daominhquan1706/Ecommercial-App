@@ -159,23 +159,23 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     private boolean full_info() {
         boolean full_info = true;
         if (tv_productname.getText().toString().isEmpty()) {
-            tv_productname.setError("không được được để trống");
+            tv_productname.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         if (img_choosen.getDrawable() == null) {
-            Toast.makeText(this, "vui lòng chọn hình Day", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.vuilongchonhinhday), Toast.LENGTH_SHORT).show();
             full_info = false;
         }
         if (img_chossen_night.getDrawable() == null) {
-            tv_url_image_night.setError("vui lòng chọn hình Night");
+            tv_url_image_night.setError(getString(R.string.vuilongchonhinhnight));
             full_info = false;
         }
         if (tv_quantity.getText().toString().isEmpty()) {
-            tv_quantity.setError("không được được để trống");
+            tv_quantity.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         if (tv_discount.getText().toString().isEmpty()) {
-            tv_discount.setError("không được được để trống");
+            tv_discount.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         return full_info;
@@ -208,7 +208,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     // Write failed
-                                    Toast.makeText(AdminSanPham_edit_product.this, "That bai , vui long thu lai", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AdminSanPham_edit_product.this, getString(R.string.thatbaivuilongthulai), Toast.LENGTH_SHORT).show();
                                     // ...
                                 }
                             });
@@ -393,12 +393,12 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                             //hiding the progress dialog
                             progressDialog_day.dismiss();
                             //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.tailenthanhcong), Toast.LENGTH_LONG).show();
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     tv_url_image.setText(uri.toString());
-                                    progressDialog_night.setTitle("Đang tải lên Firebase hình NIGHT");
+                                    progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
                                     progressDialog_night.show();
                                     uploadFile_Night();
 
@@ -431,7 +431,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
         }
         //if there is not any file
         else {
-            Toast.makeText(this, "tải hình DAY thất bại !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.taihinhdaythatbai), Toast.LENGTH_SHORT).show();
             //you can display an error toast
         }
     }
@@ -461,7 +461,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                             progressDialog_night.dismiss();
 
                             //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.tailenthanhcong, Toast.LENGTH_LONG).show();
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -498,7 +498,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
         }
         //if there is not any file
         else {
-            Toast.makeText(this, "tải hình NIGHT thất bại !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.taihinhnightthatbai), Toast.LENGTH_SHORT).show();
             //you can display an error toast
         }
     }

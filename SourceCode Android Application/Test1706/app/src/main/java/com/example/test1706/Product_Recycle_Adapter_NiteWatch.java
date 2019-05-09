@@ -149,7 +149,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
                         appBarLayout.startAnimation(slideDown_toolbar);
                     }
                 }
-                Toast.makeText(mContext, "Đã thêm " + productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mContext.getString(R.string.dathem) + productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -74,24 +74,24 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
 
         viewHolder.mName.setText(list_data.get(i).getProduct_Name());
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
-        viewHolder.mPrice.setText(((String) ("Price:" + "$" + list_data.get(i).getPrice())));
-        viewHolder.mDiscount.setText(((String) ("Discount:" + list_data.get(i).getDiscount() + "%")));
-        viewHolder.mQuantity.setText(((String) ("Quantity:" + list_data.get(i).getQuantity())));
+        viewHolder.mPrice.setText(((String) (mContext.getString(R.string.admin_price_product) + "$" + list_data.get(i).getPrice())));
+        viewHolder.mDiscount.setText(((String) (mContext.getString(R.string.admin_discount_product) + list_data.get(i).getDiscount() + "%")));
+        viewHolder.mQuantity.setText(((String) (mContext.getString(R.string.admin_quantity_product) + list_data.get(i).getQuantity())));
         viewHolder.mbtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Delete
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("xóa");
-                builder.setMessage("Bạn có muốn xóa " +productt.getProduct_Name()+" không ?");
+                builder.setTitle(R.string.xoa_title);
+                builder.setMessage(mContext.getString(R.string.dialog_message_xoa_product) +productt.getProduct_Name());
                 builder.setCancelable(false);
-                builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(mContext.getString(R.string.answer_no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 });
-                builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(mContext.getString(R.string.answer_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseDatabase database;
@@ -147,10 +147,6 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                     if (temp != -1) {
                         old_opening_menu = temp;
                     }
-                    Log.d(TAG, "onClick: opening_menu:" + opening_menu);
-                    Log.d(TAG, "onClick: old_opening_menu:" + temp);
-
-
                     notifyDataSetChanged();
                 }
 

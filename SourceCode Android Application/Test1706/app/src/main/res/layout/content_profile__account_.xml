@@ -45,7 +45,7 @@
                 android:drawableStart="@drawable/ic_account_circle_black_24dp"
                 android:drawablePadding="@dimen/drawable_padding"
                 android:enabled="false"
-                android:hint="Tên người nhận"
+                android:hint="@string/tennguoinhan__"
                 android:inputType="textPersonName|textCapWords"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/drw_edt_bg_yellow"
-            android:text="Chọn vị trí mới" />
+            android:text="@string/chonvitri_moi" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

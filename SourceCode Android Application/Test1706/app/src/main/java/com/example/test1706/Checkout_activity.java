@@ -150,7 +150,7 @@ public class Checkout_activity extends AppCompatActivity {
 
     private void HuongDan() {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.btnPaynow), "Hướng dẫn sử dụng", "Click để dùng tài khoản PayPal thanh toán")
+                TapTarget.forView(findViewById(R.id.btnPaynow), getString(R.string.paypalthanhtoan), getString(R.string.motahuongdanpaypal))
                         .tintTarget(false));
     }
 
@@ -176,7 +176,7 @@ public class Checkout_activity extends AppCompatActivity {
 
     private void ProcessPayment() {
         amount = tv_total_price.getText().toString();
-        PayPalPayment PaypalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), "USD", "Thanh toán sản phẩm", PayPalPayment.PAYMENT_INTENT_SALE);
+        PayPalPayment PaypalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), getString(R.string.menhgiatien), getString(R.string.titlepaypal), PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(Checkout_activity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, PaypalPayment);
@@ -199,9 +199,9 @@ public class Checkout_activity extends AppCompatActivity {
 
 
             } else if (resultCode == Activity.RESULT_CANCELED)
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.dahuy), Toast.LENGTH_SHORT).show();
         } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
-            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.khonghople,Toast.LENGTH_SHORT).show();
     }
 
 

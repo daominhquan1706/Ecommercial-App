@@ -82,7 +82,7 @@ public class LoginActivity_ForgotPassword extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity_ForgotPassword.this, "Success ! Please Check your email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity_ForgotPassword.this, getString(R.string.thanhconghaykiemtraemailcuaban), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LoginActivity_ForgotPassword.this, LoginActivity.class));
                 } else {
                     String error = task.getException().getMessage();

@@ -118,7 +118,7 @@ GifImageView loadingscreen;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_sign_out:
-                Toast.makeText(this, "Chưa có chức năng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.menu_sign_out_Toast), Toast.LENGTH_SHORT).show();
                 return true;
             case android.R.id.home:
                 onBackPressed();

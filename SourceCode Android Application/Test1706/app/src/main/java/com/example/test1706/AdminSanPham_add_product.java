@@ -110,30 +110,30 @@ public class AdminSanPham_add_product extends AppCompatActivity {
     private boolean full_info() {
         boolean full_info = true;
         if (tv_productname.getText().toString().isEmpty()) {
-            tv_productname.setError("không được được để trống");
+            tv_productname.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         if (img_choosen.getDrawable() == null) {
-            Toast.makeText(this, "vui lòng chọn hình Day", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.vuilongchonhinhday, Toast.LENGTH_SHORT).show();
             full_info = false;
         }
         if (img_chossen_night.getDrawable() == null) {
-            tv_url_image_night.setError("vui lòng chọn hình Night");
+            tv_url_image_night.setError(getString(R.string.vuilongchonhinhnight));
             full_info = false;
         }
         if (spinner_category.getSelectedItem().toString().isEmpty()) {
             TextView errorText = (TextView) spinner_category.getSelectedView();
             errorText.setError("");
             errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("my actual error text");//changes the selected item text to this
+            errorText.setText(R.string.khongduocdetrong);//changes the selected item text to this
             full_info = false;
         }
         if (tv_quantity.getText().toString().isEmpty()) {
-            tv_quantity.setError("không được được để trống");
+            tv_quantity.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         if (tv_discount.getText().toString().isEmpty()) {
-            tv_discount.setError("không được được để trống");
+            tv_discount.setError(getString(R.string.khongduocdetrong));
             full_info = false;
         }
         return full_info;
@@ -326,7 +326,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             //hiding the progress dialog
                             progressDialog_day.dismiss();
                             //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.tailenthanhcong, Toast.LENGTH_LONG).show();
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -365,7 +365,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
         }
         //if there is not any file
         else {
-            Toast.makeText(this, "tải hình DAY thất bại !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.taihinhdaythatbai, Toast.LENGTH_SHORT).show();
             //you can display an error toast
         }
     }
@@ -391,7 +391,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             progressDialog_night.dismiss();
 
                             //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.tailenthanhcong, Toast.LENGTH_LONG).show();
                             riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -422,14 +422,12 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
-                            progressDialog_night.setMessage("Uploaded " + ((int) progress) + "%...");
+                            progressDialog_night.setMessage(R.string.tailenthanhcong + ((int) progress) + "%...");
                         }
                     });
         }
-        //if there is not any file
         else {
-            Toast.makeText(this, "tải hình NIGHT thất bại !", Toast.LENGTH_SHORT).show();
-            //you can display an error toast
+            Toast.makeText(this, R.string.taihinhnightthatbai, Toast.LENGTH_SHORT).show();
         }
     }
 }

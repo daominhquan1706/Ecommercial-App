@@ -271,7 +271,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // Write failed
-                            Toast.makeText(AdminSanPham_Activity.this, "That bai , vui long thu lai", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminSanPham_Activity.this, R.string.thatbaivuilongthulai, Toast.LENGTH_SHORT).show();
                             // ...
                         }
                     });

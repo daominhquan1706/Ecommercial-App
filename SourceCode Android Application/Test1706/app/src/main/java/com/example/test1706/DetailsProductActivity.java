@@ -101,7 +101,7 @@ public class DetailsProductActivity extends AppCompatActivity {
                             }else{
                                 ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(DetailsProductActivity.this);
                                 productSqliteHelper.deleteProduct(productSqliteHelper.getProduct(b.getString("ProductName")));
-                                Toast.makeText(DetailsProductActivity.this, "Sản phẩm không tồn tại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailsProductActivity.this, getString(R.string.sanphamkhongtontai), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
 
@@ -136,12 +136,12 @@ public class DetailsProductActivity extends AppCompatActivity {
         btn_readmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btn_readmore.getText() == "Read more") {
+                if (btn_readmore.getText() == getString(R.string.read_more)) {
                     mdescription_product.setMaxLines(Integer.MAX_VALUE);
-                    btn_readmore.setText("Read less");
+                    btn_readmore.setText(getString(R.string.read_less));
                 } else {
                     mdescription_product.setMaxLines(5);
-                    btn_readmore.setText("Read more");
+                    btn_readmore.setText(getString(R.string.read_more));
                 }
 
             }
@@ -190,7 +190,7 @@ public class DetailsProductActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint(getString(R.string.search_here_hint));
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         //thiết lập badge cart count
         cartSqliteHelper = new CartSqliteHelper(this);

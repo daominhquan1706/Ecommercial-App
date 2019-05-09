@@ -77,7 +77,7 @@ public class Cart_Activity extends AppCompatActivity {
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
-                    Toast.makeText(Cart_Activity.this, "your cart is empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cart_Activity.this, getString(R.string.giohangrong), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -99,10 +99,10 @@ public class Cart_Activity extends AppCompatActivity {
 
         final TapTargetSequence sequence = new TapTargetSequence(Cart_Activity.this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.btn_contiueshopping), "Hướng dẫn sử dụng", "Click để tiếp tục mua hàng")
+                        TapTarget.forView(findViewById(R.id.btn_contiueshopping), getString(R.string.donggiohang), getString(R.string.cart_motahuongdan1))
                                 .tintTarget(false)
                                 .id(1),
-                        TapTarget.forView(findViewById(R.id.btn_checkout_cart), "Hướng dẫn sử dụng", "Click để thanh toán hàng")
+                        TapTarget.forView(findViewById(R.id.btn_checkout_cart), getString(R.string.thanhtoan), getString(R.string.cart_motahuongdan2))
                                 .tintTarget(false)
                                 .cancelable(false)
                                 .id(2))
@@ -116,17 +116,17 @@ public class Cart_Activity extends AppCompatActivity {
 
                     @Override
                     public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+
                     }
 
                     @Override
                     public void onSequenceCanceled(TapTarget lastTarget) {
                         final AlertDialog dialog = new AlertDialog.Builder(Cart_Activity.this)
-                                .setTitle("Uh oh")
-                                .setMessage("You canceled the sequence")
+                                .setTitle(getString(R.string.okhong))
+                                .setMessage(getString(R.string.bandangayquanghuongdan))
                                 .setPositiveButton("OK", null).show();
                         TapTargetView.showFor(dialog,
-                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), "Uh oh!", "You canceled the sequence at step " + lastTarget.id())
+                                TapTarget.forView(dialog.getButton(DialogInterface.BUTTON_POSITIVE), getString(R.string.okhong), getString(R.string.bandangayquanghuongdan) + lastTarget.id())
                                         .cancelable(false)
                                         .tintTarget(false), new TapTargetView.Listener() {
                                     @Override

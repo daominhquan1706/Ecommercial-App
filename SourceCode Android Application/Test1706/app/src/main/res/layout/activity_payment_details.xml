@@ -51,42 +51,42 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tổng cộng: "
+                        android:text="@string/details_tongcong"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tình trạng: "
+                        android:text="@string/details_tinhtrang"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ngày giao dự kiếm: "
+                        android:text="@string/details_ngaygiao"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tên người nhân: "
+                        android:text="@string/details_tennguoinhan"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Số điện thoại: "
+                        android:text="@string/details_sodienthoai"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Địa chỉ: "
+                        android:text="@string/details_diachi"
                         android:textColor="@color/LightBlue"
                         android:textStyle="bold" />
 

@@ -51,7 +51,7 @@ public class SearchFragment extends Fragment {
         searchview_product = (SearchView) getView().findViewById(R.id.searchview_product);
         searchview_product.setIconifiedByDefault(false);
         searchview_product.setSubmitButtonEnabled(true);
-        searchview_product.setQueryHint("Search Here");
+        searchview_product.setQueryHint(getString(R.string.search_here_hint));
         searchview_product.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchview_product.setFocusable(true);
 
@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment {
         SearchView searchView = (SearchView) searchItem.getActionView();
 
 
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint(getString(R.string.search_here_hint));
         searchView.setImeOptions(EditorInfo.IME_ACTION_GO);
 
 

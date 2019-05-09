@@ -241,12 +241,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setUpQuangCao();
 
-        /*if (currentUser != null) {
-
-            accountUser = new AccountUser();
-            accountUser.update_firebaseAccount();
-            Toast.makeText(this, "Hello "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
-        }*/
 
 
     }
@@ -297,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void HuongDan() {
         final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.btn_close_quangcao), "tắt cửa sổ quảng cáo")
+                        TapTarget.forView(findViewById(R.id.btn_close_quangcao), getString(R.string.tatcuasoquangcao))
                                 .tintTarget(true)
                                 .cancelable(true)
                                 .id(1))
@@ -311,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     @Override
                     public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+
                     }
 
                     @Override
@@ -325,15 +319,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void HuongDan2() {
         final TapTargetSequence sequence = new TapTargetSequence(MainActivity.this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.btn_enable_night_view), "Night Mode", "xem sản phẩm của bằng cách mô phỏng ban đêm")
+                        TapTarget.forView(findViewById(R.id.btn_enable_night_view), getString(R.string.chedobandem), getString(R.string.motahuongdan))
                                 .tintTarget(false)
                                 .cancelable(true)
                                 .id(1),
-                        TapTarget.forToolbarNavigationIcon(toolbar, "Menu chức năng", "Các chức năng linh tinh").id(2),
+                        TapTarget.forToolbarNavigationIcon(toolbar, getString(R.string.thanhchucnang), getString(R.string.motahuongdan2)).id(2),
                         TapTarget.forToolbarMenuItem(toolbar, R.id.action_search,
-                                "Tìm kiếm", "Nhập từ khóa để tìm thông tin").id(3),
+                                getString(R.string.timkiem), getString(R.string.motahuongdan3)).id(3),
                         TapTarget.forToolbarMenuItem(toolbar, R.id.action_cart,
-                                "Giỏ hàng", "Click vào để mua hàng hoặc xem những món hàng bạn đã bỏ vào giỏ").id(4))
+                                getString(R.string.my_cart), getString(R.string.motahuongdan4)).id(4))
 
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
@@ -345,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     @Override
                     public void onSequenceStep(TapTarget lastTarget, boolean targetClicked) {
-                        Log.d("TapTargetView", "Clicked on " + lastTarget.id());
+
                     }
 
                     @Override
@@ -366,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.main_menu, menu);
         searchItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint(getString(R.string.search_here_hint));
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
@@ -387,7 +381,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                Log.d(TAG, "onMenuItemActionExpand: title" + item.getTitle() + "Icon" + item.getIcon());
                 frame_container.setVisibility(View.GONE);
                 listView_search.setVisibility(View.VISIBLE);
                 appBarLayout.setVisibility(View.VISIBLE);
@@ -413,7 +406,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d(TAG, "onQueryTextChange: đã gọi được hàm nhập dữ liệu searchview");
                 productadapter.getFilter().filter(newText);
                 return false;
             }
@@ -538,20 +530,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Đăng xuất");
-                builder.setMessage("Bạn có muốn đăng xuất không?");
+                builder.setTitle(R.string.dang_xuat);
+                builder.setMessage(R.string.question_dang_xuat);
                 builder.setCancelable(false);
-                builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(R.string.answer_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 });
-                builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.answer_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseAuth.getInstance().signOut();
-                        Toast.makeText(MainActivity.this, "Sign out successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.dangxuat_thanh_cong), Toast.LENGTH_SHORT).show();
                         tv_email_nav_header.setText(getString(R.string.unknow_account));
                         nav_profile.setVisible(false);
                         nav_logout.setVisible(false);
@@ -591,9 +583,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showChangeLangDialog() {
-        final String[] listItem = {"Việt Nam", "Le français", "English", "中国"};
+        final String[] listItem = {getString(R.string.lang_tieng_viet), getString(R.string.lang_tieng_phap), getString(R.string.lang_tieng_anh), getString(R.string.lang_tieng_trung_quoc)};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-        mBuilder.setTitle("Choose Language");
+        mBuilder.setTitle(getString(R.string.chon_ngon_ngu));
         mBuilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
@@ -661,7 +653,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
-            Toast.makeText(this, "chào mừng user" + currentUser.getEmail(), Toast.LENGTH_SHORT);
+            Toast.makeText(this, getString(R.string.chao_mung_user) + currentUser.getEmail(), Toast.LENGTH_SHORT);
             nav_profile.setVisible(true);
             nav_logout.setVisible(true);
             nav_login.setVisible(false);
@@ -696,16 +688,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Thoát");
-            builder.setMessage("Bạn có muốn thoát ứng dụng không?");
+            builder.setTitle(getString(R.string.title_exit_app));
+            builder.setMessage(getString(R.string.cau_hoi_xacnhan_thoat));
             builder.setCancelable(false);
-            builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(getString(R.string.answer_no), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                 }
             });
-            builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(getString(R.string.answer_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     System.exit(0);
