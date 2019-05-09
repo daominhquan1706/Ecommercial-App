@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="MILITARY HERITAGE. TIMELESS DESIGN"
+            android:text="@string/military_heritage_timeless_design"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="13sp" />

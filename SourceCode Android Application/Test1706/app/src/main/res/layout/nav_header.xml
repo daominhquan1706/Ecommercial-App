@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Unknow_Account"
+            android:text="@string/unknow_account"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/white" />
     </LinearLayout>

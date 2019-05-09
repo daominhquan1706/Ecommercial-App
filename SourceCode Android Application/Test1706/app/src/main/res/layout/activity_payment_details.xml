@@ -169,7 +169,7 @@
                     android:layout_margin="10dp"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/button_matchparent_blue"
-                    android:text="xem đơn đặt hàng"
+                    android:text="@string/xem_n_t_h_ng"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
                     android:textStyle="bold" />
 

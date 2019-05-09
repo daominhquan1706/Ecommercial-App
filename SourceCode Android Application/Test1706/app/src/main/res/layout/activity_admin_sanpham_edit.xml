@@ -28,7 +28,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Category"
+                android:hint="@string/cAtegory"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Product Name"
+                android:hint="@string/product_name"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -84,7 +84,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Price"
+                android:hint="@string/price"
                 android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -106,7 +106,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="quantity "
+                android:hint="@string/quantity"
                 android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -127,7 +127,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="discount"
+                android:hint="@string/discount"
                 android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -161,7 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/fui_transparent"
-                    android:text="Picture DAY"
+                    android:text="@string/picture_day"
                     android:textColor="@color/LightBlue" />
             </LinearLayout>
 
@@ -186,7 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/fui_transparent"
-                    android:text="picture NIGHT"
+                    android:text="@string/picture_night"
                     android:textColor="@color/LightBlue" />
             </LinearLayout>
 
@@ -207,7 +207,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Day Image URL"
+                android:hint="@string/day_image_url"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -228,7 +228,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@null"
-                android:hint="Night Image URL "
+                android:hint="@string/night_image_url"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/white" />
@@ -239,7 +239,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/buttom_menu"
-            android:text="Lưu dữ liệu"
+            android:text="@string/l_u_d_li_u"
             android:textColor="@color/white" />
 
 

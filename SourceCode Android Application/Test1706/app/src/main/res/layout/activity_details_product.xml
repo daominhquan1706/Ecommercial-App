@@ -173,7 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textColor="@color/LightBlue"
                     android:textSize="20dp" />
 
@@ -217,7 +217,7 @@
                     android:baselineAligned="false"
                     android:drawableStart="@drawable/ic_shopping_cart_black_24dp"
                     android:gravity="center"
-                    android:text="Add to cart"
+                    android:text="@string/add_to_cart"
                     android:textColor="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>

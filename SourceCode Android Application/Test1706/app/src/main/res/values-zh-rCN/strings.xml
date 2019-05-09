@@ -224,4 +224,65 @@
     <string name="marquess"> MARQUESS </string>
         
     <string name="ultra_slim_style"> 超薄款式 </string>
+
+    <string name ="t_n_ng_i_nh_n">收件人姓名</string>
+        <string name ="s_i_n_tho_i_ng_i_nh_n">收件人的电话号码</string>
+        <string name ="a_ch_giao_h_ng">送货地址</string>
+        <string name ="t_ng">总计：</string>
+        <string name ="danh_s_ch_s_n_ph_m">产品清单</string>
+        <string name ="h_nh_n_t_g_p_c_a_s">按钮图像折叠窗口</string>
+        <string name ="h_nh"> image </string>
+        <string name ="h_y_n_h_ng">取消订单</string>
+        <string name ="x_c_nh_n">确认</string>
+        <string name ="move_map_instruction">移动地图以选择位置</string>
+        <string name ="location_picker_select_location_button_cancel">取消选择</string>
+        <string name ="ch_n_m_t_v_tr">选择一个位置</string>
+        <string name ="user_location_permission_not_granted">未授予用户权限</string>
+        <string name ="location_picker_place_name_result">地名</string>
+        <string name ="location_picker_dropped_marker_snippet_no_results">无结果</string>
+        <string name ="l_u_thay_i">保存更改</string>
+
+    <string name ="xemsanpham">查看</string>
+    <string name ="muahang">购物车</string>
+
+    <string name ="soluonghangdamua">数量：</string>
+         <string name ="tongsotienhangdamua">总计：</string>
+
+    <string name ="description">描述</string>
+         <string name ="add_to_cart">添加到购物车</string>
+         <string name ="receive_new_password">接收新密码</string>
+         <string name ="qu_ng_c_o">广告</string>
+         <string name ="b_qua">跳过</string>
+         <string name ="xem_n_t_h_ng">查看订单</string>
+         <string name ="register_new_account">注册新帐户</string>
+         <string name ="log_in_with_facebook">使用Facebook登录</string>
+         <string name ="log_in_with_google">使用google登录</string>
+         <string name ="use_phone_number">使用电话号码</string>
+         <string name ="enter_phone_number">输入电话号码</string>
+         <string name ="enter_code_received">输入收到的代码</string>
+         <string name ="confirm_code">确认代码</string>
+         <string name ="total">总计：</string>
+
+    <string name ="ch_x_c_nh_n">等待确认</string>
+         <string name ="ch_l_y_h_ng">等待拣货</string>
+         <string name ="ang_giao">交付</string>
+         <string name ="giao">已发送</string>
+         <string name ="kh_ch_h_y">访客取消</string>
+         <string name ="admin_h_y">管理员取消</string>
+         <string name ="message">发短信...... </string>
+         <string name ="categoryyyy">目录</string>
+         <string name ="product_name">产品名称</string>
+         <string name ="price">价格</string>
+         <string name ="quantity">数量</string>
+         <string name ="discount">折扣</string>
+         <string name ="picture_day">明亮的照片</string>
+         <string name ="picture_night">黑暗照片</string>
+         <string name ="day_image_url">明亮的网址</string>
+         <string name ="night_image_url">黑暗网址</string>
+         <string name ="l_u_d_li_u">保存数据</string>
+         <string name ="cAtegory">目录</string>
+         <string name ="checkout">检查</string>
+
+    <string name="military_heritage_timeless_design">军事遗产。 永恒的设计</string>
+
 </resources>

@@ -48,7 +48,7 @@
         android:layout_marginEnd="10dp"
         android:layout_toStartOf="@+id/fab"
         android:background="@drawable/drw_edt_bg"
-        android:hint="Message..."
+        android:hint="@string/message"
         android:paddingStart="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray" />

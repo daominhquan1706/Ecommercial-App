@@ -62,7 +62,7 @@
                         android:layout_marginStart="6dp"
                         android:background="#00000000"
                         android:drawableStart="@drawable/ic_account_circle_black_24dp"
-                        android:text="register new account"
+                        android:text="@string/register_new_account"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>
@@ -82,7 +82,7 @@
                         android:layout_gravity="start"
                         android:background="#00000000"
                         android:drawableStart="@drawable/ic_icons8_facebook"
-                        android:text="Log in with Facebook"
+                        android:text="@string/log_in_with_facebook"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>
@@ -103,7 +103,7 @@
                         android:layout_marginStart="10dp"
                         android:background="#00000000"
                         android:drawableStart="@drawable/ic_google__g__logo"
-                        android:text="Log in with google"
+                        android:text="@string/log_in_with_google"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
                         android:textStyle="bold" />
@@ -125,7 +125,7 @@
                         android:layout_marginStart="10dp"
                         android:background="#00000000"
                         android:drawableStart="@drawable/ic_phone_black_24dp"
-                        android:text="use phone number"
+                        android:text="@string/use_phone_number"
                         android:textColor="@color/common_google_signin_btn_text_dark_default"
                         android:textStyle="bold" />
                 </android.support.v7.widget.CardView>

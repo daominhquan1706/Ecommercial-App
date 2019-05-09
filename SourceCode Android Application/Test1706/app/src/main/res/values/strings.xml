@@ -187,5 +187,48 @@
     <string name="location_picker_place_name_result">tên địa điểm</string>
     <string name="location_picker_dropped_marker_snippet_no_results">Không có kết quả</string>
     <string name="l_u_thay_i">lưu thay đổi</string>
+    <string name="xemsanpham">View</string>
+    <string name="muahang">Cart</string>
+    <string name="soluonghangdamua">Quantity:</string>
+    <string name="tongsotienhangdamua">Total :</string>
+
+    <string name="ch_x_c_nh_n">Chờ xác nhận</string>
+    <string name="ch_l_y_h_ng">Chờ lấy hàng</string>
+    <string name="ang_giao">Đang giao</string>
+    <string name="giao">Đã giao</string>
+    <string name="kh_ch_h_y">Khách hủy</string>
+    <string name="admin_h_y">Admin hủy</string>
+    <string name="message">Message…</string>
+    <string name="categoryyyy">Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="quantity">quantity</string>
+    <string name="discount">discount</string>
+    <string name="picture_day">Picture DAY</string>
+    <string name="picture_night">picture NIGHT</string>
+    <string name="day_image_url">Day Image URL</string>
+    <string name="night_image_url">Night Image URL</string>
+    <string name="l_u_d_li_u">Lưu dữ liệu</string>
+    <string name="cAtegory">Category</string>
+    <string name="checkout">Checkout</string>
+    <string name="total">Total :</string>
+
+    <string name="description">Description</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="receive_new_password">Receive new password</string>
+    <string name="qu_ng_c_o">Quảng cáo</string>
+    <string name="b_qua">Bỏ qua</string>
+    <string name="xem_n_t_h_ng">xem đơn đặt hàng</string>
+    <string name="register_new_account">register new account</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+    <string name="log_in_with_google">Log in with google</string>
+    <string name="use_phone_number">use phone number</string>
+    <string name="enter_phone_number">Enter phone Number</string>
+    <string name="enter_code_received">Enter code received</string>
+    <string name="confirm_code">Confirm Code</string>
+    <string name="military_heritage_timeless_design">MILITARY HERITAGE. TIMELESS DESIGN</string>
+
+
+
 
 </resources>
