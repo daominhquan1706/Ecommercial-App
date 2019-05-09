@@ -94,12 +94,12 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         adapter = new Cart_Recycle_Adapter_NiteWatch(context, orders_item.getOrderDetails(), R.layout.item_checkout_item_slider_card);
         holder.lv_checkout.setAdapter(adapter);
         if (orders_item.getStatus().equals("Chờ xác nhận")) {
-            holder.tv_Xac_nhan.setText("Xác nhận");
+            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_xacnhan));
             holder.btn_TuChoi.setVisibility(View.VISIBLE);
             holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.myRef.child("Orders").child(holder.paymentId).child("status").setValue("Admin hủy").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    holder.myRef.child("Orders").child(holder.paymentId).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             holder.folding_cell.toggle(true);
@@ -110,7 +110,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
             holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue("Chờ lấy hàng").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             holder.folding_cell.toggle(true);
@@ -119,11 +119,11 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 }
             });
         } else if (orders_item.getStatus().equals("Chờ lấy hàng")) {
-            holder.tv_Xac_nhan.setText("Lấy Hàng");
+            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_layhang));
             holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue("Đang giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             holder.folding_cell.toggle(false);
@@ -132,11 +132,11 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 }
             });
         } else if (orders_item.getStatus().equals("Đang giao")) {
-            holder.tv_Xac_nhan.setText("Đã giao");
+            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_dagiao));
             holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue("Đã giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             holder.folding_cell.toggle(true);
@@ -189,17 +189,17 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         long diffInMillies = Math.abs(datetime.getTime() - currentday.getTime());
         long diff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         if (diff / (60 * 60 * 24 * 30) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + " tháng trước";
+            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + context.getString(R.string.thangtruoc);
         } else if (diff / (60 * 60 * 24) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24)) + " ngày trước";
+            thoigian = Math.round(diff / (60 * 60 * 24)) + context.getString(R.string.ngaytruoc);
         } else if (diff / (60 * 60) > 0) {
-            thoigian = Math.round(diff / (60 * 60)) + " giờ trước";
+            thoigian = Math.round(diff / (60 * 60)) +context.getString(R.string.giotruoc);
         } else if (diff / (60) > 0) {
-            thoigian = Math.round(diff / (60)) + " phút trước";
+            thoigian = Math.round(diff / (60)) + context.getString(R.string.phuttruoc);
         } else if (diff > 0) {
-            thoigian = Math.round(diff) + " giây trước";
+            thoigian = Math.round(diff) + context.getString(R.string.giaytruoc);;
         } else {
-            thoigian = "vừa xong";
+            thoigian = context.getString(R.string.vuaxong);;
         }
 
         return thoigian;

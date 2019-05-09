@@ -166,17 +166,17 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         long diffInMillies = Math.abs(datetime.getTime() - currentday.getTime());
         long diff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         if (diff / (60 * 60 * 24 * 30) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + " tháng trước";
+            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + mContext.getString(R.string.thangtruoc);
         } else if (diff / (60 * 60 * 24) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24)) + " ngày trước";
+            thoigian = Math.round(diff / (60 * 60 * 24)) + mContext.getString(R.string.ngaytruoc);
         } else if (diff / (60 * 60) > 0) {
-            thoigian = Math.round(diff / (60 * 60)) + " giờ trước";
+            thoigian = Math.round(diff / (60 * 60)) + mContext.getString(R.string.giotruoc);
         } else if (diff / (60) > 0) {
-            thoigian = Math.round(diff / (60)) + " phút trước";
+            thoigian = Math.round(diff / (60)) + mContext.getString(R.string.phuttruoc);
         } else if (diff > 0) {
-            thoigian = Math.round(diff) + " giây trước";
+            thoigian = Math.round(diff) + mContext.getString(R.string.giaytruoc);
         } else {
-            thoigian = "vừa xong";
+            thoigian = mContext.getString(R.string.vuaxong);
         }
 
         return thoigian;

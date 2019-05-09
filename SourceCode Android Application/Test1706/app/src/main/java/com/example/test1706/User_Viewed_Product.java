@@ -117,6 +117,7 @@ public class User_Viewed_Product extends AppCompatActivity {
         frame_container = (FrameLayout) findViewById(R.id.fragment_container);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.sanpham_da_xem);
         toolbar.setVisibility(View.VISIBLE);
 
         mkey = new ArrayList<String>();

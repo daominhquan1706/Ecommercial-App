@@ -200,8 +200,6 @@
     <string name="enter_phone_number">Enter phone Number</string>
     <string name="enter_code_received">Enter code received</string>
     <string name="confirm_code">Confirm Code</string>
-    <string name="total">Total :</string>
-
     <string name = "ch_x_c_nh_n"> Wait for confirmation </string>
          <string name = "ch_l_y_h_ng"> Waiting for picking goods </string>
          <string name = "ang_giao"> Delivering </string>
@@ -223,5 +221,33 @@
          <string name = "checkout"> Checkout </string>
 
     <string name="military_heritage_timeless_design">MILITARY HERITAGE. TIMELESS DESIGN</string>
+    <string name = "daxem"> Viewed </string>
+         <string name = "thangtruoc"> last month </string>
+         <string name = "ngaytruoc"> previous day </string>
+         <string name = "giotruoc"> previous hour </string>
+         <string name = "phuttruoc"> minutes ago </string>
+         <string name = "giaytruoc"> seconds ago </string>
+         <string name = "vuaxong"> just finished </string>
 
+    <string name = "title_donhang"> Commands </string>
+        <string name = "t_n_kh_ch_h_ng"> Customer Name: </string>
+        <string name = "s_i_n_tho_i"> Telephone number: </string>
+        <string name = "diachigiaohang"> Delivery address: </string>
+        <string name = "tinhtrang_xacnhan"> Confirm </string>
+        <string name = "tinhtrang_layhang"> Get the line </string>
+        <string name = "tinhtrang_dagiao"> Delivered </string>
+        <string name = "button_adminhuy"> Undo Administrator </string>
+        <string name = "button_cholayhang"> Waiting to pick up the goods </string>
+        <string name = "button_danggiao"> Broadcast </string>
+    <string name="t_ng_tien">Total :</string>
+    <string name="button_da_giao">Delivered</string>
+    <string name="sanpham_da_xem">Viewed products</string>
+    <string name="my_cart">MY CART</string>
+    <string name = "stt_choxacnhan"> Wait for confirmation </string>
+         <string name = "stt_cholayhang"> Waiting for a row </string>
+         <string name = "stt_danggiao"> Delivering </string>
+         <string name = "stt_dagiao"> Delivered </string>
+         <string name = "stt_khachhuy"> Guests cancel </string>
+         <string name = "stt_admin_huy"> Admin cancel </string>
+    <string name="kh_ng_c_n_h_ng">There are no orders </string>
 </resources>

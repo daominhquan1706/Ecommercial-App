@@ -207,8 +207,6 @@
     <string name="enter_phone_number">Nhập số điện thoại</string>
     <string name="enter_code_received">Nhập mã xác nhận</string>
     <string name="confirm_code">Xác nhận mã</string>
-    <string name="total">Tổng :</string>
-
     <string name="ch_x_c_nh_n">Chờ xác nhận</string>
     <string name="ch_l_y_h_ng">Chờ lấy hàng</string>
     <string name="ang_giao">Đang giao</string>
@@ -227,9 +225,38 @@
     <string name="night_image_url">URL Tối</string>
     <string name="l_u_d_li_u">Lưu dữ liệu</string>
     <string name="cAtegory">Danh mục</string>
-    <string name="checkout">Kiểm tra</string>
+    <string name="checkout">Thanh toán</string>
 
     <string name="military_heritage_timeless_design">QUÂN ĐỘI QUÂN SỰ. THIẾT KẾ THỜI GIAN</string>
 
+    <string name="daxem">Đã xem</string>
+    <string name="thangtruoc">tháng trước</string>
+    <string name="ngaytruoc">ngày trước</string>
+    <string name="giotruoc">giờ trước</string>
+    <string name="phuttruoc">phút trước</string>
+    <string name="giaytruoc">giây trước</string>
+    <string name="vuaxong">vừa xong</string>
+
+    <string name="title_donhang">Đơn hàng</string>
+    <string name="t_n_kh_ch_h_ng">Tên khách hàng :</string>
+    <string name="s_i_n_tho_i">Số điện thoại :</string>
+    <string name="diachigiaohang">Địa chỉ giao hàng :</string>
+    <string name="tinhtrang_xacnhan">Xác nhận</string>
+    <string name="tinhtrang_layhang">Lấy Hàng</string>
+    <string name="tinhtrang_dagiao">Đã giao</string>
+    <string name="button_adminhuy">Admin hủy</string>
+    <string name="button_cholayhang">Chờ lấy hàng</string>
+    <string name="button_danggiao">Đang giao</string>
+    <string name="t_ng_tien">Tổng :</string>
+    <string name="button_da_giao">Đã giao</string>
+    <string name="sanpham_da_xem">Sản phẩm đã xem</string>
+    <string name="my_cart">GIỎ HÀNG</string>
+    <string name="stt_choxacnhan">Chờ xác nhận</string>
+    <string name="stt_cholayhang">Chờ lấy hàng</string>
+    <string name="stt_danggiao">Đang giao</string>
+    <string name="stt_dagiao">Đã giao</string>
+    <string name="stt_khachhuy">Khách hủy</string>
+    <string name="stt_admin_huy">Admin hủy</string>
+    <string name="kh_ng_c_n_h_ng">Không có đơn hàng</string>
 
 </resources>

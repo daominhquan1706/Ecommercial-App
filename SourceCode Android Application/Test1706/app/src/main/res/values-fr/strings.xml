@@ -173,7 +173,6 @@
     <string name="t_n_ng_i_nh_n">Nom du destinataire</string>
     <string name="s_i_n_tho_i_ng_i_nh_n">Numéro de téléphone du destinataire</string>
     <string name="a_ch_giao_h_ng">Adresse de livraison</string>
-    <string name="t_ng">Total :</string>
     <string name="danh_s_ch_s_n_ph_m">Liste de produits</string>
     <string name="h_nh_n_t_g_p_c_a_s"> bouton image fenêtre rabattable </string>
         
@@ -215,8 +214,6 @@
          <string name = "enter_phone_number"> Entrez le numéro de téléphone </string>
          <string name = "enter_code_received"> Entrez le code reçu </string>
          <string name = "confirm_code"> Code de confirmation </string>
-         <string name = "total"> Total: </string>
-
          <string name = "ch_x_c_nh_n"> Attendre la confirmation </string>
          <string name = "ch_l_y_h_ng"> En attente de cueillette des marchandises </string>
          <string name = "ang_giao"> Livraison </string>
@@ -239,7 +236,33 @@
 
     <string name="military_heritage_timeless_design">PATRIMOINE MILITAIRE. DESIGN INTEMPOREL</string>
 
+    <string name = "daxem"> consulté </string>
+         <string name = "thangtruoc"> le mois dernier </string>
+         <string name = "ngaytruoc"> jour précédent </string>
+         <string name = "giotruoc"> heure précédente </string>
+         <string name = "phuttruoc"> il y a quelques minutes </string>
+         <string name = "giaytruoc"> Il y a quelques secondes </string>
+         <string name = "vuaxong"> que je viens de terminer </string>
 
-
-
+    <string name = "title_donhang"> Commandes </string>
+         <string name = "t_n_kh_ch_h_ng"> Nom du client: </string>
+         <string name = "s_i_n_tho_i"> Numéro de téléphone: </string>
+         <string name = "diachigiaohang"> Adresse de livraison: </string>
+         <string name = "tinhtrang_xacnhan"> Confirmez </string>
+         <string name = "tinhtrang_layhang"> Obtenir la ligne </string>
+         <string name = "tinhtrang_dagiao"> Livré </string>
+         <string name = "button_adminhuy"> Annulation de l\'administrateur </string>
+         <string name = "button_cholayhang"> En attente de la cueillette des marchandises </string>
+         <string name = "button_danggiao"> Diffusion </string>
+        <string name="t_ng_tien">Général :</string>
+        <string name="button_da_giao">Livré</string>
+        <string name="sanpham_da_xem">Produits vus</string>
+    <string name="my_cart">PANIER D\'ACHAT</string>
+    <string name = "stt_choxacnhan"> Attendez la confirmation </string>
+         <string name = "stt_cholayhang"> En attente d\'une ligne </string>
+         <string name = "stt_danggiao"> Livraison </string>
+         <string name = "stt_dagiao"> Livré </string>
+         <string name = "stt_khachhuy"> Les invités annulent </string>
+         <string name = "stt_admin_huy"> Annulation de l\'administrateur </string>
+    <string name="kh_ng_c_n_h_ng">Il n\'y a pas d\'ordres</string>
 </resources>

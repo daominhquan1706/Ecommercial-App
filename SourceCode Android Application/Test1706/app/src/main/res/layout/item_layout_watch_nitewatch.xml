@@ -59,9 +59,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,7 +85,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txt_product_name"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -145,7 +144,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_nitewatch_1"
                     android:fontFamily="sans-serif-light"
-                    android:text="View"
+                    android:text="@string/xemsanpham"
                     android:textColor="@color/white" />
 
                 <Button
@@ -155,7 +154,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_nitewatch_2"
                     android:fontFamily="sans-serif-light"
-                    android:text="Cart"
+                    android:text="@string/muahang"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
@@ -173,7 +172,7 @@
             android:fontFamily="sans-serif-light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đã xem "
+            android:text="@string/daxem"
             android:textAlignment="textEnd"
             android:textColor="@color/gray"
             android:textSize="13sp" />
@@ -182,7 +181,7 @@
             android:id="@+id/tv_creation_time_viewedproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1 phút trước"
+            android:text=""
             android:textAlignment="textEnd"
             android:textColor="@color/gray"
             android:textSize="13sp" />

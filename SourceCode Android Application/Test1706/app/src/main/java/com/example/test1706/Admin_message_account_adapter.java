@@ -108,17 +108,17 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
         long diffInMillies = Math.abs(datetime.getTime() - currentday.getTime());
         long diff = TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         if (diff / (60 * 60 * 24 * 30) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + " tháng trước";
+            thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + context.getString(R.string.thangtruoc);
         } else if (diff / (60 * 60 * 24) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24)) + " ngày trước";
+            thoigian = Math.round(diff / (60 * 60 * 24)) +context.getString(R.string.ngaytruoc);
         } else if (diff / (60 * 60) > 0) {
-            thoigian = Math.round(diff / (60 * 60)) + " giờ trước";
+            thoigian = Math.round(diff / (60 * 60)) + context.getString(R.string.giotruoc);
         } else if (diff / (60) > 0) {
-            thoigian = Math.round(diff / (60)) + " phút trước";
+            thoigian = Math.round(diff / (60)) + context.getString(R.string.phuttruoc);
         } else if (diff > 0) {
-            thoigian = Math.round(diff) + " giây trước";
+            thoigian = Math.round(diff) + context.getString(R.string.giaytruoc);
         } else {
-            thoigian = "vừa xong";
+            thoigian =context.getString(R.string.vuaxong);
         }
 
         return thoigian;

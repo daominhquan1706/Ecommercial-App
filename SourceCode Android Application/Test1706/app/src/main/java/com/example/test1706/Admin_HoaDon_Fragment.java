@@ -59,7 +59,6 @@ public class Admin_HoaDon_Fragment extends Fragment {
                 if (Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getStatus().equals(Status)) {
                     list.add(dataSnapshot.getValue(Orders.class));
                     mkey.add(dataSnapshot.getKey());
-                    Log.d(TAG, "onDataChange: dataSnapshot1.getKey() : " + dataSnapshot.getKey());
                     adapter.notifyDataSetChanged();
                 }
                 if (list.size() == 0) {
