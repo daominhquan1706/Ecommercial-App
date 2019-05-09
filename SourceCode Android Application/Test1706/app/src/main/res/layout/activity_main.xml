@@ -70,7 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Quảng cáo"
+                        android:text="@string/qu_ng_c_o"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
 
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/fui_transparent"
                 android:fontFamily="sans-serif-light"
-                android:text="Bỏ qua"
+                android:text="@string/b_qua"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>

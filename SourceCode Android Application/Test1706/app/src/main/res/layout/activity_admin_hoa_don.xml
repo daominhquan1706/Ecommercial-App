@@ -38,37 +38,37 @@
                 android:id="@+id/tab_ChoXacNhan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chờ xác nhận" />
+                android:text="@string/ch_x_c_nh_n" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_ChoLayHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chờ lấy hàng" />
+                android:text="@string/ch_l_y_h_ng" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_DangGiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đang giao" />
+                android:text="@string/ang_giao" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_DaGiao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đã giao" />
+                android:text="@string/giao" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_KhachHuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Khách hủy" />
+                android:text="@string/kh_ch_h_y" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tab_AdminHuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Admin hủy" />
+                android:text="@string/admin_h_y" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

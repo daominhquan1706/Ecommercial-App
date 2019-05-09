@@ -164,9 +164,81 @@
         
     <string name="never_compromise"> JAMAIS EST SAI </string>
     <string name="adventure">AVENTURE</string>
-    <string name="life_ready"> PRET POUR LA VIE </string>        
-    <string name="the_power_to_impress"> LA PUISSANCE DE LIMPRESSION </string>        
+    <string name="life_ready"> PRET POUR LA VIE </string>
+        
+    <string name="the_power_to_impress"> LA PUISSANCE DE LIMPRESSION </string>
+        
     <string name="ultra_slim_style"> STYLISH STYLE </string>
+
+    <string name="t_n_ng_i_nh_n">Nom du destinataire</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Numéro de téléphone du destinataire</string>
+    <string name="a_ch_giao_h_ng">Adresse de livraison</string>
+    <string name="t_ng">Total :</string>
+    <string name="danh_s_ch_s_n_ph_m">Liste de produits</string>
+    <string name="h_nh_n_t_g_p_c_a_s"> bouton image fenêtre rabattable </string>
+        
+    <string name="h_nh"> image </string>
+        
+    <string name="h_y_n_h_ng"> annuler la commande </string>
+        
+    <string name="x_c_nh_n"> confirmation </string>
+        
+    <string name="move_map_instruction"> Déplacez la carte pour sélectionner lemplacement </string>
+        
+    <string name="location_picker_select_location_button_cancel"> Annuler la sélection </string>
+        
+    <string name="ch_n_m_t_v_tr"> Sélectionnez un emplacement </string>
+        
+    <string name="user_location_permission_not_granted"> les droits des utilisateurs ne sont pas accordés </string>
+        
+    <string name="location_picker_place_name_result"> nom de lieu </string>
+        
+    <string name="location_picker_dropped_marker_snippet_no_results"> Aucun résultat </string>
+        
+    <string name="l_u_thay_i"> enregistrer les modifications </string>
+
+    <string name = "xemsanpham"> Afficher </string>
+    <string name = "muahang"> Panier </string>
+    <string name = "soluonghangdamua"> Quantité: </string>
+         <string name = "tongsotienhangdamua"> Total: </string>
+
+    <string name = "description"> Description </string>
+         <string name = "add_to_cart"> Ajouter au panier </string>
+         <string name = "receive_new_password"> Recevoir le nouveau mot de passe </string>
+         <string name = "qu_ng_c_o"> Publicité </string>
+         <string name = "b_qua"> Ignorer </string>
+         <string name = "xem_n_t_h_ng"> voir les commandes </string>
+         <string name = "register_new_account"> enregistrer un nouveau compte </string>
+         <string name = "log_in_with_facebook"> Connectez-vous avec Facebook </string>
+         <string name = "log_in_with_google"> Connectez-vous avec google </string>
+         <string name = "use_phone_number"> utiliser le numéro de téléphone </string>
+         <string name = "enter_phone_number"> Entrez le numéro de téléphone </string>
+         <string name = "enter_code_received"> Entrez le code reçu </string>
+         <string name = "confirm_code"> Code de confirmation </string>
+         <string name = "total"> Total: </string>
+
+         <string name = "ch_x_c_nh_n"> Attendre la confirmation </string>
+         <string name = "ch_l_y_h_ng"> En attente de cueillette des marchandises </string>
+         <string name = "ang_giao"> Livraison </string>
+         <string name = "giao"> Livré </string>
+         <string name = "kh_ch_h_y"> Les invités annulent </string>
+         <string name = "admin_h_y"> Annulation de ladministrateur </string>
+         <string name = "message"> SMS … </string>
+         <string name = "categoryyyy"> Catalogue </string>
+         <string name = "product_name"> Nom du produit </string>
+         <string name = "price"> Prix </string>
+         <string name = "quantity"> Quantité </string>
+         <string name = "discount"> Remise </string>
+         <string name = "picture_day"> Photos brillantes </string>
+         <string name = "picture_night"> Photos sombres </string>
+         <string name = "day_image_url"> URL brillante </string>
+         <string name = "night_image_url"> URL sombre </string>
+         <string name = "l_u_d_li_u"> Enregistrer les données </string>
+         <string name = "cAtegory"> Catalogue </string>
+         <string name = "checkout"> Vérifier </string>
+
+    <string name="military_heritage_timeless_design">PATRIMOINE MILITAIRE. DESIGN INTEMPOREL</string>
+
 
 
 

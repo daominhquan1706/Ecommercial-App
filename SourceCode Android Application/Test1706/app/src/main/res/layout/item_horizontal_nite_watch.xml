@@ -80,7 +80,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_nitewatch_1"
             android:fontFamily="sans-serif-light"
-            android:text="View"
+            android:text="@string/xemsanpham"
             android:textColor="@color/white" />
 
         <Button
@@ -90,7 +90,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_nitewatch_2"
             android:fontFamily="sans-serif-light"
-            android:text="Cart"
+            android:text="@string/muahang"
             android:textColor="@color/white" />
     </LinearLayout>
 

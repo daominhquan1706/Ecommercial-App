@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text=" Quantity: "
+                    android:text="@string/soluonghangdamua"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed-light"
-                    android:text="Total : "
+                    android:text="@string/tongsotienhangdamua"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -129,7 +129,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/drw_edt_bg_blue"
-                android:text="Checkout"
+                android:text="@string/checkout"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textStyle="bold" />
 

@@ -143,7 +143,7 @@
     <string name="admin">Admin</string>
     <string name="function">Function</string>
     <string name="nhantinvoiadmin">Message with Admin</string>
-    <string name="donhang">Bill</string>
+    <string name="donhang">Order</string>
     <string name="sanphamdaxem">Viewed Product</string>
     <string name="taikhoan">Account</string>
     <string name="profile">Profile</string>
@@ -157,7 +157,7 @@
     <string name="menu_admin_tinnhan">MESSAGE</string>
     <string name="menu_admin_doanthu">REVENUE</string>
     <string name="menu_admin_map">MAP</string>
-    <string name="menu_admin_ds_hoadon">BILLING LIST</string>
+    <string name="menu_admin_ds_hoadon">ORDER LIST</string>
     <string name="never_compromise">NEVER COMPROMISE</string>
     <string name="icon">ICON</string>
     <string name="life_ready">LIFE READY</string>
@@ -165,4 +165,63 @@
     <string name="the_power_to_impress">THE POWER TO IMPRESS</string>
     <string name="marquess">MARQUESS</string>
     <string name="ultra_slim_style">ULTRA-SLIM STYLE</string>
+
+    <string name="t_n_ng_i_nh_n">Recipient s name</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Phone number of the recipient</string>
+    <string name="a_ch_giao_h_ng">Delivery address</string>
+    <string name="t_ng">Total :</string>
+    <string name="danh_s_ch_s_n_ph_m">List of products</string>
+    <string name="h_nh_n_t_g_p_c_a_s">button image folding window</string>
+    <string name="h_nh">image</string>
+    <string name="h_y_n_h_ng">cancel order</string>
+    <string name="x_c_nh_n">Confirm</string>
+    <string name="move_map_instruction">Move the map to select the location</string>
+    <string name="location_picker_select_location_button_cancel">Cancel</string>
+    <string name="ch_n_m_t_v_tr">Select a location</string>
+    <string name="user_location_permission_not_granted">User permission not granted</string>
+    <string name="location_picker_place_name_result">Location name</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">No result</string>
+    <string name="l_u_thay_i">Save change</string>
+    <string name="xemsanpham">View</string>
+    <string name="muahang">Cart</string>
+    <string name="soluonghangdamua">Quantity:</string>
+    <string name="tongsotienhangdamua">Total :</string>
+
+    <string name="description">Description</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="receive_new_password">Receive new password</string>
+    <string name = "qu_ng_c_o"> Advertising </string>
+         <string name = "b_qua"> Skip </string>
+         <string name = "xem_n_t_h_ng"> view orders </string>
+    <string name="register_new_account">register new account</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+    <string name="log_in_with_google">Log in with google</string>
+    <string name="use_phone_number">use phone number</string>
+    <string name="enter_phone_number">Enter phone Number</string>
+    <string name="enter_code_received">Enter code received</string>
+    <string name="confirm_code">Confirm Code</string>
+    <string name="total">Total :</string>
+
+    <string name = "ch_x_c_nh_n"> Wait for confirmation </string>
+         <string name = "ch_l_y_h_ng"> Waiting for picking goods </string>
+         <string name = "ang_giao"> Delivering </string>
+         <string name = "giao"> Delivered </string>
+         <string name = "kh_ch_h_y"> Guests cancel </string>
+         <string name = "admin_h_y"> Admin cancel </string>
+         <string name = "message"> Texting … </string>
+         <string name = "categoryyyy"> Catalog </string>
+         <string name = "product_name"> Product name </string>
+         <string name = "price"> Price </string>
+         <string name = "quantity"> Quantity </string>
+         <string name = "discount"> Discount </string>
+         <string name = "picture_day"> Bright photos </string>
+         <string name = "picture_night"> Dark photos </string>
+         <string name = "day_image_url"> Bright URL </string>
+         <string name = "night_image_url"> Dark URL </string>
+         <string name = "l_u_d_li_u"> Save data </string>
+         <string name = "cAtegory"> Category </string>
+         <string name = "checkout"> Checkout </string>
+
+    <string name="military_heritage_timeless_design">MILITARY HERITAGE. TIMELESS DESIGN</string>
+
 </resources>
