@@ -1,8 +1,12 @@
 package com.example.test1706;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -22,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonObject;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.geocoding.v5.GeocodingCriteria;
@@ -30,8 +35,11 @@ import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.core.exceptions.ServicesException;
 import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
@@ -40,6 +48,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -64,18 +74,23 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 public class MapBox_Picker extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback {
 
     private static final String TAG = "MapBox_Picker";
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
+    String geojsonSourceLayerId = "geojsonSourceLayerId";
     private MapView mapView;
     private MapboxMap mapboxMap;
     private Button selectLocationButton, btn_save_change_profile_location;
     private PermissionsManager permissionsManager;
     private ImageView hoveringMarker;
+    private CarmenFeature home;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     AccountUser accountUser;
     TextView tv_place_name, tv_lat_location, tv_lng_location;
+    FloatingActionButton btn_search_picker;
+    public Point huflitLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,16 +107,23 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+        huflitLocation = Point.fromLngLat(106.667445, 10.776663);
 
         tv_place_name = (TextView) findViewById(R.id.tv_place_name);
         tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
         tv_lng_location = (TextView) findViewById(R.id.tv_lng_location);
-
+        btn_search_picker = (FloatingActionButton) findViewById(R.id.search_location_button_mapbox);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        btn_search_picker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSearchActivity();
+            }
+        });
         getCurrentUser();
+
     }
 
     @Override
@@ -111,7 +133,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             @Override
             public void onStyleLoaded(@NonNull final Style style) {
                 enableLocationPlugin(style);
-
+                addUserLocations();
                 // Toast instructing user to tap on the mapboxMap
                 Toast.makeText(
                         MapBox_Picker.this,
@@ -138,16 +160,18 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     @Override
                     public void onClick(View v) {
                         String userUID = firebaseUser.getUid();
-                        accountUser.setDiachi(tv_place_name.getText().toString());
-                        accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));
-                        accountUser.setLong_Location(Double.parseDouble(tv_lng_location.getText().toString()));
+                        if (tv_lat_location.getText().toString().isEmpty()) {
+                            Toast.makeText(MapBox_Picker.this, "Chưa lấy được thông tin", Toast.LENGTH_SHORT).show();
+                        } else {
+                            accountUser.setDiachi(tv_place_name.getText().toString());
+                            accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));
+                            accountUser.setLong_Location(Double.parseDouble(tv_lng_location.getText().toString()));
 
-                        databaseReference.child("Account").child(userUID).child("diachi").setValue(accountUser.getDiachi());
-                        databaseReference.child("Account").child(userUID).child("lat_Location").setValue(accountUser.getLat_Location());
-                        databaseReference.child("Account").child(userUID).child("long_Location").setValue(accountUser.getLong_Location());
-
-
-                        finish();
+                            databaseReference.child("Account").child(userUID).child("diachi").setValue(accountUser.getDiachi());
+                            databaseReference.child("Account").child(userUID).child("lat_Location").setValue(accountUser.getLat_Location());
+                            databaseReference.child("Account").child(userUID).child("long_Location").setValue(accountUser.getLong_Location());
+                            onBackPressed();
+                        }
                     }
                 });
 
@@ -155,50 +179,58 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     @Override
                     public void onClick(View view) {
                         if (hoveringMarker.getVisibility() == View.VISIBLE) {
-                            btn_save_change_profile_location.setVisibility(View.VISIBLE);
-                            // Use the map target's coordinates to make a reverse geocoding search
-                            final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
-
-                            // Hide the hovering red hovering ImageView marker
-                            hoveringMarker.setVisibility(View.INVISIBLE);
-
-                            // Transform the appearance of the button to become the cancel button
-                            selectLocationButton.setBackgroundColor(
-                                    ContextCompat.getColor(MapBox_Picker.this, R.color.colorAccent));
-                            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
-
-                            // Show the SymbolLayer icon to represent the selected map location
-                            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                                GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
-                                if (source != null) {
-                                    source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
-                                            mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
-                                }
-                                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
-                            }
-
-                            // Use the map camera target's coordinates to make a reverse geocoding search
-                            reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
-
+                            updateUI_dachon(style);
                         } else {
-                            btn_save_change_profile_location.setVisibility(View.INVISIBLE);
-                            // Switch the button appearance back to select a location.
-                            selectLocationButton.setBackgroundColor(
-                                    ContextCompat.getColor(MapBox_Picker.this, R.color.colorPrimary));
-                            selectLocationButton.setText(getString(R.string.ch_n_m_t_v_tr));
-
-                            // Show the red hovering ImageView marker
-                            hoveringMarker.setVisibility(View.VISIBLE);
-
-                            // Hide the selected location SymbolLayer
-                            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
-                            }
+                            updateUI_ChuaChon(style);
                         }
                     }
                 });
             }
         });
+    }
+
+    private void updateUI_ChuaChon(Style style) {
+        btn_save_change_profile_location.setVisibility(View.INVISIBLE);
+        // Switch the button appearance back to select a location.
+        selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(MapBox_Picker.this, R.color.colorPrimary));
+        selectLocationButton.setText(getString(R.string.ch_n_m_t_v_tr));
+
+        // Show the red hovering ImageView marker
+        hoveringMarker.setVisibility(View.VISIBLE);
+
+        // Hide the selected location SymbolLayer
+        if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+            style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
+        }
+    }
+
+    private void updateUI_dachon(Style style) {
+        btn_save_change_profile_location.setVisibility(View.VISIBLE);
+        // Use the map target's coordinates to make a reverse geocoding search
+        final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
+
+        // Hide the hovering red hovering ImageView marker
+        hoveringMarker.setVisibility(View.INVISIBLE);
+
+        // Transform the appearance of the button to become the cancel button
+        selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(MapBox_Picker.this, R.color.colorAccent));
+        selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
+
+        // Show the SymbolLayer icon to represent the selected map location
+        if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+            GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
+            if (source != null) {
+                source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
+                        mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
+            }
+            style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
+        }
+
+        // Use the map camera target's coordinates to make a reverse geocoding search
+        reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
+
     }
 
     private void initDroppedMarker(@NonNull Style loadedMapStyle) {
@@ -213,6 +245,61 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 iconAllowOverlap(true),
                 iconIgnorePlacement(true)
         ));
+    }
+
+
+    private void addUserLocations() {
+        home = CarmenFeature.builder().text("Đại Học Ngoại Ngữ Tin Học HUFLIT")
+                .geometry(huflitLocation)
+                .placeName("155 Sư Vạn Hạnh (nd), Phường 13, Quận 10, TP.HCM")
+                .id("mapbox-sf")
+                .properties(new JsonObject())
+                .build();
+    }
+
+    private void openSearchActivity() {
+        Intent intent = new PlaceAutocomplete.IntentBuilder()
+                .accessToken(Mapbox.getAccessToken())
+                .placeOptions(PlaceOptions.builder()
+                        .backgroundColor(Color.parseColor("#EEEEEE"))
+                        .limit(10)
+                        .addInjectedFeature(home)
+                        .build(PlaceOptions.MODE_CARDS))
+                .build(MapBox_Picker.this);
+        startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+
+            // Retrieve selected location's CarmenFeature
+            CarmenFeature selectedCarmenFeature = PlaceAutocomplete.getPlace(data);
+
+            // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above.
+            // Then retrieve and update the source designated for showing a selected location's symbol layer icon
+
+            if (mapboxMap != null) {
+                Style style = mapboxMap.getStyle();
+                if (style != null) {
+                    GeoJsonSource source = style.getSourceAs(geojsonSourceLayerId);
+                    if (source != null) {
+                        source.setGeoJson(FeatureCollection.fromFeatures(
+                                new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())}));
+                    }
+
+                    // Move map camera to the selected location
+                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+                            new CameraPosition.Builder()
+                                    .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
+                                            ((Point) selectedCarmenFeature.geometry()).longitude()))
+                                    .zoom(14)
+                                    .build()), 2000);
+                }
+            }
+        }
     }
 
     @Override
@@ -367,5 +454,13 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(MapBox_Picker.this, User_Profile_Account_Activity.class);
+        startActivity(i);
+        finish();
     }
 }

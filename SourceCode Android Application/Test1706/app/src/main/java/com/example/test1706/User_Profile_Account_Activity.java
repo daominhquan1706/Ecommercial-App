@@ -34,6 +34,7 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
@@ -133,24 +134,27 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                 btn_save_profile.setVisibility(View.GONE);
             }
         });
-        LatLng huflit = new LatLng(10.776663, 106.667445);
-        loadMap(huflit);
+        huflit = new LatLng(10.776663, 106.667445);
+        //loadMap(huflit);
     }
+
+    LatLng huflit;
 
     private void changeLocation(LatLng latLng) {
-        MapboxMapOptions options = new MapboxMapOptions();
-        options.camera(new CameraPosition.Builder()
-                .target(latLng)
-                .zoom(15)
-                .build());
-        mapFragment = SupportMapFragment.newInstance(options);
+        // Move map camera to the selected location
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(
+                new CameraPosition.Builder()
+                        .target(latLng)
+                        .zoom(14)
+                        .build()), 2000);
     }
 
-    SupportMapFragment mapFragment;
+
+    boolean isLoadMap_Success;
 
     private void loadMap(LatLng latLng) {
         Mapbox.getInstance(this, getString(R.string.access_token));
-
+        SupportMapFragment mapFragment;
         if (savedInstance_bundle == null) {
             final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             MapboxMapOptions options = new MapboxMapOptions();
@@ -169,7 +173,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull MapboxMap mapboxMap) {
-
+                map = mapboxMap;
 
                 mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
                     @Override
@@ -180,7 +184,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                                         User_Profile_Account_Activity.this.getResources(), R.drawable.mapbox_marker_icon_default));
 
                         GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(106.667445, 10.776663)));
+                                Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude())));
                         style.addSource(geoJsonSource);
 
                         SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
@@ -190,14 +194,18 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                         style.addLayer(symbolLayer);
                     }
                 });
+
+
             }
         });
 
     }
 
+    MapboxMap map;
     AccountUser accountUser1;
 
     public void getCurrentUser() {
+        isLoadMap_Success = false;
         toolbar_profile.setTitle(firebaseUser.getEmail());
         if (firebaseUser != null) {
             databaseReference.child("Account").child(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -212,13 +220,18 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                                 .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
                                 .apply(new RequestOptions().centerCrop())
                                 .into(img_user_avatar);
-                        if (accountUser1.getLat_Location() != null && accountUser.getLong_Location() != null) {
+                        if (accountUser1.getLat_Location() != null && accountUser1.getLong_Location() != null) {
                             tv_lng_location.setText(String.valueOf(accountUser1.getLong_Location()));
                             tv_lat_location.setText(String.valueOf(accountUser1.getLat_Location()));
 
 
                             location = new LatLng(accountUser1.getLat_Location(), accountUser1.getLong_Location());
-                            changeLocation(location);
+                            // loadMap(location);
+                            if (!isLoadMap_Success) {
+                                loadMap(location);
+                                isLoadMap_Success = true;
+                            }
+
                         }
                     } else {
                         update_firebaseAccount();
@@ -246,15 +259,16 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         }
     }
 
-    Button testmapfragment;
+    Button pickNewLocation;
 
     public void init() {
-        testmapfragment = (Button) findViewById(R.id.testmapfragment);
-        testmapfragment.setOnClickListener(new View.OnClickListener() {
+        pickNewLocation = (Button) findViewById(R.id.pickNewLocation);
+        pickNewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(User_Profile_Account_Activity.this, MapBox_Picker.class);
                 startActivity(i);
+                finish();
             }
         });
         toolbar_profile = (Toolbar) findViewById(R.id.toolbar_profile);
@@ -288,5 +302,9 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         finish();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCurrentUser();
+    }
 }

@@ -50,5 +50,5 @@
 
 
 
-    <include android:visibility="gone" layout="@layout/loading_screen"/>
+    <include layout="@layout/loading_screen"/>
 </android.support.design.widget.CoordinatorLayout>

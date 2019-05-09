@@ -128,24 +128,26 @@
             app:cardCornerRadius="20dp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_lat_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_lng_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/testmapfragment"
+            android:id="@+id/pickNewLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/drw_edt_bg_yellow"
-            android:text="map fragment" />
+            android:text="Chọn vị trí mới" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
