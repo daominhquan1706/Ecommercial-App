@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ramotion.foldingcell.FoldingCell;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                 //Delete
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle(R.string.xoa_title);
-                builder.setMessage(mContext.getString(R.string.dialog_message_xoa_product) +productt.getProduct_Name());
+                builder.setMessage(mContext.getString(R.string.dialog_message_xoa_product) + productt.getProduct_Name());
                 builder.setCancelable(false);
                 builder.setPositiveButton(mContext.getString(R.string.answer_no), new DialogInterface.OnClickListener() {
                     @Override
@@ -99,7 +100,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                         database = FirebaseDatabase.getInstance();
                         myRef = database.getReference();
                         myRef.child("NiteWatch").child(productt.getCategory()).child(productt.getProduct_Name()).removeValue();
-                        Intent refresh = new Intent(mContext,AdminSanPham_Activity.class);
+                        Intent refresh = new Intent(mContext, AdminSanPham_Activity.class);
                         mContext.startActivity(refresh);
                     }
                 });
@@ -111,7 +112,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             @Override
             public void onClick(View v) {
                 //Edit
-                Intent intent_edit =new Intent(mContext,AdminSanPham_edit_product.class);
+                Intent intent_edit = new Intent(mContext, AdminSanPham_edit_product.class);
                 Bundle b = new Bundle();
                 b.putString("ProductName", productt.getProduct_Name());
                 b.putString("ProductCategory", productt.getCategory());
@@ -120,57 +121,15 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             }
         });
 
-
-        if (opening_menu == viewHolder.getAdapterPosition()) {
-            //di chuyển sang trái
-            viewHolder.layout_info.animate().translationXBy(300).translationX(-viewHolder.menu_product.getWidth()).setDuration(200).start();
-
-        } else if (old_opening_menu == viewHolder.getAdapterPosition()) {
-            //về vị trí cũ
-            viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(200).start();
-        } else {
-            viewHolder.layout_info.animate().translationX(0).setDuration(0).start();
-        }
-
-
-        viewHolder.layout_info.setOnClickListener(new View.OnClickListener() {
+        viewHolder.folding_cell_product_admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (opening_menu == viewHolder.getAdapterPosition()) {
-                    //về vị trí cũ
-                    viewHolder.layout_info.animate().translationX(viewHolder.menu_product.getWidth()).translationX(0).setDuration(100).start();
-                    opening_menu = -1;
-
-                } else {
-                    int temp = opening_menu;
-                    opening_menu = viewHolder.getAdapterPosition();
-                    if (temp != -1) {
-                        old_opening_menu = temp;
-                    }
-                    notifyDataSetChanged();
-                }
-
+                viewHolder.folding_cell_product_admin.toggle(false);
             }
         });
-    }
-
-    private void showMenu(ViewHolder viewHolder) {
-        ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
-        if (layoutParams_info.getMarginEnd() != viewHolder.menu_product.getWidth()) {
-            layoutParams_info.setMargins(-viewHolder.menu_product.getWidth(), 0, viewHolder.menu_product.getWidth(), 0);
-            viewHolder.layout_info.requestLayout();
-        }
-
 
     }
 
-    private void hideMenu(ViewHolder viewHolder) {
-        ViewGroup.MarginLayoutParams layoutParams_info = (ViewGroup.MarginLayoutParams) viewHolder.layout_info.getLayoutParams();
-        if (layoutParams_info.getMarginEnd() == viewHolder.menu_product.getWidth()) {
-            layoutParams_info.setMargins(0, 0, 0, 0);
-            viewHolder.layout_info.requestLayout();
-        }
-    }
 
     @Override
     public int getItemCount() {
@@ -181,14 +140,16 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
         TextView mName, mPrice, mCategory, mQuantity, mDiscount;
         ImageView mImage, mImageNight;
         Button mbtnEdit, mbtnDelete;
-        LinearLayout layout_info, menu_product;
+        LinearLayout layout_product, menu_product;
+        FoldingCell folding_cell_product_admin;
+        RelativeLayout layout_menu_admin_product;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mQuantity = (TextView) itemView.findViewById(R.id.tv_tv_Quantity);
             mDiscount = (TextView) itemView.findViewById(R.id.tv_discount);
             menu_product = (LinearLayout) itemView.findViewById(R.id.menu_product);
-            layout_info = (LinearLayout) itemView.findViewById(R.id.layout_product);
+            layout_product = (LinearLayout) itemView.findViewById(R.id.layout_product);
             mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);
             mPrice = (TextView) itemView.findViewById(R.id.tv_horizontal_price);
             mCategory = (TextView) itemView.findViewById(R.id.tv_horizontal_category);
@@ -196,6 +157,8 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
             mbtnEdit = (Button) itemView.findViewById(R.id.btn_edit_product);
             mbtnDelete = (Button) itemView.findViewById(R.id.btn_delete);
             mImageNight = (ImageView) itemView.findViewById(R.id.img_horizontal_product_night);
+            folding_cell_product_admin = (FoldingCell) itemView.findViewById(R.id.folding_cell_product_admin);
+            layout_menu_admin_product = (RelativeLayout) itemView.findViewById(R.id.layout_menu_admin_product);
         }
 
 

@@ -82,7 +82,7 @@ public class DetailsProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_product);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         cartSqliteHelper = new CartSqliteHelper(this);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -391,7 +391,6 @@ public class DetailsProductActivity extends AppCompatActivity {
         btn_readmore = (TextView) findViewById(R.id.btn_readmore);
         viewPager_comment = (ViewPager) findViewById(R.id.v_pager_comment_nitewatch);
         listcomment = new ArrayList<CommentProduct>();
-        //slidr = Slidr.attach(this);
 
         btn_nightview = (LinearLayout) findViewById(R.id.btn_nightview);
     }

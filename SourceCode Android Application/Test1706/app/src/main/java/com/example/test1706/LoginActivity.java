@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         ImageView image_ba = (ImageView) findViewById(R.id.image_ba_cai_dong_ho);
         Glide
                 .with(this)

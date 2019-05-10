@@ -74,7 +74,7 @@ public class Checkout_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout_activity);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         layDataUser();
         tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));

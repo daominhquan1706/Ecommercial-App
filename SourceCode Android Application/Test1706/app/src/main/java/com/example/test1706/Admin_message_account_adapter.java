@@ -89,6 +89,7 @@ public class Admin_message_account_adapter extends BaseAdapter implements Filter
                     b.putString("userEmail", chat_item.getMessageUser());
                     intent.putExtras(b);
                     context.startActivity(intent);
+                    ((Activity) context).finish();
                     ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     Log.d(TAG, "onClick: đã mở được trang details");

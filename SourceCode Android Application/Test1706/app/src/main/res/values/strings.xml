@@ -334,6 +334,11 @@
     <string name="motahuongdanpaypal">Nhấp để tiến hành thanh toán bằng thẻ Paypal</string>
     <string name="titlepaypal">Thanh toán sản phẩm</string>
     <string name="menhgiatien">USD</string>
+    <string name="mochedosuathongtin">đã mở chế độ sửa thông tin</string>
+    <string name="tatchedosuathongtin">đã tắt chế độ sửa thông tin</string>
+    <string name="dangtailenhinhday">Đang tải lên Firebase hình DAY</string>
+    <string name="dangluulaithaydoi">đang lưu lại thay đổi</string>
+    <string name="dangthaydoi">Đang thay đổi dữ liệu</string>
 
 
 </resources>

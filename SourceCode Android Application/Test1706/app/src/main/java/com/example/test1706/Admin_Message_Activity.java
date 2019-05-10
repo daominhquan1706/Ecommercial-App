@@ -46,7 +46,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_message_);
 
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         chatMessageList = new ArrayList<ChatMessage>();
         displayChatMessage();
@@ -104,7 +104,6 @@ public class Admin_Message_Activity extends AppCompatActivity {
                                 if (dataSnapshot.getValue() != null) {
                                     username = dataSnapshot.getValue().toString();
                                 }
-
                             }
 
                             @Override
@@ -131,7 +130,6 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
                                 }
                             }
-
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                                 //Handle possible errors.

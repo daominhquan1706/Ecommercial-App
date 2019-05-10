@@ -50,7 +50,7 @@ public class AdminSanPham_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sanpham);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         btn_add_product.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,6 @@ public class AdminSanPham_Activity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "onChildAdded: " + item.getKey());
                     Product itemProduct = item.getValue(Product.class);
                     productList.add(itemProduct);
                     mkey.add(item.getKey());
@@ -88,11 +87,12 @@ public class AdminSanPham_Activity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                /*for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    productList.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
-                    Log.d("UPDATE dữ liệu ", dataSnapshot.getValue(Product.class).getProduct_Name() + s);
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    if(mkey.indexOf(item.getKey())!=-1){
+                        productList.set(mkey.indexOf(item.getKey()), item.getValue(Product.class));
+                    }
                 }
-                productadapter.notifyDataSetChanged();*/
+                productadapter.notifyDataSetChanged();
             }
 
             @Override
@@ -317,11 +317,4 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         listView_admin_product_nitewatch = (RecyclerView) findViewById(R.id.listView_admin_product_nitewatch);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent back = new Intent(this,Admin.class);
-        startActivity(back);
-        finish();
-    }
 }

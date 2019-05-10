@@ -31,7 +31,7 @@ public class LoginActivity_ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         mEmailView = (TextView) findViewById(R.id.email);
         btn_forgotpassword = (Button) findViewById(R.id.accept_forgot_password);
         firebaseAuth = FirebaseAuth.getInstance();

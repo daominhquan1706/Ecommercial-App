@@ -39,7 +39,7 @@ public class Cart_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        //Slidr.attach(this);
+        ////Slidr.attach(this);
         init();
 
         cartSqliteHelper = new CartSqliteHelper(this);

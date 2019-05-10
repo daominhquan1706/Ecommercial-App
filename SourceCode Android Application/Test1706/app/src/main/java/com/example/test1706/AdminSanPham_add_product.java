@@ -55,7 +55,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sanpham_add);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.category_nitewatch, R.layout.spinner_item_dark);
         init();
         btn_random_info.setOnClickListener(new View.OnClickListener() {

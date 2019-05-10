@@ -2,12 +2,9 @@ package com.example.test1706;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -23,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -37,25 +33,21 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.example.test1706.Config.Session;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import pl.droidsonroids.gif.GifImageView;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class NiteWatchFragment extends Fragment {
     private static final String TAG = "NiteWatchFragment";
@@ -373,54 +365,36 @@ public class NiteWatchFragment extends Fragment {
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         videoView.start();
-        videoView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                videoView.stopPlayback();
-                return false;
-            }
-        });
     }
 
     boolean isHideLoadingscreen;
 
     private void getlist_watch(String category, final List<Product> listproduct, final List<String> mkey, final Product_Recycle_Adapter_NiteWatch adapter) {
         isHideLoadingscreen = false;
-        myRef.child("NiteWatch").child(category).addValueEventListener(new ValueEventListener() {
+        myRef.child("NiteWatch").child(category).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Product itemproduct = item.getValue(Product.class);
-                    listproduct.add(itemproduct);
-                    mkey.add(item.getKey());
-                    adapter.notifyDataSetChanged();
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Product itemproduct = dataSnapshot.getValue(Product.class);
+                listproduct.add(itemproduct);
+                mkey.add(dataSnapshot.getKey());
+                adapter.notifyDataSetChanged();
+                hideLoadingScreen();
+            }
 
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Do something after 5s = 5000ms
-                            if (!isHideLoadingscreen) {
-                                hideLoadingScreen();
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                listproduct.set(mkey.indexOf(dataSnapshot.getKey()), dataSnapshot.getValue(Product.class));
+                adapter.notifyDataSetChanged();
+            }
 
-                                /*Session session = new Session(getContext());
-                                Locale locale = new Locale(session.getLanguage());
-                                Locale.setDefault(locale);
-                                Configuration config = new Configuration();
-                                config.locale = locale;
-                                getContext().getResources().updateConfiguration(config, getContext().getResources().getDisplayMetrics());
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Settings", MODE_PRIVATE).edit();
-                                editor.putString("My Lang", session.getLanguage());
+            }
 
-                                editor.apply();
-                                getActivity().recreate();*/
-                            }
-                        }
-                    }, 1000);
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-
-                }
             }
 
             @Override

@@ -27,7 +27,7 @@ public class Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
 
-        Slidr.attach(this);
+        //Slidr.attach(this);
 
         initAdmin();
         cv_sanpham.setOnClickListener(new View.OnClickListener() {
@@ -170,8 +170,6 @@ public class Admin extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent back = new Intent(this,MainActivity.class);
-        startActivity(back);
         finish();
     }
 }

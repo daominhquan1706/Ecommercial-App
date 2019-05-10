@@ -50,7 +50,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_hoa_don__details_activity);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         Bundle b = getIntent().getExtras();
         lv_checkout.setVisibility(View.VISIBLE);

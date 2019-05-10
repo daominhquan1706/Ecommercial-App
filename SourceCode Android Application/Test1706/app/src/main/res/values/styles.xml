@@ -9,8 +9,6 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorPrimary">#131212</item>
         <item name="colorPrimaryDark">#131212</item>
         <item name="colorAccent">@color/colorAccent</item>

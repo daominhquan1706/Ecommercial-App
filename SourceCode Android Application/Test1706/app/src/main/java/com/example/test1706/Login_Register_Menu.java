@@ -36,7 +36,7 @@ public class Login_Register_Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register__menu);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         init();
         btn_phonenumber.setOnClickListener(new View.OnClickListener() {
             @Override

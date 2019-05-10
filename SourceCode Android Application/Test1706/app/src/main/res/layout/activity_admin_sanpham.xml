@@ -52,8 +52,7 @@
         android:scrollbarThumbHorizontal="@color/LightBlue"
         android:scrollbars="horizontal"
         card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_admin_sanpham_list"
-        android:layout_margin="20dp">
+        tools:listitem="@layout/item_admin_sanpham_list">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -112,7 +112,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Slidr.attach(this);
         huflitLocation = Point.fromLngLat(106.667445, 10.776663);
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.

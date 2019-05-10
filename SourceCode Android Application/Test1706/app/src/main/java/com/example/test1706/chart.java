@@ -31,7 +31,7 @@ public class chart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chart_activity);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         mydb = FirebaseDatabase.getInstance();
         myRef = mydb.getReference();
         testchart = new ArrayList<Float>();

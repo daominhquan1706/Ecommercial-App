@@ -243,7 +243,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
-
                     tools:listitem="@layout/item_checkout_item_slider_card">
 
                 </android.support.v7.widget.RecyclerView>

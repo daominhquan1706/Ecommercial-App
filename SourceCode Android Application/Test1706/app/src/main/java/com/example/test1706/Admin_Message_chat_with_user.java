@@ -54,7 +54,7 @@ GifImageView loadingscreen;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_message_main);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         Bundle b = getIntent().getExtras();
         userUID = b.getString("userUID");
         userEmail = b.getString("userEmail");
@@ -164,7 +164,6 @@ GifImageView loadingscreen;
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     ChatMessage itemProduct = dataSnapshot.getValue(ChatMessage.class);
                     chatMessageList.add(itemProduct);
-                    Log.d(TAG, "onChildAdded: " + itemProduct.getMessageUser());
                     customListAdapter.notifyDataSetChanged();
                     scrollMyListViewToBottom();
                     loadingscreen.setVisibility(View.GONE);
@@ -213,10 +212,21 @@ GifImageView loadingscreen;
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, Admin_Message_Activity.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+    }
+
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 }
 

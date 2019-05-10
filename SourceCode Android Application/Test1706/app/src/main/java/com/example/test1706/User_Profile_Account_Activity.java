@@ -82,11 +82,11 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isEditing) {
-                    Snackbar.make(view, "đã mở chế độ sửa thông tin", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, R.string.mochedosuathongtin, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     btn_save_profile.setVisibility(View.VISIBLE);
                 } else {
-                    Snackbar.make(view, "đã tắt chế độ sửa thông tin", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, R.string.tatchedosuathongtin, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     getCurrentUser();
                     btn_save_profile.setVisibility(View.GONE);

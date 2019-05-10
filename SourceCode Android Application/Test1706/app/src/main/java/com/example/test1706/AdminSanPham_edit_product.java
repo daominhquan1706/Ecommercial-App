@@ -33,7 +33,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.r0adkll.slidr.Slidr;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,12 +53,12 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     String old_product_name;
     boolean isImageDay_Change;
     boolean isImageNight_Change;
-
+    boolean dalayduocdulieu ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_sanpham_edit);
-        Slidr.attach(this);
+        //Slidr.attach(this);
 
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.category_nitewatch, R.layout.spinner_item_dark);
@@ -67,6 +66,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         old_product_name = "";
 
+        dalayduocdulieu=false;
         if (b != null) {
             old_product_name = b.getString("ProductName");
             myRef.child("NiteWatch").child(Objects.requireNonNull(b.getString("ProductCategory")))
@@ -76,7 +76,11 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             product = dataSnapshot.getValue(Product.class);
                             if (product != null) {
-                                LoadDataProduct();
+                                if (!dalayduocdulieu){
+                                    LoadDataProduct();
+                                    dalayduocdulieu=true;
+                                }
+
                             }
                         }
 
@@ -86,7 +90,8 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                         }
                     });
         } else {
-            onBackPressed();
+            Toast.makeText(AdminSanPham_edit_product.this, R.string.thatbaivuilongthulai, Toast.LENGTH_SHORT).show();
+            finish();
         }
 
 
@@ -184,7 +189,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     private void ThemSanPham() {
         if (!old_product_name.equals("")) {
             new_product = product;
-            myRef.child("NiteWatch").child(product.getCategory()).child(old_product_name).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            myRef.child("NiteWatch").child(new_product.getCategory()).child(old_product_name).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     new_product.setProduct_Name(tv_productname.getText().toString());
@@ -198,8 +203,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     // Write was successful!
-                                    Intent i = new Intent(AdminSanPham_edit_product.this, AdminSanPham_Activity.class);
-                                    startActivity(i);
+                                    progress.dismiss();
                                     finish();
                                     // ...
                                 }
@@ -360,80 +364,82 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     String TenHinh_DAY;
     String TenHinh_NIGHT;
     ProgressDialog progressDialog_day;
-
+    ProgressDialog progress;
     private void uploadFile_Day() {
-        progressDialog_day = new ProgressDialog(this);
-        progressDialog_day.setTitle("Đang tải lên Firebase hình DAY");
-        progressDialog_day.show();
-        progressDialog_night = new ProgressDialog(this);
+        progress = new ProgressDialog(this);
+        progress.setMessage(getString(R.string.dangthaydoi));
+        progress.show();
 
+        if (isImageDay_Change) {
+            progressDialog_day = new ProgressDialog(this);
+            progressDialog_day.setMessage(getString(R.string.dangtailenhinhday));
+            progressDialog_day.show();
 
-        if (!isImageDay_Change) {
-            progressDialog_night.setTitle("Đang tải lên Firebase hình NIGHT");
+            //if there is a file to upload
+            if (uriImage_Day != null) {
+                //displaying a progress dialog while upload is going on
+
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageReference = storage.getReference();
+                TenHinh_DAY = "NiteWatch/" + product.getCategory() + "/" + System.currentTimeMillis() + "_DAY.png";
+                StorageReference riversRef = storageReference.child(TenHinh_DAY);
+                riversRef.putFile(uriImage_Day)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                //if the upload is successfull
+                                //hiding the progress dialog
+                                progressDialog_day.dismiss();
+                                //and displaying a success toast
+                                Toast.makeText(getApplicationContext(), getString(R.string.tailenthanhcong), Toast.LENGTH_LONG).show();
+                                riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        tv_url_image.setText(uri.toString());
+                                        progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
+                                        progressDialog_night.show();
+                                        uploadFile_Night();
+
+                                        //Do what you want with the url
+                                    }
+                                });
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                //if the upload is not successfull
+                                //hiding the progress dialog
+                                progressDialog_day.dismiss();
+
+                                //and displaying error message
+                                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                //calculating progress percentage
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
+                                //displaying percentage in progress dialog
+                                progressDialog_day.setMessage("Uploaded " + ((int) progress) + "%...");
+                            }
+                        });
+            }
+            //if there is not any file
+            else {
+                Toast.makeText(this, getString(R.string.taihinhdaythatbai), Toast.LENGTH_SHORT).show();
+                //you can display an error toast
+            }
+        } else {
+            progressDialog_night = new ProgressDialog(this);
+            progressDialog_night.setMessage(getString(R.string.dangtailenhinhnight));
             progressDialog_night.show();
             uploadFile_Night();
-            uploadFile_Night();
-            return;
         }
 
 
-        //if there is a file to upload
-        if (uriImage_Day != null) {
-            //displaying a progress dialog while upload is going on
-
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageReference = storage.getReference();
-            TenHinh_DAY = "NiteWatch/" + product.getCategory() + "/" + System.currentTimeMillis() + "_DAY.png";
-            StorageReference riversRef = storageReference.child(TenHinh_DAY);
-            riversRef.putFile(uriImage_Day)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
-                            //hiding the progress dialog
-                            progressDialog_day.dismiss();
-                            //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), getString(R.string.tailenthanhcong), Toast.LENGTH_LONG).show();
-                            riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    tv_url_image.setText(uri.toString());
-                                    progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
-                                    progressDialog_night.show();
-                                    uploadFile_Night();
-
-                                    //Do what you want with the url
-                                }
-                            });
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            //if the upload is not successfull
-                            //hiding the progress dialog
-                            progressDialog_day.dismiss();
-
-                            //and displaying error message
-                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //calculating progress percentage
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                            //displaying percentage in progress dialog
-                            progressDialog_day.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
-        }
-        //if there is not any file
-        else {
-            Toast.makeText(this, getString(R.string.taihinhdaythatbai), Toast.LENGTH_SHORT).show();
-            //you can display an error toast
-        }
     }
 
     ProgressDialog progressDialog_night;
@@ -442,10 +448,9 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
         if (!isImageNight_Change) {
             progressDialog_night.dismiss();
             ThemSanPham();
-            return;
         }
-        //if there is a file to upload
-        if (uriImage_Night != null) {
+
+        else if (uriImage_Night != null) {
             //displaying a progress dialog while upload is going on
 
             FirebaseStorage storage = FirebaseStorage.getInstance();

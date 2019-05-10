@@ -34,7 +34,7 @@ public class Login_RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         // Set up the login form.
         mProgressView = findViewById(R.id.login_progress);
         mPasswordView = (EditText) findViewById(R.id.password);

@@ -54,7 +54,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatboxmainactivity);
-        Slidr.attach(this);
+        //Slidr.attach(this);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
