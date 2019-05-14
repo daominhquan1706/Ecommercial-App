@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.Admin_Message_chat_with_user;
+import com.example.test1706.R;
 import com.example.test1706.model.ChatMessage;
 import com.google.firebase.auth.FirebaseAuth;
 

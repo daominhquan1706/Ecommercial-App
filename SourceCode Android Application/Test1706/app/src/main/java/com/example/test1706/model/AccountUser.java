@@ -1,4 +1,4 @@
-package com.example.test1706.UserModel;
+package com.example.test1706.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
