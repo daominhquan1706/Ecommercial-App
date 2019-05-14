@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.test1706.Adapter.Cart_Recycle_Adapter_NiteWatch;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.r0adkll.slidr.Slidr;
 
 import androidx.annotation.RequiresApi;
 

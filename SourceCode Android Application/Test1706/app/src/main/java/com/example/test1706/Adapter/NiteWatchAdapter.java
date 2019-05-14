@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.test1706.R;
 import com.example.test1706.model.Product;
 
 import java.util.List;

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Checkout_activity">
+    tools:context=".Checkout_activity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -138,6 +140,7 @@
                     android:background="@drawable/drw_edt_bg">
 
                     <EditText
+                        android:enabled="false"
                         android:id="@+id/address_order"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -147,11 +150,56 @@
                         android:drawablePadding="@dimen/drawable_padding"
                         android:hint="@string/a_ch_giao_h_ng"
                         android:inputType="textEmailAddress"
-                        android:maxLines="1"
+                        android:maxLines="3"
                         android:singleLine="true"
                         android:textColor="@color/white" />
 
                 </android.support.design.widget.TextInputLayout>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mapbox_cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/black_cardview_nitewatch"
+                    app:cardCornerRadius="20dp" >
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/search_location_button_mapbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:visibility="visible"
+                        app:backgroundTint="@color/LightBlue"
+                        app:srcCompat="@drawable/ic_search_black_24dp" />
+                </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lv_checkout"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:text="@string/tienvanchuyen"
+                        android:textColor="@color/LightBlue"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/tv_tienship"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-light"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"

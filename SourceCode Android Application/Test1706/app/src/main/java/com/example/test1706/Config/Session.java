@@ -2,12 +2,7 @@ package com.example.test1706.Config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.preference.PreferenceManager;
-
-import java.util.Locale;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class Session {
     private SharedPreferences prefs;
@@ -47,6 +42,31 @@ public class Session {
 
     public boolean getIsChangeLanguage() {
         return prefs.getBoolean("setIsChangeLanguage", true);
+    }
+
+
+    public void setLocation_Lat(String lat) {
+        prefs.edit().putString("location_Lat", lat).apply();
+    }
+
+    public String getLocation_Lat() {
+        return prefs.getString("location_Lat", "0");
+    }
+
+    public void setLocation_Lng(String lat) {
+        prefs.edit().putString("location_Lng", lat).apply();
+    }
+
+    public String getLocation_Lng() {
+        return prefs.getString("location_Lng", "0");
+    }
+
+    public void setLocation_Name(String lat) {
+        prefs.edit().putString("location_Name", lat).apply();
+    }
+
+    public String getLocation_Name() {
+        return prefs.getString("location_Name", "");
     }
 
 }

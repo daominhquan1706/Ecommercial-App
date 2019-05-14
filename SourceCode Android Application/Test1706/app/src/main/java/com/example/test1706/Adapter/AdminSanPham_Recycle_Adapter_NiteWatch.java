@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.AdminSanPham_Activity;
+import com.example.test1706.AdminSanPham_edit_product;
+import com.example.test1706.R;
 import com.example.test1706.model.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

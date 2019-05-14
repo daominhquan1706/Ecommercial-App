@@ -97,7 +97,7 @@
             android:id="@+id/inputlayout_address_order"
             style="@style/TextLabel"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/drw_edt_bg">
 
@@ -112,8 +112,6 @@
                 android:enabled="false"
                 android:hint="@string/a_ch_giao_h_ng"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true"
                 android:textColor="@color/white" />
 
         </android.support.design.widget.TextInputLayout>

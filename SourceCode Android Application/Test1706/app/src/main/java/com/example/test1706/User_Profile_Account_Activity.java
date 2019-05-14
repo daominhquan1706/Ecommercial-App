@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.test1706.UserModel.AccountUser;
+import com.example.test1706.model.AccountUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -147,6 +148,11 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                         .target(latLng)
                         .zoom(14)
                         .build()), 2000);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.title("địa chỉ của bạn");
+        markerOptions.position(latLng);
+        map.addMarker(markerOptions);
+
     }
 
 
@@ -160,7 +166,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
             MapboxMapOptions options = new MapboxMapOptions();
             options.camera(new CameraPosition.Builder()
                     .target(latLng)
-                    .zoom(15)
+                    .zoom(10)
                     .build());
             mapFragment = SupportMapFragment.newInstance(options);
             transaction.add(R.id.mapbox_cardview, mapFragment, "com.mapbox.map");
@@ -208,7 +214,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         isLoadMap_Success = false;
         toolbar_profile.setTitle(firebaseUser.getEmail());
         if (firebaseUser != null) {
-            databaseReference.child("Account").child(userUID).addListenerForSingleValueEvent(new ValueEventListener() {
+            databaseReference.child("Account").child(userUID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     accountUser1 = dataSnapshot.getValue(AccountUser.class);
@@ -230,6 +236,9 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                             if (!isLoadMap_Success) {
                                 loadMap(location);
                                 isLoadMap_Success = true;
+                            }
+                            else if(map!=null){
+                                changeLocation(location);
                             }
 
                         }
@@ -268,7 +277,6 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(User_Profile_Account_Activity.this, MapBox_Picker.class);
                 startActivity(i);
-                finish();
             }
         });
         toolbar_profile = (Toolbar) findViewById(R.id.toolbar_profile);
@@ -294,17 +302,5 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
         tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent back = new Intent(this, MainActivity.class);
-        startActivity(back);
-        finish();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getCurrentUser();
-    }
 }

@@ -13,13 +13,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.example.test1706.UserModel.AccountUser;
+import com.example.test1706.model.AccountUser;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.r0adkll.slidr.Slidr;
 
 public class Login_Register_Menu extends AppCompatActivity {
     Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;

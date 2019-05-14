@@ -12,7 +12,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -29,7 +28,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.test1706.Config.Session;
-import com.example.test1706.UserModel.AccountUser;
+import com.example.test1706.model.AccountUser;
 import com.firebase.ui.auth.AuthUI;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
@@ -39,9 +38,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.r0adkll.slidr.Slidr;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import static android.support.constraint.Constraints.TAG;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A login screen that offers login via email/password.
@@ -61,7 +65,11 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout minputLayout_email, minputLayout_password;
     Button btn_normal, btn_facebook, btn_phonenumber, btn_normal_account, btn_google_plus;
     private static int SIGN_IN_REQUEST_CODE_GOOGLE = 1;
+    FirebaseDatabase db;
+    DatabaseReference myref;
+    List<String> listaccount;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -122,14 +130,47 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialogdialog.dismiss();
         session = new Session(getApplicationContext());
-        if(session.getSwitchHuongDan())
-        {
+        if (session.getSwitchHuongDan()) {
             Huongdan();
         }
         setupButtonResgister();
+
+        getAlluser();
     }
 
-    private void setupButtonResgister(){
+    private void getAlluser() {
+        listaccount=new ArrayList<>();
+        db = FirebaseDatabase.getInstance();
+        myref = db.getReference("Account");
+        myref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                listaccount.add(dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setupButtonResgister() {
         btn_google_plus = (Button) findViewById(R.id.btn_google_plus);
         btn_facebook = (Button) findViewById(R.id.btn_facebook);
         btn_normal = (Button) findViewById(R.id.btn_normal_account);
@@ -165,15 +206,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private Session session;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SIGN_IN_REQUEST_CODE_GOOGLE) {
             if (resultCode == RESULT_OK) {
+                FirebaseUser user = mAuth.getCurrentUser();
                 AccountUser accountUser;
                 accountUser = new AccountUser();
-                accountUser.update_firebaseAccount();
+                if(mAuth.getCurrentUser()!=null ){
+                    if(!listaccount.contains(user.getUid())){
+                        accountUser.update_firebaseAccount();
+                    }
+                }
+
                 Snackbar.make(this.getCurrentFocus(), "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
@@ -188,11 +237,11 @@ public class LoginActivity extends AppCompatActivity {
     private void Huongdan() {
         final TapTargetSequence sequence = new TapTargetSequence(this)
                 .targets(
-                        TapTarget.forView(findViewById(R.id.email_sign_in_button), "Hướng dẫn sử dụng", "Click để Đăng nhập")
+                        TapTarget.forView(findViewById(R.id.email_sign_in_button), "Hướng dẫn sử dụng", "Đăng nhập vào phần mềm để có trải nghiệm tốt hơn")
                                 .tintTarget(false)
 
                                 .id(1),
-                        TapTarget.forView(findViewById(R.id.btn_open_forgotpassword), "Hướng dẫn sử dụng", "Click để lấy lại mật khẩu đã quên")
+                        TapTarget.forView(findViewById(R.id.btn_open_forgotpassword), "Hướng dẫn sử dụng", "Lấy lại mật khẩu đã quên ,bạn phãi cung cấp email, chúng tôi sẽ giúp bạn lấy lại mật khẩu đã quên")
                                 .tintTarget(false)
 
                                 .id(2))
@@ -253,7 +302,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-ProgressDialog pd;
+
+    ProgressDialog pd;
+
     public void DangNhap() {
         pd = new ProgressDialog(this);
         pd.setMessage("Đang kiểm tra...");
@@ -268,19 +319,22 @@ ProgressDialog pd;
         }
 
 
-
         if (email.isEmpty()) {
-            mEmailView.setError("Email is required");
+            mEmailView.setError("Email phãi được điền đầy đủ");
             mEmailView.requestFocus();
+            pd.cancel();
         } else if (!email.contains("@")) {
-            mEmailView.setError("This is not valid email");
+            mEmailView.setError("định dạng email sai");
             mEmailView.requestFocus();
+            pd.cancel();
         } else if (password.isEmpty()) {
-            mPasswordView.setError("Password is required");
+            mPasswordView.setError("Mật khẩu phãi được điền đầy đủ");
             mPasswordView.requestFocus();
+            pd.cancel();
         } else if (password.length() <= 6) {
-            mPasswordView.setError("Password more than 5 characters");
+            mPasswordView.setError("Mật Khẩu nhiều hơn 5 ký tự");
             mPasswordView.requestFocus();
+            pd.cancel();
         } else if (email.length() > 6 && password.length() > 6) {
             Snackbar snackbar = Snackbar
                     .make(relativelayout, "Chechking information", Snackbar.LENGTH_LONG);
@@ -310,6 +364,7 @@ ProgressDialog pd;
 
                             // ...
                         }
+
                     });
         }
     }

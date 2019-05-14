@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
+import com.example.test1706.Adapter.Admin_message_account_adapter;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.ChatMessage;
 import com.google.firebase.database.ChildEventListener;
@@ -21,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.r0adkll.slidr.Slidr;
 
 import java.util.ArrayList;
 import java.util.Collections;

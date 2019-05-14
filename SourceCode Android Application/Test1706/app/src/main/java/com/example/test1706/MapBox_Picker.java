@@ -18,7 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test1706.UserModel.AccountUser;
+import com.example.test1706.Config.Session;
+import com.example.test1706.model.AccountUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -159,19 +160,28 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 btn_save_change_profile_location.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String userUID = firebaseUser.getUid();
-                        if (tv_lat_location.getText().toString().isEmpty()) {
-                            Toast.makeText(MapBox_Picker.this, getString(R.string.chualayduocthongtin), Toast.LENGTH_SHORT).show();
-                        } else {
-                            accountUser.setDiachi(tv_place_name.getText().toString());
-                            accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));
-                            accountUser.setLong_Location(Double.parseDouble(tv_lng_location.getText().toString()));
+                        if (firebaseUser != null) {
+                            String userUID = firebaseUser.getUid();
+                            if (tv_lat_location.getText().toString().isEmpty()) {
+                                Toast.makeText(MapBox_Picker.this, getString(R.string.chualayduocthongtin), Toast.LENGTH_SHORT).show();
+                            } else {
+                                accountUser.setDiachi(tv_place_name.getText().toString());
+                                accountUser.setLat_Location(Double.parseDouble(tv_lat_location.getText().toString()));
+                                accountUser.setLong_Location(Double.parseDouble(tv_lng_location.getText().toString()));
 
-                            databaseReference.child("Account").child(userUID).child("diachi").setValue(accountUser.getDiachi());
-                            databaseReference.child("Account").child(userUID).child("lat_Location").setValue(accountUser.getLat_Location());
-                            databaseReference.child("Account").child(userUID).child("long_Location").setValue(accountUser.getLong_Location());
-                            onBackPressed();
+                                databaseReference.child("Account").child(userUID).child("diachi").setValue(accountUser.getDiachi());
+                                databaseReference.child("Account").child(userUID).child("lat_Location").setValue(accountUser.getLat_Location());
+                                databaseReference.child("Account").child(userUID).child("long_Location").setValue(accountUser.getLong_Location());
+                                finish();
+                            }
+                        } else {
+                            Session  session = new Session(getApplicationContext());
+                            session.setLocation_Name(tv_place_name.getText().toString());
+                            session.setLocation_Lat(tv_lat_location.getText().toString());
+                            session.setLocation_Lng(tv_lng_location.getText().toString());
+                            finish();
                         }
+
                     }
                 });
 
@@ -206,7 +216,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     }
 
     private void updateUI_dachon(Style style) {
-        btn_save_change_profile_location.setVisibility(View.VISIBLE);
+
         // Use the map target's coordinates to make a reverse geocoding search
         final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
 
@@ -296,7 +306,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                                     .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
                                             ((Point) selectedCarmenFeature.geometry()).longitude()))
                                     .zoom(14)
-                                    .build()), 2000);
+                                    .build()), 1000);
                 }
             }
         }
@@ -400,6 +410,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                             tv_place_name.setText(String.valueOf(feature.placeName()));
                             tv_lat_location.setText(String.valueOf(point.latitude()));
                             tv_lng_location.setText(String.valueOf(point.longitude()));
+                            btn_save_change_profile_location.setVisibility(View.VISIBLE);
                         }
 
                     } else {
@@ -456,11 +467,4 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent i = new Intent(MapBox_Picker.this, User_Profile_Account_Activity.class);
-        startActivity(i);
-        finish();
-    }
 }

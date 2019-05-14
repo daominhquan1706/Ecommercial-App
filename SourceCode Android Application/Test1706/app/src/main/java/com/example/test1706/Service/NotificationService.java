@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.example.test1706.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

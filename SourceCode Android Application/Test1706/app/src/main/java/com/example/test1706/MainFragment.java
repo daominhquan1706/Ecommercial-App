@@ -16,8 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.test1706.Adapter.ImageAdapter;
+import com.example.test1706.Adapter.ProductAdapter;
+import com.example.test1706.Adapter.Product_Recycle_Adapter;
 import com.example.test1706.model.Product;
-import com.example.test1706.mongodb.Code_mongodb;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

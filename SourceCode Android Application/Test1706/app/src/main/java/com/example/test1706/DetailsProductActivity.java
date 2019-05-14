@@ -32,6 +32,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.Adapter.Adapter_Search_Product;
+import com.example.test1706.Adapter.CommentAdapter;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.CommentProduct;
 import com.example.test1706.model.Product;
@@ -42,7 +44,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrInterface;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.test1706.R;
 import com.example.test1706.model.ChatMessage;
 
 import java.util.Date;

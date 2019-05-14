@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.test1706.R;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.test1706.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.test1706.R;
 import com.example.test1706.model.CommentProduct;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class CommentAdapter extends PagerAdapter {
     private Context mContext;
     private List<CommentProduct> commentProductList;
 
-    CommentAdapter(Context context, List<CommentProduct> commentProductList) {
+    public CommentAdapter(Context context, List<CommentProduct> commentProductList) {
         mContext = context;
         this.commentProductList = commentProductList;
     }

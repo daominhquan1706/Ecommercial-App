@@ -339,6 +339,11 @@
     <string name="dangtailenhinhday">Đang tải lên Firebase hình DAY</string>
     <string name="dangluulaithaydoi">đang lưu lại thay đổi</string>
     <string name="dangthaydoi">Đang thay đổi dữ liệu</string>
+    <string name="danglaydulieu">Đang lấy dữ liệu</string>
+    <string name="thieuten">Thiếu tên</string>
+    <string name="thieusodienthoai">Thiếu số điện thoại</string>
+    <string name="thieudiachi">Thiếu địa chỉ</string>
+    <string name="tienvanchuyen">Tiền vận chuyển : $</string>
 
 
 </resources>

@@ -101,7 +101,6 @@ public class AccountUser {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Account");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         if (currentUser != null) {
             AccountUser accountUser = new AccountUser(currentUser.getUid(), currentUser.getEmail());
             databaseReference.child(currentUser.getUid()).setValue(accountUser);

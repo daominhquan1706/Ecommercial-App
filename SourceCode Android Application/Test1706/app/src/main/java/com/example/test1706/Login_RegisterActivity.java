@@ -14,10 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.test1706.UserModel.AccountUser;
+import com.example.test1706.model.AccountUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.r0adkll.slidr.Slidr;
 
 import static android.support.constraint.Constraints.TAG;
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ListView;
 
+import com.example.test1706.Adapter.Adapter_Search_Product;
 import com.example.test1706.model.Product;
 
 import java.util.ArrayList;
