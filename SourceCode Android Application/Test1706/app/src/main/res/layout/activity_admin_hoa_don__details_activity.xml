@@ -24,6 +24,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
+
                     android:id="@+id/btn_close_fold"
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
@@ -36,12 +37,17 @@
 
                 </RelativeLayout>
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/timeline_recycle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_timeline" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-
-                    >
+                    android:layout_marginTop="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -148,6 +154,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rlt_address"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="@dimen/margintop_cardview">
@@ -286,7 +293,7 @@
                         android:orientation="vertical"
                         android:padding="10dp"
                         android:visibility="gone"
-                        app:cardBackgroundColor="@color/colorAccent">
+                        app:cardBackgroundColor="@color/red">
 
                         <TextView
                             android:id="@+id/tv_TuChoi"

@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ramotion.foldingcell.FoldingCell;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,12 +41,17 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     private List<Orders> list_orders;
     private Context context;
     private static final String TAG = "Adapter_HoaDon_item";
+    private boolean isKhachHang;
     Activity activity;
 
     public Adapter_HoaDon_item(Context context, List<Orders> list_orders, Activity activity) {
         this.context = context;
         this.list_orders = list_orders;
         this.activity = activity;
+    }
+
+    public void setKhachHang(boolean khachHang) {
+        isKhachHang = khachHang;
     }
 
     @NonNull
@@ -67,18 +73,6 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         holder.tv_customer_name.setText(orders_item.getCustomerName());
         holder.tv_customer_address.setText(orders_item.getCustomerAddress());
         holder.tv_customer_sdt.setText(orders_item.getCustomerPhoneNumber());
-        /*holder.layout_admin_hoadon_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: đã gọi được hàm click View");
-                Intent intent = new Intent(context, Admin_HoaDon_Details_activity.class);
-                Bundle b = new Bundle();
-                b.putString("PaymentId", orders_item.getPaymentid());
-                intent.putExtras(b);
-                context.startActivity(intent);
-                ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });*/
         holder.folding_cell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,60 +88,122 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         Cart_Recycle_Adapter_NiteWatch adapter;
         adapter = new Cart_Recycle_Adapter_NiteWatch(context, orders_item.getOrderDetails(), R.layout.item_checkout_item_slider_card);
         holder.lv_checkout.setAdapter(adapter);
-        if (orders_item.getStatus().equals("Chờ xác nhận")) {
-            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_xacnhan));
-            holder.btn_TuChoi.setVisibility(View.VISIBLE);
-            holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.myRef.child("Orders").child(holder.paymentId).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            holder.folding_cell.toggle(true);
-                        }
-                    });
-                }
-            });
-            holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            holder.folding_cell.toggle(true);
-                        }
-                    });
-                }
-            });
-        } else if (orders_item.getStatus().equals("Chờ lấy hàng")) {
-            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_layhang));
-            holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            holder.folding_cell.toggle(false);
-                        }
-                    });
-                }
-            });
-        } else if (orders_item.getStatus().equals("Đang giao")) {
-            holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_dagiao));
-            holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            holder.folding_cell.toggle(false);
-                        }
-                    });
-                }
-            });
-        } else {
+
+        TimelinesAdapter timelineAdapter;
+        timelineAdapter = new TimelinesAdapter(context, orders_item.getTimeline());
+        holder.timeline_recycle.setAdapter(timelineAdapter);
+
+
+        if (isKhachHang) {
             holder.btn_Xac_nhan.setVisibility(View.GONE);
+            if (orders_item.getStatus().equals("Chờ xác nhận")) {
+                holder.btn_TuChoi.setVisibility(View.VISIBLE);
+                holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        holder.myRef
+                                .child("Orders")
+                                .child(orders_item.getPaymentid())
+                                .child("status").setValue(context.getString(R.string.stt_khachhuy))
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        holder.folding_cell.toggle(true);
+                                    }
+                                });
+                    }
+                });
+            }
+        } else {
+            switch (orders_item.getStatus()) {
+                case "Chờ xác nhận":
+                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_xacnhan));
+                    holder.btn_TuChoi.setVisibility(View.VISIBLE);
+                    holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tinhtrang = System.currentTimeMillis()+"_"+context.getString(R.string.button_adminhuy);
+                            List<String> newTimeline = orders_item.getTimeline();
+                            if(newTimeline==null){
+                                newTimeline = new ArrayList<>();
+                            }
+                            newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    holder.folding_cell.toggle(true);
+                                }
+                            });
+                        }
+                    });
+                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tinhtrang = System.currentTimeMillis()+"_"+"Đơn hàng đã được duyệt";
+                            List<String> newTimeline = orders_item.getTimeline();
+                            if(newTimeline==null){
+                                newTimeline = new ArrayList<>();
+                            }
+                            newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    holder.folding_cell.toggle(true);
+                                }
+                            });
+                        }
+                    });
+                    break;
+                case "Chờ lấy hàng":
+                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_layhang));
+                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tinhtrang = System.currentTimeMillis()+"_"+"Đã lấy hàng";
+                            List<String> newTimeline = orders_item.getTimeline();
+                            if(newTimeline==null){
+                                newTimeline = new ArrayList<>();
+                            }
+                            newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    holder.folding_cell.toggle(false);
+                                }
+                            });
+                        }
+                    });
+                    break;
+                case "Đang giao":
+                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_dagiao));
+                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tinhtrang = System.currentTimeMillis()+"_"+"Đơn hàng đã được giao thành công";
+                            List<String> newTimeline = orders_item.getTimeline();
+                            if(newTimeline==null){
+                                newTimeline = new ArrayList<>();
+                            }
+                            newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    holder.folding_cell.toggle(false);
+                                }
+                            });
+                        }
+                    });
+                    break;
+                default:
+                    holder.btn_Xac_nhan.setVisibility(View.GONE);
+                    break;
+            }
         }
+
 
         holder.btn_close_fold.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +225,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 }
             }
         });
+
+
     }
 
     @Override
@@ -194,13 +252,15 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         } else if (diff / (60 * 60 * 24) > 0) {
             thoigian = Math.round(diff / (60 * 60 * 24)) + context.getString(R.string.ngaytruoc);
         } else if (diff / (60 * 60) > 0) {
-            thoigian = Math.round(diff / (60 * 60)) +context.getString(R.string.giotruoc);
+            thoigian = Math.round(diff / (60 * 60)) + context.getString(R.string.giotruoc);
         } else if (diff / (60) > 0) {
             thoigian = Math.round(diff / (60)) + context.getString(R.string.phuttruoc);
         } else if (diff > 0) {
-            thoigian = Math.round(diff) + context.getString(R.string.giaytruoc);;
+            thoigian = Math.round(diff) + context.getString(R.string.giaytruoc);
+            ;
         } else {
-            thoigian = context.getString(R.string.vuaxong);;
+            thoigian = context.getString(R.string.vuaxong);
+            ;
         }
 
         return thoigian;
@@ -218,7 +278,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 tv_customer_address;
         RelativeLayout layout_admin_hoadon_item;
         FoldingCell folding_cell;
-        RecyclerView list_prodcut_hoadon_fold;
+        RecyclerView list_prodcut_hoadon_fold, timeline_recycle;
 
 
         TextView tv_total_price;
@@ -234,11 +294,13 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         Orders orders;
         private static final String TAG = "AdminHoaDon_Details_act";
         CardView btn_Xac_nhan, btn_TuChoi;
-        RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold;
+        RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold, rlt_address;
 
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
+            timeline_recycle= (RecyclerView) convertView.findViewById(R.id.timeline_recycle);
+            rlt_address = (RelativeLayout) convertView.findViewById(R.id.rlt_address);
             btn_close_fold = (RelativeLayout) convertView.findViewById(R.id.btn_close_fold);
             tv_position = (TextView) convertView.findViewById(R.id.tv_position);
             tv_customer_sdt = (TextView) convertView.findViewById(R.id.tv_customer_sdt);

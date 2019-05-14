@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -32,7 +33,6 @@ import com.example.test1706.model.AccountUser;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
-import com.firebase.ui.auth.ui.ProgressView;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,7 +44,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firestore.admin.v1beta1.Progress;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
@@ -148,11 +147,9 @@ public class Checkout_activity extends AppCompatActivity {
                 } else if (address_order.getText().toString().equals("")) {
                     address_order.setError(getString(R.string.thieudiachi));
                     address_order.requestFocus();
-                } else if(tv_total_price.getText().toString().equals("")){
+                } else if (tv_total_price.getText().toString().equals("")) {
                     Toast.makeText(Checkout_activity.this, getString(R.string.chuathethanhtoanhaythulai), Toast.LENGTH_SHORT).show();
-                }
-
-                else {
+                } else {
                     ProcessPayment();
                 }
             }
@@ -193,12 +190,14 @@ public class Checkout_activity extends AppCompatActivity {
                         name_order.setText(userAccount.getName());
                         sdt_order.setText(userAccount.getSDT());
                         address_order.setText(userAccount.getDiachi());
-                        LatLng location = new LatLng(userAccount.getLat_Location(), userAccount.getLong_Location());
-                        if (!isLoadMap_Success) {
-                            loadMap(location);
-                            isLoadMap_Success = true;
-                        } else if (map != null) {
-                            changeLocation(location);
+                        if (userAccount.getLat_Location() != null && userAccount.getLong_Location() != null) {
+                            LatLng location = new LatLng(userAccount.getLat_Location(), userAccount.getLong_Location());
+                            if (!isLoadMap_Success) {
+                                loadMap(location);
+                                isLoadMap_Success = true;
+                            } else if (map != null) {
+                                changeLocation(location);
+                            }
                         }
                     }
                     pd.dismiss();
@@ -318,8 +317,21 @@ public class Checkout_activity extends AppCompatActivity {
             orders.setTotal(cartSqliteHelper.getCartPriceCount());
             orders.setPaymentid(id);
 
+
+            String tinhtrang = System.currentTimeMillis()+"_"+"Đang chờ xác nhận đơn hàng";
+            List<String> newTimeline = orders.getTimeline();
+            if(newTimeline==null){
+                newTimeline = new ArrayList<>();
+            }
+            newTimeline.add(tinhtrang);
+            orders.setTimeline(newTimeline);
+
+
             if (currentUser != null) {
                 orders.setUserID(currentUser.getUid());
+            } else {
+                orders.setUserID(Secure.getString(this.getContentResolver(),
+                        Secure.ANDROID_ID));
             }
             List<Cart> orderDetails = new ArrayList<Cart>();
             for (Cart item : cartSqliteHelper.getAllCarts()) {
@@ -368,7 +380,12 @@ public class Checkout_activity extends AppCompatActivity {
                     .build());
             mapFragment = SupportMapFragment.newInstance(options);
             transaction.add(R.id.mapbox_cardview, mapFragment, "com.mapbox.map");
-            transaction.commit();
+            try {
+                transaction.commit();
+            } catch (IllegalStateException e) {
+                Toast.makeText(this, "vấn đề :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                recreate();
+            }
         } else {
             mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
         }

@@ -80,6 +80,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.ramotion.cardslider:card-slider:0.3.0'
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.2'
+    implementation 'com.github.vipulasri:timelineview:1.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

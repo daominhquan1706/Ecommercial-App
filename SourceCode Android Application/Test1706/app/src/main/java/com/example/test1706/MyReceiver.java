@@ -9,8 +9,10 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String status = NetworkUtil.getConnectivityStatusString(context);
         if(status.isEmpty()) {
-            status="No Internet Connection";
+            status=context.getString(R.string.khongcoketnoiinternet);
         }
-        Toast.makeText(context, status, Toast.LENGTH_LONG).show();
+        if(!status.equals("Đã kết nối Wifi")){
+            Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
+        }
     }
 }

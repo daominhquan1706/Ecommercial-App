@@ -34,5 +34,6 @@
     <color name="dark_blue">#FF202F65</color>
     <color name="loading_screen_background">#0E1E2F</color>
     <color name="purple1">@color/black_cardview_nitewatch</color>
+    <color name="red">#C62828</color>
 
 </resources>

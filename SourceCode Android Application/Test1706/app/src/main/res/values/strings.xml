@@ -346,6 +346,11 @@
     <string name="tienvanchuyen">Tiền vận chuyển : </string>
     <string name="ti_n_h_ng">Tiền hàng :</string>
     <string name="chuathethanhtoanhaythulai">Chưa thể thanh toán, hãy thử lại</string>
+    <string name="khongcoketnoiinternet">Không có kết nối internet</string>
+    <string name="daketnoiwifi">Đã kết nối Wifi</string>
+    <string name="daketnoi3g">Đã kết nối 3G</string>
+    <string name="daketnoiinternet">Không có kết nối internet</string>
+    <string name="choxacnhan">chờ xác nhận</string>
 
 
 </resources>

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -217,36 +218,43 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
             databaseReference.child("Account").child(userUID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    accountUser1 = dataSnapshot.getValue(AccountUser.class);
-                    if (accountUser != null) {
-                        tv_name_profile.setText(accountUser1.getName());
-                        tv_phonenumber_profile.setText(accountUser1.getSDT());
-                        tv_address_profile.setText(accountUser1.getDiachi());
-                        Glide.with(User_Profile_Account_Activity.this)
-                                .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
-                                .apply(new RequestOptions().centerCrop())
-                                .into(img_user_avatar);
-                        if (accountUser1.getLat_Location() != null && accountUser1.getLong_Location() != null) {
-                            tv_lng_location.setText(String.valueOf(accountUser1.getLong_Location()));
-                            tv_lat_location.setText(String.valueOf(accountUser1.getLat_Location()));
+                    try {
+                        accountUser1 = dataSnapshot.getValue(AccountUser.class);
+                        if (accountUser != null) {
+                            tv_name_profile.setText(accountUser1.getName());
+                            tv_phonenumber_profile.setText(accountUser1.getSDT());
+                            tv_address_profile.setText(accountUser1.getDiachi());
+                            Glide.with(User_Profile_Account_Activity.this)
+                                    .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
+                                    .apply(new RequestOptions().centerCrop())
+                                    .into(img_user_avatar);
+                            if (accountUser1.getLat_Location() != null && accountUser1.getLong_Location() != null) {
+                                tv_lng_location.setText(String.valueOf(accountUser1.getLong_Location()));
+                                tv_lat_location.setText(String.valueOf(accountUser1.getLat_Location()));
 
 
-                            location = new LatLng(accountUser1.getLat_Location(), accountUser1.getLong_Location());
-                            // loadMap(location);
-                            if (!isLoadMap_Success) {
-                                loadMap(location);
-                                isLoadMap_Success = true;
+                                location = new LatLng(accountUser1.getLat_Location(), accountUser1.getLong_Location());
+                                // loadMap(location);
+                                if (!isLoadMap_Success) {
+                                    loadMap(location);
+                                    isLoadMap_Success = true;
+                                }
+                                else if(map!=null){
+                                    changeLocation(location);
+                                }
+
                             }
-                            else if(map!=null){
-                                changeLocation(location);
-                            }
-
+                        } else {
+                            update_firebaseAccount();
+                            getCurrentUser();
                         }
-                    } else {
-                        update_firebaseAccount();
-                        getCurrentUser();
+                        findViewById(R.id.loadingscreen).setVisibility(View.GONE);
                     }
-                    findViewById(R.id.loadingscreen).setVisibility(View.GONE);
+                    catch (IllegalArgumentException e)
+                    {
+                        Toast.makeText(User_Profile_Account_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        recreate();
+                    }
                 }
 
                 @Override

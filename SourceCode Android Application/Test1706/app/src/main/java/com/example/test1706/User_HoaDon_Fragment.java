@@ -1,6 +1,7 @@
 package com.example.test1706;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -57,24 +58,28 @@ public class User_HoaDon_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
         if (currentUser == null) {
-            UserUID = "";
+            UserUID = Settings.Secure.getString(getActivity().getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
         } else {
             UserUID = currentUser.getUid();
         }
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) && Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getUserID().equals(UserUID)) {
-                    list.add(dataSnapshot.getValue(Orders.class));
-                    mkey.add(dataSnapshot.getKey());
-                    Timber.d("onDataChange: dataSnapshot1.getKey() : %s", dataSnapshot.getKey());
-                    adapter.notifyDataSetChanged();
-                }
-                if (list.size() == 0) {
-                    listView_order_admin.setVisibility(View.INVISIBLE);
-                } else {
-                    image_empty_hoadon.setVisibility(View.GONE);
-                    listView_order_admin.setVisibility(View.VISIBLE);
+                if(dataSnapshot.getValue(Orders.class).getUserID()!=null){
+                    if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) &&
+                            dataSnapshot.getValue(Orders.class).getUserID().equals(UserUID)) {
+                        list.add(dataSnapshot.getValue(Orders.class));
+                        mkey.add(dataSnapshot.getKey());
+                        Timber.d("onDataChange: dataSnapshot1.getKey() : %s", dataSnapshot.getKey());
+                        adapter.notifyDataSetChanged();
+                    }
+                    if (list.size() == 0) {
+                        listView_order_admin.setVisibility(View.INVISIBLE);
+                    } else {
+                        image_empty_hoadon.setVisibility(View.GONE);
+                        listView_order_admin.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -137,6 +142,7 @@ public class User_HoaDon_Fragment extends Fragment {
         myRef = FirebaseDatabase.getInstance().getReference();
         list = new ArrayList<Orders>();
         adapter = new Adapter_HoaDon_item(getActivity(), list, getActivity());
+        adapter.setKhachHang(true);
         listView_order_admin = (RecyclerView) getView().findViewById(R.id.lv_order_admin);
         listView_order_admin.setAdapter(adapter);
     }

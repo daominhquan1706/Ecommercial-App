@@ -225,10 +225,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     protected void onPause() {
-        super.onPause();
         unregisterReceiver(MyReceiver);
-    }
+        super.onPause();
 
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        updateUI();
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
 
     private void init() {
 
@@ -727,14 +733,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        updateUI();
-        /*
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_mainpage);*/
-    }
+
 
 
     public static void hideKeyboard(Activity activity) {

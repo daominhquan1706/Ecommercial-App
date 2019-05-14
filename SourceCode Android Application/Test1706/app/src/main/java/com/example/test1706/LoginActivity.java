@@ -345,14 +345,17 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             pd.cancel();
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(LoginActivity.this, getString(R.string.dangnhapthanhcong), Toast.LENGTH_LONG).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
-
                                 AccountUser accountUser;
                                 accountUser = new AccountUser();
-                                accountUser.update_firebaseAccount();
+                                if(mAuth.getCurrentUser()!=null ){
+                                    if(!listaccount.contains(user.getUid())){
+                                        accountUser.update_firebaseAccount();
+                                    }
+                                }
 
+                                // Sign in success, update UI with the signed-in user's information
+                                Toast.makeText(LoginActivity.this, getString(R.string.dangnhapthanhcong), Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

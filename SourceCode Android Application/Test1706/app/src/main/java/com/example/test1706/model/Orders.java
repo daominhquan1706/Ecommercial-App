@@ -3,15 +3,42 @@ package com.example.test1706.model;
 import java.util.List;
 
 public class Orders {
-    public long creationTime;
-    public double total;
-    public String userID;
-    public String customerName;
-    public String customerAddress;
-    public String customerPhoneNumber;
-    public String status;
-    public List<Cart> orderDetails;
-    public String paymentid;
+    private long creationTime;
+    private double total;
+    private String userID;
+    private String customerName;
+    private String customerAddress;
+    private String customerPhoneNumber;
+    private String status;
+    private List<Cart> orderDetails;
+    private String paymentid;
+    private String Address_Lat;
+    private String Address_ng;
+    private List<String> Timeline;
+
+    public List<String> getTimeline() {
+        return Timeline;
+    }
+
+    public void setTimeline(List<String> timeline) {
+        Timeline = timeline;
+    }
+
+    public String getAddress_Lat() {
+        return Address_Lat;
+    }
+
+    public void setAddress_Lat(String address_Lat) {
+        Address_Lat = address_Lat;
+    }
+
+    public String getAddress_ng() {
+        return Address_ng;
+    }
+
+    public void setAddress_ng(String address_ng) {
+        Address_ng = address_ng;
+    }
 
     public Orders() {
     }
