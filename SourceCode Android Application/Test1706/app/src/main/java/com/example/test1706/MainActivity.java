@@ -1,11 +1,14 @@
 package com.example.test1706;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -115,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Locale myLocale;
     String currentLanguage = "en", currentLang;
 
+    private BroadcastReceiver MyReceiver = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -210,7 +215,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        MyReceiver = new MyReceiver();
+        broadcastIntent();
 
+    }
+
+    private void broadcastIntent() {
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
     }
 
 
