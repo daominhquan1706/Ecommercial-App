@@ -84,7 +84,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
         viewHolder.mName.setText(list_data.get(i).getProductName());
         viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
 
-        if(viewHolder.cv_item!=null){
+        /*if(viewHolder.cv_item!=null){
             viewHolder.cv_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,7 +101,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 }
             });
 
-        }
+        }*/
         if(viewHolder.layout_horizontal_nitewatch_item!=null){
             viewHolder.layout_horizontal_nitewatch_item.setOnClickListener(new View.OnClickListener() {
                 @Override

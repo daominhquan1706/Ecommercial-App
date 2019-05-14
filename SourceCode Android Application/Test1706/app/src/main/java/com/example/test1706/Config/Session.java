@@ -69,4 +69,8 @@ public class Session {
         return prefs.getString("location_Name", "");
     }
 
+
+
+
+
 }

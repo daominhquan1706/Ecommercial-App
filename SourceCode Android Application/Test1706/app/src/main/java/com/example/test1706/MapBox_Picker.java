@@ -1,6 +1,7 @@
 package com.example.test1706;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -96,12 +97,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Mapbox access token is configured here. This needs to be called either in your application
-        // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.access_token));
-
-        // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_map_box__picker);
 
         // Initialize the mapboxMap view
@@ -214,8 +210,11 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
         }
     }
-
+ProgressDialog pd_danglaydulieuvitri;
     private void updateUI_dachon(Style style) {
+        pd_danglaydulieuvitri= new ProgressDialog(this);
+        pd_danglaydulieuvitri.setMessage("Đang lấy thông tin vị trí này");
+        pd_danglaydulieuvitri.show();
 
         // Use the map target's coordinates to make a reverse geocoding search
         final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
@@ -411,12 +410,13 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                             tv_lat_location.setText(String.valueOf(point.latitude()));
                             tv_lng_location.setText(String.valueOf(point.longitude()));
                             btn_save_change_profile_location.setVisibility(View.VISIBLE);
-                        }
 
+                        }
                     } else {
                         Toast.makeText(MapBox_Picker.this,
                                 getString(R.string.location_picker_dropped_marker_snippet_no_results), Toast.LENGTH_SHORT).show();
                     }
+                    pd_danglaydulieuvitri.dismiss();
                 }
 
                 @Override

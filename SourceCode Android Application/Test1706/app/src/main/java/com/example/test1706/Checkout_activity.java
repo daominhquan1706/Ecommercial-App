@@ -32,6 +32,7 @@ import com.example.test1706.model.AccountUser;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
+import com.firebase.ui.auth.ui.ProgressView;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firestore.admin.v1beta1.Progress;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
@@ -103,8 +105,9 @@ public class Checkout_activity extends AppCompatActivity {
     Bundle savedInstance_bundle;
     FloatingActionButton search_location_button_mapbox;
     ProgressDialog pd;
-    TextView tv_tienship;
-    Point huflit ;
+    TextView tv_tienship, tv_tienhang, tv_khoangcach;
+    Point huflit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +116,9 @@ public class Checkout_activity extends AppCompatActivity {
         //Slidr.attach(this);
         init();
         layDataUser();
-        tv_total_price.setText(String.valueOf(cartSqliteHelper.getCartPriceCount()));
+
+        tv_tienhang.setText(String.valueOf(cartSqliteHelper.getCartPriceCount() + " USD"));
+
         // bat dau severvice paypal
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
@@ -143,7 +148,11 @@ public class Checkout_activity extends AppCompatActivity {
                 } else if (address_order.getText().toString().equals("")) {
                     address_order.setError(getString(R.string.thieudiachi));
                     address_order.requestFocus();
-                } else {
+                } else if(tv_total_price.getText().toString().equals("")){
+                    Toast.makeText(Checkout_activity.this, getString(R.string.chuathethanhtoanhaythulai), Toast.LENGTH_SHORT).show();
+                }
+
+                else {
                     ProcessPayment();
                 }
             }
@@ -235,6 +244,8 @@ public class Checkout_activity extends AppCompatActivity {
     }
 
     public void init() {
+        tv_khoangcach = (TextView) findViewById(R.id.tv_khoangcach);
+        tv_tienhang = (TextView) findViewById(R.id.tv_tienhang);
         huflit = Point.fromLngLat(106.667445, 10.776663);
         tv_tienship = (TextView) findViewById(R.id.tv_tienship);
         pd = new ProgressDialog(this);
@@ -263,7 +274,7 @@ public class Checkout_activity extends AppCompatActivity {
     }
 
     private void ProcessPayment() {
-        amount = tv_total_price.getText().toString();
+        amount = tv_total_price.getText().toString().split(" ")[0];
         PayPalPayment PaypalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amount)), getString(R.string.menhgiatien), getString(R.string.titlepaypal), PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(Checkout_activity.this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
@@ -388,7 +399,6 @@ public class Checkout_activity extends AppCompatActivity {
                         style.addLayer(symbolLayer);
 
 
-
                         Point userAddress = Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude());
                         getRoute(style, huflit, userAddress);
                     }
@@ -403,6 +413,7 @@ public class Checkout_activity extends AppCompatActivity {
     private DirectionsRoute currentRoute;
 
     private void getRoute(@NonNull final Style style, Point origin, Point destination) {
+
 
         MapboxDirections client = MapboxDirections.builder()
                 .origin(origin)
@@ -426,37 +437,47 @@ public class Checkout_activity extends AppCompatActivity {
 
                 // Retrieve the directions route from the API response
                 currentRoute = response.body().routes().get(0);
-                tv_tienship.setText(String.valueOf(Objects.requireNonNull(currentRoute.distance()).intValue()));
+                tv_khoangcach.setText((currentRoute.distance().intValue() / 1000) + " km");
+                double tienship = TinhTienShip(Objects.requireNonNull(currentRoute.distance()), address_order.getText().toString());
+                tv_tienship.setText(tienship + " USD");
+                tv_total_price.setText((cartSqliteHelper.getCartPriceCount() + tienship) + " USD");
+
 
             }
 
             @Override
             public void onFailure(@NotNull Call<DirectionsResponse> call, @NotNull Throwable throwable) {
-
                 Timber.e("Error: %s", throwable.getMessage());
 
             }
         });
     }
 
-    public static int TinhTienShip(Double km) {
-        int distance = km.intValue();
+    public static double TinhTienShip(Double km, String diaChi) {
+        int distance = km.intValue() / 1000;
 
-        if (0 <= distance && distance <= 4) {
-            return 20;
-        } else if (4 <= distance && distance <= 6) {
-            return 25;
-        } else if (6 <= distance && distance <= 9) {
-            return 30;
-        } else if (8 <= distance && distance <= 10) {
-            return 35;
-        } else if (10 <= distance && distance <= 12) {
-            return 40;
-        } else if (12 <= distance && distance <= 14) {
-            return 45;
+        if (diaChi.contains("Vietnam")) {
+            if (diaChi.contains("Hồ Chí Minh")) {
+                if (0 <= distance && distance <= 5) {
+                    return 1.99;
+                } else if (5 <= distance && distance <= 10) {
+                    return 2.99;
+                } else if (10 <= distance && distance <= 20) {
+                    return 3.99;
+                } else if (20 <= distance) {
+                    return 5.99;
+                }
+            } else if (diaChi.contains("Hanoi")) {
+                return 20.99;
+            } else {
+                return 25.99;
+            }
         } else {
-            return 50;
+            return 50.99;
         }
+
+
+        return 0.99;
     }
 
     @Override
