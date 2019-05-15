@@ -48,7 +48,8 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
     Chat_Adapter customListAdapter;
     ActionBar actionBar;
     String userUID, userEmail;
-GifImageView loadingscreen;
+    GifImageView loadingscreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,7 +167,7 @@ GifImageView loadingscreen;
                     customListAdapter.notifyDataSetChanged();
                     scrollMyListViewToBottom();
                     loadingscreen.setVisibility(View.GONE);
-                    btn_send_message.setVisibility(View.VISIBLE);
+                    // btn_send_message.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -210,22 +211,6 @@ GifImageView loadingscreen;
                 listOfMessage.setSelection(customListAdapter.getCount() - 1);
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(this, Admin_Message_Activity.class);
-        startActivity(intent);
-        finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-
     }
 }
 

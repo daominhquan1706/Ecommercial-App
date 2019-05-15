@@ -5,9 +5,9 @@
     android:layout_height="50dp">
 
     <LinearLayout
-        android:layout_marginStart="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -15,15 +15,16 @@
             android:id="@+id/timeline"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:endLineColor="@color/colorPrimary"
+            app:endLineColor="@color/black"
+            app:linePadding="3dp"
             app:lineWidth="2dp"
             app:markerSize="15dp"
-            app:startLineColor="@color/colorPrimary" />
+            app:startLineColor="@color/black"/>
 
         <LinearLayout
-            android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:gravity="start"
             android:orientation="vertical">
 

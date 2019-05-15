@@ -37,9 +37,15 @@ public class TimelinesAdapter extends RecyclerView.Adapter<TimelinesAdapter.View
     @Override
     public void onBindViewHolder(@NonNull TimelinesAdapter.ViewHolder holder, int position) {
         String timeline = list.get(position);
+
         holder.timeline_tinhtrang.setText(timeline.split("_")[1]);
         holder.timeline_date.setText(ThoiGian(Long.parseLong(timeline.split("_")[0])));
-
+        if (position == 0) {
+            holder.mTimelineView.setStartLineColor(context.getResources().getColor(R.color.white),holder.getItemViewType());
+        }
+        if(position==getItemCount()-1){
+            holder.mTimelineView.setEndLineColor(context.getResources().getColor(R.color.white),holder.getItemViewType());
+        }
 
     }
 

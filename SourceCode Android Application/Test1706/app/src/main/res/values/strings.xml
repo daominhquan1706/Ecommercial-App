@@ -351,6 +351,7 @@
     <string name="daketnoi3g">Đã kết nối 3G</string>
     <string name="daketnoiinternet">Không có kết nối internet</string>
     <string name="choxacnhan">chờ xác nhận</string>
+    <string name="khongdudieukiendedinhhuong">không đủ điều kiện để định hướng , hãy thữ lại</string>
 
 
 </resources>

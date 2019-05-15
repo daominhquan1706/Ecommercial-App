@@ -12,8 +12,8 @@ public class Orders {
     private String status;
     private List<Cart> orderDetails;
     private String paymentid;
-    private String Address_Lat;
-    private String Address_ng;
+    private Double Address_Lat;
+    private Double Address_Lng;
     private List<String> Timeline;
 
     public List<String> getTimeline() {
@@ -24,20 +24,20 @@ public class Orders {
         Timeline = timeline;
     }
 
-    public String getAddress_Lat() {
+    public Double getAddress_Lat() {
         return Address_Lat;
     }
 
-    public void setAddress_Lat(String address_Lat) {
+    public void setAddress_Lat(Double address_Lat) {
         Address_Lat = address_Lat;
     }
 
-    public String getAddress_ng() {
-        return Address_ng;
+    public Double getAddress_Lng() {
+        return Address_Lng;
     }
 
-    public void setAddress_ng(String address_ng) {
-        Address_ng = address_ng;
+    public void setAddress_Lng(Double address_ng) {
+        Address_Lng = address_ng;
     }
 
     public Orders() {

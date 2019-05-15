@@ -396,8 +396,7 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Uri uri) {
                                         tv_url_image.setText(uri.toString());
-                                        progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
-                                        progressDialog_night.show();
+
                                         uploadFile_Night();
 
                                         //Do what you want with the url
@@ -445,6 +444,9 @@ public class AdminSanPham_edit_product extends AppCompatActivity {
     ProgressDialog progressDialog_night;
 
     private void uploadFile_Night() {
+        progressDialog_night = new ProgressDialog(this);
+        progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
+        progressDialog_night.show();
         if (!isImageNight_Change) {
             progressDialog_night.dismiss();
             ThemSanPham();

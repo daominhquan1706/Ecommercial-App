@@ -112,6 +112,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         huflitLocation = Point.fromLngLat(106.667445, 10.776663);
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
@@ -119,7 +120,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_map_box);
-
         tvDurationMapbox = (TextView) findViewById(R.id.tvDurationMapbox);
         tvDistance = (TextView) findViewById(R.id.tvDistanceMapbox);
         tvTinhTienShip = (TextView) findViewById(R.id.tvTinhTienShip);
@@ -135,30 +135,25 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 openSearchActivity();
             }
         });
+
+
+
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem searchLocation_menuItem = menu.add(0, MENU_ITEM_ITEM1, 0, "Search");
-        searchLocation_menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        searchLocation_menuItem.setIcon(R.drawable.ic_search_black_24dp);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            case MENU_ITEM_ITEM1:
-                openSearchActivity();
-                return true;
-
+     Point address_Customer;
+    private void init() {
+        Bundle b = getIntent().getExtras();
+        if(b!=null){
+            address_Customer= Point.fromLngLat(b.getDouble("address_lng"), b.getDouble("address_lat"));
+            setCurrentLocation(address_Customer);
+            thaydoivitri(address_Customer);
         }
-        return super.onOptionsItemSelected(item);
+        else{
+            Toast.makeText(this, "Không tìm được Address", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
-*/
+
+
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
@@ -180,7 +175,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 setupLayer(style);
 
                 enableLocationComponent(style);
-
+                init();
 
             }
 
@@ -240,7 +235,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
         locationEngine.requestLocationUpdates(request, callback, getMainLooper());
         locationEngine.getLastLocation(callback);
-
 
     }
 
@@ -335,8 +329,8 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                     // Move map camera to the selected location
                     mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
-                                    .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
-                                            ((Point) selectedCarmenFeature.geometry()).longitude()))
+                                    .target(new LatLng(address_Customer.latitude(),
+                                            address_Customer.longitude()))
                                     .zoom(14)
                                     .build()), 4000);
                     IsOldLocation = false;
@@ -364,7 +358,6 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         @Override
         public void onSuccess(LocationEngineResult result) {
             MapBoxActivity activity = activityWeakReference.get();
-
             if (activity != null) {
                 Location location = result.getLastLocation();
 
@@ -380,10 +373,15 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 // Create a Toast which displays the new location's coordinates
                 Timber.d("onSuccess: %s", "new_location:" + String.valueOf(result.getLastLocation().getLatitude()) + "," + String.valueOf(result.getLastLocation().getLongitude()));
                 // Pass the new location to the Maps SDK's LocationComponent
-                if (activity.mapboxMap != null && result.getLastLocation() != null) {
-                    activity.mapboxMap.getLocationComponent().forceLocationUpdate(result.getLastLocation());
-                    activity.setCurrentLocation(now);
-                    activity.thaydoivitri(now);
+                try{
+                    if (activity.mapboxMap != null && result.getLastLocation() != null) {
+                        activity.mapboxMap.getLocationComponent().forceLocationUpdate(result.getLastLocation());
+                        activity.setCurrentLocation(now);
+                        activity.thaydoivitri(now);
+                    }
+                }
+                catch (IllegalStateException e){
+                    Toast.makeText(mapBoxActivity, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -412,7 +410,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
         loadedMapStyle.addSource(new GeoJsonSource(ROUTE_SOURCE_ID,
                 FeatureCollection.fromFeatures(new Feature[]{})));
         GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[]{
-                Feature.fromGeometry(Point.fromLngLat(currentLocation.longitude(), currentLocation.latitude())),
+                Feature.fromGeometry(address_Customer),
                 Feature.fromGeometry(Point.fromLngLat(huflitLocation.longitude(), huflitLocation.latitude()))}));
         loadedMapStyle.addSource(iconGeoJsonSource);
     }
@@ -482,8 +480,10 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 tvDurationMapbox.setText(String.valueOf(round((currentRoute.duration() / 60), 0) + " phút"));
                 tvTinhTienShip.setText(String.valueOf("$" + TinhTienShip(currentRoute.distance() / 1000)));
                 // Make a toast which displays the route's distance
-                Toast.makeText(MapBoxActivity.this, String.format(getString(R.string.timdiadiemthanhcong),
-                        currentRoute.distance()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapBoxActivity.this,
+                        String.format(getString(R.string.timdiadiemthanhcong)+
+                        currentRoute.distance()),
+                        Toast.LENGTH_SHORT).show();
 
                 if (style.isFullyLoaded()) {
                     // Retrieve and update the source designated for showing the directions route

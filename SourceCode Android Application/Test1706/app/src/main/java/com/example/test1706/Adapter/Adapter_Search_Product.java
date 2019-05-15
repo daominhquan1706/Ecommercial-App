@@ -87,21 +87,12 @@ public class Adapter_Search_Product extends BaseAdapter implements Filterable {
                 public void onClick(View v) {
                     ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(context);
                     productSqliteHelper.addProduct(product);
-
-
-
-                    Log.d(TAG, "onClick: đã gọi được hàm click View");
                     Intent intent = new Intent(context, DetailsProductActivity.class);
                     Bundle b = new Bundle();
                     b.putString("ProductName", product.getProduct_Name());
                     b.putString("ProductCategory", product.getCategory());
-
-
                     intent.putExtras(b);
-
-
                     context.startActivity(intent);
-                    Log.d(TAG, "onClick: đã mở được trang details");
                 }
             });
 

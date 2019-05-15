@@ -224,10 +224,15 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                             tv_name_profile.setText(accountUser1.getName());
                             tv_phonenumber_profile.setText(accountUser1.getSDT());
                             tv_address_profile.setText(accountUser1.getDiachi());
-                            Glide.with(User_Profile_Account_Activity.this)
-                                    .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
-                                    .apply(new RequestOptions().centerCrop())
-                                    .into(img_user_avatar);
+                            try {
+                                Glide.with(User_Profile_Account_Activity.this)
+                                        .load("https://api.adorable.io/avatars/" + accountUser1.getUID() + "@adorable.png")
+                                        .apply(new RequestOptions().centerCrop())
+                                        .into(img_user_avatar);
+                            } catch (Exception e) {
+                                Toast.makeText(User_Profile_Account_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
                             if (accountUser1.getLat_Location() != null && accountUser1.getLong_Location() != null) {
                                 tv_lng_location.setText(String.valueOf(accountUser1.getLong_Location()));
                                 tv_lat_location.setText(String.valueOf(accountUser1.getLat_Location()));
@@ -238,8 +243,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                                 if (!isLoadMap_Success) {
                                     loadMap(location);
                                     isLoadMap_Success = true;
-                                }
-                                else if(map!=null){
+                                } else if (map != null) {
                                     changeLocation(location);
                                 }
 
@@ -249,9 +253,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
                             getCurrentUser();
                         }
                         findViewById(R.id.loadingscreen).setVisibility(View.GONE);
-                    }
-                    catch (IllegalArgumentException e)
-                    {
+                    } catch (IllegalArgumentException e) {
                         Toast.makeText(User_Profile_Account_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         recreate();
                     }

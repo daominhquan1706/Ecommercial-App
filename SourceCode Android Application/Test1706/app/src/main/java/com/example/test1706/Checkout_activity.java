@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -179,13 +180,15 @@ public class Checkout_activity extends AppCompatActivity {
         });
     }
 
+    AccountUser userAccount;
+
     private void layDataUser() {
         isLoadMap_Success = false;
         if (currentUser != null) {
             myRef.child("Account").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    AccountUser userAccount = dataSnapshot.getValue(AccountUser.class);
+                    userAccount = dataSnapshot.getValue(AccountUser.class);
                     if (userAccount != null) {
                         name_order.setText(userAccount.getName());
                         sdt_order.setText(userAccount.getSDT());
@@ -303,6 +306,7 @@ public class Checkout_activity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("HardwareIds")
     public void AddCart_to_Order(String paymentDetails) {
         try {
             JSONObject jsonObject = new JSONObject(paymentDetails);
@@ -318,9 +322,9 @@ public class Checkout_activity extends AppCompatActivity {
             orders.setPaymentid(id);
 
 
-            String tinhtrang = System.currentTimeMillis()+"_"+"Đang chờ xác nhận đơn hàng";
+            String tinhtrang = System.currentTimeMillis() + "_" + "Đang chờ xác nhận đơn hàng";
             List<String> newTimeline = orders.getTimeline();
-            if(newTimeline==null){
+            if (newTimeline == null) {
                 newTimeline = new ArrayList<>();
             }
             newTimeline.add(tinhtrang);
@@ -329,9 +333,14 @@ public class Checkout_activity extends AppCompatActivity {
 
             if (currentUser != null) {
                 orders.setUserID(currentUser.getUid());
+                orders.setAddress_Lat(userAccount.getLat_Location());
+                orders.setAddress_Lng(userAccount.getLong_Location());
             } else {
                 orders.setUserID(Secure.getString(this.getContentResolver(),
                         Secure.ANDROID_ID));
+
+                orders.setAddress_Lat(Double.parseDouble(session.getLocation_Lat()));
+                orders.setAddress_Lng(Double.parseDouble(session.getLocation_Lng()));
             }
             List<Cart> orderDetails = new ArrayList<Cart>();
             for (Cart item : cartSqliteHelper.getAllCarts()) {

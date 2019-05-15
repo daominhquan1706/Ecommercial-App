@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,9 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.test1706.DetailsProductActivity;
+import com.example.test1706.MapBoxActivity;
 import com.example.test1706.R;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Orders;
@@ -101,6 +105,13 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String tinhtrang = System.currentTimeMillis() + "_" + "Bạn đã hủy đơn hàng";
+                        List<String> newTimeline = orders_item.getTimeline();
+                        if (newTimeline == null) {
+                            newTimeline = new ArrayList<>();
+                        }
+                        newTimeline.add(tinhtrang);
+                        holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
                         holder.myRef
                                 .child("Orders")
                                 .child(orders_item.getPaymentid())
@@ -115,6 +126,41 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                 });
             }
         } else {
+            holder.admin_details_hoadon_inputlayout_sdt_order.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_CALL);
+                    i.setData(Uri.parse("tel:" + orders_item.getCustomerPhoneNumber()));
+                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        context.startActivity(i);
+                    } else {
+                        ActivityCompat.requestPermissions(activity, new String[]{CALL_PHONE}, 1);
+                    }
+                }
+            });
+            holder.rlt_address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try{
+                        if(orders_item.getAddress_Lat()!=null && orders_item.getAddress_Lng()!=null){
+                            Intent intent = new Intent(context, MapBoxActivity.class);
+                            Bundle b = new Bundle();
+                            b.putDouble("address_lat", orders_item.getAddress_Lat());
+                            b.putDouble("address_lng", orders_item.getAddress_Lng());
+                            intent.putExtras(b);
+                            context.startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(context, context.getString(R.string.khongdudieukiendedinhhuong), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception e){
+                        Toast.makeText(context, "Gặp lỗi :"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
             switch (orders_item.getStatus()) {
                 case "Chờ xác nhận":
                     holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_xacnhan));
@@ -122,9 +168,9 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis()+"_"+context.getString(R.string.button_adminhuy);
+                            String tinhtrang = System.currentTimeMillis() + "_" + context.getString(R.string.button_adminhuy);
                             List<String> newTimeline = orders_item.getTimeline();
-                            if(newTimeline==null){
+                            if (newTimeline == null) {
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
@@ -140,9 +186,9 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis()+"_"+"Đơn hàng đã được duyệt";
+                            String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được duyệt";
                             List<String> newTimeline = orders_item.getTimeline();
-                            if(newTimeline==null){
+                            if (newTimeline == null) {
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
@@ -161,9 +207,9 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis()+"_"+"Đã lấy hàng";
+                            String tinhtrang = System.currentTimeMillis() + "_" + "Đã lấy hàng";
                             List<String> newTimeline = orders_item.getTimeline();
-                            if(newTimeline==null){
+                            if (newTimeline == null) {
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
@@ -182,9 +228,9 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis()+"_"+"Đơn hàng đã được giao thành công";
+                            String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được giao thành công";
                             List<String> newTimeline = orders_item.getTimeline();
-                            if(newTimeline==null){
+                            if (newTimeline == null) {
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
@@ -209,20 +255,6 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
             @Override
             public void onClick(View v) {
                 holder.folding_cell.fold(false);
-            }
-        });
-
-        holder.admin_details_hoadon_inputlayout_sdt_order.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_CALL);
-                i.setData(Uri.parse("tel:" + orders_item.getCustomerPhoneNumber()));
-                if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                    context.startActivity(i);
-                } else {
-                    ActivityCompat.requestPermissions(activity, new String[]{CALL_PHONE}, 1);
-                }
             }
         });
 
@@ -299,7 +331,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
-            timeline_recycle= (RecyclerView) convertView.findViewById(R.id.timeline_recycle);
+            timeline_recycle = (RecyclerView) convertView.findViewById(R.id.timeline_recycle);
             rlt_address = (RelativeLayout) convertView.findViewById(R.id.rlt_address);
             btn_close_fold = (RelativeLayout) convertView.findViewById(R.id.btn_close_fold);
             tv_position = (TextView) convertView.findViewById(R.id.tv_position);

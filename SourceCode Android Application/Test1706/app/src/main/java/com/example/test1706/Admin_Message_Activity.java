@@ -130,6 +130,7 @@ public class Admin_Message_Activity extends AppCompatActivity {
 
                                 }
                             }
+
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                                 //Handle possible errors.
@@ -197,4 +198,9 @@ public class Admin_Message_Activity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
 }

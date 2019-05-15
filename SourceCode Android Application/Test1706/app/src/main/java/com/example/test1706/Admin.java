@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -15,11 +14,10 @@ import com.example.test1706.Config.Session;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
-import com.r0adkll.slidr.Slidr;
 
 public class Admin extends AppCompatActivity {
 
-    CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang,cv_orders;
+    CardView cv_sanpham, cv_tinnhan, cv_doanhthu, cv_donhang, cv_orders;
 
 
     @Override
@@ -39,29 +37,29 @@ public class Admin extends AppCompatActivity {
 
             }
         });
-        cv_tinnhan.setOnClickListener(new View.OnClickListener(){
+        cv_tinnhan.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent(Admin.this,Admin_Message_Activity.class);
+                Intent intent1 = new Intent(Admin.this, Admin_Message_Activity.class);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-        cv_doanhthu.setOnClickListener(new View.OnClickListener(){
+        cv_doanhthu.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,chart.class);
+                Intent intent2 = new Intent(Admin.this, chart.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
-        cv_donhang.setOnClickListener(new View.OnClickListener(){
+        cv_donhang.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this,MapBoxActivity.class);
+                Intent intent2 = new Intent(Admin.this, MapBoxActivity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -70,14 +68,13 @@ public class Admin extends AppCompatActivity {
         cv_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2=new Intent(Admin.this, Admin_HoaDon_Activity.class);
+                Intent intent2 = new Intent(Admin.this, Admin_HoaDon_Activity.class);
                 startActivity(intent2);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         session = new Session(getApplicationContext());
-        if(session.getSwitchHuongDan())
-        {
+        if (session.getSwitchHuongDan()) {
             HuongDan();
         }
 
@@ -100,16 +97,17 @@ public class Admin extends AppCompatActivity {
 
                                 .cancelable(false)
                                 .id(3),
-                        TapTarget.forView(findViewById(R.id.img_thongTinGiaoHang), getString(R.string.bando), getString(R.string.admin_motahuongdan4))
-                                .tintTarget(false)
 
-                                .cancelable(false)
-                                .id(4),
                         TapTarget.forView(findViewById(R.id.img_ic_accountmanager), getString(R.string.danhmuchoadon), getString(R.string.admin_motahuongdan5))
                                 .tintTarget(false)
 
                                 .cancelable(false)
-                                .id(5))
+                                .id(4))
+                        /*TapTarget.forView(findViewById(R.id.img_thongTinGiaoHang), getString(R.string.bando), getString(R.string.admin_motahuongdan4))
+                                        .tintTarget(false)
+
+                                        .cancelable(false)
+                                        .id(5),*/
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence
@@ -164,7 +162,7 @@ public class Admin extends AppCompatActivity {
         cv_donhang = (CardView) findViewById(R.id.cv_donhang);
         cv_sanpham = (CardView) findViewById(R.id.cv_sanpham);
         cv_tinnhan = (CardView) findViewById(R.id.cv_tinnhan);
-        cv_orders  = (CardView) findViewById(R.id.cv_orders);
+        cv_orders = (CardView) findViewById(R.id.cv_orders);
     }
 
     @Override

@@ -113,7 +113,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:visibility="visible"
+        android:visibility="gone"
         app:backgroundTint="@color/LightBlue"
         app:srcCompat="@drawable/ic_search_black_24dp" />
 
@@ -125,7 +125,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:visibility="visible"
+        android:visibility="gone"
         app:backgroundTint="@color/LightBlue"
         app:srcCompat="@drawable/mapbox_marker_icon_default" />
 

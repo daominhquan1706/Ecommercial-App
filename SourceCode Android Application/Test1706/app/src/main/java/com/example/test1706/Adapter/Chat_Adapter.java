@@ -6,15 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.R;
+import com.example.test1706.User_Profile_Account_Activity;
 import com.example.test1706.model.ChatMessage;
 
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Chat_Adapter extends BaseAdapter {
@@ -56,6 +63,8 @@ public class Chat_Adapter extends BaseAdapter {
             holder.layout_item_message_chat = (LinearLayout) convertView.findViewById(R.id.layout_item_message_chat);
             holder.layout_message = (LinearLayout) convertView.findViewById(R.id.layout_message);
             holder.message_time = (TextView) convertView.findViewById(R.id.message_time);
+            holder.chat_avatar = (CircleImageView) convertView.findViewById(R.id.chat_avatar);
+            holder.layout_item_message_chat2= (LinearLayout) convertView.findViewById(R.id.layout_item_message_chat2);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,9 +78,23 @@ public class Chat_Adapter extends BaseAdapter {
         holder.message_time.setText(chattime);
 
         if (ChatMessage.getMessageUser().equals(currentUser)) {
+            holder.chat_avatar.setVisibility(View.GONE);
+            holder.layout_item_message_chat2.setGravity(Gravity.END);
             holder.layout_message.setGravity(Gravity.END);
             holder.layout_item_message_chat.setBackground(context.getResources().getDrawable(R.drawable.drw_edt_bg_blue));
         } else {
+            holder.chat_avatar.setVisibility(View.VISIBLE);
+            try {
+                if(currentUser.equals("admin")){
+                    Glide.with(context)
+                            .load("https://api.adorable.io/avatars/" + ChatMessage.getUserUID() + "@adorable.png")
+                            .apply(new RequestOptions().centerCrop())
+                            .into(holder.chat_avatar);
+                }
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            holder.layout_item_message_chat2.setGravity(Gravity.START);
             holder.layout_message.setGravity(Gravity.START);
             holder.layout_item_message_chat.setBackground(context.getResources().getDrawable(R.drawable.drw_edt_bg));
         }
@@ -103,8 +126,8 @@ public class Chat_Adapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-
-        LinearLayout layout_message, layout_item_message_chat;
+        CircleImageView chat_avatar;
+        LinearLayout layout_message, layout_item_message_chat,layout_item_message_chat2;
         TextView message_text;
         TextView message_user;
         TextView message_time;
