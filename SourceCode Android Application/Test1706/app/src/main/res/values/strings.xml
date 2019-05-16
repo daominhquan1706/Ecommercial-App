@@ -352,6 +352,10 @@
     <string name="daketnoiinternet">Không có kết nối internet</string>
     <string name="choxacnhan">chờ xác nhận</string>
     <string name="khongdudieukiendedinhhuong">không đủ điều kiện để định hướng , hãy thữ lại</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="chonhinhbanngay">Chọn hình ban ngày</string>
+    <string name="chonhinhbandem">Chọn hình ban đêm</string>
+    <string name="dongia">Đơn giá</string>
 
 
 </resources>

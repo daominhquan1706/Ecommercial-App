@@ -445,4 +445,23 @@
         <string name ="motahuongdanpaypal">点击继续使用Paypal </string>卡付款
         <string name ="titlepaypal">产品付款</string>
         <string name ="menhgiatien"> USD </string>
+
+    <string name ="mochedosuathongtin">已打开信息更正模式</string>
+        <string name ="tatchedosuathongtin">已禁用信息编辑</string>
+        <string name ="dangtailenhinhday">上传Firebase图像DAY </string>
+        <string name ="dangluulaithaydoi">正在保存更改</string>
+        <string name ="dangthaydoi">更改数据</string>
+        <string name ="danglaydulieu">检索数据</string>
+        <string name ="thieuten">缺少姓名</string>
+        <string name ="thieusodienthoai">缺少电话号码</string>
+        <string name ="thieudiachi">缺少地址</string>
+        <string name ="tienvanchuyen">运费：</string>
+        <string name ="ti_n_h_ng">预付款：</string>
+        <string name ="chuathethanhtoanhaythulai">无法付款，请再试一次</string>
+        <string name ="khongcoketnoiinternet">无互联网连接</string>
+        <string name ="daketnoiwifi">连接Wifi </string>
+        <string name ="daketnoi3g">连接3G </string>
+        <string name ="daketnoiinternet">没有互联网连接</string>
+        <string name ="choxacnhan">等待确认</string>
+        <string name ="khongdudieukiendedinhhuong">不符合入学资格，请留下</string>
 </resources>

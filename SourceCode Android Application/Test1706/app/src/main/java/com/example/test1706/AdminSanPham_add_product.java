@@ -263,14 +263,14 @@ public class AdminSanPham_add_product extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/png");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Chọn hình ban ngày"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.chonhinhbanngay)), PICK_IMAGE_REQUEST);
     }
 
     private void showFileChooser_Night() {
         Intent intent = new Intent();
         intent.setType("image/png");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Chọn hình ban đêm"), PICK_IMAGE_NIGHT_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.chonhinhbandem)), PICK_IMAGE_NIGHT_REQUEST);
     }
 
 
@@ -311,7 +311,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
         if (uriImage_Day != null) {
             //displaying a progress dialog while upload is going on
             progressDialog_day = new ProgressDialog(this);
-            progressDialog_day.setTitle("Đang tải lên Firebase hình DAY");
+            progressDialog_day.setTitle(getString(R.string.dangtailenhinhday));
             progressDialog_day.show();
             progressDialog_night = new ProgressDialog(this);
             FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -332,7 +332,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     tv_url_image.setText(uri.toString());
 
-                                    progressDialog_night.setTitle("Đang tải lên Firebase hình NIGHT");
+                                    progressDialog_night.setTitle(getString(R.string.dangtailenhinhnight));
                                     progressDialog_night.show();
                                     uploadFile_Night();
 
@@ -359,7 +359,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
-                            progressDialog_day.setMessage("Uploaded " + ((int) progress) + "%...");
+                            progressDialog_day.setMessage(getString(R.string.uploaded) + ((int) progress) + "%...");
                         }
                     });
         }
@@ -422,7 +422,7 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                             //displaying percentage in progress dialog
-                            progressDialog_night.setMessage(R.string.tailenthanhcong + ((int) progress) + "%...");
+                            progressDialog_night.setMessage(getString(R.string.uploaded) + ((int) progress) + "%...");
                         }
                     });
         }

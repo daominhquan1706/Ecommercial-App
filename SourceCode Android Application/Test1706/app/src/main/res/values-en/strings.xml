@@ -333,4 +333,24 @@
      <string name = "motahuongdanpaypal"> Click to proceed with payment by Paypal </string> card
      <string name = "titlepaypal"> Product payment </string>
      <string name = "menhgiatien"> USD </string>
+
+
+ <string name = "mochedosuathongtin"> has opened the information correction mode </string>
+ <string name = "tatchedosuathongtin"> has disabled information editing </string>
+ <string name = "dangtailenhinhday"> Uploading Firebase image DAY </string>
+ <string name = "dangluulaithaydoi"> is saving changes </string>
+ <string name = "dangthaydoi"> Changing data </string>
+ <string name = "danglaydulieu"> Retrieving data </string>
+ <string name = "thieuten"> Missing name </string>
+ <string name = "thieusodienthoai"> Missing phone number </string>
+ <string name = "thieudiachi"> Missing address </string>
+ <string name = "tienvanchuyen"> Shipping fee: </string>
+ <string name = "ti_n_h_ng"> Pre-payment: </string>
+ <string name = "chuathethanhtoanhaythulai"> Unable to pay, try again </string>
+ <string name = "khongcoketnoiinternet"> No internet connection </string>
+ <string name = "daketnoiwifi"> Wifi connected </string>
+ <string name = "daketnoi3g"> Connected 3G </string>
+ <string name = "daketnoiinternet"> No internet connection </string>
+ <string name = "choxacnhan"> wait for confirmation </string>
+ <string name = "khongdudieukiendedinhhuong"> is not eligible for orientation, please leave </string>
 </resources>

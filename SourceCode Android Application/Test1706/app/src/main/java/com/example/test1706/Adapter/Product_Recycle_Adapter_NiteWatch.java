@@ -114,7 +114,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
         viewHolder.mName.setText(list_data.get(i).getProduct_Name());
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
-        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
+
 
         viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,8 +158,13 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         if (viewHolder.tv_creation_time_viewedproduct != null) {
             viewHolder.tv_creation_time_viewedproduct.setText(ThoiGianChat(productt.getCreateDate()));
         }
-
+        //giá
+        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
+        viewHolder.tv_discount_percent.setText(String.valueOf("-" +productt.getDiscount() + "%"));
+        int price_not_discount = productt.getPrice()+(productt.getPrice()*productt.getDiscount()/100);
+        viewHolder.tv_realprice.setText(String.valueOf("$"+price_not_discount));
     }
+
     private String ThoiGianChat(long date) {
         String thoigian = "";
         Date datetime = new Date();
@@ -183,6 +188,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
         return thoigian;
     }
+
     private void setupBadge(int mCartItemCount) {
 
         if (textCartItemCount != null) {
@@ -206,13 +212,15 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mName, mPrice, mCategory, tv_creation_time_viewedproduct;
+        TextView mName, mPrice, mCategory, tv_creation_time_viewedproduct, tv_discount_percent, tv_realprice;
         ImageView mImage, mImageNight;
         Button mbtnView, mbtnCart;
         LinearLayout mlayout_horizontal_nitewatch_item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tv_realprice = (TextView) itemView.findViewById(R.id.tv_realprice);
+            tv_discount_percent = (TextView) itemView.findViewById(R.id.tv_discount_percent);
             tv_creation_time_viewedproduct = (TextView) itemView.findViewById(R.id.tv_creation_time_viewedproduct);
             mlayout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
             mName = (TextView) itemView.findViewById(R.id.tv_horizontal_name);

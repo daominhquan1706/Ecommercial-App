@@ -94,7 +94,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$"
                     android:textAlignment="textEnd"
                     android:textColor="@color/LightBlue" />
 
@@ -102,7 +101,6 @@
                     android:id="@+id/tv_total_price_checkout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
                     android:textAlignment="textEnd"
                     android:textColor="@color/LightBlue" />
             </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.test1706.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -115,6 +116,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                         myRef.child("NiteWatch").child(productt.getCategory()).child(productt.getProduct_Name()).removeValue();
                         Intent refresh = new Intent(mContext, AdminSanPham_Activity.class);
                         mContext.startActivity(refresh);
+                        //((Activity) mContext).finish();
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -131,6 +133,7 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                 b.putString("ProductCategory", productt.getCategory());
                 intent_edit.putExtras(b);
                 mContext.startActivity(intent_edit);
+                //((Activity) mContext).finish();
             }
         });
 

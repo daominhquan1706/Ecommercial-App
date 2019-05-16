@@ -9,6 +9,7 @@ public class ChatMessage implements Comparable<ChatMessage> {
     private long messageTime;
     private String userUID;
 
+    private boolean nguoinhan_daxem;
     public ChatMessage() {
     }
 

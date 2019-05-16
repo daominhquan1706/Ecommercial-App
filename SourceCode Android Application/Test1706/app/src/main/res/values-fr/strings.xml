@@ -346,4 +346,22 @@
         <string name = "motahuongdanpaypal"> Cliquez pour procéder au paiement par carte Paypal</string>
         <string name = "titlepaypal"> Paiement du produit</string>
         <string name = "menhgiatien"> USD</string>
+    <string name = "mochedosuathongtin"> a ouvert le mode de correction des informations </string>
+        <string name = "tatchedosuathongtin"> a désactivé la modification des informations </string>
+        <string name = "dangtailenhinhday"> Téléchargement de l\'image de Firebase DAY </string>
+        <string name = "dangluulaithaydoi"> enregistre les modifications </string>
+        <string name = "dangthaydoi"> Modification des données </string>
+        <string name = "danglaydulieu"> Récupération de données </string>
+        <string name = "thieuten"> Nom manquant </string>
+        <string name = "thieusodienthoai"> Numéro de téléphone manquant </string>
+        <string name = "thieudiachi"> Adresse manquante </string>
+        <string name = "tienvanchuyen"> Frais d\'expédition: </string>
+        <string name = "ti_n_h_ng"> Paiement anticipé: </string>
+        <string name = "chuathethanhtoanhaythulai"> Impossible de payer, essayez à nouveau </string>
+        <string name = "khongcoketnoiinternet"> Pas de connexion Internet </string>
+        <string name = "daketnoiwifi"> Wifi connecté </string>
+        <string name = "daketnoi3g"> 3G connectée </string>
+        <string name = "daketnoiinternet"> Pas de connexion Internet </string>
+        <string name = "choxacnhan"> attendre la confirmation </string>
+        <string name = "khongdudieukiendedinhhuong"> n\'est pas éligible pour l\'orientation, veuillez laisser </string>
 </resources>

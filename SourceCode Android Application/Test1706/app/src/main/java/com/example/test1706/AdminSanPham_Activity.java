@@ -316,5 +316,9 @@ public class AdminSanPham_Activity extends AppCompatActivity {
         layout_product = (LinearLayout) findViewById(R.id.layout_product);
         listView_admin_product_nitewatch = (RecyclerView) findViewById(R.id.listView_admin_product_nitewatch);
     }
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
 }

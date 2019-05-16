@@ -336,4 +336,22 @@
     <string name="motahuongdanpaypal">Nhấp để tiến hành thanh toán bằng thẻ Paypal</string>
     <string name="titlepaypal">Thanh toán sản phẩm</string>
     <string name="menhgiatien">USD</string>
+    <string name="mochedosuathongtin">đã mở chế độ sửa thông tin</string>
+    <string name="tatchedosuathongtin">đã tắt chế độ sửa thông tin</string>
+    <string name="dangtailenhinhday">Đang tải lên Firebase hình DAY</string>
+    <string name="dangluulaithaydoi">đang lưu lại thay đổi</string>
+    <string name="dangthaydoi">Đang thay đổi dữ liệu</string>
+    <string name="danglaydulieu">Đang lấy dữ liệu</string>
+    <string name="thieuten">Thiếu tên</string>
+    <string name="thieusodienthoai">Thiếu số điện thoại</string>
+    <string name="thieudiachi">Thiếu địa chỉ</string>
+    <string name="tienvanchuyen">Tiền vận chuyển : </string>
+    <string name="ti_n_h_ng">Tiền hàng :</string>
+    <string name="chuathethanhtoanhaythulai">Chưa thể thanh toán, hãy thử lại</string>
+    <string name="khongcoketnoiinternet">Không có kết nối internet</string>
+    <string name="daketnoiwifi">Đã kết nối Wifi</string>
+    <string name="daketnoi3g">Đã kết nối 3G</string>
+    <string name="daketnoiinternet">Không có kết nối internet</string>
+    <string name="choxacnhan">chờ xác nhận</string>
+    <string name="khongdudieukiendedinhhuong">không đủ điều kiện để định hướng , hãy thữ lại</string>
 </resources>
