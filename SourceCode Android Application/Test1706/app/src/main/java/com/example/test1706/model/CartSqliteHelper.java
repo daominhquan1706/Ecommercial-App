@@ -144,7 +144,6 @@ public class CartSqliteHelper extends SQLiteOpenHelper {
         List<Cart> CartList = new ArrayList<Cart>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_CART;
-
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 

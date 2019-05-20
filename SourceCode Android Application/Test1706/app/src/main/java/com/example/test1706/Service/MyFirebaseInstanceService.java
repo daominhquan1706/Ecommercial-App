@@ -29,8 +29,11 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
     }
 
     private void showNotification(Map<String, String> data) {
-        String title=data.get("title").toString();
-        String body=data.get("body").toString();
+        if(data!=null){
+            String title= data.get("title");
+            String body= data.get("body");
+
+
 
         NotificationManager notificationManager=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID="com.example.notification.test";
@@ -49,6 +52,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         notificationbuilder.setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL).setWhen(System.currentTimeMillis()).setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle(title)
                 .setContentText(body).setContentInfo("Info");
         notificationManager.notify(new Random().nextInt(),notificationbuilder.build());
+        }
     }
 
     private void showNotification(String title, String body) {

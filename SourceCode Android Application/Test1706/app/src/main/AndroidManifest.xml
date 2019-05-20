@@ -31,8 +31,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MapBox_Picker"></activity>
+        tools:ignore="GoogleAppIndexingWarning"
+        android:name=".ApplicationClass">
+        <activity android:name=".MapBox_Picker"/>
         <activity android:name=".SupportMapFragmentActivity" />
         <activity
             android:name=".User_Viewed_Product"

@@ -63,10 +63,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
@@ -669,9 +671,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void updateUI() {
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            /*accountUser= new AccountUser();
-            accountUser.update_firebaseAccount();
-*/
+            OneSignal.setEmail(Objects.requireNonNull(currentUser.getEmail()));
+
+
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
             tv_email_nav_header.setText(currentUser.getEmail());
