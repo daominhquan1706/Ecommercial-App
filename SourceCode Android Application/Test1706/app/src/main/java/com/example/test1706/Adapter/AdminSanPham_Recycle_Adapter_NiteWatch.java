@@ -114,9 +114,9 @@ public class AdminSanPham_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter
                         database = FirebaseDatabase.getInstance();
                         myRef = database.getReference();
                         myRef.child("NiteWatch").child(productt.getCategory()).child(productt.getProduct_Name()).removeValue();
-                        Intent refresh = new Intent(mContext, AdminSanPham_Activity.class);
-                        mContext.startActivity(refresh);
-                        //((Activity) mContext).finish();
+                        /*Intent refresh = new Intent(mContext, AdminSanPham_Activity.class);
+                        mContext.startActivity(refresh);*/
+                        ((Activity) mContext).recreate();
                     }
                 });
                 AlertDialog alertDialog = builder.create();

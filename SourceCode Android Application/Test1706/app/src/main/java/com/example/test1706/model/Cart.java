@@ -7,6 +7,15 @@ public class Cart {
     private double Price;
     private String ImageProduct;
     private String Category;
+    private boolean daBinhLuan;
+
+    public boolean isDaBinhLuan() {
+        return daBinhLuan;
+    }
+
+    public void setDaBinhLuan(boolean daBinhLuan) {
+        this.daBinhLuan = daBinhLuan;
+    }
 
     public Cart() {
     }

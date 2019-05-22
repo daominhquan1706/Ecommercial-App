@@ -227,7 +227,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     protected void onPause() {
-        unregisterReceiver(MyReceiver);
+        if(MyReceiver.isOrderedBroadcast()){
+            unregisterReceiver(MyReceiver);
+        }
+
         super.onPause();
 
     }

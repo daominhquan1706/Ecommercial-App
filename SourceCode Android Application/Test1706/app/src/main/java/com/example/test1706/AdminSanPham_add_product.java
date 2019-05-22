@@ -153,8 +153,6 @@ public class AdminSanPham_add_product extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             // Write was successful!
-                            Intent i = new Intent(AdminSanPham_add_product.this, AdminSanPham_Activity.class);
-                            startActivity(i);
                             finish();
                             // ...
                         }

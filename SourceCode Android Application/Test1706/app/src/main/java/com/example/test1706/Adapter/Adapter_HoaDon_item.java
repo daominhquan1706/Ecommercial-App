@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -16,13 +17,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.test1706.DetailsProductActivity;
 import com.example.test1706.MapBoxActivity;
 import com.example.test1706.R;
 import com.example.test1706.model.CartSqliteHelper;
@@ -91,8 +91,11 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
         Cart_Recycle_Adapter_NiteWatch adapter;
         adapter = new Cart_Recycle_Adapter_NiteWatch(context, orders_item.getOrderDetails(), R.layout.item_checkout_item_slider_card);
+        if (isKhachHang && orders_item.getStatus().equals("Đã giao")) {
+            adapter.setPaymentId(orders_item.getPaymentid());
+            adapter.setHoaDon_item(true);
+        }
         holder.lv_checkout.setAdapter(adapter);
-
         TimelinesAdapter timelineAdapter;
         timelineAdapter = new TimelinesAdapter(context, orders_item.getTimeline());
         holder.timeline_recycle.setAdapter(timelineAdapter);
@@ -125,6 +128,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     }
                 });
             }
+
         } else {
             holder.admin_details_hoadon_inputlayout_sdt_order.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
@@ -142,21 +146,19 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
             holder.rlt_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try{
-                        if(orders_item.getAddress_Lat()!=null && orders_item.getAddress_Lng()!=null){
+                    try {
+                        if (orders_item.getAddress_Lat() != null && orders_item.getAddress_Lng() != null) {
                             Intent intent = new Intent(context, MapBoxActivity.class);
                             Bundle b = new Bundle();
                             b.putDouble("address_lat", orders_item.getAddress_Lat());
                             b.putDouble("address_lng", orders_item.getAddress_Lng());
                             intent.putExtras(b);
                             context.startActivity(intent);
-                        }
-                        else{
+                        } else {
                             Toast.makeText(context, context.getString(R.string.khongdudieukiendedinhhuong), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    catch (Exception e){
-                        Toast.makeText(context, "Gặp lỗi :"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(context, "Gặp lỗi :" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -299,6 +301,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+
         TextView
                 tv_position,
                 tv_customer_sdt,
@@ -329,8 +333,16 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold, rlt_address;
 
 
+        Button dialog_comment_btn_huy, dialog_comment_btn_danhgia;
+        EditText edt_binhluan;
+
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
+            edt_binhluan = (EditText) convertView.findViewById(R.id.edt_binhluan);
+            dialog_comment_btn_danhgia = (Button) convertView.findViewById(R.id.dialog_comment_btn_danhgia);
+            dialog_comment_btn_huy = (Button) convertView.findViewById(R.id.dialog_comment_btn_huy);
+
+
             timeline_recycle = (RecyclerView) convertView.findViewById(R.id.timeline_recycle);
             rlt_address = (RelativeLayout) convertView.findViewById(R.id.rlt_address);
             btn_close_fold = (RelativeLayout) convertView.findViewById(R.id.btn_close_fold);

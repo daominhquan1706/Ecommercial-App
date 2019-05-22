@@ -1,5 +1,7 @@
 package com.example.test1706.Adapter;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +12,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.test1706.Config.Session;
 import com.example.test1706.DetailsProductActivity;
 import com.example.test1706.R;
 import com.example.test1706.model.Cart;
 import com.example.test1706.model.CartSqliteHelper;
+import com.example.test1706.model.CommentProduct;
 import com.example.test1706.model.Product;
 import com.example.test1706.model.ProductSqliteHelper;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -34,9 +45,20 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
     private CartSqliteHelper cartSqliteHelper;
     private TextView tv_count_quantity, tv_count_price;
     private RecyclerView recycleview_cart_list;
+    private boolean isHoaDon_item;
+    private String paymentId;
+
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
 
     public void setRecycleview_cart_list(RecyclerView recycleview_cart_list) {
         this.recycleview_cart_list = recycleview_cart_list;
+    }
+
+    public void setHoaDon_item(boolean hoaDon_item) {
+        isHoaDon_item = hoaDon_item;
     }
 
     public boolean isNight() {
@@ -83,26 +105,83 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 .into(viewHolder.mImage);
         viewHolder.mName.setText(list_data.get(i).getProductName());
         viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
-
-        /*if(viewHolder.cv_item!=null){
-            viewHolder.cv_item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Product product = new Product(cartt.getProductName(), (int) cartt.getPrice(), cartt.getCategory(), cartt.getImageProduct(), cartt.getImageProduct());
-                    ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
-                    productSqliteHelper.addProduct(product);
-
-                    Intent intent = new Intent(mContext, DetailsProductActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("ProductName", product.getProduct_Name());
-                    b.putString("ProductCategory", product.getCategory());
-                    intent.putExtras(b);
-                    mContext.startActivity(intent);
+        if (isHoaDon_item) {
+            if (viewHolder.cv_item != null) {
+                viewHolder.tv_dabinhluan.setVisibility(View.VISIBLE);
+                if (cartt.isDaBinhLuan()) {
+                    viewHolder.tv_dabinhluan.setText("Đã đánh giá");
+                    viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                } else {
+                    viewHolder.tv_dabinhluan.setText("Chưa đánh giá");
+                    viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.red));
                 }
-            });
+                viewHolder.cv_item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Dialog dialog = new Dialog(mContext);
+                        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.danhgia_dialog, null);
+                        dialog.setContentView(layout);
 
-        }*/
-        if(viewHolder.layout_horizontal_nitewatch_item!=null){
+                        dialog.setTitle("Đánh giá " + cartt.getProductName());
+                        TextView tv_dialog_title = (TextView) dialog.findViewById(R.id.tv_dialog_title);
+                        tv_dialog_title.setText("Đánh giá " + cartt.getProductName());
+                        Button dialog_comment_btn_huy = (Button) dialog.findViewById(R.id.dialog_comment_btn_huy);
+                        Button dialog_comment_btn_danhgia = (Button) dialog.findViewById(R.id.dialog_comment_btn_danhgia);
+                        EditText edt_binhluan = (EditText) dialog.findViewById(R.id.edt_binhluan);
+
+                        dialog_comment_btn_huy.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog_comment_btn_danhgia.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Session session = new Session(mContext);
+                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                CommentProduct commentProduct = new CommentProduct();
+                                commentProduct.setContent(edt_binhluan.getText().toString());
+                                commentProduct.setCreateDate(System.currentTimeMillis());
+                                commentProduct.setRateScore(4);
+                                if (currentUser != null) {
+                                    commentProduct.setUserName(currentUser.getEmail());
+                                } else {
+                                    commentProduct.setUserName("UnknownUser");
+                                }
+                                viewHolder.myRef
+                                        .child("NiteWatch")
+                                        .child(cartt.getCategory())
+                                        .child(cartt.getProductName())
+                                        .child("commentproductlist").push().setValue(commentProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(mContext, "Đánh giá " + cartt.getProductName() + " thành công !", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                        viewHolder.tv_dabinhluan.setText("Đã đánh giá");
+                                        viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                                    }
+                                });
+                                viewHolder.myRef
+                                        .child("Orders")
+                                        .child(paymentId)
+                                        .child("orderDetails")
+                                        .child(String.valueOf(i))
+                                        .child("daBinhLuan")
+                                        .setValue(true);
+
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
+
+            }
+        }
+
+        if (viewHolder.layout_horizontal_nitewatch_item != null) {
             viewHolder.layout_horizontal_nitewatch_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -161,7 +240,6 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
         }
 
 
-
     }
 
     @Override
@@ -171,15 +249,19 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        FirebaseDatabase db;
+        DatabaseReference myRef;
         TextView mName, mPrice, tv_total_price_checkout;
         TextView mQuantity;
         ImageView mImage, mImageNight;
         Button mbtnPlus, mbtnMinus;
         LinearLayout layout_horizontal_nitewatch_item;
         CardView cv_item;
+        TextView tv_dabinhluan;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tv_dabinhluan = (TextView) itemView.findViewById(R.id.tv_dabinhluan);
             mImage = (ImageView) itemView.findViewById(R.id.img_product_cart);
             mName = (TextView) itemView.findViewById(R.id.tv_name_cart);
             mPrice = (TextView) itemView.findViewById(R.id.tv_total_price_cart);
@@ -188,7 +270,9 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
             mbtnPlus = (Button) itemView.findViewById(R.id.plus_one_product_cart);
             tv_total_price_checkout = (TextView) itemView.findViewById(R.id.tv_total_price_checkout);
             cv_item = (CardView) itemView.findViewById(R.id.cv_item);
-            layout_horizontal_nitewatch_item= (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
+            layout_horizontal_nitewatch_item = (LinearLayout) itemView.findViewById(R.id.layout_horizontal_nitewatch_item);
+            db = FirebaseDatabase.getInstance();
+            myRef = db.getReference();
         }
 
     }

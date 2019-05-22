@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,6 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 
 import com.example.test1706.Adapter.Adapter_Search_Product;
 import com.example.test1706.Adapter.Product_Recycle_Adapter_NiteWatch;

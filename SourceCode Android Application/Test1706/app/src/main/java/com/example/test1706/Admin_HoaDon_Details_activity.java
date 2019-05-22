@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.test1706.Adapter.Cart_Recycle_Adapter_NiteWatch;
@@ -25,8 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import androidx.annotation.RequiresApi;
 
 import static android.Manifest.permission.CALL_PHONE;
 
@@ -43,7 +43,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
     String paymentId;
     Orders orders;
     private static final String TAG = "AdminHoaDon_Details_act";
-    CardView admin_details_hoadon_inputlayout_sdt_order;
+    RelativeLayout admin_details_hoadon_inputlayout_sdt_order;
     CardView btn_Xac_nhan, btn_TuChoi;
 
     @Override
@@ -175,7 +175,7 @@ public class Admin_HoaDon_Details_activity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         myRef = db.getReference();
         btn_TuChoi = (CardView) findViewById(R.id.btn_TuChoi);
-        admin_details_hoadon_inputlayout_sdt_order = (CardView) findViewById(R.id.cv_phone_admin_order);
+        admin_details_hoadon_inputlayout_sdt_order = (RelativeLayout) findViewById(R.id.cv_phone_admin_order);
         lv_checkout = (RecyclerView) findViewById(R.id.admin_details_hoadon_lv_checkout);
         btn_Xac_nhan = (CardView) findViewById(R.id.btn_Xac_nhan);
         tv_Xac_nhan = (TextView) findViewById(R.id.tv_Xac_nhan);
