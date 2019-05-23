@@ -464,4 +464,17 @@
         <string name ="daketnoiinternet">没有互联网连接</string>
         <string name ="choxacnhan">等待确认</string>
         <string name ="khongdudieukiendedinhhuong">不符合入学资格，请留下</string>
+
+    <string name ="uploaded">上传</string>
+         <string name ="chonhinhbanngay">选择日期图像</string>
+         <string name ="chonhinhbandem">选择夜间图像</string>
+         <string name ="dongia">单价</string>
+         <string name ="l_i_b_nh_lu_n_c_a_b_n">留下您的评论</string>
+         <string name ="nh_gi_s_n_ph_m">产品评论</string>
+         <string name ="ng">发布</string>
+         <string name ="hu">取消</string>
+         <string name ="khongthedetrong">不能为空</string>
+         <string name ="daDanhgia">已审核</string>
+         <string name ="danhgiathanhcongsanpham">成功的产品评估</string>
+         <string name ="vodanh">匿名</string>
 </resources>

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.test1706.R;
@@ -45,10 +46,10 @@ public class CommentAdapter extends PagerAdapter {
         holder.mUserName.setText(commentProduct.getUserName());
         holder.mContent.setText(commentProduct.getContent());
         holder.mCreateDate.setText(ThoiGian(commentProduct.getCreateDate()));
+        holder.rating_comment.setRating(commentProduct.getRateScore());
         container.addView(view);
         return view;
     }
-
 
 
     @Override
@@ -59,16 +60,19 @@ public class CommentAdapter extends PagerAdapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mUserName, mCreateDate, mContent, mRate;
+        RatingBar rating_comment;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mUserName = (TextView) itemView.findViewById(R.id.tv_username_comment);
             mCreateDate = (TextView) itemView.findViewById(R.id.tv_creationdate_nitewatch);
             mContent = (TextView) itemView.findViewById(R.id.tv_content_comment);
+            rating_comment= (RatingBar) itemView.findViewById(R.id.rating_comment);
 
         }
 
     }
+
     private String ThoiGian(long date) {
         String thoigian = "";
         Date datetime = new Date();
@@ -79,7 +83,7 @@ public class CommentAdapter extends PagerAdapter {
         if (diff / (60 * 60 * 24 * 30) > 0) {
             thoigian = Math.round(diff / (60 * 60 * 24 * 30)) + mContext.getString(R.string.thangtruoc);
         } else if (diff / (60 * 60 * 24) > 0) {
-            thoigian = Math.round(diff / (60 * 60 * 24)) +mContext.getString(R.string.ngaytruoc);
+            thoigian = Math.round(diff / (60 * 60 * 24)) + mContext.getString(R.string.ngaytruoc);
         } else if (diff / (60 * 60) > 0) {
             thoigian = Math.round(diff / (60 * 60)) + mContext.getString(R.string.giotruoc);
         } else if (diff / (60) > 0) {

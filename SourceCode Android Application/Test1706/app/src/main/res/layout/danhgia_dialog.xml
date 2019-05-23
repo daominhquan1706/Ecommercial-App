@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@color/black">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:gravity="center"
+        android:minWidth="350dp"
         android:orientation="vertical">
 
         <TextView
@@ -14,16 +18,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Đánh giá sản phẩm"
-            android:textSize="20sp"
+            android:text="@string/nh_gi_s_n_ph_m"
+            android:textAlignment="center"
+            android:textColor="@color/LightBlue"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edt_binhluan"
+        <RatingBar
+            android:id="@+id/ratingBar1"
+            style="@style/MyRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:progressBackgroundTint="@color/black_cardview_nitewatch"
+            android:progressTint="@color/ratingcolor" />
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/TextLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:hint="để lại bình luận của bạn" />
+            android:background="@drawable/drw_edt_bg"
+            android:minHeight="50dp">
+
+            <EditText
+                android:id="@+id/edt_binhluan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:drawableLeft="@drawable/ic_message_black_24dp"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:hint="@string/nh_gi"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +72,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Đăng" />
+                    android:background="@drawable/drw_edt_bg_yellow"
+                    android:text="@string/ng" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -55,7 +86,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Huỷ" />
+                    android:background="@drawable/drw_edt_bg_blue"
+                    android:text="@string/hu" />
             </RelativeLayout>
 
         </LinearLayout>

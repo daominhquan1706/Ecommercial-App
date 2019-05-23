@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -129,7 +130,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                         Button dialog_comment_btn_huy = (Button) dialog.findViewById(R.id.dialog_comment_btn_huy);
                         Button dialog_comment_btn_danhgia = (Button) dialog.findViewById(R.id.dialog_comment_btn_danhgia);
                         EditText edt_binhluan = (EditText) dialog.findViewById(R.id.edt_binhluan);
-
+                        RatingBar ratingBar1= (RatingBar) dialog.findViewById(R.id.ratingBar1);
                         dialog_comment_btn_huy.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -139,38 +140,43 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                         dialog_comment_btn_danhgia.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Session session = new Session(mContext);
-                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                                FirebaseUser currentUser = mAuth.getCurrentUser();
-                                CommentProduct commentProduct = new CommentProduct();
-                                commentProduct.setContent(edt_binhluan.getText().toString());
-                                commentProduct.setCreateDate(System.currentTimeMillis());
-                                commentProduct.setRateScore(4);
-                                if (currentUser != null) {
-                                    commentProduct.setUserName(currentUser.getEmail());
-                                } else {
-                                    commentProduct.setUserName("UnknownUser");
-                                }
-                                viewHolder.myRef
-                                        .child("NiteWatch")
-                                        .child(cartt.getCategory())
-                                        .child(cartt.getProductName())
-                                        .child("commentproductlist").push().setValue(commentProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(mContext, "Đánh giá " + cartt.getProductName() + " thành công !", Toast.LENGTH_SHORT).show();
-                                        dialog.dismiss();
-                                        viewHolder.tv_dabinhluan.setText("Đã đánh giá");
-                                        viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                                if (!edt_binhluan.getText().toString().equals("")) {
+                                    Session session = new Session(mContext);
+                                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                                    CommentProduct commentProduct = new CommentProduct();
+                                    commentProduct.setContent(edt_binhluan.getText().toString());
+                                    commentProduct.setCreateDate(System.currentTimeMillis());
+                                    commentProduct.setRateScore(ratingBar1.getRating());
+                                    if (currentUser != null) {
+                                        commentProduct.setUserName(currentUser.getEmail());
+                                    } else {
+                                        commentProduct.setUserName(mContext.getString(R.string.vodanh));
                                     }
-                                });
-                                viewHolder.myRef
-                                        .child("Orders")
-                                        .child(paymentId)
-                                        .child("orderDetails")
-                                        .child(String.valueOf(i))
-                                        .child("daBinhLuan")
-                                        .setValue(true);
+                                    viewHolder.myRef
+                                            .child("NiteWatch")
+                                            .child(cartt.getCategory())
+                                            .child(cartt.getProductName())
+                                            .child("commentproductlist").push().setValue(commentProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(mContext, mContext.getString(R.string.danhgiathanhcongsanpham) + cartt.getProductName() + "!", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                            viewHolder.tv_dabinhluan.setText(mContext.getString(R.string.daDanhgia));
+                                            viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                                        }
+                                    });
+                                    viewHolder.myRef
+                                            .child("Orders")
+                                            .child(paymentId)
+                                            .child("orderDetails")
+                                            .child(String.valueOf(i))
+                                            .child("daBinhLuan")
+                                            .setValue(true);
+                                } else {
+                                    edt_binhluan.setError(mContext.getString(R.string.khongthedetrong));
+                                }
+
 
                             }
                         });

@@ -354,4 +354,17 @@
     <string name="daketnoiinternet">Không có kết nối internet</string>
     <string name="choxacnhan">chờ xác nhận</string>
     <string name="khongdudieukiendedinhhuong">không đủ điều kiện để định hướng , hãy thữ lại</string>
+
+    <string name="uploaded">Đang tải lên</string>
+    <string name="chonhinhbanngay">Chọn hình ban ngày</string>
+    <string name="chonhinhbandem">Chọn hình ban đêm</string>
+    <string name="dongia">Đơn giá</string>
+    <string name="l_i_b_nh_lu_n_c_a_b_n">Để lại bình luận của bạn</string>
+    <string name="nh_gi_s_n_ph_m">Đánh giá sản phẩm</string>
+    <string name="ng">Đăng</string>
+    <string name="hu">Huỷ</string>
+    <string name="khongthedetrong">Không thể để trống</string>
+    <string name="daDanhgia">Đã đánh giá</string>
+    <string name="danhgiathanhcongsanpham">Đánh giá thành công sản phẩm</string>
+    <string name="vodanh">Vô danh</string>
 </resources>

@@ -4,7 +4,7 @@ public class CommentProduct {
     private String UserName;
     private long CreateDate;
     private String Content;
-    private int RateScore;
+    private float RateScore;
 
     public CommentProduct(String userName, long createDate, String content, int rateScore) {
         UserName = userName;
@@ -40,11 +40,11 @@ public class CommentProduct {
         Content = content;
     }
 
-    public int getRateScore() {
+    public float getRateScore() {
         return RateScore;
     }
 
-    public void setRateScore(int rateScore) {
+    public void setRateScore(float rateScore) {
         RateScore = rateScore;
     }
 }

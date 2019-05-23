@@ -55,5 +55,8 @@
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="MyRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="colorAccent">#6200ea</item>
+        <item name="android:colorControlNormal">#f9a825</item>
+    </style>
 </resources>

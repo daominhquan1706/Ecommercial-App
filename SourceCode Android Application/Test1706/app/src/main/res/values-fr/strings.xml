@@ -364,4 +364,17 @@
         <string name = "daketnoiinternet"> Pas de connexion Internet </string>
         <string name = "choxacnhan"> attendre la confirmation </string>
         <string name = "khongdudieukiendedinhhuong"> n\'est pas éligible pour l\'orientation, veuillez laisser </string>
+
+    <string name = "uploaded"> Chargement </string>
+         <string name = "chonhinhbanngay"> Sélectionnez l\'image du jour </string>
+         <string name = "chonhinhbandem"> Choisissez une image de nuit </string>
+         <string name = "dongia"> Prix unitaire </string>
+         <string name = "l_i_b_nh_lu_n_c_a_b_n"> Laissez votre commentaire </string>
+         <string name = "nh_gi_s_n_ph_m"> Commentaires sur le produit </string>
+         <string name = "ng"> Poster </string>
+         <string name = "hu"> Annuler </string>
+         <string name = "khongthedetrong"> Ne peut pas être vide </string>
+         <string name = "daDanhgia"> révisé </string>
+         <string name = "danhgiathanhcongsanpham"> Évaluation du produit réussie </string>
+         <string name = "vodanh"> Anonymous </string>
 </resources>

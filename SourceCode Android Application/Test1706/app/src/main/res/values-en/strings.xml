@@ -222,11 +222,11 @@
 
     <string name="military_heritage_timeless_design">MILITARY HERITAGE. TIMELESS DESIGN</string>
     <string name = "daxem">Viewed</string>
-         <string name = "thangtruoc">last month</string>
-         <string name = "ngaytruoc">previous day</string>
-         <string name = "giotruoc">previous hour</string>
-         <string name = "phuttruoc">minutes ago</string>
-         <string name = "giaytruoc">seconds ago</string>
+         <string name = "thangtruoc"> last month</string>
+         <string name = "ngaytruoc"> previous day</string>
+         <string name = "giotruoc"> previous hour</string>
+         <string name = "phuttruoc"> minutes ago</string>
+         <string name = "giaytruoc"> seconds ago</string>
          <string name = "vuaxong">just finished</string>
 
     <string name = "title_donhang">Commands</string>
@@ -353,4 +353,17 @@
  <string name = "daketnoiinternet"> No internet connection </string>
  <string name = "choxacnhan"> wait for confirmation </string>
  <string name = "khongdudieukiendedinhhuong"> is not eligible for orientation, please leave </string>
+
+ <string name = "uploaded"> Uploading </string>
+      <string name = "chonhinhbanngay"> Select the day image </string>
+      <string name = "chonhinhbandem"> Choose night image </string>
+      <string name = "dongia"> Unit price </string>
+      <string name = "l_i_b_nh_lu_n_c_a_b_n"> Leave your comment </string>
+      <string name = "nh_gi_s_n_ph_m"> Product reviews </string>
+      <string name = "ng"> Post </string>
+      <string name = "hu"> Cancel </string>
+      <string name = "khongthedetrong"> Cannot be blank </string>
+      <string name = "daDanhgia"> Reviewed </string>
+      <string name = "danhgiathanhcongsanpham"> Successful product evaluation </string>
+      <string name = "vodanh"> Anonymous </string>
 </resources>

@@ -36,6 +36,7 @@
     <color name="purple1">@color/black_cardview_nitewatch</color>
     <color name="red">#C62828</color>
     <color name="green">#5CA32B</color>
+    <color name="ratingcolor">#F9C425</color>
 
 
 </resources>

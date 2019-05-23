@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +80,8 @@ public class DetailsProductActivity extends AppCompatActivity {
     boolean isNight = false;
     ScrollView sv_details_product;
 
+    RatingBar rating_product;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +99,10 @@ public class DetailsProductActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             product = dataSnapshot.getValue(Product.class);
-                            if(product!=null){
+                            if (product != null) {
                                 LoadDataProduct();
                                 setUpAddToCart();
-                            }else{
+                            } else {
                                 ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(DetailsProductActivity.this);
                                 productSqliteHelper.deleteProduct(productSqliteHelper.getProduct(b.getString("ProductName")));
                                 Toast.makeText(DetailsProductActivity.this, getString(R.string.sanphamkhongtontai), Toast.LENGTH_SHORT).show();
@@ -120,7 +123,16 @@ public class DetailsProductActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                listcomment.add(dataSnapshot1.getValue(CommentProduct.class));
+                                CommentProduct commentProduct = dataSnapshot1.getValue(CommentProduct.class);
+                                listcomment.add(commentProduct);
+
+                                if(rating_product.getRating()==0){
+                                    rating_product.setRating(commentProduct.getRateScore());
+                                }
+                                else{
+                                    rating_product.setRating(roundToHalf((rating_product.getRating()+commentProduct.getRateScore())/2));
+                                }
+
                                 setUpComment(listcomment);
                             }
                         }
@@ -184,7 +196,9 @@ public class DetailsProductActivity extends AppCompatActivity {
             actionBar.setTitle("");
         }
     }
-
+    public static float roundToHalf(double d) {
+        return (float) (Math.round(d * 2) / 2.0);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -347,6 +361,8 @@ public class DetailsProductActivity extends AppCompatActivity {
     }
 
     public void setUpComment(List<CommentProduct> commentProductList) {
+
+
         commentAdapter = new CommentAdapter(this, commentProductList);
         viewPager_comment.setAdapter(commentAdapter);
         if (listcomment.size() == 0) {
@@ -360,6 +376,7 @@ public class DetailsProductActivity extends AppCompatActivity {
     }
 
     private void init() {
+        rating_product= (RatingBar) findViewById(R.id.rating_product);
         sv_details_product = (ScrollView) findViewById(R.id.sv_details_product);
 
         btn_enable_night_view = (LinearLayout) findViewById(R.id.btn_enable_night_view);

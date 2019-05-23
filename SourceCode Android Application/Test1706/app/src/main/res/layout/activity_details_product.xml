@@ -52,43 +52,13 @@
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 
-                    <LinearLayout
+                    <RatingBar
+                        android:id="@+id/rating_product"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margintop_cardview"
-                        android:orientation="horizontal">
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp" />
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp" />
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp" />
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp" />
-
-                        <ImageView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp" />
-
-                    </LinearLayout>
+                        android:progressBackgroundTint="@color/gray"
+                        android:progressTint="@color/ratingcolor" />
 
                 </LinearLayout>
 
@@ -123,13 +93,13 @@
                     android:src="@drawable/dongho_1" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/img_details_nitewatch_night"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:background="@drawable/background_product_image"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/dongho_1" />
+                    android:src="@drawable/dongho_1"
+                    android:visibility="gone" />
             </RelativeLayout>
 
 
