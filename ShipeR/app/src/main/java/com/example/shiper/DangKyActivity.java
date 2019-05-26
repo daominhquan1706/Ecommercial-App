@@ -1,16 +1,18 @@
 package com.example.shiper;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shiper.Model.AccountUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,19 +20,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static android.support.constraint.Constraints.TAG;
+import java.util.List;
 
 public class DangKyActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
     FirebaseUser firebaseUser;
     EditText email, password, repassword;
+    Button btn_dangky, btn_dangnhap;
 
 
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference myRef;
+    DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private List<AccountUser> accountUserList;
 
-    Button btn_dangky, btn_dangnhap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,6 @@ public class DangKyActivity extends AppCompatActivity {
 
     }
 
-
     public void DangKy() {
         String sEmail = email.getText().toString().trim();
         String sPassword = password.getText().toString().trim();
@@ -67,20 +70,33 @@ public class DangKyActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            //nếu thành công , lưu user vừa tạo vào csdl
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(DangKyActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            addShipperToFirebase(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(DangKyActivity.this, "Đăng ký thất bại : "+task.getException(),
+                            // nếu thất bại hiện thông báo cho user
+                            Toast.makeText(DangKyActivity.this, "Đăng ký thất bại : " + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    public void addShipperToFirebase(FirebaseUser currentUser) {
+        if (currentUser != null) {
+            AccountUser accountUser = new AccountUser();
+            accountUser.setEmail(currentUser.getEmail());
+            accountUser.setUID(currentUser.getUid());
+            databaseReference.child(currentUser.getUid()).setValue(accountUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(DangKyActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DangKyActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
     }
 
 
@@ -93,10 +109,9 @@ public class DangKyActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference("Shipper");
+        databaseReference = firebaseDatabase.getReference("Shipper");
+        mAuth = FirebaseAuth.getInstance();
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         repassword = (EditText) findViewById(R.id.repassword);
@@ -116,19 +131,19 @@ public class DangKyActivity extends AppCompatActivity {
             password.setError("Thiếu mật khẩu");
             return false;
         } else if (!sEmail.contains("@")) {
-            password.setError("Sai định dạng email");
+            email.setError("Sai định dạng email");
             return false;
         } else if (sEmail.length() < 6) {
-            password.setError("Sai định dạng email");
+            email.setError("Sai định dạng email");
             return false;
         } else if (sEmail.split("@")[1].length() < 6) {
-            password.setError("Sai định dạng email");
+            email.setError("Sai định dạng email");
             return false;
         } else if (sRepassword.equals("")) {
             repassword.setError("Thiếu nhập lại mật khẩu");
             return false;
         } else if (!sPassword.equals(sRepassword)) {
-            repassword.setError("nhập lại mật khẩu sai");
+            password.setError("nhập lại mật khẩu sai");
             return false;
         }
 

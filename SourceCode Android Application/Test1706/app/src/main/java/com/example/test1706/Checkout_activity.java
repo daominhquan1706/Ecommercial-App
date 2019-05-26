@@ -215,8 +215,8 @@ public class Checkout_activity extends AppCompatActivity {
             if (!session.getLocation_Lat().equals("0") && !session.getLocation_Lng().equals("0")) {
                 loadMap(new LatLng(Double.parseDouble(session.getLocation_Lat()), Double.parseDouble(session.getLocation_Lng())));
                 address_order.setText(session.getLocation_Name());
-                pd.dismiss();
             }
+            pd.dismiss();
         }
 
     }
@@ -229,7 +229,7 @@ public class Checkout_activity extends AppCompatActivity {
                 new CameraPosition.Builder()
                         .target(latLng)
                         .zoom(14)
-                        .build()), 2000);
+                        .build()), 200);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title("địa chỉ của bạn");
         markerOptions.position(latLng);
@@ -509,6 +509,7 @@ public class Checkout_activity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        session = new Session(this);
         if (currentUser == null) {
             address_order.setText(session.getLocation_Name());
             changeLocation(new LatLng(Double.parseDouble(session.getLocation_Lat()), Double.parseDouble(session.getLocation_Lng())));

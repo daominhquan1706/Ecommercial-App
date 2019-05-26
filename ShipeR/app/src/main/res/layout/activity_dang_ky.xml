@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     android:background="@null"
                     android:drawableLeft="@drawable/ic_vpn_key_black_24dp"
                     android:drawablePadding="@dimen/drawable_padding"
-                    android:hint="Nhập mật khẩu"
+                    android:hint="Nhập họ tên"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
@@ -100,6 +100,7 @@
                     android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             </android.support.design.widget.TextInputLayout>
+
 
 
             <Button
@@ -130,4 +131,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</ScrollView>

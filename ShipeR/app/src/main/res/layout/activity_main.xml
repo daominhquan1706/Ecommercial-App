@@ -4,7 +4,6 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#131212"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -12,10 +11,15 @@
 
     <TextView
         android:id="@+id/username"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="hello world"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
+    <Button
+        android:id="@+id/btn_dangxuat"
+        android:text="Đăng xuất"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -1,85 +1,25 @@
 package com.example.shiper.Model;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 
 public class AccountUser {
     private String UID;
     private String Email;
-    private String Name;
-    private String SDT;
-    private String Diachi;
     private Double Lat_Location;
     private Double Long_Location;
     private List<String> DonHangDaGiao;
     private String Status;
 
-    public List<String> getDonHangDaGiao() {
-        return DonHangDaGiao;
-    }
-
-    public void setDonHangDaGiao(List<String> donHangDaGiao) {
+    public AccountUser(String UID, String email, Double lat_Location, Double long_Location, List<String> donHangDaGiao, String status) {
+        this.UID = UID;
+        Email = email;
+        Lat_Location = lat_Location;
+        Long_Location = long_Location;
         DonHangDaGiao = donHangDaGiao;
-    }
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
         Status = status;
     }
 
-    public Double getLat_Location() {
-        return Lat_Location;
-    }
-
-    public void setLat_Location(Double lat_Location) {
-        Lat_Location = lat_Location;
-    }
-
-    public Double getLong_Location() {
-        return Long_Location;
-    }
-
-    public void setLong_Location(Double long_Location) {
-        Long_Location = long_Location;
-    }
-
-    private static final String TAG = "AccountUser";
-
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
-    private List<AccountUser> accountUserList;
-
-    public AccountUser(String UID, String email, String name, String SDT, String diachi) {
-        this.UID = UID;
-        Email = email;
-        Name = name;
-        this.SDT = SDT;
-        Diachi = diachi;
-    }
-
-    public String getDiachi() {
-        return Diachi;
-    }
-
-    public void setDiachi(String diachi) {
-        Diachi = diachi;
-    }
-
     public AccountUser() {
-    }
-
-    public AccountUser(String UID, String email) {
-        this.UID = UID;
-        Email = email;
     }
 
     public String getUID() {
@@ -98,30 +38,36 @@ public class AccountUser {
         Email = email;
     }
 
-    public String getName() {
-        return Name;
+
+    public Double getLat_Location() {
+        return Lat_Location;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setLat_Location(Double lat_Location) {
+        Lat_Location = lat_Location;
     }
 
-    public String getSDT() {
-        return SDT;
+    public Double getLong_Location() {
+        return Long_Location;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setLong_Location(Double long_Location) {
+        Long_Location = long_Location;
     }
 
+    public List<String> getDonHangDaGiao() {
+        return DonHangDaGiao;
+    }
 
-    public void update_firebaseAccount() {
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Account");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            AccountUser accountUser = new AccountUser(currentUser.getUid(), currentUser.getEmail());
-            databaseReference.child(currentUser.getUid()).setValue(accountUser);
-        }
+    public void setDonHangDaGiao(List<String> donHangDaGiao) {
+        DonHangDaGiao = donHangDaGiao;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

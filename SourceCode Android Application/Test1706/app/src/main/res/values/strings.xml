@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">POWERr</string>
+    <string name="app_name">PoweR</string>
     <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
     <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
     <string name="title_activity_login">Đăng nhập</string>

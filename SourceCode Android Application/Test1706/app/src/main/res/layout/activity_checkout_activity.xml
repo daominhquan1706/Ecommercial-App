@@ -120,7 +120,6 @@
                         android:background="@null"
                         android:drawableStart="@drawable/ic_home_blue_24dp"
                         android:drawablePadding="@dimen/drawable_padding"
-                        android:enabled="false"
                         android:hint="@string/a_ch_giao_h_ng"
                         android:inputType="textEmailAddress"
                         android:maxLines="3"
