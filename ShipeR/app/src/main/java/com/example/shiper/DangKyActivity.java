@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shiper.Model.AccountUser;
+import com.example.shiper.model.AccountUser;
+import com.example.shiper.model.AccountUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -91,7 +92,7 @@ public class DangKyActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(DangKyActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DangKyActivity.this, MainActivity.class);
+                    Intent intent = new Intent(DangKyActivity.this, TrangChinhActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -102,7 +103,7 @@ public class DangKyActivity extends AppCompatActivity {
 
     private void checkLogin() {
         if (firebaseUser != null) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, TrangChinhActivity.class);
             startActivity(intent);
             finish();
         }

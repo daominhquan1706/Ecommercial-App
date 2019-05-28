@@ -1,4 +1,4 @@
-package com.example.shiper.Model;
+package com.example.test1706.model;
 
 import java.util.List;
 

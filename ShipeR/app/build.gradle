@@ -33,4 +33,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//Card slider
+    implementation 'com.ramotion.cardslider:card-slider:0.3.0'
+    //folding cell
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.2'
+    //timeline
+    implementation 'com.github.vipulasri:timelineview:1.1.0'
+    // CircleImageView
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    //
+    //bản đồ Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.3.2'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-core:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:4.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:0.8.0'
 }

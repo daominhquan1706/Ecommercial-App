@@ -34,7 +34,7 @@ public class User_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter;
     List<Orders> list;
     DatabaseReference myRef;
-    private static final String TAG = "Admin_HoaDon_Fragment";
+    private static final String TAG = "User_HoaDon_Fragment";
     String Status;
     TextView tv_status_empty;
     List<String> mkey;
