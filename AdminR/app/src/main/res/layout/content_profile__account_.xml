@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".User_Profile_Account_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user_avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_account_circle_black_24dp"
+            app:civ_border_color="@color/LightBlue"
+            app:civ_border_width="2dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+
+            android:id="@+id/inputlayout_name_order"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/drw_edt_bg">
+
+            <EditText
+
+                android:id="@+id/tv_name_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_account_circle_black_24dp"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
+                android:hint="@string/tennguoinhan__"
+                android:inputType="textPersonName|textCapWords"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_sdt_order"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg">
+
+            <EditText
+                android:id="@+id/tv_phonenumber_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_phone_blue_24dp"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
+                android:hint="@string/s_i_n_tho_i_ng_i_nh_n"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btn_save_profile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/drw_edt_bg_blue"
+            android:clickable="false"
+            android:text="@string/l_u_thay_i"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputlayout_address_order"
+            style="@style/TextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg">
+
+            <EditText
+                android:id="@+id/tv_address_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_home_blue_24dp"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:enabled="false"
+                android:hint="@string/a_ch_giao_h_ng"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/mapbox_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/black_cardview_nitewatch"
+            app:cardCornerRadius="20dp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_lat_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_lng_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/pickNewLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/drw_edt_bg_yellow"
+            android:text="@string/chonvitri_moi" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

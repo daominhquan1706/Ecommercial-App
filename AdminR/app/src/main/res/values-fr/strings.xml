@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">AdminR</string>
+    <string name="navigation_drawer_open">Open Navigation drawer</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="title_activity_login">se connecter</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">se connecter</string>
+    <string name="action_sign_in_short">se connecter</string>
+    <string name="error_invalid_email">Cette adresse email est invalide</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court</string>
+    <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
+    <string name="error_field_required">Ce champ est obligatoire</string>
+    <string name="permission_rationale">"Les autorisations de contacts sont nécessaires pour lapprovisionnement de messagerie
+         finitions."
+    </string>
+    <string name="create_an_account">Créer un compte</string>
+    <string name="category">Catégorie</string>
+    <string name="productname">ProductName</string>
+    <string name="money">$100</string>
+    <string name="re_type_password">Retaper le mot de passe</string>
+    <string name="search">Recherche</string>
+    <string name="forgot_password">Mot de passe oublié?</string>
+    <string name="up">Up</string>
+    <string name="unknow_account">compte inconnu</string>
+
+
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
+        <item>Hawk</item>
+        <item>Alpha</item>
+        <item>Icon</item>
+        <item>Marquess</item>
+        <item>Mx10</item>
+    </string-array>
+    <string name="title_activity_profile__account_">Profile_Account_Activity</string>
+    <string name="large_text">
+       "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="enable_night_view">ACTIVER LA VUE DE NUIT</string>
+    <string name="disable_night_view">DÉSACTIVER LA VUE DE NUIT</string>
+    <string name="alpha">ALPHA</string>
+    <string name="my_app_id">adminr-ntmjm</string>
+    <string name="title_activity_maps">Carte</string>
+    <string name="continue_shopping">Continuer mes achats</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_tabbed">TestTabbed</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_admin__hoa_don_">Admin_HoaDon_Activity</string>
+    <string name="imageproduct">ImageProduct</string>
+    <string name="access_token">pk.eyJ1IjoiZGFvbWluaHF1YW4xNzYiLCJhIjoiY2p1bHp0aDU2MG9weTN6cXM2NjB3dGJvMyJ9.-X1tNne-QQ90Rm6hRglFmQ</string>
+    <string name="user_location_permission_explanation">Nous avons besoin de votre information pour localiser</string>
+    <string name="admin">Admin</string>
+    <string name="function">Fonction</string>
+    <string name="nhantinvoiadmin">Message avec admin</string>
+    <string name="donhang">Facture</string>
+    <string name="sanphamdaxem">Xem Produit</string>
+    <string name="taikhoan">Compte</string>
+    <string name="profile">Profil</string>
+    <string name="dangnhap">Connexion</string>
+    <string name="dangxuat">Déconnexion</string>
+    <string name="tuychinh">Réglage</string>
+    <string name="hienquangcao">Montrer la publicité</string>
+    <string name="hienhuongdan">Montrer le tutoriel</string>
+    <string name="doingonngu">Changer de langue</string>
+    <string name="menu_admin_name_sanpham">PRODUIT</string>
+    <string name="menu_admin_tinnhan">MESSAGE</string>
+    <string name="menu_admin_doanthu">REVENU</string>
+    <string name="menu_admin_map">CARTE</string>
+    <string name="menu_admin_ds_hoadon">LISTE DE FACTURATION</string>
+    <string name="icon_automatic">ICÔNE AUTOMATIQUE </string>
+    <string name="marquess">MARQUESS </string>
+    <string name="hawk">HAWK</string>
+        
+    <string name="never_compromise">JAMAIS EST SAI </string>
+    <string name="adventure">AVENTURE</string>
+    <string name="life_ready">PRET POUR LA VIE </string>
+        
+    <string name="the_power_to_impress">LA PUISSANCE DE LIMPRESSION </string>
+        
+    <string name="ultra_slim_style">STYLISH STYLE </string>
+
+    <string name="t_n_ng_i_nh_n">Nom du destinataire</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Numéro de téléphone du destinataire</string>
+    <string name="a_ch_giao_h_ng">Adresse de livraison</string>
+    <string name="danh_s_ch_s_n_ph_m">Liste de produits</string>
+    <string name="h_nh_n_t_g_p_c_a_s">bouton image fenêtre rabattable </string>
+        
+    <string name="h_nh">image </string>
+        
+    <string name="h_y_n_h_ng">annuler la commande </string>
+        
+    <string name="x_c_nh_n">confirmation </string>
+        
+    <string name="move_map_instruction">Déplacez la carte pour sélectionner lemplacement </string>
+        
+    <string name="location_picker_select_location_button_cancel">Annuler la sélection </string>
+        
+    <string name="ch_n_m_t_v_tr">Sélectionnez un emplacement </string>
+        
+    <string name="user_location_permission_not_granted">les droits des utilisateurs ne sont pas accordés </string>
+        
+    <string name="location_picker_place_name_result">nom de lieu </string>
+        
+    <string name="location_picker_dropped_marker_snippet_no_results">Aucun résultat </string>
+        
+    <string name="l_u_thay_i">enregistrer les modifications </string>
+
+    <string name = "xemsanpham">Afficher </string>
+    <string name = "muahang">Panier </string>
+    <string name = "soluonghangdamua">Quantité: </string>
+         <string name = "tongsotienhangdamua">Total: </string>
+
+    <string name = "description">Description </string>
+         <string name = "add_to_cart">Ajouter au panier </string>
+         <string name = "receive_new_password">Recevoir le nouveau mot de passe </string>
+         <string name = "qu_ng_c_o">Publicité </string>
+         <string name = "b_qua">Ignorer </string>
+         <string name = "xem_n_t_h_ng">voir les commandes </string>
+         <string name = "register_new_account">enregistrer un nouveau compte </string>
+         <string name = "log_in_with_facebook">Connectez-vous avec Facebook </string>
+         <string name = "log_in_with_google">Connectez-vous avec google </string>
+         <string name = "use_phone_number">utiliser le numéro de téléphone </string>
+         <string name = "enter_phone_number">Entrez le numéro de téléphone </string>
+         <string name = "enter_code_received">Entrez le code reçu </string>
+         <string name = "confirm_code">Code de confirmation </string>
+         <string name = "ch_x_c_nh_n">Attendre la confirmation </string>
+         <string name = "ch_l_y_h_ng">En attente de cueillette des marchandises </string>
+         <string name = "ang_giao">Livraison </string>
+         <string name = "giao">Livré </string>
+         <string name = "kh_ch_h_y">Les invités annulent </string>
+         <string name = "admin_h_y">Annulation de ladministrateur </string>
+         <string name = "message">SMS … </string>
+         <string name = "categoryyyy">Catalogue </string>
+         <string name = "product_name">Nom du produit </string>
+         <string name = "price">Prix </string>
+         <string name = "quantity">Quantité </string>
+         <string name = "discount">Remise </string>
+         <string name = "picture_day">Photos brillantes </string>
+         <string name = "picture_night">Photos sombres </string>
+         <string name = "day_image_url">URL brillante </string>
+         <string name = "night_image_url">URL sombre </string>
+         <string name = "l_u_d_li_u">Enregistrer les données </string>
+         <string name = "cAtegory">Catalogue </string>
+         <string name = "checkout">Vérifier </string>
+
+    <string name="military_heritage_timeless_design">PATRIMOINE MILITAIRE. DESIGN INTEMPOREL</string>
+
+    <string name = "daxem">consulté </string>
+         <string name = "thangtruoc">le mois dernier </string>
+         <string name = "ngaytruoc">jour précédent </string>
+         <string name = "giotruoc">heure précédente </string>
+         <string name = "phuttruoc">il y a quelques minutes </string>
+         <string name = "giaytruoc">Il y a quelques secondes </string>
+         <string name = "vuaxong">que je viens de terminer </string>
+
+    <string name = "title_donhang">Commandes </string>
+         <string name = "t_n_kh_ch_h_ng">Nom du client: </string>
+         <string name = "s_i_n_tho_i">Numéro de téléphone: </string>
+         <string name = "diachigiaohang">Adresse de livraison: </string>
+         <string name = "tinhtrang_xacnhan">Confirmez </string>
+         <string name = "tinhtrang_layhang">Obtenir la ligne </string>
+         <string name = "tinhtrang_dagiao">Livré </string>
+         <string name = "button_adminhuy">Annulation de ladministrateur </string>
+         <string name = "button_cholayhang">En attente de la cueillette des marchandises </string>
+         <string name = "button_danggiao">Diffusion </string>
+        <string name="t_ng_tien">Général :</string>
+        <string name="button_da_giao">Livré</string>
+        <string name="sanpham_da_xem">Produits vus</string>
+    <string name="my_cart">PANIER DACHAT</string>
+    <string name = "stt_choxacnhan">Attendez la confirmation </string>
+         <string name = "stt_cholayhang">En attente dune ligne </string>
+         <string name = "stt_danggiao">Livraison </string>
+         <string name = "stt_dagiao">Livré </string>
+         <string name = "stt_khachhuy">Les invités annulent </string>
+         <string name = "stt_admin_huy">Annulation de ladministrateur </string>
+    <string name="kh_ng_c_n_h_ng">Il ny a pas dordres</string>
+
+
+    <string name = "tennguoinhan__">Nom du destinataire</string>
+        <string name = "chonvitri_moi">Choisissez un nouvel emplacement</string>
+        <string name = "customer_reviews">COMMENTAIRES DES CLIENTS</string>
+        <string name = "read_more">En savoir plus</string>
+        <string name = "read_less">Lire moins</string>
+        <string name = "search_here_hint">Rechercher ici</string>
+        <string name = "admin_price_product">Prix:</string>
+        <string name = "admin_discount_product">Remise:</string>
+        <string name = "admin_quantity_product">Quantité:</string>
+        <string name = "dialog_message_xoa_product">Êtes-vous sûr de vouloir supprimer</string>
+        <string name = "xoa_title">delete</string>
+        <string name = "answer_no">Non</string>
+        <string name = "answer_yes">Oui</string>
+        <string name = "title_exit_app">Quitter</string>
+        <string name = "cau_hoi_xacnhan_thoat">Voulez-vous quitter lapplication?</string>
+        <string name = "lang_tieng_viet">Vietnam</string>
+        <string name = "lang_tieng_phap">français</string>
+        <string name = "lang_tieng_anh">anglais</string>
+        <string name = "lang_tieng_trung_quoc">chinois</string>
+        <string name = "chon_ngon_ngu">Choisir la langue</string>
+        <string name = "menu_sign_out_Toast">Temporairement non mis à jour, réessayez plus tard</string>
+        <string name = "dang_xuat">Déconnexion</string>
+        <string name = "question_dang_xuat">Voulez-vous vous déconnecter?</string>
+        <string name = "dangxuat_thanh_cong">Déconnexion réussie</string>
+        <string name = "chao_mung_user">bienvenue utilisateur</string>
+        <string name = "vuilongchonhinhday">veuillez sélectionner le jour</string> image
+        <string name = "vuilongchonhinhnight">veuillez sélectionner limage de nuit</string>
+        <string name = "khongduocdetrong">ne peut pas être laissé en blanc</string>
+        <string name = "thatbaivuilongthulai">Ce bai, collectez sil vous plaît lavenir</string>
+        <string name = "tailenthanhcong">Télécharger avec succès</string>
+        <string name = "dangtailenhinhnight">Chargement de limage NIGHT de Firebase</string>
+        <string name = "taihinhdaythatbai">téléchargement échoué DAY picture!</string>
+        <string name = "taihinhnightthatbai">Échec du téléchargement de limage NUIT!</string>
+        <string name = "giohangrong">Votre panier est actuellement vide</string>
+        <string name = "chungthucthatbaihaythulai">La fonction réelle a échoué. Veuillez réessayer.</string>
+        <string name = "sanphamkhongtontai">Le produit nexiste pas</string>
+        <string name = "dangnhapthanhcong">Connectez-vous avec succès</string>
+        <string name = "khonghople">Le-mail ou le mot de passe est incorrect</string>
+        <string name = "thanhconghaykiemtraemailcuaban">Succès! vérifiez votre email</string>
+        <string name = "dathem">Ajouté</string>
+        <string name = "dahuy">annulé</string>
+        <string name = "chualayduocthongtin">Na pas obtenu linformation</string>
+        <string name = "timdiadiemthanhcong">Trouvez un emplacement réussi!</string>
+        <string name = "loi">Erreur:</string>
+    <string name = "details_tongcong"> Total: </string>
+         <string name = "details_tinhtrang"> Statut: </string>
+         <string name = "details_ngaygiao"> Date de livraison du projet: </string>
+         <string name = "details_tennguoinhan"> Nom de la personne: </string>
+         <string name = "details_sodienthoai"> Numéro de téléphone: </string>
+         <string name = "details_diachi"> Adresse: </string>
+
+    <string name = "tatcuasoquangcao"> désactive la fenêtre de publicité</string>
+        <string name = "chedobandem"> Mode nuit</string>
+        <string name = "motahuongdan"> voir votre simulation nocturne de produit</string>
+        <string name = "thanhchucnang"> Barre de fonction</string>
+        <string name = "motahuongdan2"> Cliquez pour voir plus de fonctions intéressantes du logiciel</string>
+        <string name = "motahuongdan3"> Entrez des mots clés pour rechercher des informations</string>
+        <string name = "motahuongdan4"> Cliquez pour acheter ou voir les articles que vous avez mis dans le panier</string>
+        <string name = "timkiem"> Recherche</string>
+        <string name = "donggiohang"> Fermer le panier</string>
+        <string name = "cart_motahuongdan1"> Cliquez pour continuer à acheter dautres montres</string>
+        <string name = "cart_motahuongdan2"> Cliquez pour payer larticle dans le panier</string>
+        <string name = "thanhtoan"> Paiement</string>
+        <string name = "bandangayquanghuongdan"> vous avez interrompu le tutoriel!</string>
+        <string name = "okhong"> Non-lecteur!</string>
+        <string name = "quanlysanpham"> Gestion du produit</string>
+        <string name = "nhantinkhachhang"> Messagerie client</string>
+        <string name = "baocao"> Rapport</string>
+        <string name = "bando"> Carte</string>
+        <string name = "danhmuchoadon"> Liste des factures</string>
+        <string name = "admin_motahuongdan1"> Gérer les produits de votre magasin</string>
+        <string name = "admin_motahuongdan2"> Envoyez des SMS et consultez les clients directement en leur envoyant un message</string>
+        <string name = "admin_motahuongdan3"> Les statistiques de rapport vous donnent un aperçu des revenus passés</string>
+        <string name = "admin_motahuongdan4"> Test de la carte</string>
+        <string name = "admin_motahuongdan5"> Gérez toutes les factures et effectuez des opérations liées aux factures</string>
+        <string name = "paypalthanhtoan"> Paiement Paypal</string>
+        <string name = "motahuongdanpaypal"> Cliquez pour procéder au paiement par carte Paypal</string>
+        <string name = "titlepaypal"> Paiement du produit</string>
+        <string name = "menhgiatien"> USD</string>
+    <string name = "mochedosuathongtin"> a ouvert le mode de correction des informations </string>
+        <string name = "tatchedosuathongtin"> a désactivé la modification des informations </string>
+        <string name = "dangtailenhinhday"> Téléchargement de l\'image de Firebase DAY </string>
+        <string name = "dangluulaithaydoi"> enregistre les modifications </string>
+        <string name = "dangthaydoi"> Modification des données </string>
+        <string name = "danglaydulieu"> Récupération de données </string>
+        <string name = "thieuten"> Nom manquant </string>
+        <string name = "thieusodienthoai"> Numéro de téléphone manquant </string>
+        <string name = "thieudiachi"> Adresse manquante </string>
+        <string name = "tienvanchuyen"> Frais d\'expédition: </string>
+        <string name = "ti_n_h_ng"> Paiement anticipé: </string>
+        <string name = "chuathethanhtoanhaythulai"> Impossible de payer, essayez à nouveau </string>
+        <string name = "khongcoketnoiinternet"> Pas de connexion Internet </string>
+        <string name = "daketnoiwifi"> Wifi connecté </string>
+        <string name = "daketnoi3g"> 3G connectée </string>
+        <string name = "daketnoiinternet"> Pas de connexion Internet </string>
+        <string name = "choxacnhan"> attendre la confirmation </string>
+        <string name = "khongdudieukiendedinhhuong"> n\'est pas éligible pour l\'orientation, veuillez laisser </string>
+
+    <string name = "uploaded"> Chargement </string>
+         <string name = "chonhinhbanngay"> Sélectionnez l\'image du jour </string>
+         <string name = "chonhinhbandem"> Choisissez une image de nuit </string>
+         <string name = "dongia"> Prix unitaire </string>
+         <string name = "l_i_b_nh_lu_n_c_a_b_n"> Laissez votre commentaire </string>
+         <string name = "nh_gi_s_n_ph_m"> Commentaires sur le produit </string>
+         <string name = "ng"> Poster </string>
+         <string name = "hu"> Annuler </string>
+         <string name = "khongthedetrong"> Ne peut pas être vide </string>
+         <string name = "daDanhgia"> révisé </string>
+         <string name = "danhgiathanhcongsanpham"> Évaluation du produit réussie </string>
+         <string name = "vodanh"> Anonymous </string>
+</resources>
