@@ -1,4 +1,4 @@
-package com.example.test1706.model;
+package com.example.shiper.model;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;

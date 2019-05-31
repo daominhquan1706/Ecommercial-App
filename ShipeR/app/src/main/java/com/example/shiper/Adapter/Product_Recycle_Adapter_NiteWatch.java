@@ -1,4 +1,4 @@
-package com.example.test1706.Adapter;
+package com.example.shiper.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,11 +22,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.test1706.DetailsProductActivity;
-import com.example.test1706.R;
-import com.example.test1706.model.CartSqliteHelper;
-import com.example.test1706.model.Product;
-import com.example.test1706.model.ProductSqliteHelper;
+import com.example.shiper.R;
+import com.example.shiper.model.CartSqliteHelper;
+import com.example.shiper.model.Product;
+import com.example.shiper.model.ProductSqliteHelper;
 
 import java.util.Date;
 import java.util.List;
@@ -116,20 +115,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
         viewHolder.mCategory.setText(list_data.get(i).getCategory());
 
 
-        viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
-                productSqliteHelper.addProduct(productt);
 
-                Intent intent = new Intent(mContext, DetailsProductActivity.class);
-                Bundle b = new Bundle();
-                b.putString("ProductName", productt.getProduct_Name());
-                b.putString("ProductCategory", productt.getCategory());
-                intent.putExtras(b);
-                mContext.startActivity(intent);
-            }
-        });
 
 
         viewHolder.mbtnCart.setOnClickListener(new View.OnClickListener() {

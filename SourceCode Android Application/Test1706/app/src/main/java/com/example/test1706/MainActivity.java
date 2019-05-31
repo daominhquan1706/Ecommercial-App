@@ -9,8 +9,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -65,10 +67,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onesignal.OneSignal;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Scanner;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
@@ -225,15 +231,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void broadcastIntent() {
         registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
+
     @Override
     protected void onPause() {
-        if(MyReceiver.isOrderedBroadcast()){
+        if (MyReceiver.isOrderedBroadcast()) {
             unregisterReceiver(MyReceiver);
         }
 
         super.onPause();
 
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -267,7 +275,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         img_tag_sale = (ImageView) findViewById(R.id.img_tag_sale);
 
         setUpQuangCao();
-
 
 
     }
@@ -665,8 +672,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             session.setIsChangeLanguage(!session.getIsChangeLanguage());
             setLocale(session.getLanguage());
             recreate();
-        }
-        else{
+        } else {
             session.setIsChangeLanguage(!session.getIsChangeLanguage());
         }
     }
@@ -674,8 +680,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void updateUI() {
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            OneSignal.setEmail(Objects.requireNonNull(currentUser.getEmail()));
-
+            OneSignal.setEmail(currentUser.getEmail());
+            OneSignal.sendTag("User_ID", currentUser.getEmail());
 
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
@@ -721,7 +727,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setPositiveButton(getString(R.string.answer_no), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    sendNotification();
                 }
             });
             builder.setNegativeButton(getString(R.string.answer_yes), new DialogInterface.OnClickListener() {
@@ -737,8 +743,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void sendNotification() {
+        Toast.makeText(this, "Current Recipients is : daominhquan176@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    String send_email;
+
+                    //This is a Simple Logic to Send Notification different Device Programmatically....
+                    send_email = "daominhquan176@gmail.com";
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MWIwNDQxNGQtMzE0Mi00MGY5LThmNzgtYTJhM2RjYTJkODE0");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"054e65ad-ff00-43a1-8615-48de2e56cc4f\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "}";
 
 
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
 
     public static void hideKeyboard(Activity activity) {

@@ -1,4 +1,4 @@
-package com.example.test1706.model;
+package com.example.shiper.model;
 
 public class CommentProduct {
     private String UserName;

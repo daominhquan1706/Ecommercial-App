@@ -1,6 +1,5 @@
-package com.example.test1706.model;
+package com.example.shiper.model;
 
-import java.util.Date;
 import java.util.List;
 
 public class Product {

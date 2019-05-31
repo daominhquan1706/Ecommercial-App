@@ -1,4 +1,4 @@
-package com.example.test1706.model;
+package com.example.shiper.model;
 
 import android.content.ContentValues;
 import android.content.Context;

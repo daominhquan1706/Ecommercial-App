@@ -1,4 +1,4 @@
-package com.example.test1706;
+package com.example.shiper;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.test1706.Config.Session;
-import com.example.test1706.model.AccountUser;
+import com.example.shiper.Config.Session;
+import com.example.shiper.model.AccountUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
