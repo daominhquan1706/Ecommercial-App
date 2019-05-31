@@ -14,6 +14,7 @@ import com.example.adminr.Config.Session;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.onesignal.OneSignal;
 
 public class Admin extends AppCompatActivity {
 
@@ -75,7 +76,7 @@ public class Admin extends AppCompatActivity {
         });
         session = new Session(getApplicationContext());
         if (session.getSwitchHuongDan()) {
-            HuongDan();
+            //HuongDan();
         }
 
     }
@@ -158,6 +159,8 @@ public class Admin extends AppCompatActivity {
     }
 
     private void initAdmin() {
+        OneSignal.setEmail("admin@gmail.com");
+        OneSignal.sendTag("User_ID", "admin");
         cv_doanhthu = (CardView) findViewById(R.id.cv_doanhthu);
         cv_donhang = (CardView) findViewById(R.id.cv_donhang);
         cv_sanpham = (CardView) findViewById(R.id.cv_sanpham);

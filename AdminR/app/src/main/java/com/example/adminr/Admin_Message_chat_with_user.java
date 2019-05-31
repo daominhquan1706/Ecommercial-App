@@ -120,7 +120,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
         }
 
     }
-    private void sendNotification(String userUID,String noiDung) {
+    private void sendNotification(String userUID, String noiDung) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -147,9 +147,8 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
-                                + "\"data\": {\"activity\": \"ChatBoxMainActivity\"},"
-
-                                + "\"contents\": {\"en\": \""+noiDung+"\", \"es\": \"Tin nhắn\"}"
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \"" + noiDung + "\"}"
                                 + "}";
 
 
