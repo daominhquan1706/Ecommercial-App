@@ -681,7 +681,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             OneSignal.setEmail(currentUser.getEmail());
-            OneSignal.sendTag("User_ID", currentUser.getEmail());
+            OneSignal.sendTag("User_ID", currentUser.getUid());
 
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
@@ -727,7 +727,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setPositiveButton(getString(R.string.answer_no), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    sendNotification();
+
                 }
             });
             builder.setNegativeButton(getString(R.string.answer_yes), new DialogInterface.OnClickListener() {
@@ -743,7 +743,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void sendNotification() {
+    private void sendNotification(String userUID,String noiDung) {
         Toast.makeText(this, "Current Recipients is : daominhquan176@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
 
         AsyncTask.execute(new Runnable() {
@@ -754,10 +754,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
                     StrictMode.setThreadPolicy(policy);
-                    String send_email;
-
-                    //This is a Simple Logic to Send Notification different Device Programmatically....
-                    send_email = "daominhquan176@gmail.com";
                     try {
                         String jsonResponse;
 
@@ -774,10 +770,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String strJsonBody = "{"
                                 + "\"app_id\": \"054e65ad-ff00-43a1-8615-48de2e56cc4f\","
 
-                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "\"contents\": {\"en\": \""+noiDung+"\"}"
                                 + "}";
 
 

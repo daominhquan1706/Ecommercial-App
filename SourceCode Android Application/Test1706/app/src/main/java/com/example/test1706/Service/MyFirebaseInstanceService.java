@@ -79,8 +79,6 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-
-        Log.d("TOKENFIREBASE",s);
     }
 }
 

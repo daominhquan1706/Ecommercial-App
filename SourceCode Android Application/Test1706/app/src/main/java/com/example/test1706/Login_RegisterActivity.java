@@ -79,8 +79,8 @@ public class Login_RegisterActivity extends AppCompatActivity {
             mPasswordView.setError("Password is required");
             mPasswordView.requestFocus();
             return;
-        } else if (password.length() <= 6) {
-            mPasswordView.setError("Password more than 5 characters");
+        } else if (password.length() < 5) {
+            mPasswordView.setError("Password more than 6 characters");
             mPasswordView.requestFocus();
             return;
         } else if (!password.equals(retypepassword)) {
