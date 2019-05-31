@@ -113,14 +113,14 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
         Product product = new Product();
         if (cursor != null) {
             cursor.moveToFirst();
-
-
-            product.setProduct_Name((cursor.getString(0)));
-            product.setPrice(Integer.parseInt(cursor.getString(1)));
-            product.setImage(cursor.getString(2));
-            product.setImage_Night(cursor.getString(3));
-            product.setDescription(cursor.getString(4));
-            product.setCategory(cursor.getString(5));
+            if (!cursor.getString(0).isEmpty()) {
+                product.setProduct_Name((cursor.getString(0)));
+                product.setPrice(Integer.parseInt(cursor.getString(1)));
+                product.setImage(cursor.getString(2));
+                product.setImage_Night(cursor.getString(3));
+                product.setDescription(cursor.getString(4));
+                product.setCategory(cursor.getString(5));
+            }
             //Product.setCreateDate(Long.parseLong(cursor.getString(6)));
         }
         // return Product
@@ -219,10 +219,12 @@ public class ProductSqliteHelper extends SQLiteOpenHelper {
     }
 
     public void deleteProduct(Product product) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CART, COLUMN_PRODUCT_PRODUCTNAME + " = ?",
-                new String[]{String.valueOf(product.getProduct_Name())});
-        db.close();
+        if(!product.getProduct_Name().isEmpty()){
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete(TABLE_CART, COLUMN_PRODUCT_PRODUCTNAME + " = ?",
+                    new String[]{String.valueOf(product.getProduct_Name())});
+            db.close();
+        }
     }
 
 }

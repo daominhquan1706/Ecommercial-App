@@ -282,11 +282,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     public int getItemCount() {
         return list_orders.size();
     }
-
-
     private void sendNotification(String userUID,String noiDung) {
-        Toast.makeText(context, "Current Recipients is : daominhquan176@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -313,8 +309,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
-                                + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \""+noiDung+"\"}"
+                                + "\"data\": {\"activity\": \"User_HoaDon_Activity\"},"
+                                + "\"contents\": {\"en\": \""+noiDung+"\", \"es\": \"Tình trạng đơn hàng\"}"
                                 + "}";
 
 

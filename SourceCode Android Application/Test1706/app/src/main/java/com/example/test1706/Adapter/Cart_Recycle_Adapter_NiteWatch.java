@@ -32,8 +32,11 @@ import com.example.test1706.model.ProductSqliteHelper;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -112,77 +115,80 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                 if (cartt.isDaBinhLuan()) {
                     viewHolder.tv_dabinhluan.setText("Đã đánh giá");
                     viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                } else if (!isTonTai(cartt,viewHolder)) {
+                    viewHolder.cv_item.setEnabled(false);
                 } else {
                     viewHolder.tv_dabinhluan.setText("Chưa đánh giá");
                     viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.red));
-                }
-                viewHolder.cv_item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        final Dialog dialog = new Dialog(mContext);
-                        LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-                        View layout = inflater.inflate(R.layout.danhgia_dialog, null);
-                        dialog.setContentView(layout);
+                    viewHolder.cv_item.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final Dialog dialog = new Dialog(mContext);
+                            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+                            View layout = inflater.inflate(R.layout.danhgia_dialog, null);
+                            dialog.setContentView(layout);
 
-                        dialog.setTitle("Đánh giá " + cartt.getProductName());
-                        TextView tv_dialog_title = (TextView) dialog.findViewById(R.id.tv_dialog_title);
-                        tv_dialog_title.setText("Đánh giá " + cartt.getProductName());
-                        Button dialog_comment_btn_huy = (Button) dialog.findViewById(R.id.dialog_comment_btn_huy);
-                        Button dialog_comment_btn_danhgia = (Button) dialog.findViewById(R.id.dialog_comment_btn_danhgia);
-                        EditText edt_binhluan = (EditText) dialog.findViewById(R.id.edt_binhluan);
-                        RatingBar ratingBar1= (RatingBar) dialog.findViewById(R.id.ratingBar1);
-                        dialog_comment_btn_huy.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-                        dialog_comment_btn_danhgia.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (!edt_binhluan.getText().toString().equals("")) {
-                                    Session session = new Session(mContext);
-                                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                                    FirebaseUser currentUser = mAuth.getCurrentUser();
-                                    CommentProduct commentProduct = new CommentProduct();
-                                    commentProduct.setContent(edt_binhluan.getText().toString());
-                                    commentProduct.setCreateDate(System.currentTimeMillis());
-                                    commentProduct.setRateScore(ratingBar1.getRating());
-                                    if (currentUser != null) {
-                                        commentProduct.setUserName(currentUser.getEmail());
-                                    } else {
-                                        commentProduct.setUserName(mContext.getString(R.string.vodanh));
-                                    }
-                                    viewHolder.myRef
-                                            .child("NiteWatch")
-                                            .child(cartt.getCategory())
-                                            .child(cartt.getProductName())
-                                            .child("commentproductlist").push().setValue(commentProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(mContext, mContext.getString(R.string.danhgiathanhcongsanpham) + cartt.getProductName() + "!", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                            viewHolder.tv_dabinhluan.setText(mContext.getString(R.string.daDanhgia));
-                                            viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
-                                        }
-                                    });
-                                    viewHolder.myRef
-                                            .child("Orders")
-                                            .child(paymentId)
-                                            .child("orderDetails")
-                                            .child(String.valueOf(i))
-                                            .child("daBinhLuan")
-                                            .setValue(true);
-                                } else {
-                                    edt_binhluan.setError(mContext.getString(R.string.khongthedetrong));
+                            dialog.setTitle("Đánh giá " + cartt.getProductName());
+                            TextView tv_dialog_title = (TextView) dialog.findViewById(R.id.tv_dialog_title);
+                            tv_dialog_title.setText("Đánh giá " + cartt.getProductName());
+                            Button dialog_comment_btn_huy = (Button) dialog.findViewById(R.id.dialog_comment_btn_huy);
+                            Button dialog_comment_btn_danhgia = (Button) dialog.findViewById(R.id.dialog_comment_btn_danhgia);
+                            EditText edt_binhluan = (EditText) dialog.findViewById(R.id.edt_binhluan);
+                            RatingBar ratingBar1 = (RatingBar) dialog.findViewById(R.id.ratingBar1);
+                            dialog_comment_btn_huy.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
                                 }
+                            });
+                            dialog_comment_btn_danhgia.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (!edt_binhluan.getText().toString().equals("")) {
+                                        Session session = new Session(mContext);
+                                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                                        CommentProduct commentProduct = new CommentProduct();
+                                        commentProduct.setContent(edt_binhluan.getText().toString());
+                                        commentProduct.setCreateDate(System.currentTimeMillis());
+                                        commentProduct.setRateScore(ratingBar1.getRating());
+                                        if (currentUser != null) {
+                                            commentProduct.setUserName(currentUser.getEmail());
+                                        } else {
+                                            commentProduct.setUserName(mContext.getString(R.string.vodanh));
+                                        }
+                                        viewHolder.myRef
+                                                .child("NiteWatch")
+                                                .child(cartt.getCategory())
+                                                .child(cartt.getProductName())
+                                                .child("commentproductlist").push().setValue(commentProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(mContext, mContext.getString(R.string.danhgiathanhcongsanpham) + cartt.getProductName() + "!", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                                viewHolder.tv_dabinhluan.setText(mContext.getString(R.string.daDanhgia));
+                                                viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
+                                            }
+                                        });
+                                        viewHolder.myRef
+                                                .child("Orders")
+                                                .child(paymentId)
+                                                .child("orderDetails")
+                                                .child(String.valueOf(i))
+                                                .child("daBinhLuan")
+                                                .setValue(true);
+                                    } else {
+                                        edt_binhluan.setError(mContext.getString(R.string.khongthedetrong));
+                                    }
 
 
-                            }
-                        });
-                        dialog.show();
-                    }
-                });
+                                }
+                            });
+                            dialog.show();
+                        }
+                    });
+                }
+
 
             }
         }
@@ -246,6 +252,32 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
         }
 
 
+    }
+
+    private boolean isTonTai(Cart cart,ViewHolder viewHolder) {
+        final boolean[] istontai = {false};
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("NiteWatch");
+        myRef.child(cart.getCategory())
+                .child(cart.getProductName())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Product product = dataSnapshot.getValue(Product.class);
+                        if (product != null) {
+                            istontai[0] = true;
+                        } else {
+                            viewHolder.tv_dabinhluan.setText("Ngưng bán");
+                            viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.Deeppurple));
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+        return istontai[0];
     }
 
     @Override

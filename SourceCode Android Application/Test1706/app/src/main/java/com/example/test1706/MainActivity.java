@@ -52,6 +52,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.Adapter.Adapter_Search_Product;
 import com.example.test1706.Config.Session;
+import com.example.test1706.Handler.MyNotificationOpenedHandler;
 import com.example.test1706.model.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
@@ -73,7 +74,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -131,8 +131,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new MyNotificationOpenedHandler(this.getApplication()))
+                .init();
+
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
+
 
         loadLangguage();
 
@@ -227,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         broadcastIntent();
 
     }
+
 
     private void broadcastIntent() {
         registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -743,7 +749,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void sendNotification(String userUID,String noiDung) {
+    private void sendNotification(String userUID, String noiDung) {
         Toast.makeText(this, "Current Recipients is : daominhquan176@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
 
         AsyncTask.execute(new Runnable() {
@@ -773,7 +779,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \""+noiDung+"\"}"
+                                + "\"contents\": {\"en\": \"" + noiDung + "\"}"
                                 + "}";
 
 

@@ -73,6 +73,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
@@ -153,16 +156,7 @@
             -->
         </activity>
 
-        <service android:name=".Service.MyFirebaseInstanceService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".Service.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+
 
         <receiver android:name="MyReceiver">
             <intent-filter>
