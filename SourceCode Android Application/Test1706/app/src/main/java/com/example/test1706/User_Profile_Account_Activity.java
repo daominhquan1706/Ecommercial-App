@@ -160,51 +160,57 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
     boolean isLoadMap_Success;
 
     private void loadMap(LatLng latLng) {
-        Mapbox.getInstance(this, getString(R.string.access_token));
-        SupportMapFragment mapFragment;
-        if (savedInstance_bundle == null) {
-            final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            MapboxMapOptions options = new MapboxMapOptions();
-            options.camera(new CameraPosition.Builder()
-                    .target(latLng)
-                    .zoom(10)
-                    .build());
-            mapFragment = SupportMapFragment.newInstance(options);
-            transaction.add(R.id.mapbox_cardview, mapFragment, "com.mapbox.map");
-            transaction.commit();
-        } else {
-            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
+        try {
+            Mapbox.getInstance(this, getString(R.string.access_token));
+            SupportMapFragment mapFragment;
+            if (savedInstance_bundle == null) {
+                final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                MapboxMapOptions options = new MapboxMapOptions();
+                options.camera(new CameraPosition.Builder()
+                        .target(latLng)
+                        .zoom(10)
+                        .build());
+                mapFragment = SupportMapFragment.newInstance(options);
+                transaction.add(R.id.mapbox_cardview, mapFragment, "com.mapbox.map");
+                transaction.commit();
+            } else {
+                mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
+            }
+
+            assert mapFragment != null;
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                    map = mapboxMap;
+
+                    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                        @Override
+                        public void onStyleLoaded(@NonNull Style style) {
+                            // Add the marker image to map
+                            style.addImage("marker-icon-id",
+                                    BitmapFactory.decodeResource(
+                                            User_Profile_Account_Activity.this.getResources(), R.drawable.mapbox_marker_icon_default));
+
+                            GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
+                                    Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude())));
+                            style.addSource(geoJsonSource);
+
+                            SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+                            symbolLayer.withProperties(
+                                    PropertyFactory.iconImage("marker-icon-id")
+                            );
+                            style.addLayer(symbolLayer);
+                        }
+                    });
+
+
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            recreate();
         }
 
-        assert mapFragment != null;
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                map = mapboxMap;
-
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                        // Add the marker image to map
-                        style.addImage("marker-icon-id",
-                                BitmapFactory.decodeResource(
-                                        User_Profile_Account_Activity.this.getResources(), R.drawable.mapbox_marker_icon_default));
-
-                        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", Feature.fromGeometry(
-                                Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude())));
-                        style.addSource(geoJsonSource);
-
-                        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-                        symbolLayer.withProperties(
-                                PropertyFactory.iconImage("marker-icon-id")
-                        );
-                        style.addLayer(symbolLayer);
-                    }
-                });
-
-
-            }
-        });
 
     }
 

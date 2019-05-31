@@ -310,7 +310,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
                                 + "\"data\": {\"activity\": \"User_HoaDon_Activity\"},"
-                                + "\"contents\": {\"en\": \""+noiDung+"\", \"es\": \"Tình trạng đơn hàng\"}"
+                                + "\"contents\": {\"en\": \""+noiDung+"\"}"
                                 + "}";
 
 
