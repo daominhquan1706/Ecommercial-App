@@ -126,17 +126,17 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                         dialog.setTitle("Đánh giá " + cartt.getProductName());
                         TextView tv_dialog_title = (TextView) dialog.findViewById(R.id.tv_dialog_title);
                         tv_dialog_title.setText("Đánh giá " + cartt.getProductName());
-                        Button dialog_comment_btn_huy = (Button) dialog.findViewById(R.id.dialog_comment_btn_huy);
-                        Button dialog_comment_btn_danhgia = (Button) dialog.findViewById(R.id.dialog_comment_btn_danhgia);
+                        Button btn_dialog_nhandonhang = (Button) dialog.findViewById(R.id.btn_dialog_nhandonhang);
+                        Button btn_dialog_tuchoidonhang = (Button) dialog.findViewById(R.id.btn_dialog_tuchoidonhang);
                         final EditText edt_binhluan = (EditText) dialog.findViewById(R.id.edt_binhluan);
                         final RatingBar ratingBar1= (RatingBar) dialog.findViewById(R.id.ratingBar1);
-                        dialog_comment_btn_huy.setOnClickListener(new View.OnClickListener() {
+                        btn_dialog_nhandonhang.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 dialog.dismiss();
                             }
                         });
-                        dialog_comment_btn_danhgia.setOnClickListener(new View.OnClickListener() {
+                        btn_dialog_tuchoidonhang.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if (!edt_binhluan.getText().toString().equals("")) {

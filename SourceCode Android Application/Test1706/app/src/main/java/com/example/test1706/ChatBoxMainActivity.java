@@ -151,7 +151,7 @@ public class ChatBoxMainActivity extends AppCompatActivity {
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
-                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"data\": {\"activity\": \"ChatBoxMainActivity\",\"ID\": \""+FirebaseAuth.getInstance().getCurrentUser().getUid()+"\",\"Email\": \""+FirebaseAuth.getInstance().getCurrentUser().getEmail()+"\"},"
                                 + "\"contents\": {\"en\": \"" + noiDung + "\"}"
                                 + "}";
 

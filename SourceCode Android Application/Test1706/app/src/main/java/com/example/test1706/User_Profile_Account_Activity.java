@@ -208,7 +208,7 @@ public class User_Profile_Account_Activity extends AppCompatActivity {
             });
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            recreate();
+            finish();
         }
 
 

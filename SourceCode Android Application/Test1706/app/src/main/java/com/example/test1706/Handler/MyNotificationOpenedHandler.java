@@ -33,7 +33,7 @@ public class MyNotificationOpenedHandler implements OneSignal.NotificationOpened
         if (data != null) {
             String myCustomData = data.optString("activity", null);
             if (myCustomData != null) {
-                if (myCustomData.contains("ChatBoxMainActivity")) {
+                if (myCustomData.equals("ChatBoxMainActivity")) {
                     startChatActivity();
                 } else if (myCustomData.contains("User_HoaDon_Activity")) {
                     startHoaDonActivity();

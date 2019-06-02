@@ -110,13 +110,13 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
         viewHolder.mName.setText(list_data.get(i).getProductName());
         viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
         if (isHoaDon_item) {
+
             if (viewHolder.cv_item != null) {
+                khongTonTai(cartt, viewHolder);
                 viewHolder.tv_dabinhluan.setVisibility(View.VISIBLE);
                 if (cartt.isDaBinhLuan()) {
                     viewHolder.tv_dabinhluan.setText("Đã đánh giá");
                     viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
-                } else if (!isTonTai(cartt,viewHolder)) {
-                    viewHolder.cv_item.setEnabled(false);
                 } else {
                     viewHolder.tv_dabinhluan.setText("Chưa đánh giá");
                     viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.red));
@@ -254,8 +254,7 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
 
     }
 
-    private boolean isTonTai(Cart cart,ViewHolder viewHolder) {
-        final boolean[] istontai = {false};
+    private void khongTonTai(Cart cart, ViewHolder viewHolder) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("NiteWatch");
         myRef.child(cart.getCategory())
@@ -264,20 +263,17 @@ public class Cart_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Cart_Re
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Product product = dataSnapshot.getValue(Product.class);
-                        if (product != null) {
-                            istontai[0] = true;
-                        } else {
+                        if (product == null) {
                             viewHolder.tv_dabinhluan.setText("Ngưng bán");
-                            viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.Deeppurple));
+                            viewHolder.cv_item.setEnabled(false);
+                            viewHolder.tv_dabinhluan.setTextColor(mContext.getResources().getColor(R.color.green));
                         }
-
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-        return istontai[0];
     }
 
     @Override

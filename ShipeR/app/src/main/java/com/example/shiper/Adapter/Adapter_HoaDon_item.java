@@ -333,14 +333,14 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold, rlt_address;
 
 
-        Button dialog_comment_btn_huy, dialog_comment_btn_danhgia;
+        Button btn_dialog_nhandonhang, btn_dialog_tuchoidonhang;
         EditText edt_binhluan;
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
             edt_binhluan = (EditText) convertView.findViewById(R.id.edt_binhluan);
-            dialog_comment_btn_danhgia = (Button) convertView.findViewById(R.id.dialog_comment_btn_danhgia);
-            dialog_comment_btn_huy = (Button) convertView.findViewById(R.id.dialog_comment_btn_huy);
+            btn_dialog_tuchoidonhang = (Button) convertView.findViewById(R.id.btn_dialog_tuchoidonhang);
+            btn_dialog_nhandonhang = (Button) convertView.findViewById(R.id.btn_dialog_nhandonhang);
 
 
             timeline_recycle = (RecyclerView) convertView.findViewById(R.id.timeline_recycle);
@@ -360,10 +360,10 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
             db = FirebaseDatabase.getInstance();
             myRef = db.getReference();
-            btn_TuChoi = (CardView) convertView.findViewById(R.id.btn_TuChoi);
+            btn_TuChoi = (CardView) convertView.findViewById(R.id.btn_dialog_tuchoidonhang);
             admin_details_hoadon_inputlayout_sdt_order = (RelativeLayout) convertView.findViewById(R.id.cv_phone_admin_order);
             lv_checkout = (RecyclerView) convertView.findViewById(R.id.admin_details_hoadon_lv_checkout);
-            btn_Xac_nhan = (CardView) convertView.findViewById(R.id.btn_Xac_nhan);
+            btn_Xac_nhan = (CardView) convertView.findViewById(R.id.btn_dialog_nhandonhang);
             tv_Xac_nhan = (TextView) convertView.findViewById(R.id.tv_Xac_nhan);
             tv_total_price = (TextView) convertView.findViewById(R.id.admin_details_hoadon_tv_total_price);
             name_order = (TextView) convertView.findViewById(R.id.admin_details_hoadon_name_order);

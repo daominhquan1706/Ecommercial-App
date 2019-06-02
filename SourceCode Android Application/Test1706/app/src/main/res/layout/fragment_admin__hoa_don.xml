@@ -37,6 +37,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_status_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,7 +60,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            card_view:reverseLayout="true"
             android:id="@+id/lv_order_admin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

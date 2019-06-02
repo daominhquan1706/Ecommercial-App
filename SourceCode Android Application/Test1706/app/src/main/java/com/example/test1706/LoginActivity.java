@@ -189,6 +189,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this, Login_RegisterActivity.class);
                 startActivity(i);
+                finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
@@ -331,7 +332,7 @@ public class LoginActivity extends AppCompatActivity {
             mPasswordView.setError("Mật khẩu phãi được điền đầy đủ");
             mPasswordView.requestFocus();
             pd.cancel();
-        } else if (password.length() <= 6) {
+        } else if (password.length() < 5) {
             mPasswordView.setError("Mật Khẩu nhiều hơn 5 ký tự");
             mPasswordView.requestFocus();
             pd.cancel();

@@ -390,12 +390,13 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
 
 
         TextView tv_total_price;
-        CartSqliteHelper cartSqliteHelper;
+
         TextView name_order, address_order, sdt_order, tv_Xac_nhan;
 
         RecyclerView lv_checkout;
         FirebaseDatabase db;
         DatabaseReference myRef;
+        CartSqliteHelper cartSqliteHelper;
         private FirebaseAuth mAuth;
         ActionBar actionBar;
         String paymentId;

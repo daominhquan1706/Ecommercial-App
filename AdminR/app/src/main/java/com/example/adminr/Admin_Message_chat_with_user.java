@@ -147,7 +147,7 @@ public class Admin_Message_chat_with_user extends AppCompatActivity {
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
-                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"data\": {\"activity\": \"ChatBoxMainActivity\"},"
                                 + "\"contents\": {\"en\": \"" + noiDung + "\"}"
                                 + "}";
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.example.adminr.Config.Session;
+import com.example.adminr.Handler.MyNotificationOpenedHandler;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
@@ -24,6 +25,9 @@ public class Admin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new MyNotificationOpenedHandler(this.getApplication()))
+                .init();*/
         setContentView(R.layout.activity_admin_main);
 
         //Slidr.attach(this);

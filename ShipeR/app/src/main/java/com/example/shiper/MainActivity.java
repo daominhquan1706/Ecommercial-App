@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else{
-            Intent intent = new Intent(MainActivity.this, TrangChinhActivity.class);
+            Intent intent = new Intent(MainActivity.this, MapBox_Picker.class);
             startActivity(intent);
             finish();
         }

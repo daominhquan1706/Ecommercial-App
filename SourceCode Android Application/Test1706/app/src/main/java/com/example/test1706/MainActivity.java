@@ -131,10 +131,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OneSignal.startInit(this)
+        /*OneSignal.startInit(this)
                 .setNotificationOpenedHandler(new MyNotificationOpenedHandler(this.getApplication()))
-                .init();
-
+                .init();*/
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
@@ -686,7 +685,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void updateUI() {
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            OneSignal.setEmail(currentUser.getEmail());
+            //OneSignal.setEmail(currentUser.getEmail());
             OneSignal.sendTag("User_ID", currentUser.getUid());
 
             tv_email_nav_header.setText(getString(R.string.unknow_account));

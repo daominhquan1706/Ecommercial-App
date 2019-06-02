@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -66,11 +67,12 @@ public class User_HoaDon_Fragment extends Fragment {
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                if(dataSnapshot.getValue(Orders.class).getUserID()!=null){
+                if (dataSnapshot.getValue(Orders.class).getUserID() != null) {
                     if (dataSnapshot.getValue(Orders.class).getStatus().equals(Status) &&
                             dataSnapshot.getValue(Orders.class).getUserID().equals(UserUID)) {
                         list.add(dataSnapshot.getValue(Orders.class));
                         mkey.add(dataSnapshot.getKey());
+                        Collections.sort(list);
                         Timber.d("onDataChange: dataSnapshot1.getKey() : %s", dataSnapshot.getKey());
                         adapter.notifyDataSetChanged();
                     }

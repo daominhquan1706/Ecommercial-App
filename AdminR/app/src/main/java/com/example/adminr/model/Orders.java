@@ -1,8 +1,9 @@
 package com.example.adminr.model;
 
+import java.util.Date;
 import java.util.List;
 
-public class Orders {
+public class Orders implements Comparable<Orders> {
     private long creationTime;
     private double total;
     private String userID;
@@ -126,4 +127,16 @@ public class Orders {
     public void setPaymentid(String paymentid) {
         this.paymentid = paymentid;
     }
+
+
+    @Override
+    public int compareTo(Orders o) {
+        Date datetime1 = new Date();
+        datetime1.setTime(getCreationTime());
+
+        Date datetime2 = new Date();
+        datetime2.setTime(o.getCreationTime());
+        return datetime2.compareTo(datetime1);
+    }
+
 }

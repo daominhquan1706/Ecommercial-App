@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="@color/black_cardview_nitewatch"
-                    android:text="đã bình luận"
+                    android:text=""
                     android:textColor="@color/LightBlue"
                     android:textSize="20sp"
                     android:visibility="invisible" />

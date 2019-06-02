@@ -92,7 +92,7 @@ public class DangKyActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(DangKyActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DangKyActivity.this, TrangChinhActivity.class);
+                    Intent intent = new Intent(DangKyActivity.this, MapBox_Picker.class);
                     startActivity(intent);
                     finish();
                 }
@@ -103,7 +103,7 @@ public class DangKyActivity extends AppCompatActivity {
 
     private void checkLogin() {
         if (firebaseUser != null) {
-            Intent intent = new Intent(this, TrangChinhActivity.class);
+            Intent intent = new Intent(this, MapBox_Picker.class);
             startActivity(intent);
             finish();
         }
