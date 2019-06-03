@@ -160,6 +160,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 // This is done by using an image view with the default marker found in the SDK. You can
                 // swap out for your own marker image, just make sure it matches up with the dropped marker.
                 hoveringMarker = new ImageView(MapBox_Picker.this);
+                hoveringMarker.setVisibility(View.INVISIBLE);
                 hoveringMarker.setImageResource(R.drawable.mapbox_marker_icon_default);
                 FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -227,7 +228,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         // Add the marker image to map
         mapStyle.addImage("marker-icon-id" + ID,
                 BitmapFactory.decodeResource(
-                        MapBox_Picker.this.getResources(), R.drawable.mapbox_marker_icon_default));
+                        MapBox_Picker.this.getResources(), R.drawable.order_marker));
 
         GeoJsonSource geoJsonSource = new GeoJsonSource("source-id" + ID, Feature.fromGeometry(
                 Point.fromLngLat(longitude, latitude)));
