@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +35,8 @@ import com.example.shiper.Adapter.Cart_Recycle_Adapter_NiteWatch;
 import com.example.shiper.Adapter.TimelinesAdapter;
 import com.example.shiper.model.CartSqliteHelper;
 import com.example.shiper.model.Orders;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -75,7 +79,12 @@ import com.ramotion.foldingcell.FoldingCell;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -113,13 +122,14 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     FloatingActionButton btn_search_picker;
     public Point huflitLocation;
     Style mapStyle;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_map_box__picker);
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // Initialize the mapboxMap view
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -197,9 +207,11 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Orders orders = dataSnapshot.getValue(Orders.class);
-                Point thispoint = Point.fromLngLat(orders.getAddress_Lng(), orders.getAddress_Lat());
-                double khoangcach = 10;
-                getRoute(mapStyle, thispoint, orders, khoangcach);
+                if (orders.getStatus().equals("Chờ lấy hàng")) {
+                    Point thispoint = Point.fromLngLat(orders.getAddress_Lng(), orders.getAddress_Lat());
+                    double khoangcach = 1000000;
+                    getRoute(mapStyle, thispoint, orders, khoangcach);
+                }
             }
 
             @Override
@@ -228,13 +240,13 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         // Add the marker image to map
         mapStyle.addImage("marker-icon-id" + ID,
                 BitmapFactory.decodeResource(
-                        MapBox_Picker.this.getResources(), R.drawable.order_marker));
+                        MapBox_Picker.this.getResources(), R.drawable.markser_hoadon));
 
         GeoJsonSource geoJsonSource = new GeoJsonSource("source-id" + ID, Feature.fromGeometry(
                 Point.fromLngLat(longitude, latitude)));
         mapStyle.addSource(geoJsonSource);
 
-        SymbolLayer symbolLayer = new SymbolLayer("layer-id" + ID, "source-id" + ID);
+        final SymbolLayer symbolLayer = new SymbolLayer("layer-id" + ID, "source-id" + ID);
         symbolLayer.withProperties(PropertyFactory.iconImage("marker-icon-id" + ID));
         mapStyle.addLayer(symbolLayer);
 
@@ -246,15 +258,15 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, "layer-id" + ID);
                 if (!features.isEmpty()) {
                     Feature selectedFeature = features.get(0);
-                    openDialog_HoaDon(orders);
-                    Toast.makeText(getApplicationContext(), "You selected " + orders.getCustomerName(), Toast.LENGTH_SHORT).show();
+                    openDialog_HoaDon(orders, symbolLayer);
+                    //Toast.makeText(getApplicationContext(), "You selected " + orders.getCustomerName(), Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
         });
     }
 
-    private void openDialog_HoaDon(final Orders orders) {
+    private void openDialog_HoaDon(final Orders orders, final SymbolLayer symbolLayer) {
         final Dialog dialog = new Dialog(this);
         LayoutInflater inflater = ((Activity) this).getLayoutInflater();
         View layout = inflater.inflate(R.layout.click_marker_dialog, null);
@@ -350,6 +362,38 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 folding_cell.fold(false);
             }
         });
+        tv_Xac_nhan.setText(this.getString(R.string.tinhtrang_layhang));
+        btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được nhân viên giao hàng [" + user.getEmail() + "] lấy hàng, chuẩn bị giao cho khách hàng.";
+                List<String> newTimeline = orders.getTimeline();
+                if (newTimeline == null) {
+                    newTimeline = new ArrayList<>();
+                }
+                newTimeline.add(tinhtrang);
+                myRef.child("Orders").child(orders.getPaymentid()).child("timeline").setValue(newTimeline);
+                myRef.child("Orders").child(orders.getPaymentid()).child("shiper_uid").setValue(user.getUid());
+                myRef.child("Orders").child(orders.getPaymentid()).child("shiper_email").setValue(user.getEmail());
+
+
+                myRef.child("Orders").child(orders.getPaymentid()).child("status").setValue("Đang giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        mapStyle.removeLayer(symbolLayer);
+                        folding_cell.toggle(false);
+                        sendNotification(orders.getUserID(), "Đơn hàng đã được nhân viên giao hàng [" + user.getEmail() + "] lấy hàng, chuẩn bị giao cho khách hàng.");
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        btn_TuChoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
 
         dialog.show();
@@ -357,6 +401,71 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         Window window = dialog.getWindow();
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
+
+
+    private void sendNotification(final String userUID, final String noiDung) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MWIwNDQxNGQtMzE0Mi00MGY5LThmNzgtYTJhM2RjYTJkODE0");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"054e65ad-ff00-43a1-8615-48de2e56cc4f\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
+
+                                + "\"data\": {\"activity\": \"User_HoaDon_Activity\"},"
+                                + "\"contents\": {\"en\": \"" + noiDung + "\", \"es\": \"Tình trạng đơn hàng\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
 
     private void updateUI_ChuaChon(Style style) {
         // Switch the button appearance back to select a location.

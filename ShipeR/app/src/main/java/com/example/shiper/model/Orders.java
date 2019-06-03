@@ -15,6 +15,24 @@ public class Orders {
     private Double Address_Lat;
     private Double Address_Lng;
     private List<String> Timeline;
+    private String shiper_uid;
+    private String shiper_email;
+
+    public String getShiper_uid() {
+        return shiper_uid;
+    }
+
+    public void setShiper_uid(String shiper_uid) {
+        this.shiper_uid = shiper_uid;
+    }
+
+    public String getShiper_email() {
+        return shiper_email;
+    }
+
+    public void setShiper_email(String shiper_email) {
+        this.shiper_email = shiper_email;
+    }
 
     public List<String> getTimeline() {
         return Timeline;
