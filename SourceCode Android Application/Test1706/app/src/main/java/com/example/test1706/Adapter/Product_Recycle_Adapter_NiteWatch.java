@@ -1,5 +1,6 @@
 package com.example.test1706.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,95 +75,101 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        final Product productt = list_data.get(i % list_data.size());
-        if (productt == null) {
-            return;
-        }
-        Glide.with(mContext)
-                .load(list_data.get(i % list_data.size()).getImage())
-                .apply(new RequestOptions().fitCenter())
-                .into(viewHolder.mImage);
-        Glide.with(mContext)
-                .load(list_data.get(i % list_data.size()).getImage_Night())
-                .apply(new RequestOptions().fitCenter())
-                .into(viewHolder.mImageNight);
-
-        long time = 3000;
-        Animation fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
-        fadeIn.setDuration(time);
-
-        Animation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-        fadeOut.setStartOffset(50);
-        fadeOut.setDuration(time);
-
-        if (isNight && viewHolder.mImage.getVisibility() == View.VISIBLE) {
-            viewHolder.mImage.setAnimation(fadeOut);
-            viewHolder.mImage.setVisibility(View.INVISIBLE);
-            viewHolder.mImageNight.setVisibility(View.VISIBLE);
-            viewHolder.mImageNight.setAnimation(fadeIn);
-            viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.clearblack));
-
-        } else if (!isNight && viewHolder.mImageNight.getVisibility() == View.VISIBLE) {
-            viewHolder.mImageNight.setAnimation(fadeOut);
-            viewHolder.mImageNight.setVisibility(View.INVISIBLE);
-            viewHolder.mImage.setVisibility(View.VISIBLE);
-            viewHolder.mImage.setAnimation(fadeIn);
-            viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.black_cardview_nitewatch));
-        }
-
-        viewHolder.mName.setText(list_data.get(i % list_data.size()).getProduct_Name());
-        viewHolder.mCategory.setText(list_data.get(i % list_data.size()).getCategory());
-
-
-        viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
-                productSqliteHelper.addProduct(productt);
-
-                Intent intent = new Intent(mContext, DetailsProductActivity.class);
-                Bundle b = new Bundle();
-                b.putString("ProductName", productt.getProduct_Name());
-                b.putString("ProductCategory", productt.getCategory());
-                intent.putExtras(b);
-                mContext.startActivity(intent);
+        try {
+            final Product productt = list_data.get(i % list_data.size());
+            if (productt == null) {
+                return;
             }
-        });
+            Glide.with(mContext)
+                    .load(list_data.get(i % list_data.size()).getImage())
+                    .apply(new RequestOptions().fitCenter())
+                    .into(viewHolder.mImage);
+            Glide.with(mContext)
+                    .load(list_data.get(i % list_data.size()).getImage_Night())
+                    .apply(new RequestOptions().fitCenter())
+                    .into(viewHolder.mImageNight);
+
+            long time = 3000;
+            Animation fadeIn = new AlphaAnimation(0, 1);
+            fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
+            fadeIn.setDuration(time);
+
+            Animation fadeOut = new AlphaAnimation(1, 0);
+            fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+            fadeOut.setStartOffset(50);
+            fadeOut.setDuration(time);
+
+            if (isNight && viewHolder.mImage.getVisibility() == View.VISIBLE) {
+                viewHolder.mImage.setAnimation(fadeOut);
+                viewHolder.mImage.setVisibility(View.INVISIBLE);
+                viewHolder.mImageNight.setVisibility(View.VISIBLE);
+                viewHolder.mImageNight.setAnimation(fadeIn);
+                viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.clearblack));
+
+            } else if (!isNight && viewHolder.mImageNight.getVisibility() == View.VISIBLE) {
+                viewHolder.mImageNight.setAnimation(fadeOut);
+                viewHolder.mImageNight.setVisibility(View.INVISIBLE);
+                viewHolder.mImage.setVisibility(View.VISIBLE);
+                viewHolder.mImage.setAnimation(fadeIn);
+                viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.black_cardview_nitewatch));
+            }
+
+            viewHolder.mName.setText(list_data.get(i % list_data.size()).getProduct_Name());
+            viewHolder.mCategory.setText(list_data.get(i % list_data.size()).getCategory());
 
 
-        viewHolder.mbtnCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CartSqliteHelper cartSqliteHelper = new CartSqliteHelper(mContext);
+            viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ProductSqliteHelper productSqliteHelper = new ProductSqliteHelper(mContext);
+                    productSqliteHelper.addProduct(productt);
 
-                if (!cartSqliteHelper.CheckExists(productt)) {
-                    cartSqliteHelper.addCart(productt);
-                } else {
-                    cartSqliteHelper.PlusOneQuantity(productt);
+                    Intent intent = new Intent(mContext, DetailsProductActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("ProductName", productt.getProduct_Name());
+                    b.putString("ProductCategory", productt.getCategory());
+                    intent.putExtras(b);
+                    mContext.startActivity(intent);
                 }
-                setupBadge(cartSqliteHelper.getCartQuantityCount());
+            });
 
-                final Animation slideDown_toolbar = AnimationUtils.loadAnimation(mContext, R.anim.toolbar_slidedown);
-                if (appBarLayout != null) {
-                    if (appBarLayout.getVisibility() == View.INVISIBLE) {
-                        appBarLayout.setVisibility(View.VISIBLE);
-                        appBarLayout.startAnimation(slideDown_toolbar);
+
+            viewHolder.mbtnCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CartSqliteHelper cartSqliteHelper = new CartSqliteHelper(mContext);
+
+                    if (!cartSqliteHelper.CheckExists(productt)) {
+                        cartSqliteHelper.addCart(productt);
+                    } else {
+                        cartSqliteHelper.PlusOneQuantity(productt);
                     }
-                }
-                Toast.makeText(mContext, mContext.getString(R.string.dathem) + productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    setupBadge(cartSqliteHelper.getCartQuantityCount());
 
-        if (viewHolder.tv_creation_time_viewedproduct != null) {
-            viewHolder.tv_creation_time_viewedproduct.setText(ThoiGianChat(productt.getCreateDate()));
+                    final Animation slideDown_toolbar = AnimationUtils.loadAnimation(mContext, R.anim.toolbar_slidedown);
+                    if (appBarLayout != null) {
+                        if (appBarLayout.getVisibility() == View.INVISIBLE) {
+                            appBarLayout.setVisibility(View.VISIBLE);
+                            appBarLayout.startAnimation(slideDown_toolbar);
+                        }
+                    }
+                    Toast.makeText(mContext, mContext.getString(R.string.dathem) + productt.getProduct_Name(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            if (viewHolder.tv_creation_time_viewedproduct != null) {
+                viewHolder.tv_creation_time_viewedproduct.setText(ThoiGianChat(productt.getCreateDate()));
+            }
+            //giá
+            viewHolder.mPrice.setText(((String) ("$" + list_data.get(i % list_data.size()).getPrice())));
+            viewHolder.tv_discount_percent.setText(String.valueOf("-" + productt.getDiscount() + "%"));
+            int price_not_discount = productt.getPrice() + (productt.getPrice() * productt.getDiscount() / 100);
+            viewHolder.tv_realprice.setText(String.valueOf("$" + price_not_discount));
+        } catch (Exception e) {
+            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+            ((Activity) mContext).recreate();
         }
-        //giá
-        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i % list_data.size()).getPrice())));
-        viewHolder.tv_discount_percent.setText(String.valueOf("-" +productt.getDiscount() + "%"));
-        int price_not_discount = productt.getPrice()+(productt.getPrice()*productt.getDiscount()/100);
-        viewHolder.tv_realprice.setText(String.valueOf("$"+price_not_discount));
+
     }
 
     private String ThoiGianChat(long date) {

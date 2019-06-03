@@ -16,9 +16,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.test1706.Adapter.ImageAdapter;
@@ -482,15 +481,26 @@ public class NiteWatchFragment extends Fragment {
             }
         });
 
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                myrecyclerview.scrollBy(2, 0);
-                handler.postDelayed(this, 0);
-            }
-        };
-        handler.postDelayed(runnable, 0);
+        autoScroll(myrecyclerview);
+    }
+
+    public void autoScroll(RecyclerView recyclerView) {
+        try {
+            final Handler handler = new Handler();
+            final Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.scrollBy(2, 0);
+                    handler.postDelayed(this, 0);
+                }
+            };
+            handler.postDelayed(runnable, 0);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            getActivity().recreate();
+
+        }
+
     }
 
     private List<Product> getProductdata() {

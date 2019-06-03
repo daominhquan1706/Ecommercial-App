@@ -40,7 +40,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:scrollbarFadeDuration="50"
-            android:scrollbarSize="2dp"
+            android:scrollbarSize="0dp"
             android:scrollbarStyle="insideOverlay"
             android:scrollbarThumbHorizontal="@color/LightBlue"
             android:scrollbars="horizontal"

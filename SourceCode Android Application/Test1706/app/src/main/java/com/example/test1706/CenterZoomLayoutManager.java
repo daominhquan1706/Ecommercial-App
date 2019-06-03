@@ -8,10 +8,10 @@ import android.view.View;
 public class CenterZoomLayoutManager extends LinearLayoutManager {
 
     // Shrink the cards around the center up to 50%
-    private final float mShrinkAmount = 0.2f;
+    private final float mShrinkAmount = 10.0f;
     // The cards will be at 50% when they are 75% of the way between the
     // center and the edge.
-    private final float mShrinkDistance = 1f;
+    private final float mShrinkDistance = 40.0f;
 
     public CenterZoomLayoutManager(Context context) {
         super(context);

@@ -51,9 +51,6 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
         btn_continue_shopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Checkout_PaymentDetails_activity.this, MainActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
             }
         });

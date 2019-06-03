@@ -227,13 +227,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         MyReceiver = new MyReceiver();
-        broadcastIntent();
+        //broadcastIntent();
 
     }
 
 
     private void broadcastIntent() {
-        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        try{
+            registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        }catch (Exception e){
+            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
