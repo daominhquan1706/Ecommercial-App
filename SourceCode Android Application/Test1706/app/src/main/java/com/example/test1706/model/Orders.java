@@ -16,6 +16,13 @@ public class Orders implements Comparable<Orders> {
     private Double Address_Lat;
     private Double Address_Lng;
     private List<String> Timeline;
+    private String shiper_uid;
+    private String shiper_email;
+
+    public Orders(String shiper_uid, String shiper_email) {
+        this.shiper_uid = shiper_uid;
+        this.shiper_email = shiper_email;
+    }
 
     public List<String> getTimeline() {
         return Timeline;

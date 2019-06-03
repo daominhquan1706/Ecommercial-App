@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single"
+        android:visible="false">
         <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/ic_settings"

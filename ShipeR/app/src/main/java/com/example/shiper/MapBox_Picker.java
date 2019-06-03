@@ -3,6 +3,7 @@ package com.example.shiper;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -13,13 +14,19 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -102,7 +109,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
  * Drop a marker at a specific location and then perform
  * reverse geocoding to retrieve and display the location's address
  */
-public class MapBox_Picker extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback {
+public class MapBox_Picker extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MapBox_Picker";
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
@@ -123,26 +130,19 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     public Point huflitLocation;
     Style mapStyle;
     FirebaseUser user;
+    NavigationView navigationView;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_map_box__picker);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        // Initialize the mapboxMap view
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
-        huflitLocation = Point.fromLngLat(106.667445, 10.776663);
+        init();
 
-        tv_place_name = (TextView) findViewById(R.id.tv_place_name);
-        tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
-        tv_lng_location = (TextView) findViewById(R.id.tv_lng_location);
-        btn_search_picker = (FloatingActionButton) findViewById(R.id.search_location_button_mapbox);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         btn_search_picker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +150,32 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             }
         });
 
+    }
+
+    private void init() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        // Initialize the mapboxMap view
+
+        mapView.getMapAsync(this);
+        huflitLocation = Point.fromLngLat(106.667445, 10.776663);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        tv_place_name = (TextView) findViewById(R.id.tv_place_name);
+        tv_lat_location = (TextView) findViewById(R.id.tv_lat_location);
+        tv_lng_location = (TextView) findViewById(R.id.tv_lng_location);
+        btn_search_picker = (FloatingActionButton) findViewById(R.id.search_location_button_mapbox);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //set up Navigation bar (side bar)
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     @Override
@@ -773,4 +799,41 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_profile:
+                /*Intent intention = new Intent(getApplicationContext(), Admin.class);
+                startActivity(intention);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
+                break;
+            case R.id.nav_logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.dang_xuat);
+                builder.setMessage(R.string.question_dang_xuat);
+                builder.setCancelable(false);
+                builder.setPositiveButton(R.string.answer_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.setNegativeButton(R.string.answer_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(MapBox_Picker.this, getString(R.string.dangxuat_thanh_cong), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MapBox_Picker.this, DangNhapActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
+        }
+        navigationView.setCheckedItem(menuItem.getItemId());
+        return true;
+    }
 }

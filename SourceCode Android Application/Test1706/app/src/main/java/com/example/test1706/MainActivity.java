@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_main);
 
-
         loadLangguage();
 
         init();

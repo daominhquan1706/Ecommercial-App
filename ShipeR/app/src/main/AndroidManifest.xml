@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapBox_Picker" />
+        <activity android:name=".MapBox_Picker"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
