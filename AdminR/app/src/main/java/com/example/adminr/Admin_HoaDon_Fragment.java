@@ -76,26 +76,6 @@ public class Admin_HoaDon_Fragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                if (mkey.contains(dataSnapshot.getKey())) {
-                    if (!Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getStatus().equals(Status)) {
-                        list.remove(mkey.indexOf(dataSnapshot.getKey()));
-                        mkey.remove(mkey.indexOf(dataSnapshot.getKey()));
-                        adapter.notifyDataSetChanged();
-                    }
-                } else {
-                    if (Objects.requireNonNull(dataSnapshot.getValue(Orders.class)).getStatus().equals(Status)) {
-                        list.add(dataSnapshot.getValue(Orders.class));
-                        mkey.add(dataSnapshot.getKey());
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-
-
-                if (list.size() == 0) {
-                    listView_order_admin.setVisibility(View.INVISIBLE);
-                } else {
-                    listView_order_admin.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override

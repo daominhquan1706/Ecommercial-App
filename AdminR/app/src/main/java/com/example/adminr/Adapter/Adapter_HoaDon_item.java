@@ -48,11 +48,11 @@ import java.util.concurrent.TimeUnit;
 import static android.Manifest.permission.CALL_PHONE;
 
 public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_item.ViewHolder> {
+    private static final String TAG = "Adapter_HoaDon_item";
+    Activity activity;
     private List<Orders> list_orders;
     private Context context;
-    private static final String TAG = "Adapter_HoaDon_item";
     private boolean isKhachHang;
-    Activity activity;
 
     public Adapter_HoaDon_item(Context context, List<Orders> list_orders, Activity activity) {
         this.context = context;
@@ -176,6 +176,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //holder.folding_cell.toggle(true);
+                            holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                             String tinhtrang = System.currentTimeMillis() + "_" + context.getString(R.string.button_adminhuy);
                             List<String> newTimeline = orders_item.getTimeline();
                             if (newTimeline == null) {
@@ -186,8 +188,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(true);
-                                    sendNotification(orders_item.getUserID(),"Đơn hàng của bạn đã bị hủy.");
+
+                                    sendNotification(orders_item.getUserID(), "Đơn hàng của bạn đã bị hủy.");
                                 }
                             });
                         }
@@ -195,6 +197,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //holder.folding_cell.toggle(true);
+                            holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                             String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được duyệt";
                             List<String> newTimeline = orders_item.getTimeline();
                             if (newTimeline == null) {
@@ -205,8 +209,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(true);
-                                    sendNotification(orders_item.getUserID(),"Đơn hàng đã được duyệt.");
+
+                                    sendNotification(orders_item.getUserID(), "Đơn hàng đã được duyệt.");
                                 }
                             });
                         }
@@ -217,6 +221,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //holder.folding_cell.toggle(true);
+                            holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                             String tinhtrang = System.currentTimeMillis() + "_" + "Đã lấy hàng";
                             List<String> newTimeline = orders_item.getTimeline();
                             if (newTimeline == null) {
@@ -227,8 +233,9 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(false);
-                                    sendNotification(orders_item.getUserID(),"Đơn hàng đã được nhân viên giao hàng lấy hàng, chuẩn bị giao cho bạn.");
+
+                                    sendNotification(orders_item.getUserID(), "Đơn hàng đã được nhân viên giao hàng lấy hàng, chuẩn bị giao cho bạn.");
+
                                 }
                             });
                         }
@@ -239,6 +246,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //holder.folding_cell.toggle(true);
+                            holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                             String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được giao thành công";
                             List<String> newTimeline = orders_item.getTimeline();
                             if (newTimeline == null) {
@@ -249,8 +258,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(false);
-                                    sendNotification(orders_item.getUserID(),"Đơn hàng đã được giao thành công, nêu bạn thích sản phẩm hãy để lại đánh giá cho chúng tôi, Xin Cảm Ơn");
+
+                                    sendNotification(orders_item.getUserID(), "Đơn hàng đã được giao thành công, nêu bạn thích sản phẩm hãy để lại đánh giá cho chúng tôi, Xin Cảm Ơn");
                                 }
                             });
                         }
@@ -282,7 +291,8 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     public int getItemCount() {
         return list_orders.size();
     }
-    private void sendNotification(String userUID,String noiDung) {
+
+    private void sendNotification(String userUID, String noiDung) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -310,7 +320,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 
                                 + "\"data\": {\"activity\": \"User_HoaDon_Activity\"},"
-                                + "\"contents\": {\"en\": \""+noiDung+"\"}"
+                                + "\"contents\": {\"en\": \"" + noiDung + "\"}"
                                 + "}";
 
 
@@ -375,6 +385,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
+        private static final String TAG = "AdminHoaDon_Details_act";
         TextView
                 tv_position,
                 tv_customer_sdt,
@@ -387,26 +398,20 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         RelativeLayout layout_admin_hoadon_item;
         FoldingCell folding_cell;
         RecyclerView list_prodcut_hoadon_fold, timeline_recycle;
-
-
         TextView tv_total_price;
         CartSqliteHelper cartSqliteHelper;
         TextView name_order, address_order, sdt_order, tv_Xac_nhan;
-
         RecyclerView lv_checkout;
         FirebaseDatabase db;
         DatabaseReference myRef;
-        private FirebaseAuth mAuth;
         ActionBar actionBar;
         String paymentId;
         Orders orders;
-        private static final String TAG = "AdminHoaDon_Details_act";
         CardView btn_Xac_nhan, btn_TuChoi;
         RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold, rlt_address;
-
-
         Button dialog_comment_btn_huy, dialog_comment_btn_danhgia;
         EditText edt_binhluan;
+        private FirebaseAuth mAuth;
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);

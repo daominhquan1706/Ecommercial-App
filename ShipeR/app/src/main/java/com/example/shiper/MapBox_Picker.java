@@ -226,7 +226,11 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         });
     }
 
+    List<String> ordersList;
+
     private void getAllHoaDon() {
+        ordersList=new ArrayList<>();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference("Orders");
         myRef.addChildEventListener(new ChildEventListener() {
@@ -237,12 +241,19 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     Point thispoint = Point.fromLngLat(orders.getAddress_Lng(), orders.getAddress_Lat());
                     double khoangcach = 1000000;
                     getRoute(mapStyle, thispoint, orders, khoangcach);
+                    ordersList.add(orders.getPaymentid());
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                Orders orders = dataSnapshot.getValue(Orders.class);
+                if (!ordersList.contains(orders.getPaymentid()) && orders.getStatus().equals("Chờ lấy hàng")) {
+                    Point thispoint = Point.fromLngLat(orders.getAddress_Lng(), orders.getAddress_Lat());
+                    double khoangcach = 1000000;
+                    getRoute(mapStyle, thispoint, orders, khoangcach);
+                    Toast.makeText(MapBox_Picker.this, "vừa thêm hóa đơn tại" + orders.getCustomerAddress(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -274,7 +285,9 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
 
         final SymbolLayer symbolLayer = new SymbolLayer("layer-id" + ID, "source-id" + ID);
         symbolLayer.withProperties(PropertyFactory.iconImage("marker-icon-id" + ID));
-        mapStyle.addLayer(symbolLayer);
+
+            mapStyle.addLayer(symbolLayer.withProperties(iconAllowOverlap(true)));
+
 
 
         mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
@@ -290,6 +303,12 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 return false;
             }
         });
+    }
+
+    private void setupMakiLayer(@NonNull Style loadedMapStyle, String MAKI_LAYER_ID, String SOURCE_ID) {
+        loadedMapStyle.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
+                .withProperties(iconAllowOverlap(true)
+                ));
     }
 
     private void openDialog_HoaDon(final Orders orders, final SymbolLayer symbolLayer) {
@@ -407,9 +426,9 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         mapStyle.removeLayer(symbolLayer);
-                        folding_cell.toggle(false);
                         sendNotification(orders.getUserID(), "Đơn hàng đã được nhân viên giao hàng [" + user.getEmail() + "] lấy hàng, chuẩn bị giao cho khách hàng.");
                         dialog.dismiss();
+                        Toast.makeText(MapBox_Picker.this, "đã lấy hàng thành công, hãy giao cho khách sớm nhất có thể", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

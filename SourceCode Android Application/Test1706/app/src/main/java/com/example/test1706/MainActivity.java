@@ -52,7 +52,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.test1706.Adapter.Adapter_Search_Product;
 import com.example.test1706.Config.Session;
-import com.example.test1706.Handler.MyNotificationOpenedHandler;
 import com.example.test1706.model.AccountUser;
 import com.example.test1706.model.CartSqliteHelper;
 import com.example.test1706.model.Product;
@@ -140,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         loadLangguage();
 
         init();
+
         //set up Navigation bar (side bar)
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -686,6 +686,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (currentUser != null) {
             //OneSignal.setEmail(currentUser.getEmail());
             OneSignal.sendTag("User_ID", currentUser.getUid());
+            OneSignal.setEmail(currentUser.getEmail());
+            OneSignal.setAppContext(this);
 
             tv_email_nav_header.setText(getString(R.string.unknow_account));
             Timber.d("UpdateUI:  %s", currentUser.getEmail());
