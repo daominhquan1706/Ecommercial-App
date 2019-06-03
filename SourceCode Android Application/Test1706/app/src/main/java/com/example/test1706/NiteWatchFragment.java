@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -14,7 +15,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -437,6 +441,8 @@ public class NiteWatchFragment extends Fragment {
         linearLayout = (LinearLayout) getActivity().findViewById(R.id.btn_enable_night_view);
         scrollView = (ScrollView) getView().findViewById(R.id.scrollview_nitewatch);
         listView = (RecyclerView) getView().findViewById(R.id.listView_product_nitewatch);
+
+
         recyclerView_horizontal_Alpha = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Alpha);
         recyclerView_horizontal_Hawk = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Hawk);
         recyclerView_horizontal_Icon = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Icon);
@@ -444,8 +450,47 @@ public class NiteWatchFragment extends Fragment {
         recyclerView_horizontal_Marquess = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Marquess);
         recyclerView_horizontal_Mx10 = (RecyclerView) getView().findViewById(R.id.recycleview_horizontal_nitewatch_Mx10);
 
+
+        tuyChinhRecyclerView(recyclerView_horizontal_Alpha);
+        tuyChinhRecyclerView(recyclerView_horizontal_Hawk);
+        tuyChinhRecyclerView(recyclerView_horizontal_Icon);
+        tuyChinhRecyclerView(recyclerView_horizontal_Icon_auto);
+        tuyChinhRecyclerView(recyclerView_horizontal_Marquess);
+        tuyChinhRecyclerView(recyclerView_horizontal_Mx10);
+
+
         icon_buttonNightView = (ImageView) getActivity().findViewById(R.id.icon_buttonNightView);
         tv_NightView = (TextView) getActivity().findViewById(R.id.tv_NightView);
+    }
+
+    private void tuyChinhRecyclerView(RecyclerView myrecyclerview) {
+        CenterZoomLayoutManager centerZoomLayoutManager;
+        centerZoomLayoutManager = new CenterZoomLayoutManager(getContext());
+        centerZoomLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        myrecyclerview.setLayoutManager(centerZoomLayoutManager);
+        /*SnapHelper helper = new LinearSnapHelper();
+        helper.attachToRecyclerView(myrecyclerview);*/
+
+        myrecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstItemVisible = centerZoomLayoutManager.findFirstVisibleItemPosition();
+                if (firstItemVisible != 0 && firstItemVisible % productList_Alpha.size() == 0) {
+                    recyclerView.getLayoutManager().scrollToPosition(0);
+                }
+            }
+        });
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                myrecyclerview.scrollBy(2, 0);
+                handler.postDelayed(this, 0);
+            }
+        };
+        handler.postDelayed(runnable, 0);
     }
 
     private List<Product> getProductdata() {

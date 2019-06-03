@@ -74,16 +74,16 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        final Product productt = list_data.get(i);
+        final Product productt = list_data.get(i % list_data.size());
         if (productt == null) {
             return;
         }
         Glide.with(mContext)
-                .load(list_data.get(i).getImage())
+                .load(list_data.get(i % list_data.size()).getImage())
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImage);
         Glide.with(mContext)
-                .load(list_data.get(i).getImage_Night())
+                .load(list_data.get(i % list_data.size()).getImage_Night())
                 .apply(new RequestOptions().fitCenter())
                 .into(viewHolder.mImageNight);
 
@@ -112,8 +112,8 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             viewHolder.mlayout_horizontal_nitewatch_item.setBackgroundColor(mContext.getResources().getColor(R.color.black_cardview_nitewatch));
         }
 
-        viewHolder.mName.setText(list_data.get(i).getProduct_Name());
-        viewHolder.mCategory.setText(list_data.get(i).getCategory());
+        viewHolder.mName.setText(list_data.get(i % list_data.size()).getProduct_Name());
+        viewHolder.mCategory.setText(list_data.get(i % list_data.size()).getCategory());
 
 
         viewHolder.mbtnView.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +159,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             viewHolder.tv_creation_time_viewedproduct.setText(ThoiGianChat(productt.getCreateDate()));
         }
         //giá
-        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i).getPrice())));
+        viewHolder.mPrice.setText(((String) ("$" + list_data.get(i % list_data.size()).getPrice())));
         viewHolder.tv_discount_percent.setText(String.valueOf("-" +productt.getDiscount() + "%"));
         int price_not_discount = productt.getPrice()+(productt.getPrice()*productt.getDiscount()/100);
         viewHolder.tv_realprice.setText(String.valueOf("$"+price_not_discount));
@@ -207,8 +207,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public int getItemCount() {
-
-        return (list_data == null) ? 0 : list_data.size();
+        return list_data == null ? 0 : list_data.size() * 2;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
