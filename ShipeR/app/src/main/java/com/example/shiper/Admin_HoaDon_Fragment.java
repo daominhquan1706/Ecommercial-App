@@ -1,6 +1,5 @@
-package com.example.adminr;
+package com.example.shiper;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.adminr.Adapter.Adapter_HoaDon_item;
-import com.example.adminr.model.Orders;
+import com.example.shiper.Adapter.Adapter_HoaDon_item;
+import com.example.shiper.model.Orders;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +34,6 @@ public class Admin_HoaDon_Fragment extends Fragment {
     TextView tv_status_empty;
     List<String> mkey;
     RelativeLayout image_empty_hoadon;
-    ProgressDialog pd;
 
     @Nullable
     @Override
@@ -72,15 +70,11 @@ public class Admin_HoaDon_Fragment extends Fragment {
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
                 adapter.notifyDataSetChanged();
-                if (pd.isShowing()) {
-                    pd.dismiss();
-                }
 
-
-                /*Orders orderss = dataSnapshot.getValue(Orders.class);
+                Orders orderss = dataSnapshot.getValue(Orders.class);
 
                 if (orderss.getStatus().equals("Đang giao"))
-                    myRef.child("Orders").child(orderss.getPaymentid()).child("status").setValue("Chờ xác nhận");*/
+                    myRef.child("Orders").child(orderss.getPaymentid()).child("status").setValue("Chờ xác nhận");
 
             }
 
@@ -122,9 +116,6 @@ public class Admin_HoaDon_Fragment extends Fragment {
     }
 
     public void init() {
-        pd = new ProgressDialog(getContext());
-        pd.setMessage("Đang lấy dữ liệu");
-        pd.show();
         image_empty_hoadon = (RelativeLayout) getView().findViewById(R.id.image_empty_hoadon);
         mkey = new ArrayList<String>();
         tv_status_empty = (TextView) getView().findViewById(R.id.tv_status_empty);

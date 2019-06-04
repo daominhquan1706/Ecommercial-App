@@ -75,16 +75,15 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        try {
             final Product productt = list_data.get(i % list_data.size());
             if (productt == null) {
                 return;
             }
-            Glide.with(mContext)
+            Glide.with(mContext.getApplicationContext())
                     .load(list_data.get(i % list_data.size()).getImage())
                     .apply(new RequestOptions().fitCenter())
                     .into(viewHolder.mImage);
-            Glide.with(mContext)
+            Glide.with(mContext.getApplicationContext())
                     .load(list_data.get(i % list_data.size()).getImage_Night())
                     .apply(new RequestOptions().fitCenter())
                     .into(viewHolder.mImageNight);
@@ -165,10 +164,7 @@ public class Product_Recycle_Adapter_NiteWatch extends RecyclerView.Adapter<Prod
             viewHolder.tv_discount_percent.setText(String.valueOf("-" + productt.getDiscount() + "%"));
             int price_not_discount = productt.getPrice() + (productt.getPrice() * productt.getDiscount() / 100);
             viewHolder.tv_realprice.setText(String.valueOf("$" + price_not_discount));
-        } catch (Exception e) {
-            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
-            ((Activity) mContext).recreate();
-        }
+
 
     }
 

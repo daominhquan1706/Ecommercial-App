@@ -718,8 +718,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-
-
             }
         }, 5000);
 
@@ -775,11 +773,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         con.setDoInput(true);
 
                         con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                        con.setRequestProperty("Authorization", "Basic MWIwNDQxNGQtMzE0Mi00MGY5LThmNzgtYTJhM2RjYTJkODE0");
+                        con.setRequestProperty("Authorization", "Basic MzMwMWU4YTMtNmRjYi00NTFlLWJiZDMtNWUyMGI5NDYxMTYz");
                         con.setRequestMethod("POST");
 
                         String strJsonBody = "{"
-                                + "\"app_id\": \"054e65ad-ff00-43a1-8615-48de2e56cc4f\","
+                                + "\"app_id\": \"1de18513-2a3e-48d2-84d0-3124988e7a03\","
 
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
 

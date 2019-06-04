@@ -483,11 +483,12 @@ public class NiteWatchFragment extends Fragment {
 
         autoScroll(myrecyclerview);
     }
-
+    Handler handler;
+    Runnable runnable;
     public void autoScroll(RecyclerView recyclerView) {
         try {
-            final Handler handler = new Handler();
-            final Runnable runnable = new Runnable() {
+            handler = new Handler();
+            runnable = new Runnable() {
                 @Override
                 public void run() {
                     recyclerView.scrollBy(2, 0);
@@ -497,11 +498,18 @@ public class NiteWatchFragment extends Fragment {
             handler.postDelayed(runnable, 0);
         } catch (Exception e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            getActivity().recreate();
-
+            handler.removeCallbacks(runnable);
         }
 
     }
+
+    @Override
+    public void onDestroy () {
+        handler.removeCallbacks(runnable);
+        super.onDestroy ();
+    }
+
+
 
     private List<Product> getProductdata() {
         List<Product> list_data = new ArrayList<Product>();

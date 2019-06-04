@@ -333,14 +333,14 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         RelativeLayout admin_details_hoadon_inputlayout_sdt_order, btn_close_fold, rlt_address;
 
 
-        Button btn_dialog_nhandonhang, btn_dialog_tuchoidonhang;
+        CardView btn_dialog_nhandonhang, btn_dialog_tuchoidonhang;
         EditText edt_binhluan;
 
         public ViewHolder(@NonNull View convertView) {
             super(convertView);
             edt_binhluan = (EditText) convertView.findViewById(R.id.edt_binhluan);
-            btn_dialog_tuchoidonhang = (Button) convertView.findViewById(R.id.btn_dialog_tuchoidonhang);
-            btn_dialog_nhandonhang = (Button) convertView.findViewById(R.id.btn_dialog_nhandonhang);
+            btn_dialog_tuchoidonhang = (CardView) convertView.findViewById(R.id.btn_dialog_tuchoidonhang);
+            btn_dialog_nhandonhang = (CardView) convertView.findViewById(R.id.btn_dialog_nhandonhang);
 
 
             timeline_recycle = (RecyclerView) convertView.findViewById(R.id.timeline_recycle);

@@ -7,7 +7,7 @@
         <menu>
             <item
 
-                android:id="@+id/nav_user_chat"
+                android:id="@+id/nav_giaohang"
                 android:icon="@drawable/ic_message_black_24dp"
                 android:title="Đơn hàng đã nhận"
                 app:actionLayout="@layout/spinner_item_dark" />

@@ -49,7 +49,8 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class User_Profile_Account_Activity extends AppCompatActivity {
+public class
+User_Profile_Account_Activity extends AppCompatActivity {
     CircleImageView img_user_avatar;
     Toolbar toolbar_profile;
     AccountUser accountUser;

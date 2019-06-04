@@ -192,8 +192,6 @@ public class chart extends AppCompatActivity {
     private void sendNotification(String send_email)
     {
 
-        Toast.makeText(this, "Current Recipients is : user1@gmail.com ( Just For Demo )", Toast.LENGTH_SHORT).show();
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {

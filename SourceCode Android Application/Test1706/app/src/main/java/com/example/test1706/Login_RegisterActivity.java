@@ -1,5 +1,6 @@
 package com.example.test1706;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class Login_RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageView mImage;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,14 @@ public class Login_RegisterActivity extends AppCompatActivity {
         Button mEmailSignUpButton = (Button) findViewById(R.id.btn_register);
         mEmailSignUpButton.setOnClickListener(v -> DangKy());
         Button btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(v -> finish());
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login_RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
 
@@ -141,9 +150,6 @@ public class Login_RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(this, MainActivity.class);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        startActivity(i);
-
+        finish();
     }
 }

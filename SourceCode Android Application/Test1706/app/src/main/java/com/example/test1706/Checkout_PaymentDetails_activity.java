@@ -74,9 +74,6 @@ public class Checkout_PaymentDetails_activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(Checkout_PaymentDetails_activity.this, MainActivity.class);
-        startActivity(i);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }
 

@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference myref;
     List<String> listaccount;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void getAlluser() {
-        listaccount=new ArrayList<>();
+        listaccount = new ArrayList<>();
         db = FirebaseDatabase.getInstance();
         myref = db.getReference("Account");
         myref.addChildEventListener(new ChildEventListener() {
@@ -198,11 +199,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                     startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_REQUEST_CODE_GOOGLE);
-
                 } else {
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
                 }
             }
         });
@@ -218,19 +216,15 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 AccountUser accountUser;
                 accountUser = new AccountUser();
-                if(mAuth.getCurrentUser()!=null ){
-                    if(!listaccount.contains(user.getUid())){
+                if (mAuth.getCurrentUser() != null) {
+                    if (!listaccount.contains(user.getUid())) {
                         accountUser.update_firebaseAccount();
                     }
                 }
-
-                Snackbar.make(this.getCurrentFocus(), "Succesfully sign in", Snackbar.LENGTH_SHORT).show();
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
+                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 finish();
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             } else {
-                Snackbar.make(this.getCurrentFocus(), "TRY AGAIN !!!!", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(this, "Thất bại vui lòng thử lại", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -349,17 +343,15 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 AccountUser accountUser;
                                 accountUser = new AccountUser();
-                                if(mAuth.getCurrentUser()!=null ){
-                                    if(!listaccount.contains(user.getUid())){
+                                if (mAuth.getCurrentUser() != null) {
+                                    if (!listaccount.contains(user.getUid())) {
                                         accountUser.update_firebaseAccount();
                                     }
                                 }
 
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(LoginActivity.this, getString(R.string.dangnhapthanhcong), Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(i);
-                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                                finish();
                             } else {
                                 mEmailView.setError(getString(R.string.khonghople));
                                 mPasswordView.setText("");

@@ -25,6 +25,10 @@
         </activity>
         <activity android:name=".MapBox_Picker"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Admin_HoaDon_Activity"
+            android:label="@string/title_activity_admin__hoa_don_"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

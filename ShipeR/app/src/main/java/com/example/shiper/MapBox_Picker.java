@@ -117,7 +117,6 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     String geojsonSourceLayerId = "geojsonSourceLayerId";
     MapView mapView;
     MapboxMap mapboxMap;
-    Button selectLocationButton;
     PermissionsManager permissionsManager;
     ImageView hoveringMarker;
     CarmenFeature home;
@@ -208,18 +207,6 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                 initDroppedMarker(style);
 
                 // Button for user to drop marker or to pick marker back up.
-                selectLocationButton = findViewById(R.id.btn_pick_location);
-                selectLocationButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (hoveringMarker.getVisibility() == View.VISIBLE) {
-                            updateUI_dachon(style);
-                        } else {
-                            updateUI_ChuaChon(style);
-                        }
-                    }
-                });
-
 
                 getAllHoaDon();
             }
@@ -229,7 +216,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     List<String> ordersList;
 
     private void getAllHoaDon() {
-        ordersList=new ArrayList<>();
+        ordersList = new ArrayList<>();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference("Orders");
@@ -286,8 +273,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         final SymbolLayer symbolLayer = new SymbolLayer("layer-id" + ID, "source-id" + ID);
         symbolLayer.withProperties(PropertyFactory.iconImage("marker-icon-id" + ID));
 
-            mapStyle.addLayer(symbolLayer.withProperties(iconAllowOverlap(true)));
-
+        mapStyle.addLayer(symbolLayer.withProperties(iconAllowOverlap(true)));
 
 
         mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
@@ -384,7 +370,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         folding_cell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                folding_cell.toggle(false);
+                folding_cell.toggle(true);
             }
         });
         tv_total_price.setText(String.valueOf(orders.getTotal()));
@@ -404,7 +390,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         btn_close_fold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                folding_cell.fold(false);
+                folding_cell.toggle(true);
             }
         });
         tv_Xac_nhan.setText(this.getString(R.string.tinhtrang_layhang));
@@ -512,53 +498,8 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     }
 
 
-    private void updateUI_ChuaChon(Style style) {
-        // Switch the button appearance back to select a location.
-        selectLocationButton.setBackgroundColor(
-                ContextCompat.getColor(MapBox_Picker.this, R.color.colorPrimary));
-        selectLocationButton.setText(getString(R.string.ch_n_m_t_v_tr));
 
-        // Show the red hovering ImageView marker
-        hoveringMarker.setVisibility(View.VISIBLE);
 
-        // Hide the selected location SymbolLayer
-        if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-            style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
-        }
-    }
-
-    ProgressDialog pd_danglaydulieuvitri;
-
-    private void updateUI_dachon(Style style) {
-        pd_danglaydulieuvitri = new ProgressDialog(this);
-        pd_danglaydulieuvitri.setMessage("Đang lấy thông tin vị trí này");
-        pd_danglaydulieuvitri.show();
-
-        // Use the map target's coordinates to make a reverse geocoding search
-        final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
-
-        // Hide the hovering red hovering ImageView marker
-        hoveringMarker.setVisibility(View.INVISIBLE);
-
-        // Transform the appearance of the button to become the cancel button
-        selectLocationButton.setBackgroundColor(
-                ContextCompat.getColor(MapBox_Picker.this, R.color.colorAccent));
-        selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
-
-        // Show the SymbolLayer icon to represent the selected map location
-        if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-            GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
-            if (source != null) {
-                source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
-                        mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
-            }
-            style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
-        }
-
-        // Use the map camera target's coordinates to make a reverse geocoding search
-        reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
-
-    }
 
     private void initDroppedMarker(@NonNull Style loadedMapStyle) {
         // Add the marker image to map
@@ -696,56 +637,7 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         }
     }
 
-    /**
-     * This method is used to reverse geocode where the user has dropped the marker.
-     *
-     * @param style style
-     * @param point The location to use for the search
-     */
 
-    private void reverseGeocode(@NonNull final Style style, final Point point) {
-        try {
-            MapboxGeocoding client = MapboxGeocoding.builder()
-                    .accessToken(getString(R.string.access_token))
-                    .query(Point.fromLngLat(point.longitude(), point.latitude()))
-                    .geocodingTypes(GeocodingCriteria.TYPE_LOCALITY)
-                    .build();
-
-            client.enqueueCall(new Callback<GeocodingResponse>() {
-                @Override
-                public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
-
-                    List<CarmenFeature> results = response.body().features();
-                    if (results.size() > 0) {
-                        CarmenFeature feature = results.get(0);
-
-                        // If the geocoder returns a result, we take the first in the list and show a Toast with the place name.
-                        if (style.isFullyLoaded() && style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                            Toast.makeText(MapBox_Picker.this,
-                                    getString(R.string.location_picker_place_name_result) + ": " +
-                                            feature.placeName(), Toast.LENGTH_SHORT).show();
-                            tv_place_name.setText(String.valueOf(feature.placeName()));
-                            tv_lat_location.setText(String.valueOf(point.latitude()));
-                            tv_lng_location.setText(String.valueOf(point.longitude()));
-
-                        }
-                    } else {
-                        Toast.makeText(MapBox_Picker.this,
-                                getString(R.string.location_picker_dropped_marker_snippet_no_results), Toast.LENGTH_SHORT).show();
-                    }
-                    pd_danglaydulieuvitri.dismiss();
-                }
-
-                @Override
-                public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
-                    Timber.e("Geocoding Failure: %s", throwable.getMessage());
-                }
-            });
-        } catch (ServicesException servicesException) {
-            Timber.e("Error geocoding: %s", servicesException.toString());
-            servicesException.printStackTrace();
-        }
-    }
 
     double currentLat;
     double currentLng;
@@ -822,11 +714,18 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
+
             case R.id.nav_profile:
                 /*Intent intention = new Intent(getApplicationContext(), Admin.class);
                 startActivity(intention);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
                 break;
+            case R.id.nav_giaohang:
+                Intent intention = new Intent(getApplicationContext(), Admin_HoaDon_Activity.class);
+                startActivity(intention);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+
             case R.id.nav_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.dang_xuat);
