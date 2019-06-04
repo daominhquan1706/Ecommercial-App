@@ -2,7 +2,6 @@ package com.example.shiper;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -10,12 +9,12 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -38,6 +37,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.shiper.Adapter.Cart_Recycle_Adapter_NiteWatch;
 import com.example.shiper.Adapter.TimelinesAdapter;
 import com.example.shiper.model.CartSqliteHelper;
@@ -58,11 +59,7 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.api.geocoding.v5.GeocodingCriteria;
-import com.mapbox.api.geocoding.v5.MapboxGeocoding;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
-import com.mapbox.core.exceptions.ServicesException;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
@@ -93,13 +90,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
-import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
@@ -498,9 +495,6 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
     }
 
 
-
-
-
     private void initDroppedMarker(@NonNull Style loadedMapStyle) {
         // Add the marker image to map
         loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
@@ -570,9 +564,15 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         }
     }
 
+    CircleImageView img_user_avatar_chat;
+
     @Override
     public void onResume() {
         super.onResume();
+
+        tv_email_nav_header = (TextView) navigationView.getHeaderView(0).findViewById(R.id.txt_username_nav_header);
+        img_user_avatar_chat = (CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.img_user_avatar_navheader);
+        updateUI();
         mapView.onResume();
     }
 
@@ -636,7 +636,6 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             finish();
         }
     }
-
 
 
     double currentLat;
@@ -753,5 +752,37 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
         }
         navigationView.setCheckedItem(menuItem.getItemId());
         return true;
+    }
+
+    FirebaseUser currentUser;
+    TextView tv_email_nav_header;
+
+
+    private void updateUI() {
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            //OneSignal.setEmail(currentUser.getEmail());
+
+            tv_email_nav_header.setText(getString(R.string.unknow_account));
+            Timber.d("UpdateUI:  %s", currentUser.getEmail());
+            tv_email_nav_header.setText(currentUser.getEmail());
+            Toast.makeText(this, getString(R.string.chao_mung_user) + currentUser.getEmail(), Toast.LENGTH_SHORT);
+            Glide.with(this)
+                    .load("https://api.adorable.io/avatars/" + currentUser.getUid().toString() + "@adorable.png")
+                    .apply(new RequestOptions().centerCrop())
+                    .into(img_user_avatar_chat);
+        } else {
+            tv_email_nav_header.setText(getString(R.string.unknow_account));
+            img_user_avatar_chat.setImageResource(R.drawable.ic_account_circle_black_24dp);
+        }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+            }
+        }, 5000);
+
     }
 }

@@ -9,8 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -60,7 +58,6 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
     }
 
 
-
     public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -107,11 +104,17 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    Admin_HoaDon_Fragment fragment3 = new Admin_HoaDon_Fragment();
-                    Bundle bundle3 = new Bundle();
-                    bundle3.putString("Status", "Đang giao");
-                    fragment3.setArguments(bundle3);
-                    return fragment3;
+                    Admin_HoaDon_Fragment fragment0 = new Admin_HoaDon_Fragment();
+                    Bundle bundle0 = new Bundle();
+                    bundle0.putString("Status", "Đang giao");
+                    fragment0.setArguments(bundle0);
+                    return fragment0;
+                case 1:
+                    Admin_HoaDon_Fragment fragment1 = new Admin_HoaDon_Fragment();
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("Status", "Đã giao");
+                    fragment1.setArguments(bundle1);
+                    return fragment1;
             }
             return null;
         }
@@ -119,10 +122,11 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 1;
+            return 2;
         }
 
     }
+
     @Override
     public void finish() {
         super.finish();

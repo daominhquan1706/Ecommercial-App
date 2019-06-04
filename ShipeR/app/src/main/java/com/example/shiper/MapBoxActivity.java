@@ -139,7 +139,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
 
 
     }
-     Point address_Customer;
+    Point address_Customer;
     private void init() {
         Bundle b = getIntent().getExtras();
         if(b!=null){
@@ -482,7 +482,7 @@ public class MapBoxActivity extends AppCompatActivity implements OnMapReadyCallb
                 // Make a toast which displays the route's distance
                 Toast.makeText(MapBoxActivity.this,
                         String.format(getString(R.string.timdiadiemthanhcong)+
-                        currentRoute.distance()),
+                                currentRoute.distance()),
                         Toast.LENGTH_SHORT).show();
 
                 if (style.isFullyLoaded()) {

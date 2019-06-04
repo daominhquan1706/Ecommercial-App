@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -17,7 +19,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,13 +31,18 @@ import com.example.shiper.model.Orders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ramotion.foldingcell.FoldingCell;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import static android.Manifest.permission.CALL_PHONE;
@@ -101,155 +107,69 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         holder.timeline_recycle.setAdapter(timelineAdapter);
 
 
-        if (isKhachHang) {
-            holder.btn_Xac_nhan.setVisibility(View.GONE);
-            if (orders_item.getStatus().equals("Chờ xác nhận")) {
-                holder.btn_TuChoi.setVisibility(View.VISIBLE);
-                holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
+        holder.admin_details_hoadon_inputlayout_sdt_order.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_CALL);
+                i.setData(Uri.parse("tel:" + orders_item.getCustomerPhoneNumber()));
+                if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    context.startActivity(i);
+                } else {
+                    ActivityCompat.requestPermissions(activity, new String[]{CALL_PHONE}, 1);
+                }
+            }
+        });
+        holder.rlt_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (orders_item.getAddress_Lat() != null && orders_item.getAddress_Lng() != null) {
+                        Intent intent = new Intent(context, MapBoxActivity.class);
+                        Bundle b = new Bundle();
+                        b.putDouble("address_lat", orders_item.getAddress_Lat());
+                        b.putDouble("address_lng", orders_item.getAddress_Lng());
+                        intent.putExtras(b);
+                        context.startActivity(intent);
+                    } else {
+                        Toast.makeText(context, context.getString(R.string.khongdudieukiendedinhhuong), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, "Gặp lỗi :" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        holder.btn_TuChoi.setVisibility(View.GONE);
+        switch (orders_item.getStatus()) {
+            case "Đang giao":
+                holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_dagiao));
+                holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String tinhtrang = System.currentTimeMillis() + "_" + "Bạn đã hủy đơn hàng";
+                        //holder.folding_cell.toggle(true);
+                        holder.layout_admin_hoadon_item.setVisibility(View.GONE);
+                        String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được giao thành công";
                         List<String> newTimeline = orders_item.getTimeline();
                         if (newTimeline == null) {
                             newTimeline = new ArrayList<>();
                         }
                         newTimeline.add(tinhtrang);
                         holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                        holder.myRef
-                                .child("Orders")
-                                .child(orders_item.getPaymentid())
-                                .child("status").setValue(context.getString(R.string.stt_khachhuy))
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        holder.folding_cell.toggle(true);
-                                    }
-                                });
+                        holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                holder.layout_admin_hoadon_item.setVisibility(View.GONE);
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                sendNotification(orders_item.getUserID(), "Đơn hàng đã được " + user.getEmail() + "  giao thành công, nêu bạn thích sản phẩm hãy để lại đánh giá cho chúng tôi, Xin Cảm Ơn");
+                            }
+                        });
                     }
                 });
-            }
+                break;
+            default:
+                holder.btn_Xac_nhan.setVisibility(View.GONE);
+                break;
 
-        } else {
-            holder.admin_details_hoadon_inputlayout_sdt_order.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_CALL);
-                    i.setData(Uri.parse("tel:" + orders_item.getCustomerPhoneNumber()));
-                    if (ContextCompat.checkSelfPermission(context, CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                        context.startActivity(i);
-                    } else {
-                        ActivityCompat.requestPermissions(activity, new String[]{CALL_PHONE}, 1);
-                    }
-                }
-            });
-            holder.rlt_address.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        if (orders_item.getAddress_Lat() != null && orders_item.getAddress_Lng() != null) {
-                            Intent intent = new Intent(context, MapBoxActivity.class);
-                            Bundle b = new Bundle();
-                            b.putDouble("address_lat", orders_item.getAddress_Lat());
-                            b.putDouble("address_lng", orders_item.getAddress_Lng());
-                            intent.putExtras(b);
-                            context.startActivity(intent);
-                        } else {
-                            Toast.makeText(context, context.getString(R.string.khongdudieukiendedinhhuong), Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(context, "Gặp lỗi :" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-            switch (orders_item.getStatus()) {
-                case "Chờ xác nhận":
-                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_xacnhan));
-                    holder.btn_TuChoi.setVisibility(View.VISIBLE);
-                    holder.btn_TuChoi.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis() + "_" + context.getString(R.string.button_adminhuy);
-                            List<String> newTimeline = orders_item.getTimeline();
-                            if (newTimeline == null) {
-                                newTimeline = new ArrayList<>();
-                            }
-                            newTimeline.add(tinhtrang);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(true);
-                                }
-                            });
-                        }
-                    });
-                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được duyệt";
-                            List<String> newTimeline = orders_item.getTimeline();
-                            if (newTimeline == null) {
-                                newTimeline = new ArrayList<>();
-                            }
-                            newTimeline.add(tinhtrang);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(true);
-                                }
-                            });
-                        }
-                    });
-                    break;
-                case "Chờ lấy hàng":
-                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_layhang));
-                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis() + "_" + "Đã lấy hàng";
-                            List<String> newTimeline = orders_item.getTimeline();
-                            if (newTimeline == null) {
-                                newTimeline = new ArrayList<>();
-                            }
-                            newTimeline.add(tinhtrang);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(false);
-                                }
-                            });
-                        }
-                    });
-                    break;
-                case "Đang giao":
-                    holder.tv_Xac_nhan.setText(context.getString(R.string.tinhtrang_dagiao));
-                    holder.btn_Xac_nhan.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được giao thành công";
-                            List<String> newTimeline = orders_item.getTimeline();
-                            if (newTimeline == null) {
-                                newTimeline = new ArrayList<>();
-                            }
-                            newTimeline.add(tinhtrang);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    holder.folding_cell.toggle(false);
-                                }
-                            });
-                        }
-                    });
-                    break;
-                default:
-                    holder.btn_Xac_nhan.setVisibility(View.GONE);
-                    break;
-            }
         }
 
 
@@ -261,6 +181,69 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
         });
 
 
+    }
+
+    private void sendNotification(final String userUID, final String noiDung) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MWIwNDQxNGQtMzE0Mi00MGY5LThmNzgtYTJhM2RjYTJkODE0");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"054e65ad-ff00-43a1-8615-48de2e56cc4f\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + userUID + "\"}],"
+
+                                + "\"data\": {\"activity\": \"User_HoaDon_Activity\"},"
+                                + "\"contents\": {\"en\": \"" + noiDung + "\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     @Override

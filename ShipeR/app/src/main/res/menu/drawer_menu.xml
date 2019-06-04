@@ -11,16 +11,6 @@
                 android:icon="@drawable/ic_message_black_24dp"
                 android:title="Đơn hàng đã nhận"
                 app:actionLayout="@layout/spinner_item_dark" />
-            <item
-                android:id="@+id/nav_user_order_history"
-                android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-                android:title="@string/donhang"
-                app:actionLayout="@layout/spinner_item_dark" />
-            <item
-                android:id="@+id/nav_viewed_products"
-                android:icon="@drawable/ic_remove_red_eye_black_24dp"
-                android:title="@string/sanphamdaxem"
-                app:actionLayout="@layout/spinner_item_dark" />
         </menu>
     </item>
     <item android:title="@string/taikhoan">

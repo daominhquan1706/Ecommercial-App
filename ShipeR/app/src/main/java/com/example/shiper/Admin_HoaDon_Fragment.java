@@ -1,5 +1,6 @@
 package com.example.shiper;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.shiper.Adapter.Adapter_HoaDon_item;
 import com.example.shiper.model.Orders;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +37,8 @@ public class Admin_HoaDon_Fragment extends Fragment {
     TextView tv_status_empty;
     List<String> mkey;
     RelativeLayout image_empty_hoadon;
+    ProgressDialog pd;
+    FirebaseUser user;
 
     @Nullable
     @Override
@@ -49,19 +54,20 @@ public class Admin_HoaDon_Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init();
-
-        // Set up the login form.
-
-
         myRef.child("Orders").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Orders orders = dataSnapshot.getValue(Orders.class);
+                if (orders != null) {
+                    if (orders.getStatus().equals(Status)) {
+                        if(orders.getShiper_uid()!=null)
+                        if (orders.getShiper_uid().equals(user.getUid())) {
+                            list.add(orders);
+                            mkey.add(orders.getPaymentid());
+                            Collections.sort(list);
+                        }
 
-                if (orders.getStatus().equals(Status)) {
-                    list.add(orders);
-                    mkey.add(orders.getPaymentid());
-                    Collections.sort(list);
+                    }
                 }
                 if (list.size() == 0) {
                     listView_order_admin.setVisibility(View.INVISIBLE);
@@ -70,23 +76,20 @@ public class Admin_HoaDon_Fragment extends Fragment {
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
                 adapter.notifyDataSetChanged();
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
 
-                Orders orderss = dataSnapshot.getValue(Orders.class);
+
+                /*Orders orderss = dataSnapshot.getValue(Orders.class);
 
                 if (orderss.getStatus().equals("Đang giao"))
-                    myRef.child("Orders").child(orderss.getPaymentid()).child("status").setValue("Chờ xác nhận");
+                    myRef.child("Orders").child(orderss.getPaymentid()).child("status").setValue("Chờ xác nhận");*/
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               /* Orders orders = dataSnapshot.getValue(Orders.class);
-
-
-                Log.d(TAG, "onChildChanged: " + orders.getPaymentid());
-                Collections.sort(list);
-                adapter.notifyDataSetChanged();*/
-
 
             }
 
@@ -116,6 +119,9 @@ public class Admin_HoaDon_Fragment extends Fragment {
     }
 
     public void init() {
+        pd = new ProgressDialog(getContext());
+        pd.setMessage("Đang lấy dữ liệu");
+        pd.show();
         image_empty_hoadon = (RelativeLayout) getView().findViewById(R.id.image_empty_hoadon);
         mkey = new ArrayList<String>();
         tv_status_empty = (TextView) getView().findViewById(R.id.tv_status_empty);
@@ -124,6 +130,8 @@ public class Admin_HoaDon_Fragment extends Fragment {
         adapter = new Adapter_HoaDon_item(getActivity(), list, getActivity());
         listView_order_admin = (RecyclerView) getView().findViewById(R.id.lv_order_admin);
         listView_order_admin.setAdapter(adapter);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
 }
