@@ -208,9 +208,7 @@ public class MapBoxActivity extends AppCompatActivity {
                 currentRoute = response.body().routes().get(0);
 
                 // Make a toast which displays the route's distance
-                Toast.makeText(MapBoxActivity.this, String.format(
-                        "khoảng cách : ",
-                        currentRoute.distance()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapBoxActivity.this, String.valueOf("khoảng cách : "+currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
                 if (style.isFullyLoaded()) {
                     // Retrieve and update the source designated for showing the directions route

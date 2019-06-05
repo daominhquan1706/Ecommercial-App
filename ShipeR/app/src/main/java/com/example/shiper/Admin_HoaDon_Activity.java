@@ -1,5 +1,6 @@
 package com.example.shiper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,11 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         super.onResume();
     }
 
+    public void refreshUI() {
+        finish();
+        startActivity(getIntent());
+    }
+
 
     public static class PlaceholderFragment extends Fragment {
         /**
@@ -94,6 +100,8 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+    Admin_HoaDon_Fragment fragment0, fragment1;
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -104,13 +112,13 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    Admin_HoaDon_Fragment fragment0 = new Admin_HoaDon_Fragment();
+                    fragment0 = new Admin_HoaDon_Fragment();
                     Bundle bundle0 = new Bundle();
                     bundle0.putString("Status", "Đang giao");
                     fragment0.setArguments(bundle0);
                     return fragment0;
                 case 1:
-                    Admin_HoaDon_Fragment fragment1 = new Admin_HoaDon_Fragment();
+                    fragment1 = new Admin_HoaDon_Fragment();
                     Bundle bundle1 = new Bundle();
                     bundle1.putString("Status", "Đã giao");
                     fragment1.setArguments(bundle1);
@@ -128,8 +136,9 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    public void onBackPressed() {
+        Intent i = new Intent(Admin_HoaDon_Activity.this, MapBox_Picker.class);
+        startActivity(i);
+        finish();
     }
 }

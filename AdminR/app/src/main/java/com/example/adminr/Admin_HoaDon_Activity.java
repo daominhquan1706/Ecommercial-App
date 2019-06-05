@@ -1,5 +1,6 @@
 package com.example.adminr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.r0adkll.slidr.Slidr;
 
 public class Admin_HoaDon_Activity extends AppCompatActivity {
 
@@ -81,6 +80,11 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void refreshUI() {
+        finish();
+        startActivity(getIntent());
     }
 
     /**
@@ -179,9 +183,17 @@ public class Admin_HoaDon_Activity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Admin_HoaDon_Activity.this, Admin.class);
+        startActivity(i);
+        finish();
     }
 }

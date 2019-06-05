@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -400,11 +401,10 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
                     newTimeline = new ArrayList<>();
                 }
                 newTimeline.add(tinhtrang);
-                myRef.child("Orders").child(orders.getPaymentid()).child("timeline").setValue(newTimeline);
                 myRef.child("Orders").child(orders.getPaymentid()).child("shiper_uid").setValue(user.getUid());
                 myRef.child("Orders").child(orders.getPaymentid()).child("shiper_email").setValue(user.getEmail());
-
-
+                myRef.child("Orders").child(orders.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
+                myRef.child("Orders").child(orders.getPaymentid()).child("timeline").setValue(newTimeline);
                 myRef.child("Orders").child(orders.getPaymentid()).child("status").setValue("Đang giao").addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -784,5 +784,33 @@ public class MapBox_Picker extends AppCompatActivity implements PermissionsListe
             }
         }, 5000);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.title_exit_app));
+            builder.setMessage(getString(R.string.cau_hoi_xacnhan_thoat));
+            builder.setCancelable(false);
+            builder.setPositiveButton(getString(R.string.answer_no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.setNegativeButton(getString(R.string.answer_yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    System.exit(0);
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+            //super.onBackPressed();
+        }
     }
 }

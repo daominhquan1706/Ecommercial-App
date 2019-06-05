@@ -184,6 +184,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_adminhuy)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -205,6 +206,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_cholayhang)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -229,6 +231,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_danggiao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -254,6 +257,7 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                                 newTimeline = new ArrayList<>();
                             }
                             newTimeline.add(tinhtrang);
+                            holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
                             holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

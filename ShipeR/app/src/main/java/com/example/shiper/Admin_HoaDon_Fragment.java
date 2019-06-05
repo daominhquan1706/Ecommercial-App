@@ -1,7 +1,9 @@
 package com.example.shiper;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Admin_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
@@ -60,13 +63,11 @@ public class Admin_HoaDon_Fragment extends Fragment {
                 Orders orders = dataSnapshot.getValue(Orders.class);
                 if (orders != null) {
                     if (orders.getStatus().equals(Status)) {
-                        if(orders.getShiper_uid()!=null)
-                        if (orders.getShiper_uid().equals(user.getUid())) {
-                            list.add(orders);
-                            mkey.add(orders.getPaymentid());
-                            Collections.sort(list);
-                        }
-
+                        if (orders.getShiper_uid() != null)
+                            if (orders.getShiper_uid().equals(user.getUid())) {
+                                list.add(orders);
+                                mkey.add(orders.getPaymentid());
+                            }
                     }
                 }
                 if (list.size() == 0) {
@@ -75,22 +76,30 @@ public class Admin_HoaDon_Fragment extends Fragment {
                     image_empty_hoadon.setVisibility(View.GONE);
                     listView_order_admin.setVisibility(View.VISIBLE);
                 }
-                adapter.notifyDataSetChanged();
                 if (pd.isShowing()) {
                     pd.dismiss();
                 }
 
 
+                Collections.sort(list);
+                adapter.notifyDataSetChanged();
+
+
                 /*Orders orderss = dataSnapshot.getValue(Orders.class);
 
-                if (orderss.getStatus().equals("Đang giao"))
+                if (orderss.getStatus().equals("Đã giao"))
                     myRef.child("Orders").child(orderss.getPaymentid()).child("status").setValue("Chờ xác nhận");*/
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+               try{
+                   ((Admin_HoaDon_Activity) Objects.requireNonNull(getActivity())).refreshUI();
+               }
+                catch (Exception ignored){
 
+                }
             }
 
             @Override
@@ -133,6 +142,7 @@ public class Admin_HoaDon_Fragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
+
 
 }
 

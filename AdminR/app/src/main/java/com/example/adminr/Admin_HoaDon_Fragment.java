@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Admin_HoaDon_Fragment extends Fragment {
     Adapter_HoaDon_item adapter_hoaDon_item;
@@ -86,12 +87,12 @@ public class Admin_HoaDon_Fragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               /* Orders orders = dataSnapshot.getValue(Orders.class);
+                try{
+                    ((Admin_HoaDon_Activity) Objects.requireNonNull(getActivity())).refreshUI();
+                }
+                catch (Exception ignored){
 
-
-                Log.d(TAG, "onChildChanged: " + orders.getPaymentid());
-                Collections.sort(list);
-                adapter.notifyDataSetChanged();*/
+                }
 
 
             }

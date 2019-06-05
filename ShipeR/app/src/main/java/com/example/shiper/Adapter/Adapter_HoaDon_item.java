@@ -147,18 +147,19 @@ public class Adapter_HoaDon_item extends RecyclerView.Adapter<Adapter_HoaDon_ite
                     @Override
                     public void onClick(View v) {
                         //holder.folding_cell.toggle(true);
-                        holder.layout_admin_hoadon_item.setVisibility(View.GONE);
+                        //holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                         String tinhtrang = System.currentTimeMillis() + "_" + "Đơn hàng đã được giao thành công";
                         List<String> newTimeline = orders_item.getTimeline();
                         if (newTimeline == null) {
                             newTimeline = new ArrayList<>();
                         }
                         newTimeline.add(tinhtrang);
+                        holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("creationTime").setValue(System.currentTimeMillis());
                         holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("timeline").setValue(newTimeline);
-                        holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue(context.getString(R.string.button_da_giao)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        holder.myRef.child("Orders").child(orders_item.getPaymentid()).child("status").setValue("Đã giao").addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                holder.layout_admin_hoadon_item.setVisibility(View.GONE);
+                                //holder.layout_admin_hoadon_item.setVisibility(View.GONE);
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 sendNotification(orders_item.getUserID(), "Đơn hàng đã được " + user.getEmail() + "  giao thành công, nêu bạn thích sản phẩm hãy để lại đánh giá cho chúng tôi, Xin Cảm Ơn");
                             }
