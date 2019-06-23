@@ -1,0 +1,370 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PoweR</string>
+    <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
+    <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
+    <string name="title_activity_login">Đăng nhập</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mật khẩu</string>
+    <string name="action_sign_in">Đăng nhập</string>
+    <string name="action_sign_in_short">Đăng nhập</string>
+    <string name="error_invalid_email">Email này không hợp lệ</string>
+    <string name="error_invalid_password">Mật khẩu quá ngắn</string>
+    <string name="error_incorrect_password">Mật khẩu không chính xác</string>
+    <string name="error_field_required">Không được bỏ trống</string>
+    <string name="permission_rationale">"Cần có quyền để cung cấp cho việc hoàn thành email."
+    </string>
+    <string name="create_an_account">Tạo tài khoản</string>
+    <string name="category">Thể loại</string>
+    <string name="productname">Tên sản phẩm</string>
+    <string name="money">$100</string>
+    <string name="re_type_password">Nhập lại mật khẩu</string>
+    <string name="search">Search</string>
+    <string name="forgot_password">Quên mật khẩu ?</string>
+    <string name="up">Up</string>
+    <string name="unknow_account">Tài khoản khách</string>
+
+
+    <string-array name="category_nitewatch" tools:ignore="InconsistentArrays">
+        <item>ALPHA</item>
+        <item>HAWK</item>
+        <item>ICON-AUTO</item>
+        <item>ICON-QUARTZ</item>
+        <item>MARQESS</item>
+        <item>MX10</item>
+
+
+    </string-array>
+    <string name="title_activity_profile__account_">Profile_Account_Activity</string>
+    <string name="large_text">
+        "Vật chất là phép ẩn dụ. \n \n"
+
+        "Một phép ẩn dụ vật chất là lý thuyết thống nhất về một không gian hợp lý và một hệ thống chuyển động."
+        "Tài liệu này dựa trên thực tế xúc giác, lấy cảm hứng từ nghiên cứu về giấy và mực,"
+        "công nghệ tiên tiến và mở ra cho trí tưởng tượng và phép thuật. \n"
+        "Bề mặt và các cạnh của vật liệu cung cấp tín hiệu thị giác được đặt nền tảng trong thực tế."
+        "sử dụng các thuộc tính xúc giác quen thuộc giúp người dùng nhanh chóng hiểu được khả năng chi trả. Tuy nhiên,"
+        "tính linh hoạt của vật liệu tạo ra khả năng chi trả mới thay thế cho vật chất"
+        "thế giới, không phá vỡ các quy tắc vật lý. \n"
+        "Các nguyên tắc cơ bản của ánh sáng, bề mặt và chuyển động là chìa khóa để truyền đạt cách các vật thể di chuyển,"
+        "tương tác và tồn tại trong không gian và liên quan đến nhau. Chương trình chiếu sáng thực tế"
+        "đường nối, phân chia không gian và biểu thị các bộ phận chuyển động. \n \n"
+
+        "Táo bạo, đồ họa, có chủ ý. \n \n"
+
+        "Các yếu tố nền tảng của kiểu chữ thiết kế dựa trên in, lưới, không gian, tỷ lệ, màu sắc,"
+        "và sử dụng các hướng dẫn điều trị bằng hình ảnh. Các yếu tố này làm được nhiều hơn là làm hài lòng"
+        "mắt. Chúng tạo ra thứ bậc, ý nghĩa và trọng tâm. Cố ý lựa chọn màu sắc, cạnh này sang cạnh khác"
+        "hình ảnh, kiểu chữ quy mô lớn và không gian trắng có chủ ý tạo ra một sự táo bạo và đồ họa"
+        "Giao diện khiến người dùng đắm chìm trong trải nghiệm. \n"
+        "Sự nhấn mạnh vào hành động của người dùng làm cho chức năng cốt lõi ngay lập tức rõ ràng và cung cấp"
+        "điểm tham chiếu cho người dùng. \n \n"
+
+        "Chuyển động cung cấp ý nghĩa. \n \n"
+
+        "Chuyển động tôn trọng và củng cố người dùng là động lực chính. Hành động của người dùng chính là"
+        "các điểm uốn bắt đầu chuyển động, biến đổi toàn bộ thiết kế. \n"
+        "Tất cả hành động diễn ra trong một môi trường duy nhất. Các đối tượng được trình bày cho người dùng mà không"
+        "phá vỡ tính liên tục của kinh nghiệm ngay cả khi chúng biến đổi và sắp xếp lại. \n"
+        "Chuyển động có ý nghĩa và phù hợp, phục vụ để tập trung sự chú ý và duy trì sự liên tục."
+        "Phản hồi là tinh tế nhưng rõ ràng. Chuyển đổi là hiệu quả nhưng vẫn mạch lạc. \n \n"
+
+        "Thế giới 3D. \n \n"
+
+        "Môi trường vật chất là không gian 3D, có nghĩa là tất cả các đối tượng có x, y và z"
+        "kích thước. Trục z được đặt vuông góc với mặt phẳng của màn hình, với"
+        "trục z dương kéo dài về phía người xem. Mỗi tờ vật liệu chiếm một"
+        "vị trí dọc theo trục z và có độ dày 1dp tiêu chuẩn. \n"
+        "Trên web, trục z được sử dụng để tạo lớp chứ không phải cho phối cảnh. Thế giới 3D là"
+        "được mô phỏng bằng cách thao tác trục y. \n \n"
+
+        "Ánh sáng và bóng tối. \n \n"
+
+        "Trong môi trường vật chất, đèn ảo chiếu sáng cảnh. Đèn chính tạo ra"
+        "bóng định hướng, trong khi ánh sáng xung quanh tạo ra bóng mềm từ mọi góc độ. \n"
+        "Bóng trong môi trường vật chất được tạo bởi hai nguồn sáng này. Trong Android"
+        "sự phát triển, bóng tối xảy ra khi các nguồn sáng bị chặn bởi các tấm vật liệu tại"
+        "các vị trí khác nhau dọc theo trục z. Trên web, bóng được mô tả bằng cách thao tác"
+        "chỉ trục y. Ví dụ sau đây cho thấy thẻ có chiều cao 6dp. \n \n"
+
+        "Độ cao nghỉ ngơi. \n \n"
+
+        "Tất cả các đối tượng vật chất, bất kể kích thước, có độ cao nghỉ, hoặc độ cao mặc định"
+        "điều đó không thay đổi. Nếu một vật thể thay đổi độ cao, nó sẽ trở về trạng thái nghỉ"
+        "độ cao càng sớm càng tốt. \n \n"
+
+        "Độ cao thành phần. \n \n"
+
+        "Độ cao nghỉ ngơi cho loại thành phần phù hợp giữa các ứng dụng (ví dụ: độ cao FAB"
+        "không thay đổi từ 6dp trong một ứng dụng sang 16dp trong một ứng dụng khác). \n"
+        "Các thành phần có thể có độ cao nghỉ khác nhau trên các nền tảng, tùy thuộc vào độ sâu"
+        "của môi trường (ví dụ: TV có độ sâu lớn hơn thiết bị di động hoặc máy tính để bàn). \n \n"
+
+        "Độ cao đáp ứng và độ lệch độ cao động. \n \n"
+
+        "Một số loại thành phần có độ cao đáp ứng, nghĩa là chúng thay đổi độ cao trong phản ứng"
+        "cho đầu vào của người dùng (ví dụ: bình thường, tập trung và nhấn) hoặc các sự kiện hệ thống. Những độ cao này"
+        "các thay đổi được thực hiện một cách nhất quán bằng cách sử dụng các độ lệch độ cao động. \n"
+        "Độ lệch độ cao động là độ cao mục tiêu mà một thành phần di chuyển tới, tương đối"
+        "đến trạng thái nghỉ ngơi thành phần. Họ đảm bảo rằng sự thay đổi độ cao là phù hợp"
+        "trên các hành động và loại thành phần. Ví dụ: tất cả các thành phần nâng trên báo chí có"
+        "cùng một thay đổi độ cao so với độ cao nghỉ của chúng. \n"
+        "Khi sự kiện đầu vào được hoàn thành hoặc hủy bỏ, thành phần sẽ trở về trạng thái nghỉ"
+        "độ cao. \n \n"
+
+        "Tránh nhiễu độ cao. \n \n"
+
+        "Các thành phần có độ cao đáp ứng có thể gặp các thành phần khác khi chúng di chuyển giữa"
+        "độ cao nghỉ ngơi của họ và e năng động giảm thuế. Bởi vì vật chất không thể vượt qua "
+         "thông qua các tài liệu khác, các thành phần tránh can thiệp lẫn nhau bất kỳ cách nào,"
+         "cho dù trên cơ sở từng thành phần hoặc sử dụng toàn bộ bố cục ứng dụng. \n"
+         "Ở cấp độ thành phần, các thành phần có thể di chuyển hoặc bị loại bỏ trước khi chúng gây nhiễu."
+         "Ví dụ: nút hành động nổi (FAB) có thể biến mất hoặc di chuyển khỏi màn hình trước khi"
+         "người dùng nhặt một thẻ hoặc nó có thể di chuyển nếu một thanh snack xuất hiện. \n"
+         "Ở cấp độ bố cục, hãy thiết kế bố cục ứng dụng của bạn để giảm thiểu cơ hội can thiệp."
+         "Ví dụ: đặt FAB sang một bên của luồng thẻ để FAB giành được can thiệp"
+         "khi người dùng cố lấy một trong các thẻ. \n \n"
+    </string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="enable_night_view">CHẾ ĐỘ SÁNG</string>
+    <string name="disable_night_view">CHẾ ĐỘ TỐI</string>
+    <string name="alpha">ALPHA</string>
+    <string name="my_app_id">powerr-ntmjm</string>
+    <string name="title_activity_maps">Bản đồ</string>
+    <string name="continue_shopping">Tiếp tục mua hàng</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_tabbed">TestTabbed</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_admin__hoa_don_">Admin_HoaDon_Activity</string>
+    <string name="imageproduct">Hình sản phẩm</string>
+    <string name="access_token">pk.eyJ1IjoiZGFvbWluaHF1YW4xNzYiLCJhIjoiY2p1bHp0aDU2MG9weTN6cXM2NjB3dGJvMyJ9.-X1tNne-QQ90Rm6hRglFmQ</string>
+    <string name="user_location_permission_explanation">Chúng tôi cần thông tin vị trí của bạn để định vị</string>
+    <string name="admin">Quản trị viên</string>
+    <string name="function">Chức năng</string>
+    <string name="nhantinvoiadmin">Nhắn tin với quản trị viên</string>
+    <string name="donhang">Đơn hàng</string>
+    <string name="sanphamdaxem">Sản phẩm đã xem</string>
+    <string name="taikhoan">Tài khoản</string>
+    <string name="profile">Quản lý tài khoản</string>
+    <string name="dangnhap">Đăng nhập</string>
+    <string name="dangxuat">Đăng xuất</string>
+    <string name="tuychinh">Tùy chỉnh</string>
+    <string name="hienquangcao">Hiện quảng cáo</string>
+    <string name="hienhuongdan">Hiện hướng dẫn</string>
+    <string name="doingonngu">Đổi ngôn ngữ</string>
+    <string name="menu_admin_name_sanpham">SẢN PHẢM</string>
+    <string name="menu_admin_tinnhan">TIN NHẮN</string>
+    <string name="menu_admin_doanthu">DOANH THU</string>
+    <string name="menu_admin_map">Test Google Map</string>
+    <string name="menu_admin_ds_hoadon">DANH SÁCH HÓA ĐƠN</string>
+
+    <string name="icon" translatable="false">ICON</string>
+    <string name="icon_automatic">ICON AUTOMATIC</string>
+    <string name="marquess">MARQUESS</string>
+    <string name="hawk">HAWK</string>
+
+    <string name="never_compromise">CHƯA BAO GIỜ LÀ SAI</string>
+    <string name="life_ready">SẴN SÀNG CHO CUỘC SỐNG</string>
+    <string name="the_power_to_impress">SỨC MẠNH CỦA SỰ ẤN TƯỢNG</string>
+    <string name="ultra_slim_style">PHONG CÁCH NHẸ NHÀNG</string>
+    <string name="adventure">CUỘC PHIÊU LƯU</string>
+
+    <string name="t_n_ng_i_nh_n">Tên người nhận</string>
+    <string name="s_i_n_tho_i_ng_i_nh_n">Số điện thoại người nhận</string>
+    <string name="a_ch_giao_h_ng">Địa chỉ giao hàng</string>
+    <string name="danh_s_ch_s_n_ph_m">Danh sách sản phẩm</string>
+    <string name="h_nh_n_t_g_p_c_a_s">hình nút gập cửa sổ</string>
+    <string name="h_nh">hình</string>
+    <string name="h_y_n_h_ng">hủy đơn hàng</string>
+    <string name="x_c_nh_n">xác nhận</string>
+    <string name="move_map_instruction">Đây là vị trí hiện tại của bạn</string>
+    <string name="location_picker_select_location_button_cancel">Hủy chọn</string>
+    <string name="ch_n_m_t_v_tr">Chọn một vị trí</string>
+    <string name="user_location_permission_not_granted">quyền của người dùng không được cấp</string>
+    <string name="location_picker_place_name_result">tên địa điểm</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">Không có kết quả </string>
+    <string name="l_u_thay_i">lưu thay đổi</string>
+    <string name="xemsanpham">View</string>
+    <string name="muahang">Cart</string>
+    <string name="soluonghangdamua">Quantity:</string>
+    <string name="tongsotienhangdamua">Total :</string>
+
+    <string name="ch_x_c_nh_n">Chờ xác nhận</string>
+    <string name="ch_l_y_h_ng">Chờ lấy hàng</string>
+    <string name="ang_giao">Đang giao</string>
+    <string name="giao">Đã giao</string>
+    <string name="kh_ch_h_y">Khách hủy</string>
+    <string name="admin_h_y">Admin hủy</string>
+    <string name="message">Message…</string>
+    <string name="categoryyyy">Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="quantity">quantity</string>
+    <string name="discount">discount</string>
+    <string name="picture_day">Picture DAY</string>
+    <string name="picture_night">picture NIGHT</string>
+    <string name="day_image_url">Day Image URL</string>
+    <string name="night_image_url">Night Image URL</string>
+    <string name="l_u_d_li_u">Lưu dữ liệu</string>
+    <string name="cAtegory">Category</string>
+    <string name="checkout">Checkout</string>
+    <string name="description">Description</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="receive_new_password">Receive new password</string>
+    <string name="qu_ng_c_o">Quảng cáo</string>
+    <string name="b_qua">Bỏ qua</string>
+    <string name="xem_n_t_h_ng">xem đơn đặt hàng</string>
+    <string name="register_new_account">register new account</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+    <string name="log_in_with_google">Log in with google</string>
+    <string name="use_phone_number">use phone number</string>
+    <string name="enter_phone_number">Enter phone Number</string>
+    <string name="enter_code_received">Enter code received</string>
+    <string name="confirm_code">Confirm Code</string>
+    <string name="military_heritage_timeless_design">MILITARY HERITAGE. TIMELESS DESIGN</string>
+
+
+    <string name="daxem">Đã xem</string>
+    <string name="thangtruoc"> tháng trước</string>
+    <string name="ngaytruoc"> ngày trước</string>
+    <string name="giotruoc"> giờ trước</string>
+    <string name="phuttruoc"> phút trước</string>
+    <string name="giaytruoc"> giây trước</string>
+    <string name="vuaxong"> vừa xong</string>
+
+
+    <string name="title_donhang">Đơn hàng</string>
+    <string name="t_n_kh_ch_h_ng">Tên khách hàng :</string>
+    <string name="s_i_n_tho_i">Số điện thoại :</string>
+    <string name="diachigiaohang">Địa chỉ giao hàng :</string>
+    <string name="tinhtrang_xacnhan">Xác nhận</string>
+    <string name="tinhtrang_layhang">Lấy Hàng</string>
+    <string name="tinhtrang_dagiao">Đã giao</string>
+    <string name="button_adminhuy">Admin hủy</string>
+    <string name="button_cholayhang">Chờ lấy hàng</string>
+    <string name="button_danggiao">Đang giao</string>
+    <string name="t_ng_tien">Tổng :</string>
+    <string name="button_da_giao">Đã giao</string>
+    <string name="sanpham_da_xem">Sản phẩm đã xem</string>
+    <string name="my_cart">GIỎ HÀNG</string>
+    <string name="stt_choxacnhan">Chờ xác nhận</string>
+    <string name="stt_cholayhang">Chờ lấy hàng</string>
+    <string name="stt_danggiao">Đang giao</string>
+    <string name="stt_dagiao">Đã giao</string>
+    <string name="stt_khachhuy">Khách hủy</string>
+    <string name="stt_admin_huy">Admin hủy</string>
+    <string name="kh_ng_c_n_h_ng">Không có đơn hàng </string>
+    <string name="tennguoinhan__">Tên người nhận</string>
+    <string name="chonvitri_moi">Chọn vị trí mới</string>
+    <string name="customer_reviews">ĐÁNH GIÁ KHÁCH HÀNG</string>
+    <string name="read_more">Đọc thêm</string>
+    <string name="read_less">Ẩn bớt</string>
+    <string name="search_here_hint">Nhập dữ liệu cần tìm</string>
+    <string name="admin_price_product">Giá:</string>
+    <string name="admin_discount_product">Giảm giá:</string>
+    <string name="admin_quantity_product">Số lượng:</string>
+    <string name="dialog_message_xoa_product">Có phải bạn muốn xóa</string>
+    <string name="xoa_title">xóa</string>
+    <string name="answer_no">Không</string>
+    <string name="answer_yes">Có</string>
+    <string name="title_exit_app">Thoát</string>
+    <string name="cau_hoi_xacnhan_thoat">Bạn có muốn thoát ứng dụng không?</string>
+    <string name="lang_tieng_viet">Việt Nam</string>
+    <string name="lang_tieng_phap">Tiếng Pháp</string>
+    <string name="lang_tieng_anh">Tiếng Anh</string>
+    <string name="lang_tieng_trung_quoc">Tiếng Trung Quốc</string>
+    <string name="chon_ngon_ngu">Chọn ngôn ngữ</string>
+    <string name="menu_sign_out_Toast">Chức năng tạm thời chưa cập nhật, thử lại sau</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="question_dang_xuat">Bạn có muốn đăng xuất không?</string>
+    <string name="dangxuat_thanh_cong">Sign out successfully</string>
+    <string name="chao_mung_user">chào mừng user</string>
+    <string name="vuilongchonhinhday">vui lòng chọn hình Day</string>
+    <string name="vuilongchonhinhnight">vui lòng chọn hình Night</string>
+    <string name="khongduocdetrong">không được được để trống</string>
+    <string name="thatbaivuilongthulai">That bai , vui long thu lai</string>
+    <string name="tailenthanhcong">Tải lên thành công</string>
+    <string name="dangtailenhinhnight">Đang tải lên Firebase hình NIGHT</string>
+    <string name="taihinhdaythatbai">tải hình DAY thất bại !</string>
+    <string name="taihinhnightthatbai">tải hình NIGHT thất bại !</string>
+    <string name="giohangrong">Giỏ hảng của bạn hiện tại đang rỗng</string>
+    <string name="chungthucthatbaihaythulai">Chức thực thất bại , hãy thử lại.</string>
+    <string name="sanphamkhongtontai">Sản phẩm không tồn tại</string>
+    <string name="dangnhapthanhcong">Đăng nhập thành công</string>
+    <string name="khonghople">Email or Password is incorrect</string>
+    <string name="thanhconghaykiemtraemailcuaban">Thành công! hãy kiểm tra email của bạn</string>
+    <string name="dathem">Đã thêm</string>
+    <string name="dahuy">Đã hủy</string>
+    <string name="chualayduocthongtin">Chưa lấy được thông tin</string>
+    <string name="timdiadiemthanhcong">Tìm địa điểm thành công !</string>
+    <string name="loi">Lỗi :</string>
+    <string name="details_tongcong">Tổng cộng:</string>
+    <string name="details_tinhtrang">Tình trạng:</string>
+    <string name="details_ngaygiao">Ngày giao dự kiếm:</string>
+    <string name="details_tennguoinhan">Tên người nhân:</string>
+    <string name="details_sodienthoai">Số điện thoại:</string>
+    <string name="details_diachi">Địa chỉ:</string>
+    <string name="tatcuasoquangcao">tắt cửa sổ quảng cáo</string>
+    <string name="chedobandem">Chế độ ban đêm</string>
+    <string name="motahuongdan">xem sản phẩm của bạn bằng cách mô phỏng ban đêm</string>
+    <string name="thanhchucnang">Thanh chức năng</string>
+    <string name="motahuongdan2">Nhấp để xem thêm các chức năng thú vị khác của phần mềm</string>
+    <string name="motahuongdan3">Nhập từ khóa để tìm thông tin</string>
+    <string name="motahuongdan4">Nhấp vào để mua hàng hoặc xem những món hàng bạn đã bỏ vào giỏ</string>
+    <string name="timkiem">Tìm kiếm</string>
+    <string name="donggiohang">Đóng giỏ hàng</string>
+    <string name="cart_motahuongdan1">Nhấp để tiếp tục mua những chiếc đồng hồ khác</string>
+    <string name="cart_motahuongdan2">Nhấp để thanh toán hàng trong giỏ</string>
+    <string name="thanhtoan">Thanh toán</string>
+    <string name="bandangayquanghuongdan">bạn đã ngắt quãng hướng dẫn !</string>
+    <string name="okhong">Ổ không !</string>
+    <string name="quanlysanpham">Quản lý sản phẩm</string>
+    <string name="nhantinkhachhang">Nhắn tin khách hàng</string>
+    <string name="baocao">Báo cáo</string>
+    <string name="bando">Bản đồ</string>
+    <string name="danhmuchoadon">Danh mục hóa đơn</string>
+    <string name="admin_motahuongdan1">Quản lý sản phẩm có trong cửa hàng của bạn</string>
+    <string name="admin_motahuongdan2">Nhắn tin và tư vấn khách hàng trực tiếp bằng cách gữi tin nhắn cho họ</string>
+    <string name="admin_motahuongdan3">Thống kê báo cáo giúp bạn có cái nhìn tổng quan về doanh thu trong quá khứ</string>
+    <string name="admin_motahuongdan4">Thử nghiệm bản đồ</string>
+    <string name="admin_motahuongdan5">Quản lý tất cả hóa đơn và thực hiện các thao tác liên quan đến hóa đơn</string>
+    <string name="paypalthanhtoan">Paypal thanh toán</string>
+    <string name="motahuongdanpaypal">Nhấp để tiến hành thanh toán bằng thẻ Paypal</string>
+    <string name="titlepaypal">Thanh toán sản phẩm</string>
+    <string name="menhgiatien">USD</string>
+    <string name="mochedosuathongtin">đã mở chế độ sửa thông tin</string>
+    <string name="tatchedosuathongtin">đã tắt chế độ sửa thông tin</string>
+    <string name="dangtailenhinhday">Đang tải lên Firebase hình DAY</string>
+    <string name="dangluulaithaydoi">đang lưu lại thay đổi</string>
+    <string name="dangthaydoi">Đang thay đổi dữ liệu</string>
+    <string name="danglaydulieu">Đang lấy dữ liệu</string>
+    <string name="thieuten">Thiếu tên</string>
+    <string name="thieusodienthoai">Thiếu số điện thoại</string>
+    <string name="thieudiachi">Thiếu địa chỉ</string>
+    <string name="tienvanchuyen">Tiền vận chuyển : </string>
+    <string name="ti_n_h_ng">Tiền hàng :</string>
+    <string name="chuathethanhtoanhaythulai">Chưa thể thanh toán, hãy thử lại</string>
+    <string name="khongcoketnoiinternet">Không có kết nối internet</string>
+    <string name="daketnoiwifi">Đã kết nối Wifi</string>
+    <string name="daketnoi3g">Đã kết nối 3G</string>
+    <string name="daketnoiinternet">Không có kết nối internet</string>
+    <string name="choxacnhan">chờ xác nhận</string>
+    <string name="khongdudieukiendedinhhuong">không đủ điều kiện để định hướng , hãy thữ lại</string>
+    <string name="uploaded">Đang tải lên </string>
+    <string name="chonhinhbanngay">Chọn hình ban ngày</string>
+    <string name="chonhinhbandem">Chọn hình ban đêm</string>
+    <string name="dongia">Đơn giá</string>
+    <string name="l_i_b_nh_lu_n_c_a_b_n">Để lại bình luận của bạn</string>
+    <string name="nh_gi_s_n_ph_m">Đánh giá sản phẩm</string>
+    <string name="ng">Đăng</string>
+    <string name="hu">Huỷ</string>
+    <string name="khongthedetrong">Không thể để trống</string>
+    <string name="daDanhgia">Đã đánh giá</string>
+    <string name="danhgiathanhcongsanpham">Đánh giá thành công sản phẩm</string>
+    <string name="vodanh">Vô danh</string>
+    <string name="nh_gi">Đánh giá</string>
+
+
+</resources>
