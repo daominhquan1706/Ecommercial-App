@@ -1,0 +1,16 @@
+﻿@using AdminR.Models;
+
+@{
+    ViewBag.Title = "About";
+    List<Product> listproduct = ViewBag.ListProduct;
+}
+<h2>@ViewBag.Title</h2>
+
+<h3>Login History</h3>
+<p>Current user: @ViewBag.CurrentUser</p>
+<ul>
+    @foreach (Product product in listproduct)
+    {
+        <li>Login at @product.Product_Name </li>
+    }
+</ul>
