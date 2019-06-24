@@ -7,7 +7,7 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using System.Threading.Tasks;
 using AdminR.Models;
-
+using System.Globalization;
 
 namespace AdminR.Controllers
 {
@@ -27,33 +27,33 @@ namespace AdminR.Controllers
             //  .postasync(currentuserlogin);
 
             //Retrieve data from Firebase
-            var dbLogins = await firebaseClient
-              .Child("NiteWatch")
-              .Child("ALPHA")
-              .OnceAsync<Product>();
-
-            var listproduct = new List<Product>();
-
-            //Convert JSON data to original datatype
-            foreach (var login in dbLogins)
+            List<String> listCategory = new List<String>();
+            listCategory.Add("ALPHA");
+            listCategory.Add("HAWK");
+            listCategory.Add("ICON-AUTO");
+            listCategory.Add("ICON-QUARTZ");
+            listCategory.Add("MARQUESS");
+            listCategory.Add("MX10");
+            List<Product> listproduct = new List<Product>();
+            foreach (String category in listCategory)
             {
-                //timestampList.Add(Convert.ToDateTime(login.Object.TimestampUtc).ToLocalTime());
-                Product p = new Product();
-                p.category = Convert.ToString(login.Object.category);
-                p.createDate = Convert.ToInt64(login.Object.createDate);
-                p.Description = Convert.ToString(login.Object.Description);
-                p.discount = Convert.ToInt16(login.Object.discount);
-                p.Image = Convert.ToString(login.Object.Image);
-                p.Image_Night = Convert.ToString(login.Object.Image_Night);
-                p.Price = Convert.ToInt16(login.Object.Price);
-                p.Product_Name = Convert.ToString(login.Object.Product_Name);
-                p.Quantity = Convert.ToInt16(login.Object.Quantity);
-                listproduct.Add(p);
+                var dbLogins = await firebaseClient
+              .Child("NiteWatch")
+              .Child(category)
+              .OnceAsync<Product>();
+                //Convert JSON data to original datatype
+                foreach (var product in dbLogins)
+                {
+                    //timestampList.Add(Convert.ToDateTime(login.Object.TimestampUtc).ToLocalTime());
+                    Product p = product.Object;
+                    listproduct.Add(p);
+                }
             }
+
 
             //Pass data to the view
             ViewBag.CurrentUser = userId;
-            ViewBag.ListProduct = listproduct.OrderByDescending(x => x.Price);
+            ViewBag.ListProduct = listproduct;
             return View();
         }
 
@@ -79,25 +79,43 @@ namespace AdminR.Controllers
             List<Product> listproduct = new List<Product>();
 
             //Convert JSON data to original datatype
-            foreach (var login in dbLogins)
+            foreach (var product in dbLogins)
             {
                 //timestampList.Add(Convert.ToDateTime(login.Object.TimestampUtc).ToLocalTime());
-                Product p = new Product();
-                p.category = Convert.ToString(login.Object.category);
-                p.createDate = Convert.ToInt64(login.Object.createDate);
-                p.Description = Convert.ToString(login.Object.Description);
-                p.discount = Convert.ToInt16(login.Object.discount);
-                p.Image = Convert.ToString(login.Object.Image);
-                p.Image_Night = Convert.ToString(login.Object.Image_Night);
-                p.Price = Convert.ToInt16(login.Object.Price);
-                p.Product_Name = Convert.ToString(login.Object.Product_Name);
-                p.Quantity = Convert.ToInt16(login.Object.Quantity);
+                Product p = product.Object;
                 listproduct.Add(p);
             }
 
             //Pass data to the view
             ViewBag.CurrentUser = userId;
             ViewBag.ListProduct = listproduct;
+            return View();
+        }
+        public async Task<ActionResult> QuanLyHoaDon()
+        {
+            //Save non identifying data to Firebase
+            var firebaseClient = new FirebaseClient("https://ecommerial-40d25.firebaseio.com/");
+            //var result = await firebaseclient
+            //  .child("users/" + userid + "/logins")
+            //  .postasync(currentuserlogin);
+
+            //Retrieve data from Firebase
+            var dbLogins = await firebaseClient
+              .Child("Orders")
+              .OnceAsync<Order>();
+
+            List<Order> listHoaDon = new List<Order>();
+
+            //Convert JSON data to original datatype
+            foreach (var order in dbLogins)
+            {
+                //timestampList.Add(Convert.ToDateTime(login.Object.TimestampUtc).ToLocalTime());
+                Order p = new Order();
+
+                p = order.Object;
+                listHoaDon.Add(p);
+            }
+            ViewBag.List = listHoaDon;
             return View();
         }
 
@@ -107,5 +125,8 @@ namespace AdminR.Controllers
 
             return View();
         }
+
+
+
     }
 }
